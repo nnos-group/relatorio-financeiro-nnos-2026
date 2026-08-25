@@ -1,0 +1,10 @@
+# Ignore CSV data sources and zip archives
+*.csv
+*.zip
+
+# Ignore python cache and logs
+__pycache__/
+*.pyc
+*.log
+make_logo_b64.py
+update_code_html.py
