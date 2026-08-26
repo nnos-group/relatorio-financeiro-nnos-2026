@@ -43,11 +43,11 @@ def fmt_val_table_exp(x):
 def get_row(label, key, row_type="normal"):
     if row_type == "group":
         return f'''<tr class="bg-surface-container-high/90 border-y border-surface-variant/80">
-          <td colspan="10" class="py-2.5 px-4 text-xs font-bold text-brand-blue uppercase tracking-widest">{label}</td>
+          <td colspan="11" class="py-2.5 px-4 text-xs font-bold text-brand-blue uppercase tracking-widest">{label}</td>
         </tr>\n'''
     elif row_type == "spacer":
         return f'''<tr class="h-2">
-          <td colspan="10"></td>
+          <td colspan="11"></td>
         </tr>\n'''
         
     vals = d[key]
@@ -272,8 +272,8 @@ for idx, (cc, val) in enumerate(d['top_cc']):
 # Viagens Comparativo
 viagens_comp_html = ""
 max_viag = max(max(d['viagens_desp']), max(d['reembolso_viagens']))
-months_viag = ['JAN-26', 'FEV-26', 'MAR-26', 'ABR-26', 'MAI-26', 'JUN-26', 'JUL-26']
-for i in range(7):
+months_viag = ['JAN-26', 'FEV-26', 'MAR-26', 'ABR-26', 'MAI-26', 'JUN-26', 'JUL-26', 'AGO-26']
+for i in range(len(months_viag)):
     desp_v = d['viagens_desp'][i]
     reemb_v = d['reembolso_viagens'][i]
     p_desp = (desp_v / max_viag) * 100
@@ -472,16 +472,16 @@ full_html = f'''<!DOCTYPE html>
         <span class="text-xs font-bold text-brand-blue uppercase tracking-widest bg-brand-blue/10 px-3 py-1 rounded-full border border-brand-blue/30">Relatório Financeiro Gerencial</span>
       </div>
       <h1 class="text-3xl md:text-4xl font-extrabold font-display text-white mb-2 tracking-tight">Demonstrativo de Resultados & Dashboard Executivo</h1>
-      <p class="text-gray-300 text-base mb-6">Análise financeira gerencial — Visão acumulada de 7 meses (Janeiro a Julho/2026)</p>
+      <p class="text-gray-300 text-base mb-6">Análise financeira gerencial — Visão acumulada de 8 meses (Janeiro a Agosto/2026)</p>
       <div class="flex flex-wrap gap-3 text-xs font-semibold">
         <span class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 text-white border border-white/10">
-          <span class="material-symbols-outlined text-brand-blue text-sm">calendar_month</span> Jan/2026 a Jul/2026 (7 Meses)
+          <span class="material-symbols-outlined text-brand-blue text-sm">calendar_month</span> Jan/2026 a Ago/2026 (8 Meses)
         </span>
         <span class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 text-white border border-white/10">
-          <span class="material-symbols-outlined text-emerald-400 text-sm">payments</span> Rec. Bruta: R$ 5,84M
+          <span class="material-symbols-outlined text-emerald-400 text-sm">payments</span> Rec. Bruta: R$ 6,80M
         </span>
         <span class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 text-white border border-white/10">
-          <span class="material-symbols-outlined text-brand-blue text-sm">trending_up</span> Margem Bruta: 45,4%
+          <span class="material-symbols-outlined text-brand-blue text-sm">trending_up</span> Margem Bruta: 54,1%
         </span>
         <span class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 text-white border border-white/10">
           <span class="material-symbols-outlined text-amber-400 text-sm">verified</span> Controladoria & Gestão
@@ -520,9 +520,9 @@ full_html = f'''<!DOCTYPE html>
       <div>
         <h2 class="text-xl font-display font-bold text-white flex items-center gap-3">
           <div class="w-1.5 h-6 bg-brand-blue rounded-full"></div>
-          Indicadores Estratégicos YTD (7 Meses)
+          Indicadores Estratégicos YTD (8 Meses)
         </h2>
-        <p class="text-xs text-gray-400 mt-1 ml-4.5">Visão sintética do desempenho financeiro acumulado de Janeiro a Julho/2026</p>
+        <p class="text-xs text-gray-400 mt-1 ml-4.5">Visão sintética do desempenho financeiro acumulado de Janeiro a Agosto/2026</p>
       </div>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -532,12 +532,12 @@ full_html = f'''<!DOCTYPE html>
           <div class="w-10 h-10 rounded-lg bg-brand-blue/20 flex items-center justify-center text-brand-blue border border-brand-blue/30">
             <span class="material-symbols-outlined">payments</span>
           </div>
-          <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-brand-blue/20 text-brand-blue border border-brand-blue/30">7 Meses</span>
+          <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-brand-blue/20 text-brand-blue border border-brand-blue/30">8 Meses</span>
         </div>
         <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Receita Bruta YTD</div>
-        <div class="text-2xl font-extrabold font-display text-white mb-1">R$ 5,84M</div>
+        <div class="text-2xl font-extrabold font-display text-white mb-1">R$ 6,80M</div>
         <div class="text-xs text-emerald-400 font-medium flex items-center gap-1">
-          <span class="material-symbols-outlined text-sm">trending_up</span> Média: R$ 833,6k/mês
+          <span class="material-symbols-outlined text-sm">trending_up</span> Média: R$ 849,8k/mês
         </div>
         <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-brand-blue to-blue-600"></div>
       </div>
@@ -547,12 +547,12 @@ full_html = f'''<!DOCTYPE html>
           <div class="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center text-emerald-400 border border-emerald-500/30">
             <span class="material-symbols-outlined">add_chart</span>
           </div>
-          <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Julho: 51,2%</span>
+          <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Agosto: 55,5%</span>
         </div>
         <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Margem Bruta Acumulada</div>
-        <div class="text-2xl font-extrabold font-display text-white mb-1">45,4%</div>
+        <div class="text-2xl font-extrabold font-display text-white mb-1">54,1%</div>
         <div class="text-xs text-emerald-400 font-medium flex items-center gap-1">
-          <span class="material-symbols-outlined text-sm">arrow_upward</span> R$ 2,65M em Margem Bruta
+          <span class="material-symbols-outlined text-sm">arrow_upward</span> R$ 3,69M em Margem Bruta
         </div>
         <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-emerald-500 to-teal-400"></div>
       </div>
@@ -562,12 +562,12 @@ full_html = f'''<!DOCTYPE html>
           <div class="w-10 h-10 rounded-lg bg-amber-500/20 flex items-center justify-center text-amber-400 border border-amber-500/30">
             <span class="material-symbols-outlined">analytics</span>
           </div>
-          <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Mai/Jul Positivos</span>
+          <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Mai/Jul/Ago Positivos</span>
         </div>
         <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">EBITDA Acumulado</div>
-        <div class="text-2xl font-extrabold font-display text-rose-400 mb-1">-R$ 689k</div>
+        <div class="text-2xl font-extrabold font-display text-rose-400 mb-1">-R$ 680k</div>
         <div class="text-xs text-gray-400 font-medium flex items-center gap-1">
-          <span class="material-symbols-outlined text-sm">timeline</span> Margin EBITDA: -11,8%
+          <span class="material-symbols-outlined text-sm">timeline</span> Margin EBITDA: -10,0%
         </div>
         <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-amber-500 to-rose-500"></div>
       </div>
@@ -577,12 +577,12 @@ full_html = f'''<!DOCTYPE html>
           <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400 border border-purple-500/30">
             <span class="material-symbols-outlined">account_balance</span>
           </div>
-          <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">+R$ 265k em Jul</span>
+          <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">+R$ 253k em Ago</span>
         </div>
         <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Resultado YTD Período</div>
-        <div class="text-2xl font-extrabold font-display text-rose-400 mb-1">-R$ 528k</div>
+        <div class="text-2xl font-extrabold font-display text-rose-400 mb-1">-R$ 275k</div>
         <div class="text-xs text-emerald-400 font-medium flex items-center gap-1">
-          <span class="material-symbols-outlined text-sm">savings</span> Rec. Financeira: R$ 225k
+          <span class="material-symbols-outlined text-sm">savings</span> Rec. Financeira: R$ 454k
         </div>
         <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-purple-500 to-indigo-500"></div>
       </div>
@@ -596,7 +596,7 @@ full_html = f'''<!DOCTYPE html>
         <div class="w-1.5 h-6 bg-brand-blue rounded-full"></div>
         Demonstração do Resultado do Exercício (DRE Gerencial)
       </h2>
-      <p class="text-xs text-gray-400 mt-1 ml-4.5">Apuração mensal detalhada (Jan a Jul/26) — Impostos (ISS Efetivo + 6,15% PIS/COFINS) e Resultado Financeiro</p>
+      <p class="text-xs text-gray-400 mt-1 ml-4.5">Apuração mensal detalhada (Jan a Ago/26) — Impostos (ISS Efetivo + 6,15% PIS/COFINS) e Resultado Financeiro</p>
     </div>
     <div class="glass-panel rounded-2xl overflow-hidden border border-white/15 shadow-2xl">
       <div class="p-4 bg-slate-900/90 border-b border-white/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
@@ -618,7 +618,8 @@ full_html = f'''<!DOCTYPE html>
               <th class="py-3.5 px-3 text-right">MAI-26</th>
               <th class="py-3.5 px-3 text-right">JUN-26</th>
               <th class="py-3.5 px-3 text-right">JUL-26</th>
-              <th class="py-3.5 px-3 text-right text-brand-blue font-black">YTD (7 MESES)</th>
+              <th class="py-3.5 px-3 text-right">AGO-26</th>
+              <th class="py-3.5 px-3 text-right text-brand-blue font-black">YTD (8 MESES)</th>
             </tr>
           </thead>
           <tbody>
@@ -794,10 +795,10 @@ full_html = f'''<!DOCTYPE html>
           <span class="material-symbols-outlined text-sm">check_circle</span> Pontos Positivos
         </div>
         <div class="p-5 space-y-3 text-xs text-gray-300 leading-relaxed">
-          <p><strong class="text-white">● Margem Bruta Consolidada:</strong> Mantida no patamar de 51% nos meses de Maio e Julho, evidenciando excelente retorno sobre serviços prestados.</p>
-          <p><strong class="text-white">● Recorde de Faturamento:</strong> Julho superou a marca de R$ 1,007 milhão, um avanço expressivo de +62,8% em comparação a Janeiro.</p>
-          <p><strong class="text-white">● EBITDA Positivo na Segunda Metade:</strong> Meses de Maio (R$ +52k) e Julho (R$ +48k) atingiram resultado operacional positivo.</p>
-          <p><strong class="text-white">● Rendimento Financeiro Expressivo:</strong> R$ 225,1k de receita financeira em Julho impulsionaram o resultado mensal para +R$ 264,7k.</p>
+          <p><strong class="text-white">● Margem Bruta Consolidada:</strong> Mantida no patamar de 55,5% em Agosto, acumulando 54,1% YTD e evidenciando consistente rentabilidade dos serviços.</p>
+          <p><strong class="text-white">● Faturamento Elevado no 2º Semestre:</strong> Julho (R$ 1,008M) e Agosto (R$ 962,8k) mantiveram a receita em patamares recordes do ano.</p>
+          <p><strong class="text-white">● Sequência Positiva no Resultado do Período:</strong> Meses de Julho (R$ +264,7k) e Agosto (R$ +253,4k) apresentaram lucro líquido consecutivo.</p>
+          <p><strong class="text-white">● Redução Expressiva do Prejuízo Acumulado:</strong> O resultado YTD acumulado melhorou significativamente, reduzindo de -R$ 528k em Julho para -R$ 274,8k em Agosto.</p>
         </div>
       </div>
 
@@ -807,10 +808,10 @@ full_html = f'''<!DOCTYPE html>
           <span class="material-symbols-outlined text-sm">warning</span> Pontos de Atenção
         </div>
         <div class="p-5 space-y-3 text-xs text-gray-300 leading-relaxed">
-          <p><strong class="text-white">● Concentração de Receita:</strong> 58,7% do faturamento YTD está concentrado na UN Outsourcing (R$ 3,43M).</p>
-          <p><strong class="text-white">● Custo Fixo Elevado:</strong> Estrutura fixa consumiu 56,0% da Receita Bruta YTD (R$ 3,27M acumulados).</p>
-          <p><strong class="text-white">● Peso da Folha de Pagamento:</strong> Funcionários e benefícios representam 37,1% do faturamento acumulado.</p>
-          <p><strong class="text-white">● Custos com Consultores:</strong> Maior custo variável de serviços, totalizando R$ 2,47M no acumulado.</p>
+          <p><strong class="text-white">● Concentração de Receita:</strong> 55,3% do faturamento YTD está concentrado na UN Outsourcing (R$ 3,76M acumulados).</p>
+          <p><strong class="text-white">● Estrutura Fixa Acumulada:</strong> Custo fixo consumiu 54,0% da Receita Bruta YTD (R$ 3,67M acumulados de Jan a Ago).</p>
+          <p><strong class="text-white">● Custos com Consultores:</strong> Maior custo variável de serviços, totalizando R$ 2,83M no acumulado de 8 meses.</p>
+          <p><strong class="text-white">● Despesas com Viagens:</strong> Viagens acumulam R$ 917,7k YTD, dos quais R$ 734,5k foram recuperados via reembolso.</p>
         </div>
       </div>
 
@@ -820,10 +821,10 @@ full_html = f'''<!DOCTYPE html>
           <span class="material-symbols-outlined text-sm">error</span> Riscos Críticos
         </div>
         <div class="p-5 space-y-3 text-xs text-gray-300 leading-relaxed">
-          <p><strong class="text-white">● Acumulado do Ano Negativo:</strong> Apesar da recuperação recente, o acumulado de 7 meses registra prejuízo de R$ 528.162,00.</p>
-          <p><strong class="text-white">● Encargos Financeiros:</strong> Juros e tarifas bancárias acumulam R$ 64,1k no período (média de R$ 9,1k/mês).</p>
-          <p><strong class="text-white">● Campus BH:</strong> Quarto maior centro de custos da empresa (R$ 401k YTD), demandando auditoria sobre obras e despesas prediais.</p>
-          <p><strong class="text-white">● Despesas Adm e Controle:</strong> Centro de custo com maior volume financeiro (R$ 1,76M YTD), exigindo otimização contínua.</p>
+          <p><strong class="text-white">● Recuperação YTD em Andamento:</strong> O acumulado de 8 meses registra resultado de R$ -274.752,38, exigindo manutenção do resultado mensal positivo.</p>
+          <p><strong class="text-white">● Encargos Financeiros:</strong> Juros e tarifas bancárias acumulam R$ 72,5k no período (média de R$ 9,1k/mês).</p>
+          <p><strong class="text-white">● Campus BH:</strong> Quarto maior centro de custos da empresa (R$ 406,3k YTD), demandando controle contínuo sobre despesas prediais.</p>
+          <p><strong class="text-white">● Despesas Adm e Controle:</strong> Centro de custo com maior volume financeiro acumulado (R$ 2,13M YTD), exigindo otimização de processos.</p>
         </div>
       </div>
     </div>
@@ -838,7 +839,7 @@ full_html = f'''<!DOCTYPE html>
       <img alt="NNÓS Logo" class="h-10 w-auto object-contain opacity-90" src="{LOGO_B64_WHITE}"/>
       <span class="font-bold text-white">NNÓS Business Solutions</span>
     </div>
-    <div>Relatório Financeiro Gerencial • Período: Janeiro a Julho de 2026</div>
+    <div>Relatório Financeiro Gerencial • Período: Janeiro a Agosto de 2026</div>
     <div class="text-[11px] text-gray-500">Controladoria & Gestão Financeira</div>
   </div>
 </footer>
@@ -852,7 +853,7 @@ if (ctxFaturamento) {{
   new Chart(ctxFaturamento, {{
     type: 'bar',
     data: {{
-      labels: ['Jan/26', 'Fev/26', 'Mar/26', 'Abr/26', 'Mai/26', 'Jun/26', 'Jul/26'],
+      labels: ['Jan/26', 'Fev/26', 'Mar/26', 'Abr/26', 'Mai/26', 'Jun/26', 'Jul/26', 'Ago/26'],
       datasets: [{{
         label: 'Receita Bruta (R$)',
         data: [{", ".join(str(round(x, 2)) for x in d['rec_bruta'])}],
