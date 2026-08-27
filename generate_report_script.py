@@ -313,6 +313,42 @@ tot_viag_reemb = sum(d['reembolso_viagens'])
 gap_viagens = tot_viag_reemb - tot_viag_desp
 cobertura_pct = (tot_viag_reemb / tot_viag_desp) * 100
 
+# ── KPI 5: Resultado sem Imobilizado & Reforma ──
+_res_sem = res_sem_imob_ytd  # already calculated above
+_res_sem_pct = (_res_sem / sum(d['rec_bruta'])) * 100
+_imob_val_k = imob_total / 1000
+if _res_sem >= 0:
+    _kpi5_color = 'text-emerald-400'
+    _kpi5_gradient = 'from-emerald-500 to-teal-400'
+    _kpi5_badge_cls = 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
+    _kpi5_icon_cls = 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
+    _kpi5_value_fmt = f'R$ {fmt(abs(_res_sem))}'
+    _kpi5_sub_icon = 'arrow_upward'
+    _kpi5_sub_color = 'text-emerald-400'
+else:
+    _kpi5_color = 'text-rose-400'
+    _kpi5_gradient = 'from-teal-600 to-cyan-500'
+    _kpi5_badge_cls = 'bg-teal-500/20 text-teal-300 border-teal-500/30'
+    _kpi5_icon_cls = 'bg-teal-500/20 text-teal-300 border-teal-500/30'
+    _kpi5_value_fmt = f'-R$ {fmt(abs(_res_sem))}'
+    _kpi5_sub_icon = 'trending_down'
+    _kpi5_sub_color = 'text-rose-400'
+
+kpi5_card = f'''<div class="glass-card rounded-xl p-5 relative overflow-hidden group border-2 border-teal-500/30">
+        <div class="flex items-center justify-between mb-3">
+          <div class="w-10 h-10 rounded-lg {_kpi5_icon_cls} flex items-center justify-center border">
+            <span class="material-symbols-outlined">construction</span>
+          </div>
+          <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full {_kpi5_badge_cls} border">Ex-Imob.</span>
+        </div>
+        <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Resultado s/ Imob. &amp; Reforma</div>
+        <div class="text-2xl font-extrabold font-display {_kpi5_color} mb-1">{_kpi5_value_fmt}</div>
+        <div class="text-xs {_kpi5_sub_color} font-medium flex items-center gap-1">
+          <span class="material-symbols-outlined text-sm">{_kpi5_sub_icon}</span> {_res_sem_pct:+.1f}% rec. bruta | Imob.: R$ {_imob_val_k:.0f}k
+        </div>
+        <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r {_kpi5_gradient}"></div>
+      </div>'''
+
 full_html = f'''<!DOCTYPE html>
 <html class="dark" lang="pt-BR">
 <head>
@@ -535,7 +571,7 @@ full_html = f'''<!DOCTYPE html>
         <p class="text-xs text-gray-400 mt-1 ml-4.5">Visão sintética do desempenho financeiro acumulado de Janeiro a Agosto/2026</p>
       </div>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
       <!-- KPI 1 -->
       <div class="glass-card rounded-xl p-5 relative overflow-hidden group">
         <div class="flex items-center justify-between mb-3">
@@ -596,6 +632,8 @@ full_html = f'''<!DOCTYPE html>
         </div>
         <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-purple-500 to-indigo-500"></div>
       </div>
+      <!-- KPI 5 -->
+      {kpi5_card}
     </div>
   </section>
 
