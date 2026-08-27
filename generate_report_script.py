@@ -136,8 +136,8 @@ table_body += get_row("", None, "spacer")
 table_body += get_row("(=) RESULTADO DO PERÍODO", "resultado_periodo", "result")
 table_body += get_row("% Resultado / Receita Bruta", "resultado_periodo", "hint")
 
-# ── Imobilizado & Reforma ──
-imob_total = 325572.28
+# ── Imobilizado & Reforma (Atualizado com base no painel Campus BH UVA) ──
+imob_total = 337754.41
 imob_fornecedores = [
     ("MR ENGENHARIA", "Obras", 189589.65),
     ("OTHON DE CARVALHO", "Materiais Elétricos", 29730.33),
@@ -168,12 +168,12 @@ for idx, (nome, desc, valor) in enumerate(imob_fornecedores):
 
 # Imobilizado header row in the DRE table
 table_body += '''<tr class="h-6">
-  <td colspan="10"></td>
+  <td colspan="11"></td>
 </tr>
 '''
 table_body += f'''<tr class="bg-surface-container-high/90 border-y border-surface-variant/80">
   <td class="py-3 px-4 text-xs font-bold text-brand-blue uppercase tracking-widest">Imobilizado &amp; Reforma</td>
-  <td colspan="7" class="py-3 px-3"></td>
+  <td colspan="8" class="py-3 px-3"></td>
   <td class="py-3 px-3 text-right text-sm font-sans font-bold text-amber-300">R$ {fmt_float(imob_total)}</td>
 </tr>
 '''
