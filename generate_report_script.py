@@ -481,7 +481,7 @@ full_html = f'''<!DOCTYPE html>
           <span class="material-symbols-outlined text-emerald-400 text-sm">payments</span> Rec. Bruta: R$ 6,80M
         </span>
         <span class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 text-white border border-white/10">
-          <span class="material-symbols-outlined text-brand-blue text-sm">trending_up</span> Margem Bruta: 54,1%
+          <span class="material-symbols-outlined text-brand-blue text-sm">trending_up</span> Margem Bruta: 45,8%
         </span>
         <span class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 text-white border border-white/10">
           <span class="material-symbols-outlined text-amber-400 text-sm">verified</span> Controladoria & Gestão
@@ -547,12 +547,12 @@ full_html = f'''<!DOCTYPE html>
           <div class="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center text-emerald-400 border border-emerald-500/30">
             <span class="material-symbols-outlined">add_chart</span>
           </div>
-          <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Agosto: 55,5%</span>
+          <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Agosto: 49,2%</span>
         </div>
         <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Margem Bruta Acumulada</div>
-        <div class="text-2xl font-extrabold font-display text-white mb-1">54,1%</div>
+        <div class="text-2xl font-extrabold font-display text-white mb-1">45,8%</div>
         <div class="text-xs text-emerald-400 font-medium flex items-center gap-1">
-          <span class="material-symbols-outlined text-sm">arrow_upward</span> R$ 3,69M em Margem Bruta
+          <span class="material-symbols-outlined text-sm">arrow_upward</span> R$ 3,12M em Margem Bruta
         </div>
         <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-emerald-500 to-teal-400"></div>
       </div>
@@ -562,12 +562,12 @@ full_html = f'''<!DOCTYPE html>
           <div class="w-10 h-10 rounded-lg bg-amber-500/20 flex items-center justify-center text-amber-400 border border-amber-500/30">
             <span class="material-symbols-outlined">analytics</span>
           </div>
-          <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Mai/Jul/Ago Positivos</span>
+          <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30">Ago: +R$ 287k</span>
         </div>
         <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">EBITDA Acumulado</div>
-        <div class="text-2xl font-extrabold font-display text-rose-400 mb-1">-R$ 680k</div>
+        <div class="text-2xl font-extrabold font-display text-rose-400 mb-1">-R$ 631k</div>
         <div class="text-xs text-gray-400 font-medium flex items-center gap-1">
-          <span class="material-symbols-outlined text-sm">timeline</span> Margin EBITDA: -10,0%
+          <span class="material-symbols-outlined text-sm">timeline</span> Margin EBITDA: -9,3%
         </div>
         <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-amber-500 to-rose-500"></div>
       </div>
@@ -577,12 +577,12 @@ full_html = f'''<!DOCTYPE html>
           <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400 border border-purple-500/30">
             <span class="material-symbols-outlined">account_balance</span>
           </div>
-          <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">+R$ 253k em Ago</span>
+          <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">+R$ 287k em Ago</span>
         </div>
         <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Resultado YTD Período</div>
-        <div class="text-2xl font-extrabold font-display text-rose-400 mb-1">-R$ 275k</div>
+        <div class="text-2xl font-extrabold font-display text-rose-400 mb-1">-R$ 473k</div>
         <div class="text-xs text-emerald-400 font-medium flex items-center gap-1">
-          <span class="material-symbols-outlined text-sm">savings</span> Rec. Financeira: R$ 454k
+          <span class="material-symbols-outlined text-sm">savings</span> Rec. Financeira: R$ 229k
         </div>
         <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-purple-500 to-indigo-500"></div>
       </div>
@@ -797,8 +797,8 @@ full_html = f'''<!DOCTYPE html>
         <div class="p-5 space-y-3 text-xs text-gray-300 leading-relaxed">
           <p><strong class="text-white">● Margem Bruta Consolidada:</strong> Mantida no patamar de 55,5% em Agosto, acumulando 54,1% YTD e evidenciando consistente rentabilidade dos serviços.</p>
           <p><strong class="text-white">● Faturamento Elevado no 2º Semestre:</strong> Julho (R$ 1,008M) e Agosto (R$ 962,8k) mantiveram a receita em patamares recordes do ano.</p>
-          <p><strong class="text-white">● Sequência Positiva no Resultado do Período:</strong> Meses de Julho (R$ +264,7k) e Agosto (R$ +253,4k) apresentaram lucro líquido consecutivo.</p>
-          <p><strong class="text-white">● Redução Expressiva do Prejuízo Acumulado:</strong> O resultado YTD acumulado melhorou significativamente, reduzindo de -R$ 528k em Julho para -R$ 274,8k em Agosto.</p>
+          <p><strong class="text-white">● Resultado Positivo em Agosto:</strong> Agosto registrou resultado líquido de +R$ 286,7k, contribuindo para a recuperação do período.</p>
+          <p><strong class="text-white">● Controle de Despesa Financeira:</strong> Após auditoria, juros e tarifas bancárias (R$ 70,7k YTD) foram corretamente isolados dos empréstimos/amortizações (R$ 617k YTD), tratados separadamente no balanço.</p>
         </div>
       </div>
 
@@ -808,10 +808,10 @@ full_html = f'''<!DOCTYPE html>
           <span class="material-symbols-outlined text-sm">warning</span> Pontos de Atenção
         </div>
         <div class="p-5 space-y-3 text-xs text-gray-300 leading-relaxed">
-          <p><strong class="text-white">● Concentração de Receita:</strong> 55,3% do faturamento YTD está concentrado na UN Outsourcing (R$ 3,76M acumulados).</p>
-          <p><strong class="text-white">● Estrutura Fixa Acumulada:</strong> Custo fixo consumiu 54,0% da Receita Bruta YTD (R$ 3,67M acumulados de Jan a Ago).</p>
-          <p><strong class="text-white">● Custos com Consultores:</strong> Maior custo variável de serviços, totalizando R$ 2,83M no acumulado de 8 meses.</p>
-          <p><strong class="text-white">● Despesas com Viagens:</strong> Viagens acumulam R$ 917,7k YTD, dos quais R$ 734,5k foram recuperados via reembolso.</p>
+          <p><strong class="text-white">● Margem Bruta Corrigida:</strong> Após inclusão das comissões (R$ 44,7k YTD), a Margem Bruta real é de 45,8% — abaixo do indicado anteriormente.</p>
+          <p><strong class="text-white">● Comissões de Vendedores:</strong> R$ 44,7k acumulados (Jan a Ago), com maior concentração em Março (R$ 10k) e Abril (R$ 12,3k).</p>
+          <p><strong class="text-white">● Custos com Consultores:</strong> Maior custo variável de serviços no acumulado de 8 meses.</p>
+          <p><strong class="text-white">● Impostos Revisados:</strong> ISS efetivo (conforme Base Despesas) + 6,15% PIS/COFINS calculado sobre o faturamento mensal.</p>
         </div>
       </div>
 
@@ -821,10 +821,10 @@ full_html = f'''<!DOCTYPE html>
           <span class="material-symbols-outlined text-sm">error</span> Riscos Críticos
         </div>
         <div class="p-5 space-y-3 text-xs text-gray-300 leading-relaxed">
-          <p><strong class="text-white">● Recuperação YTD em Andamento:</strong> O acumulado de 8 meses registra resultado de R$ -274.752,38, exigindo manutenção do resultado mensal positivo.</p>
-          <p><strong class="text-white">● Encargos Financeiros:</strong> Juros e tarifas bancárias acumulam R$ 72,5k no período (média de R$ 9,1k/mês).</p>
-          <p><strong class="text-white">● Campus BH:</strong> Quarto maior centro de custos da empresa (R$ 406,3k YTD), demandando controle contínuo sobre despesas prediais.</p>
-          <p><strong class="text-white">● Despesas Adm e Controle:</strong> Centro de custo com maior volume financeiro acumulado (R$ 2,13M YTD), exigindo otimização de processos.</p>
+          <p><strong class="text-white">● Déficit YTD em Andamento:</strong> O acumulado de 8 meses registra resultado de R$ -472,6k, exigindo manutenção do resultado mensal positivo para reversão no 2º semestre.</p>
+          <p><strong class="text-white">● Encargos Financeiros:</strong> Juros e tarifas bancárias totalizam R$ 70,7k YTD (média R$ 8,8k/mês). Empréstimos e amortizações (R$ 617k) são tratados fora do resultado operacional.</p>
+          <p><strong class="text-white">● Receita Financeira Concentrada:</strong> R$ 229,1k da receita financeira YTD provém de rendimentos de aplicações registrados em Agosto (R$ 229,1k), evento não recorrente.</p>
+          <p><strong class="text-white">● Despesas Adm e Controle:</strong> Centro de custo com maior volume financeiro acumulado, exigindo otimização de processos internos.</p>
         </div>
       </div>
     </div>

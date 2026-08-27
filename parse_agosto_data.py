@@ -89,7 +89,7 @@ with open('Agosto - Base Despesas Jan-Ago.csv', 'r', encoding='cp1252') as f:
                     impostos_tot[i] += v
                 elif dash_n == 'consultor':
                     custo_consultores[i] += v
-                elif dash_n == 'comissoes':
+                elif 'comiss' in dash_n or 'comiss' in orig_n:
                     comissoes[i] += v
                 elif dash_n == 'viagens':
                     viagens_desp[i] += v
@@ -107,8 +107,13 @@ with open('Agosto - Base Despesas Jan-Ago.csv', 'r', encoding='cp1252') as f:
                     contabilidade[i] += v
                 elif dash_n == 'despesas operacionais':
                     desp_operacionais[i] += v
-                elif dash_n == 'despesa financeira':
-                    juros_tarifas[i] += v
+                elif dash_n == 'despesa financeira' or 'financeir' in dash_n:
+                    if 'juros' in orig_n or 'tarifa' in orig_n:
+                        juros_tarifas[i] += v
+# Apply PIS/COFINS (6.15%) on revenue and add to total taxes
+pis_cofins = [rec_bruta[i] * 0.0615 for i in range(8)]
+for i in range(8):
+    impostos_tot[i] += pis_cofins[i]
 
 # 3. REEMBOLSO E APLICAÇÃO
 reembolso_viagens = [0.0] * 8
@@ -129,7 +134,7 @@ with open('Agosto - Reembolso e Aplicação.csv', 'r', encoding='cp1252') as f:
                     reembolso_viagens[i] += v
                 elif 'rendimentos' in orig_n or dash_n == 'resultado financeiro':
                     receita_financeira[i] += v
-                elif dash_n == 'despesa financeira':
+                elif ('despesa financeira' in dash_n or 'financeir' in dash_n) and ('juros' in orig_n or 'tarifa' in orig_n):
                     juros_tarifas[i] += v
 
 # DERIVED METRICS
