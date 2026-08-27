@@ -38,7 +38,11 @@ with open('Agosto - Receita JAN-AGO.csv', 'r', encoding='cp1252') as f:
             proj = row[1].strip()
             val = parse_num(row[4])
             un = row[5].strip()
-            
+
+            # CAMPUS BH (UNIV. VEIGA DE ALMEIDA) é uma UN própria
+            if 'CAMPUS BH' in proj.upper():
+                un = 'CAMPUS BH'
+
             if m_str in month_map:
                 m_idx = month_map[m_str]
                 rec_bruta[m_idx] += val

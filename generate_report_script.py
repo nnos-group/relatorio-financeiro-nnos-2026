@@ -228,23 +228,33 @@ for idx, (proj, val) in enumerate(d['top_proj'], 1):
 un_grid_html = ""
 un_bars_html = ""
 tot_rec_ytd = sum(d['rec_bruta'])
-un_colors = ['bg-brand-blue', 'bg-emerald-500', 'bg-purple-500', 'bg-amber-500', 'bg-slate-400']
+un_colors = ['bg-brand-blue', 'bg-emerald-500', 'bg-purple-500', 'bg-amber-500', 'bg-teal-500', 'bg-rose-400', 'bg-slate-400']
+un_display_names = {
+    'OUTSOURCING': 'OUTSOURCING',
+    'HRD - HUMAN RESOURCE\xa0DEVELOPMENT': 'HRD',
+    'BUSINESS SOLUTIONS': 'BUSINESS SOLUTIONS',
+    'DEALER DEVELOPMENT': 'DEALER DEVELOPMENT',
+    'INNOVATION': 'INNOVATION',
+    'CAMPUS BH': 'CAMPUS BH',
+    'EDUCA\xc7\xc3O': 'EDUCA\xc7\xc3O',
+}
 for idx, (un, val) in enumerate(sorted(d['un_ytd'].items(), key=lambda x: x[1], reverse=True)):
     pct = (val / tot_rec_ytd) * 100
     val_k = val / 1000
+    display = un_display_names.get(un, un.split(' - ')[0])
     grid_col_span = ' class="col-span-full"' if un == 'INNOVATION' else ''
     un_grid_html += f'''<div class="glass-card p-4 rounded-xl border border-surface-variant/60 flex items-center justify-between{grid_col_span}">
   <div>
-    <div class="text-xs font-bold text-brand-blue uppercase tracking-wider">{un.split(" - ")[0]}</div>
+    <div class="text-xs font-bold text-brand-blue uppercase tracking-wider">{display}</div>
     <div class="text-[11px] text-text-muted mt-0.5">{pct:.1f}% do faturamento total</div>
   </div>
   <div class="text-lg font-extrabold text-white font-display">R$ {val_k:,.0f}K</div>
 </div>\n'''.replace(',', '.')
-    
+
     color_cls = un_colors[idx % len(un_colors)]
     un_bars_html += f'''<div class="space-y-1.5">
   <div class="flex justify-between text-xs font-medium">
-    <span class="text-text-muted">{un.split(" - ")[0]}</span>
+    <span class="text-text-muted">{display}</span>
     <span class="text-white font-semibold">{pct:.1f}%</span>
   </div>
   <div class="h-3 w-full bg-surface-container-high rounded-full overflow-hidden border border-surface-variant/40">
