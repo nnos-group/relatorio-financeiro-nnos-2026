@@ -1,4 +1,4 @@
-import json
+﻿import json
 import hashlib
 from logo_b64 import LOGO_B64_WHITE
 
@@ -989,8 +989,12 @@ document.addEventListener('DOMContentLoaded', () => {{
 target_filename = '2026 - Relatório Financeiro - NNÓS - MATRIZ-26.html'
 with open(target_filename, 'w', encoding='utf-8') as f:
     f.write(full_html)
+print(f"Relatório Matriz atualizado em: {target_filename}")
 
-with open('index.html', 'w', encoding='utf-8') as f:
-    f.write(full_html)
-
-print(f"Successfully generated updated HTML with login gate: {target_filename} and index.html")
+# Atualiza automaticamente o Portal Integrado (Hub de Seleção + Matriz + UVA) no index.html
+try:
+    import build_portal
+    build_portal.build()
+    print("Portal Integrado index.html atualizado automaticamente com sucesso!")
+except Exception as e:
+    print(f"Aviso: execute build_portal.py para atualizar o index.html ({e})")
