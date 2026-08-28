@@ -56,19 +56,13 @@ main{padding:34px 0 70px} .section{margin-top:54px;scroll-margin-top:78px}
 .leader-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px} .leader-grid div{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05);border-radius:12px;padding:10px} .leader-grid span{display:block;color:#869ab3;font-size:10px;margin-bottom:5px} .leader-grid strong{font-size:13px} .progress{height:4px;background:rgba(255,255,255,.07);border-radius:9px;margin-top:15px;overflow:hidden} .progress i{display:block;height:100%;background:linear-gradient(90deg,#0083ca,#60a5fa);border-radius:9px}
 .dre-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:16px} .dre-card{padding:16px;border-radius:16px;border:1px solid var(--line);background:rgba(14,31,53,.55)} .dre-card .v{font-family:Manrope;font-size:20px;font-weight:800;margin-top:8px} .dre-card .l{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#8fa3bd;font-weight:700} .dre-card.negative .v{color:#ff96a8} .dre-card.positive .v{color:#7de4bc} .dre-card.capex .v{color:#ffd56a}
 .adjust-note{padding:17px 18px;border:1px solid rgba(52,211,153,.2);background:rgba(8,70,55,.12);border-radius:16px;color:#b8d8cc;font-size:13px;line-height:1.55;margin-top:14px} .adjust-note strong{color:#8ef0cb}
-.toolbar-card{background:linear-gradient(145deg,rgba(16,34,59,.85),rgba(10,24,43,.75));border:1px solid rgba(56,189,248,.25);border-radius:18px;padding:16px 20px;margin-bottom:18px;box-shadow:0 12px 35px rgba(0,0,0,.28)}
-.toolbar{display:grid;grid-template-columns:1.4fr 1fr 1fr auto;gap:12px;align-items:center}
-.input-wrap,.select-wrap{position:relative;display:flex;align-items:center}
-.input-wrap .field-icon,.select-wrap .field-icon{position:absolute;left:14px;color:#38bdf8;font-size:18px;pointer-events:none;opacity:.85}
-.input-wrap input{width:100%;border:1px solid rgba(148,163,184,.22);background:rgba(8,20,38,.85);color:#fff;border-radius:12px;padding:11px 14px 11px 42px;outline:none;font-size:13px;transition:all .2s ease;font-family:Inter,sans-serif}
-.input-wrap input::placeholder{color:#8aa0bc}
-.input-wrap input:focus{border-color:#38bdf8;box-shadow:0 0 16px rgba(56,189,248,.28);background:rgba(12,27,48,.95)}
-.select-wrap select{width:100%;border:1px solid rgba(148,163,184,.22);background:rgba(8,20,38,.85);color:#fff;border-radius:12px;padding:11px 36px 11px 42px;outline:none;font-size:13px;cursor:pointer;appearance:none;-webkit-appearance:none;font-family:Inter,sans-serif;transition:all .2s ease}
-.select-wrap select option{background:#0d1d33;color:#fff}
-.select-wrap:after{content:"▾";position:absolute;right:14px;color:#8aa0bc;font-size:12px;pointer-events:none}
-.select-wrap select:focus{border-color:#38bdf8;box-shadow:0 0 16px rgba(56,189,248,.28);background:rgba(12,27,48,.95)}
-.btn-reset{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(251,113,133,.3);background:rgba(251,113,133,.08);color:#ffaab8;border-radius:12px;padding:11px 16px;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s ease;white-space:nowrap}
-.btn-reset:hover{background:rgba(251,113,133,.2);border-color:rgba(251,113,133,.6);color:#fff;box-shadow:0 0 14px rgba(251,113,133,.22)}
+.toolbar{display:grid;grid-template-columns:1.3fr .9fr .9fr auto;gap:10px;margin-bottom:14px}
+.toolbar input, .toolbar select{width:100%!important;border:1px solid rgba(148,163,184,.22)!important;background:#0c1d33!important;background-color:#0c1d33!important;color:#f8fbff!important;border-radius:10px!important;padding:10px 14px!important;outline:none!important;font-size:13px!important;font-family:Inter,sans-serif!important;box-shadow:none!important;appearance:auto!important;-webkit-appearance:auto!important}
+.toolbar input::placeholder{color:#6f839e!important;opacity:1!important}
+.toolbar select option{background:#0c1d33!important;color:#f8fbff!important}
+.toolbar input:focus, .toolbar select:focus{border-color:#60a5fa!important;box-shadow:0 0 12px rgba(96,165,250,.25)!important}
+.toolbar button{border:1px solid rgba(96,165,250,.25)!important;background:rgba(96,165,250,.08)!important;color:#cfe8ff!important;border-radius:10px!important;padding:10px 16px!important;font-size:13px!important;font-weight:700!important;cursor:pointer!important;white-space:nowrap!important;transition:all .2s ease!important}
+.toolbar button:hover{background:rgba(96,165,250,.18)!important;border-color:rgba(96,165,250,.5)!important;color:#ffffff!important}
 .table-wrap{overflow:auto;border-radius:18px;border:1px solid var(--line)} table{width:100%;border-collapse:collapse;min-width:1040px;background:rgba(8,22,39,.48)} th{position:sticky;top:0;background:#10243e;color:#9fb2c9;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.08em;padding:12px 13px;border-bottom:1px solid var(--line)} td{padding:11px 13px;border-bottom:1px solid rgba(255,255,255,.045);font-size:12px;color:#c7d4e5} tr:hover td{background:rgba(96,165,250,.035)} td.num{text-align:right;font-variant-numeric:tabular-nums} .project-name{color:white;font-weight:600;max-width:360px}
 .status{display:inline-flex;padding:5px 8px;border-radius:999px;font-size:10px;font-weight:800} .status.excelente{background:rgba(52,211,153,.1);color:#7de4bc;border:1px solid rgba(52,211,153,.18)} .status.meta{background:rgba(96,165,250,.1);color:#9dcfff;border:1px solid rgba(96,165,250,.18)} .status.atencao{background:rgba(251,191,36,.1);color:#ffda72;border:1px solid rgba(251,191,36,.18)} .status.critico{background:rgba(251,113,133,.1);color:#ff9bae;border:1px solid rgba(251,113,133,.18)}
 .footer{border-top:1px solid var(--line);padding:28px 0 44px;color:#8296ae;font-size:12px} .footer-in{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
@@ -281,25 +275,11 @@ main{padding:34px 0 70px} .section{margin-top:54px;scroll-margin-top:78px}
 
 <section class="section" id="detalhe">
   <div class="section-head"><div><div class="line-title"><h2>Detalhamento dos projetos operacionais</h2></div><p>Tabela completa com filtros por projeto, líder e faixa de rentabilidade.</p></div></div>
-  <div class="toolbar-card">
-    <div class="toolbar">
-      <div class="input-wrap">
-        <span class="material-symbols-outlined field-icon">search</span>
-        <input id="q" placeholder="Buscar por nome do projeto...">
-      </div>
-      <div class="select-wrap">
-        <span class="material-symbols-outlined field-icon">person</span>
-        <select id="leaderFilter"><option value="">Todos os líderes</option></select>
-      </div>
-      <div class="select-wrap">
-        <span class="material-symbols-outlined field-icon">tune</span>
-        <select id="statusFilter"><option value="">Todos os status</option><option value="excelente">≥ 30% — Excelente</option><option value="meta">22% a 30% — Faixa meta</option><option value="atencao">0% a 22% — Atenção</option><option value="critico">Negativo — Crítico</option></select>
-      </div>
-      <button class="btn-reset" onclick="resetFilters()">
-        <span class="material-symbols-outlined" style="font-size:16px">restart_alt</span>
-        <span>Limpar filtros</span>
-      </button>
-    </div>
+  <div class="toolbar">
+    <input id="q" placeholder="Buscar projeto...">
+    <select id="leaderFilter"><option value="">Todos os líderes</option></select>
+    <select id="statusFilter"><option value="">Todos os status</option><option value="excelente">≥ 30% — Excelente</option><option value="meta">22% a 30% — Faixa meta</option><option value="atencao">0% a 22% — Atenção</option><option value="critico">Negativo — Crítico</option></select>
+    <button onclick="resetFilters()">Limpar filtros</button>
   </div>
   <div class="table-wrap"><table><thead><tr><th>Projeto</th><th>Líder</th><th style="text-align:right">Receita</th><th style="text-align:right">Custos</th><th style="text-align:right">Logística</th><th style="text-align:right">Repasse</th><th style="text-align:right">Margem</th><th style="text-align:right">Margem %</th><th>Status</th></tr></thead><tbody id="projectRows"></tbody></table></div>
 </section>
