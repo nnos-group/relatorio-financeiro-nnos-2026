@@ -56,10 +56,10 @@ def build():
                 return m.group(1) + new_matriz_view_inner + m.group(3)
             index_content = re.sub(pattern, repl, index_content)
             
-            # Garantir texto da fonte
+            # Garantir texto da fonte sem duplicidade
             index_content = index_content.replace(
-                'Análise financeira gerencial — Visão acumulada de 8 meses (Janeiro a Agosto/2026)',
-                'Análise financeira gerencial — Visão acumulada de 8 meses (Janeiro a Agosto/2026) - Fonte Conta Azul'
+                ' - Fonte Conta Azul - Fonte Conta Azul',
+                ' - Fonte Conta Azul'
             )
 
             with open(output_index, "w", encoding="utf-8") as f:
