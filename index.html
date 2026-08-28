@@ -2183,7 +2183,7 @@ function showView(viewName, updateHash = true) {
     if (booking) booking.classList.remove('hidden');
     if (updateHash) window.location.hash = 'projetos';
     document.title = "NNÓS Group | Dashboard Executivo de Performance de Projetos";
-    if (typeof renderTable === 'function') setTimeout(renderTable, 50);
+    setTimeout(() => { initBookingCharts(); initBookingTable(); }, 50);
   } else {
     if (hub) hub.classList.remove('hidden');
     if (updateHash) window.location.hash = 'hub';
@@ -2227,33 +2227,51 @@ const logMensal={"Jan":23452.040000000005,"Fev":38414.47,"Mar":36500.66,"Abr":29
 const money=v=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0}).format(v);
 const pctFmt=v=>new Intl.NumberFormat('pt-BR',{style:'percent',minimumFractionDigits:1,maximumFractionDigits:1}).format(v);
 const shortMoney=v=>{const a=Math.abs(v),s=v<0?'-':'';if(a>=1e6)return s+'R$ '+(a/1e6).toFixed(1).replace('.',',')+'M';if(a>=1e3)return s+'R$ '+(a/1e3).toFixed(0)+'K';return s+'R$ '+a.toFixed(0)};
-Chart.defaults.font.family="'Inter', sans-serif"; Chart.defaults.color='#aebed2';
 const gridColor='rgba(148,163,184,.11)';
 const tooltip={backgroundColor:'#10243e',titleColor:'#fff',bodyColor:'#d9e5f3',borderColor:'rgba(148,163,184,.22)',borderWidth:1,padding:12,displayColors:false};
 
-new Chart(document.getElementById('leaderCombo'),{data:{labels:leaders.map(x=>x.lider.split(' ')[0]),datasets:[
-{type:'bar',label:'Receita',data:leaders.map(x=>x.receita),backgroundColor:'rgba(96,165,250,.55)',borderColor:'#60a5fa',borderWidth:1,borderRadius:7,yAxisID:'y'},
-{type:'line',label:'Margem %',data:leaders.map(x=>x.margem_pct*100),borderColor:'#34d399',backgroundColor:'#34d399',pointBackgroundColor:'#34d399',pointRadius:4,tension:.35,yAxisID:'y1'}]},
-options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{usePointStyle:true,boxWidth:8}},tooltip},scales:{x:{grid:{display:false}},y:{beginAtZero:true,grid:{color:gridColor},ticks:{callback:v=>shortMoney(v)}},y1:{position:'right',grid:{display:false},ticks:{callback:v=>v.toFixed(0)+'%'}}}}});
-
-new Chart(document.getElementById('leaderShare'),{type:'doughnut',data:{labels:leaders.map(x=>x.lider),datasets:[{data:leaders.map(x=>x.receita),backgroundColor:['#60a5fa','#22d3ee','#34d399','#a78bfa','#fbbf24','#fb7185','#38bdf8'],borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,cutout:'68%',plugins:{legend:{position:'bottom',labels:{boxWidth:9,usePointStyle:true,padding:16,font:{size:10}}},tooltip:{...tooltip,callbacks:{label:c=>money(c.parsed)}}}}});
-
-new Chart(document.getElementById('topMargin'),{type:'bar',data:{labels:topMargin.map(x=>x.projeto),datasets:[{data:topMargin.map(x=>x.margem),backgroundColor:'rgba(52,211,153,.6)',borderColor:'#34d399',borderWidth:1,borderRadius:5}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...tooltip,callbacks:{label:c=>money(c.parsed.x)}}},scales:{x:{grid:{color:gridColor},ticks:{callback:v=>shortMoney(v)}},y:{grid:{display:false},ticks:{font:{size:10}}}}}});
-
-new Chart(document.getElementById('bottomMargin'),{type:'bar',data:{labels:bottomMargin.map(x=>x.projeto),datasets:[{data:bottomMargin.map(x=>x.margem),backgroundColor:'rgba(251,113,133,.58)',borderColor:'#fb7185',borderWidth:1,borderRadius:5}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...tooltip,callbacks:{label:c=>money(c.parsed.x)}}},scales:{x:{grid:{color:gridColor},ticks:{callback:v=>shortMoney(v)}},y:{grid:{display:false},ticks:{font:{size:10}}}}}});
-
-new Chart(document.getElementById('dreChart'),{type:'bar',data:{labels:['Receita','Receita líquida','Margem contribuição','Gastos fixos ajustados','Lucro operacional ajustado','Lucro líquido ajustado'],datasets:[{data:[dre.receita,dre.receita_liquida,dre.margem_contribuicao,-dreAdj.gastos_fixos,dreAdj.lucro_operacional,dreAdj.lucro_liquido],backgroundColor:['rgba(96,165,250,.62)','rgba(34,211,238,.55)','rgba(52,211,153,.62)','rgba(251,191,36,.55)','rgba(251,113,133,.62)','rgba(251,113,133,.82)'],borderWidth:0,borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...tooltip,callbacks:{label:c=>money(c.parsed.y)}}},scales:{x:{grid:{display:false},ticks:{font:{size:10}}},y:{grid:{color:gridColor},ticks:{callback:v=>shortMoney(v)}}}}});
-
-new Chart(document.getElementById('logChart'),{type:'line',data:{labels:Object.keys(logMensal),datasets:[{data:Object.values(logMensal),borderColor:'#60a5fa',backgroundColor:'rgba(96,165,250,.16)',fill:true,tension:.38,pointRadius:4,pointBackgroundColor:'#60a5fa',borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...tooltip,callbacks:{label:c=>money(c.parsed.y)}}},scales:{x:{grid:{display:false}},y:{beginAtZero:true,grid:{color:gridColor},ticks:{callback:v=>shortMoney(v)}}}}});
-
 function statusOf(p){if(p.margem<0)return['critico','Crítico'];if(p.margem_pct>=.30)return['excelente','Excelente'];if(p.margem_pct>=.22)return['meta','Faixa meta'];return['atencao','Atenção']}
-const leaderFilter=document.getElementById('leaderFilter');
-[...new Set(projects.map(p=>p.lider))].sort().forEach(l=>{const o=document.createElement('option');o.value=l;o.textContent=l;leaderFilter.appendChild(o)});
-function renderTable(){const q=document.getElementById('q').value.trim().toLowerCase(),lf=leaderFilter.value,sf=document.getElementById('statusFilter').value;
-const rows=projects.filter(p=>{const st=statusOf(p)[0];return(!q||p.projeto.toLowerCase().includes(q)||p.lider.toLowerCase().includes(q))&&(!lf||p.lider===lf)&&(!sf||st===sf)}).sort((a,b)=>b.receita-a.receita);
-document.getElementById('projectRows').innerHTML=rows.map(p=>{const s=statusOf(p);return `<tr><td class="project-name">${p.projeto}</td><td>${p.lider}</td><td class="num">${money(p.receita)}</td><td class="num">${money(p.custos)}</td><td class="num">${money(p.logistica)}</td><td class="num">${money(p.repasse)}</td><td class="num" style="color:${p.margem<0?'#ff9bae':'#9bd7ff'}">${money(p.margem)}</td><td class="num">${pctFmt(p.margem_pct)}</td><td><span class="status ${s[0]}">${s[1]}</span></td></tr>`}).join('')}
-function resetFilters(){document.getElementById('q').value='';leaderFilter.value='';document.getElementById('statusFilter').value='';renderTable()}
-document.getElementById('q').addEventListener('input',renderTable);leaderFilter.addEventListener('change',renderTable);document.getElementById('statusFilter').addEventListener('change',renderTable);renderTable();
+
+let bookingChartsInitialized = false;
+function initBookingCharts() {
+  if (bookingChartsInitialized) return;
+  const el1 = document.getElementById('leaderCombo');
+  if (!el1) return;
+  bookingChartsInitialized = true;
+
+  Chart.defaults.font.family="'Inter', sans-serif"; Chart.defaults.color='#aebed2';
+
+  new Chart(el1,{data:{labels:leaders.map(x=>x.lider.split(' ')[0]),datasets:[
+  {type:'bar',label:'Receita',data:leaders.map(x=>x.receita),backgroundColor:'rgba(96,165,250,.55)',borderColor:'#60a5fa',borderWidth:1,borderRadius:7,yAxisID:'y'},
+  {type:'line',label:'Margem %',data:leaders.map(x=>x.margem_pct*100),borderColor:'#34d399',backgroundColor:'#34d399',pointBackgroundColor:'#34d399',pointRadius:4,tension:.35,yAxisID:'y1'}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{usePointStyle:true,boxWidth:8}},tooltip},scales:{x:{grid:{display:false}},y:{beginAtZero:true,grid:{color:gridColor},ticks:{callback:v=>shortMoney(v)}},y1:{position:'right',grid:{display:false},ticks:{callback:v=>v.toFixed(0)+'%'}}}}});
+
+  new Chart(document.getElementById('leaderShare'),{type:'doughnut',data:{labels:leaders.map(x=>x.lider),datasets:[{data:leaders.map(x=>x.receita),backgroundColor:['#60a5fa','#22d3ee','#34d399','#a78bfa','#fbbf24','#fb7185','#38bdf8'],borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,cutout:'68%',plugins:{legend:{position:'bottom',labels:{boxWidth:9,usePointStyle:true,padding:16,font:{size:10}}},tooltip:{...tooltip,callbacks:{label:c=>money(c.parsed)}}}}});
+
+  new Chart(document.getElementById('topMargin'),{type:'bar',data:{labels:topMargin.map(x=>x.projeto),datasets:[{data:topMargin.map(x=>x.margem),backgroundColor:'rgba(52,211,153,.6)',borderColor:'#34d399',borderWidth:1,borderRadius:5}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...tooltip,callbacks:{label:c=>money(c.parsed.x)}}},scales:{x:{grid:{color:gridColor},ticks:{callback:v=>shortMoney(v)}},y:{grid:{display:false},ticks:{font:{size:10}}}}}});
+
+  new Chart(document.getElementById('bottomMargin'),{type:'bar',data:{labels:bottomMargin.map(x=>x.projeto),datasets:[{data:bottomMargin.map(x=>x.margem),backgroundColor:'rgba(251,113,133,.58)',borderColor:'#fb7185',borderWidth:1,borderRadius:5}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...tooltip,callbacks:{label:c=>money(c.parsed.x)}}},scales:{x:{grid:{color:gridColor},ticks:{callback:v=>shortMoney(v)}},y:{grid:{display:false},ticks:{font:{size:10}}}}}});
+
+  new Chart(document.getElementById('dreChart'),{type:'bar',data:{labels:['Receita','Receita líquida','Margem contribuição','Gastos fixos ajustados','Lucro operacional ajustado','Lucro líquido ajustado'],datasets:[{data:[dre.receita,dre.receita_liquida,dre.margem_contribuicao,-dreAdj.gastos_fixos,dreAdj.lucro_operacional,dreAdj.lucro_liquido],backgroundColor:['rgba(96,165,250,.62)','rgba(34,211,238,.55)','rgba(52,211,153,.62)','rgba(251,191,36,.55)','rgba(251,113,133,.62)','rgba(251,113,133,.82)'],borderWidth:0,borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...tooltip,callbacks:{label:c=>money(c.parsed.y)}}},scales:{x:{grid:{display:false},ticks:{font:{size:10}}},y:{grid:{color:gridColor},ticks:{callback:v=>shortMoney(v)}}}}});
+
+  new Chart(document.getElementById('logChart'),{type:'line',data:{labels:Object.keys(logMensal),datasets:[{data:Object.values(logMensal),borderColor:'#60a5fa',backgroundColor:'rgba(96,165,250,.16)',fill:true,tension:.38,pointRadius:4,pointBackgroundColor:'#60a5fa',borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...tooltip,callbacks:{label:c=>money(c.parsed.y)}}},scales:{x:{grid:{display:false}},y:{beginAtZero:true,grid:{color:gridColor},ticks:{callback:v=>shortMoney(v)}}}}});
+}
+
+let bookingTableInitialized = false;
+function initBookingTable() {
+  if (bookingTableInitialized) return;
+  const leaderFilter = document.getElementById('leaderFilter');
+  if (!leaderFilter) return;
+  bookingTableInitialized = true;
+
+  [...new Set(projects.map(p=>p.lider))].sort().forEach(l=>{const o=document.createElement('option');o.value=l;o.textContent=l;leaderFilter.appendChild(o)});
+
+  function renderTable(){const q=document.getElementById('q').value.trim().toLowerCase(),lf=leaderFilter.value,sf=document.getElementById('statusFilter').value;
+  const rows=projects.filter(p=>{const st=statusOf(p)[0];return(!q||p.projeto.toLowerCase().includes(q)||p.lider.toLowerCase().includes(q))&&(!lf||p.lider===lf)&&(!sf||st===sf)}).sort((a,b)=>b.receita-a.receita);
+  document.getElementById('projectRows').innerHTML=rows.map(p=>{const s=statusOf(p);return `<tr><td class="project-name">${p.projeto}</td><td>${p.lider}</td><td class="num">${money(p.receita)}</td><td class="num">${money(p.custos)}</td><td class="num">${money(p.logistica)}</td><td class="num">${money(p.repasse)}</td><td class="num" style="color:${p.margem<0?'#ff9bae':'#9bd7ff'}">${money(p.margem)}</td><td class="num">${pctFmt(p.margem_pct)}</td><td><span class="status ${s[0]}">${s[1]}</span></td></tr>`}).join('')}
+  window.resetFilters = function(){document.getElementById('q').value='';leaderFilter.value='';document.getElementById('statusFilter').value='';renderTable()};
+  document.getElementById('q').addEventListener('input',renderTable);leaderFilter.addEventListener('change',renderTable);document.getElementById('statusFilter').addEventListener('change',renderTable);renderTable();
+}
 
 
 if ('IntersectionObserver' in window) {
