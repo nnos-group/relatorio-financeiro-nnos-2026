@@ -518,7 +518,7 @@ full_html = f'''<!DOCTYPE html>
         <span class="text-xs font-bold text-brand-blue uppercase tracking-widest bg-brand-blue/10 px-3 py-1 rounded-full border border-brand-blue/30">Relatório Financeiro Gerencial</span>
       </div>
       <h1 class="text-3xl md:text-4xl font-extrabold font-display text-white mb-2 tracking-tight">Demonstrativo de Resultados & Dashboard Executivo</h1>
-      <p class="text-gray-300 text-base mb-6">Análise financeira gerencial — Visão acumulada de 8 meses (Janeiro a Agosto/2026)</p>
+      <p class="text-gray-300 text-base mb-6">Análise financeira gerencial — Visão acumulada de 8 meses (Janeiro a Agosto/2026) - Fonte Conta Azul</p>
       <div class="flex flex-wrap gap-3 text-xs font-semibold">
         <span class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 text-white border border-white/10">
           <span class="material-symbols-outlined text-brand-blue text-sm">calendar_month</span> Jan/2026 a Ago/2026 (8 Meses)
@@ -895,46 +895,53 @@ full_html = f'''<!DOCTYPE html>
 
 <script>
 // CHART.JS FATURAMENTO MENSAL
-const ctxFaturamento = document.getElementById('chartFaturamento');
-if (ctxFaturamento) {{
-  new Chart(ctxFaturamento, {{
-    type: 'bar',
-    data: {{
-      labels: ['Jan/26', 'Fev/26', 'Mar/26', 'Abr/26', 'Mai/26', 'Jun/26', 'Jul/26', 'Ago/26'],
-      datasets: [{{
-        label: 'Receita Bruta (R$)',
-        data: [{", ".join(str(round(x, 2)) for x in d['rec_bruta'])}],
-        backgroundColor: 'rgba(0, 131, 202, 0.85)',
-        borderColor: '#0083ca',
-        borderWidth: 1.5,
-        borderRadius: 6
-      }}]
-    }},
-    options: {{
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {{
-        legend: {{ display: false }},
-        tooltip: {{
-          callbacks: {{
-            label: function(context) {{
-              return 'Receita: R$ ' + context.raw.toLocaleString('pt-BR', {{minimumFractionDigits: 2}});
+let chartFaturamentoInstance = null;
+
+function initFaturamentoChart() {{
+  const ctxFaturamento = document.getElementById('chartFaturamento');
+  if (ctxFaturamento) {{
+    if (chartFaturamentoInstance) {{
+      chartFaturamentoInstance.destroy();
+    }}
+    chartFaturamentoInstance = new Chart(ctxFaturamento, {{
+      type: 'bar',
+      data: {{
+        labels: ['Jan/26', 'Fev/26', 'Mar/26', 'Abr/26', 'Mai/26', 'Jun/26', 'Jul/26', 'Ago/26'],
+        datasets: [{{
+          label: 'Receita Bruta (R$)',
+          data: [{", ".join(str(round(x, 2)) for x in d['rec_bruta'])}],
+          backgroundColor: 'rgba(0, 131, 202, 0.85)',
+          borderColor: '#0083ca',
+          borderWidth: 1.5,
+          borderRadius: 6
+        }}]
+      }},
+      options: {{
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {{
+          legend: {{ display: false }},
+          tooltip: {{
+            callbacks: {{
+              label: function(context) {{
+                return 'Receita: R$ ' + context.raw.toLocaleString('pt-BR', {{minimumFractionDigits: 2}});
+              }}
             }}
           }}
-        }}
-      }},
-      scales: {{
-        y: {{
-          grid: {{ color: 'rgba(255, 255, 255, 0.1)' }},
-          ticks: {{ color: '#9CA3AF', font: {{ family: 'Inter', size: 11 }} }}
         }},
-        x: {{
-          grid: {{ display: false }},
-          ticks: {{ color: '#9CA3AF', font: {{ family: 'Inter', size: 11 }} }}
+        scales: {{
+          y: {{
+            grid: {{ color: 'rgba(255, 255, 255, 0.1)' }},
+            ticks: {{ color: '#9CA3AF', font: {{ family: 'Inter', size: 11 }} }}
+          }},
+          x: {{
+            grid: {{ display: false }},
+            ticks: {{ color: '#9CA3AF', font: {{ family: 'Inter', size: 11 }} }}
+          }}
         }}
       }}
-    }}
-  }});
+    }});
+  }}
 }}
 
 // AUTHENTICATION SECURITY GATE (SHA-256)
@@ -966,6 +973,7 @@ function unlockDashboard() {{
   const wrapper = document.getElementById('report-wrapper');
   if (overlay) overlay.classList.add('hidden');
   if (wrapper) wrapper.classList.remove('hidden');
+  setTimeout(initFaturamentoChart, 50);
 }}
 
 function logout() {{
@@ -973,10 +981,22 @@ function logout() {{
   location.reload();
 }}
 
-// Check active session on page load
+// Check active session on page load & observe chart visibility
 document.addEventListener('DOMContentLoaded', () => {{
   if (sessionStorage.getItem('nnos_auth') === 'true') {{
     unlockDashboard();
+  }}
+
+  const canvas = document.getElementById('chartFaturamento');
+  if (canvas && 'IntersectionObserver' in window) {{
+    const observer = new IntersectionObserver((entries) => {{
+      entries.forEach(entry => {{
+        if (entry.isIntersecting) {{
+          initFaturamentoChart();
+        }}
+      }});
+    }}, {{ threshold: 0.1 }});
+    observer.observe(canvas);
   }}
 }});
 </script>

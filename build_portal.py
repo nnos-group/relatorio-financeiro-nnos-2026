@@ -1,4 +1,4 @@
-﻿import os
+import os
 import re
 import base64
 
@@ -373,7 +373,10 @@ let chartFormasPagamentoInstance = null;
 
 function initMatrizCharts() {{
   const ctx = document.getElementById('chartFaturamento');
-  if (ctx && !chartFaturamentoInstance) {{
+  if (ctx) {{
+    if (chartFaturamentoInstance) {{
+      chartFaturamentoInstance.destroy();
+    }}
     chartFaturamentoInstance = new Chart(ctx, {{
       type: 'bar',
       data: {{
@@ -605,6 +608,22 @@ window.addEventListener('hashchange', () => {{
 document.addEventListener('DOMContentLoaded', () => {{
   if (sessionStorage.getItem('nnos_auth') === 'true') {{
     unlockDashboard();
+  }}
+
+  if ('IntersectionObserver' in window) {{
+    const observer = new IntersectionObserver((entries) => {{
+      entries.forEach(entry => {{
+        if (entry.isIntersecting) {{
+          if (entry.target.id === 'chartFaturamento') initMatrizCharts();
+          if (['chartFornecedores', 'chartMensalExtendido', 'chartCategorias', 'chartFormasPagamento'].includes(entry.target.id)) initUvaCharts();
+        }}
+      }});
+    }}, {{ threshold: 0.1 }});
+
+    ['chartFaturamento', 'chartFornecedores', 'chartMensalExtendido', 'chartCategorias', 'chartFormasPagamento'].forEach(id => {{
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    }});
   }}
 }});
 </script>

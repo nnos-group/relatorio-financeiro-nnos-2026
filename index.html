@@ -258,7 +258,7 @@
         <span class="text-xs font-bold text-brand-blue uppercase tracking-widest bg-brand-blue/10 px-3 py-1 rounded-full border border-brand-blue/30">Relatório Financeiro Gerencial</span>
       </div>
       <h1 class="text-3xl md:text-4xl font-extrabold font-display text-white mb-2 tracking-tight">Demonstrativo de Resultados & Dashboard Executivo</h1>
-      <p class="text-gray-300 text-base mb-6">Análise financeira gerencial — Visão acumulada de 8 meses (Janeiro a Agosto/2026)</p>
+      <p class="text-gray-300 text-base mb-6">Análise financeira gerencial — Visão acumulada de 8 meses (Janeiro a Agosto/2026) - Fonte Conta Azul</p>
       <div class="flex flex-wrap gap-3 text-xs font-semibold">
         <span class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 text-white border border-white/10">
           <span class="material-symbols-outlined text-brand-blue text-sm">calendar_month</span> Jan/2026 a Ago/2026 (8 Meses)
@@ -1612,7 +1612,10 @@ let chartFormasPagamentoInstance = null;
 
 function initMatrizCharts() {
   const ctx = document.getElementById('chartFaturamento');
-  if (ctx && !chartFaturamentoInstance) {
+  if (ctx) {
+    if (chartFaturamentoInstance) {
+      chartFaturamentoInstance.destroy();
+    }
     chartFaturamentoInstance = new Chart(ctx, {
       type: 'bar',
       data: {
@@ -1844,6 +1847,22 @@ window.addEventListener('hashchange', () => {
 document.addEventListener('DOMContentLoaded', () => {
   if (sessionStorage.getItem('nnos_auth') === 'true') {
     unlockDashboard();
+  }
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (entry.target.id === 'chartFaturamento') initMatrizCharts();
+          if (['chartFornecedores', 'chartMensalExtendido', 'chartCategorias', 'chartFormasPagamento'].includes(entry.target.id)) initUvaCharts();
+        }
+      });
+    }, { threshold: 0.1 });
+
+    ['chartFaturamento', 'chartFornecedores', 'chartMensalExtendido', 'chartCategorias', 'chartFormasPagamento'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
   }
 });
 </script>
