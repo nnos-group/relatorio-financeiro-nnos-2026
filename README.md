@@ -1,8 +1,8 @@
 # 🏢 Portal de Relatórios Financeiros 2026 — NNÓS Group
 
-🔗 **Link Oficial:** [https://nnos-group.github.io/relatorio-financeiro-nnos-2026/](https://nnos-group.github.io/relatorio-financeiro-nnos-2026/)
+🔗 **Link Oficial do Portal:** [https://nnos-group.github.io/relatorio-financeiro-nnos-2026/](https://nnos-group.github.io/relatorio-financeiro-nnos-2026/)
 
-🔐 **Acesso Restrito:**
+🔐 **Acesso Restrito (Sessão Integrada):**
 - **Usuário:** `nnos`
 - **Senha:** `nnos2026`
 
@@ -10,39 +10,37 @@
 
 ## 🏛️ Arquitetura do Portal Integrado
 
-O arquivo `index.html` atua como um **Portal Integrado de Relatórios** composto por:
-1. **Gate de Autenticação:** Login criptografado via SHA-256 no cliente.
-2. **Hub Executivo de Seleção (3 Opções):**
-   - **Opção 1:** 📊 *Relatório Financeiro & DRE Gerencial 2026 (Matriz)*
-   - **Opção 2:** 🏛️ *Contas a Pagar | Campus BH UVA*
-   - **Opção 3:** 📈 *Booking — Dashboard Executivo de Performance de Projetos*
-3. **Alternância Instantânea no Canto Superior Direito:**
-   - Botão para alternar diretamente entre Matriz, UVA e Performance sem sair ou recarregar.
-   - Botão de retorno ao Menu (Hub de seleção).
+O ecossistema é hospedado diretamente no **GitHub Pages** e estruturado de forma desacoplada, permitindo que cada demonstrativo funcione de maneira 100% independente, mas totalmente integrado e navegável entre si:
+
+1. **Gate de Autenticação & Hub Executivo (`index.html`):**
+   - Autenticação criptografada (SHA-256) no cliente com sessão persistida (`sessionStorage`).
+   - Painel principal de seleção com 3 cards dinâmicos para acesso direto aos relatórios.
+
+2. **Demonstrativos Independentes Hospedados:**
+   - 📊 **Opção 1 — Relatório Financeiro & DRE Gerencial 2026:** [`matriz.html`](matriz.html)
+   - 🏛️ **Opção 2 — Contas a Pagar | Campus BH UVA:** [`uva.html`](uva.html)
+   - 📈 **Opção 3 — Dashboard Executivo de Performance de Projetos (Booking):** [`booking.html`](booking.html)
+
+3. **Navegabilidade e Interação Multidirecional:**
+   - Todos os relatórios possuem barra de navegação superior (Navbar) que permite alternar instantaneamente entre **Matriz**, **UVA**, **Performance** e o **Menu Principal**, além do botão para **Encerrar Sessão**.
+   - A autenticação é verificada automaticamente em todas as páginas: se o usuário não estiver autenticado, é redirecionado para a tela de login.
 
 ---
 
-## ⚠️ Regra Fundamental para Atualizações
-
-**NUNCA sobrescrever o `index.html` diretamente com apenas um dos relatórios isolados.**
-
-### 🔄 Como atualizar os relatórios:
+## 🔄 Como atualizar os relatórios
 
 1. **Se atualizar o Relatório Matriz:**
-   - O script `generate_report_script.py` já foi programado para atualizar o `2026 - Relatório Financeiro - NNÓS - MATRIZ-26.html` e em seguida chamar automaticamente o `build_portal.py` para remontar o `index.html`.
+   - Execute o script `generate_report_script.py`. Ele recalcula as bases DRE, atualiza o `matriz.html` e executa o `build_portal.py`.
 
 2. **Se atualizar o Contas a Pagar UVA:**
-   - Atualize o arquivo `contas-a-pagar-uva.html`.
-   - Execute o script `build_portal.ps1` ou `build_portal.py`.
+   - Atualize o arquivo `contas-a-pagar-uva.html` e execute `build_portal.py` (ou `build_portal.ps1`).
 
 3. **Se atualizar o Dashboard de Performance (Booking):**
-   - Atualize o arquivo `dashboard-executivo-booking.html`.
-   - Execute o script `build_portal.py` para remontar o `index.html`.
+   - Atualize o arquivo `dashboard-executivo-booking.html` e execute `build_portal.py`.
 
 4. **Automação Completa (Reconstrução + Git Push):**
    - Execute no terminal PowerShell:
    ```powershell
    .\atualizar_todos_relatorios.ps1 -MensagemCommit "feat: atualizacao dados AGO-26"
    ```
-   Este script recompila o `index.html`, sincroniza as cópias e faz o deploy automático no GitHub Pages.
-
+   Este script sincroniza todos os demonstrativos e publica automaticamente no GitHub Pages.

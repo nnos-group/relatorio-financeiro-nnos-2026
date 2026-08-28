@@ -58,6 +58,16 @@
   ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 4px; }
   ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.3); }
 </style>
+
+<script>
+  if (sessionStorage.getItem('nnos_auth') !== 'true') {
+    window.location.href = 'index.html';
+  }
+  function logout() {
+    sessionStorage.removeItem('nnos_auth');
+    window.location.href = 'index.html';
+  }
+</script>
 </head>
 <body class="antialiased selection:bg-brand-blue selection:text-white">
 
@@ -91,7 +101,7 @@
 <!-- ═══════════ NAV ═══════════ -->
 <nav class="sticky top-0 z-50 bg-surface/90 backdrop-blur-md border-b border-surface-variant">
 <div class="max-w-[1440px] mx-auto px-4 overflow-x-auto">
-<div class="flex items-center gap-1 py-3 min-w-max">
+<div class="flex items-center justify-between gap-2 py-2.5 min-w-max"><div class="flex items-center gap-1">
 <a class="px-4 py-2 rounded-lg text-sm font-medium text-text-muted hover:text-white hover:bg-surface-variant transition-colors flex items-center gap-2" href="#kpis"><span class="material-symbols-outlined text-lg">monitoring</span> KPIs</a>
 <a class="px-4 py-2 rounded-lg text-sm font-medium text-text-muted hover:text-white hover:bg-surface-variant transition-colors flex items-center gap-2" href="#execucao"><span class="material-symbols-outlined text-lg">analytics</span> Execução Financeira</a>
 <a class="px-4 py-2 rounded-lg text-sm font-medium text-text-muted hover:text-white hover:bg-surface-variant transition-colors flex items-center gap-2" href="#imobilizado"><span class="material-symbols-outlined text-lg">inventory_2</span> Imobilizado &amp; Reforma</a>
@@ -101,8 +111,21 @@
 <a class="px-4 py-2 rounded-lg text-sm font-medium text-text-muted hover:text-white hover:bg-surface-variant transition-colors flex items-center gap-2" href="#indicadores"><span class="material-symbols-outlined text-lg">assessment</span> Indicadores Consolidados</a>
 <a class="px-4 py-2 rounded-lg text-sm font-medium text-text-muted hover:text-white hover:bg-surface-variant transition-colors flex items-center gap-2" href="#alertas"><span class="material-symbols-outlined text-lg">warning</span> Alertas &amp; Insights</a>
 </div>
+<div class="flex items-center gap-2.5 ml-auto">
+  <a href="matriz.html" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-brand-blue bg-blue-500/20 hover:bg-blue-500/30 border border-brand-blue/40 transition-all flex items-center gap-1.5 shadow-sm hover:scale-[1.02] cursor-pointer">
+    <span class="material-symbols-outlined text-sm">monitoring</span> Matriz 2026
+  </a>
+  <a href="booking.html" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-emerald-300 bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/40 transition-all flex items-center gap-1.5 shadow-sm hover:scale-[1.02] cursor-pointer">
+    <span class="material-symbols-outlined text-sm">trending_up</span> Performance Projetos
+  </a>
+  <a href="index.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 border border-white/10 transition-colors flex items-center gap-1.5 cursor-pointer">
+    <span class="material-symbols-outlined text-sm">grid_view</span> Menu
+  </a>
+  <button onclick="logout()" class="p-1.5 rounded-lg text-gray-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors cursor-pointer" title="Encerrar Sessão">
+    <span class="material-symbols-outlined text-sm">logout</span>
+  </button>
 </div>
-</nav>
+</div></div></nav>
 
 <!-- ═══════════ MAIN ═══════════ -->
 <main class="max-w-[1440px] mx-auto px-6 py-10 space-y-16">
