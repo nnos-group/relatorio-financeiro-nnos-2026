@@ -862,6 +862,8 @@ O <strong class="text-white">PIX instantâneo</strong> responde por <strong clas
 
 
   <!-- 3. VIEW PERFORMANCE DE PROJETOS -->
+  
+  <!-- 3. VIEW PERFORMANCE DE PROJETOS -->
   <div id="view-booking" class="hidden">
     
 
@@ -882,35 +884,40 @@ O <strong class="text-white">PIX instantâneo</strong> responde por <strong clas
 </header>
 
 
-<nav class="nav"><div class="wrap nav-in">
-  <div class="flex items-center gap-2.5 ml-auto">
-    <button onclick="showView('matriz')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-sky-200 bg-sky-500/20 hover:bg-sky-500/30 border border-sky-400/40 transition-all flex items-center gap-1.5 shadow-sm hover:scale-[1.02] cursor-pointer">
-      <span class="material-symbols-outlined text-sm text-sky-300">analytics</span>
-      <span>Relatório Matriz</span>
-    </button>
-    <button onclick="showView('uva')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-amber-200 bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/40 transition-all flex items-center gap-1.5 shadow-sm hover:scale-[1.02] cursor-pointer">
-      <span class="material-symbols-outlined text-sm text-amber-300">account_balance_wallet</span>
-      <span>Campus BH UVA</span>
-    </button>
-    <button onclick="showView('hub')" class="px-3 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 border border-white/10 transition-colors flex items-center gap-1.5 cursor-pointer">
-      <span class="material-symbols-outlined text-sm">grid_view</span> Menu
-    </button>
-    <button onclick="logout()" class="px-3 py-1.5 rounded-lg text-xs font-bold text-rose-300 hover:bg-rose-500/20 border border-rose-500/30 transition-colors flex items-center gap-1.5 cursor-pointer">
-      <span class="material-symbols-outlined text-sm">lock</span> Sair
-    </button>
-  </div>
 
-  <div class="nav-dropdown">
-    <button class="nav-dropdown-btn">📊 Alternar Relatório ▾</button>
-    <div class="nav-dropdown-content">
-      <a href="index.html" class="active">📊 Dashboard Executivo (Atual)</a>
-      <a href="../2026%20-%20Relat%C3%B3rio%20Financeiro%20-%20NN%C3%93S%20-26/2026%20-%20Relat%C3%B3rio%20Financeiro%20-%20NN%C3%93S%20-%20MATRIZ-26.html" target="_blank">📑 Relatório Financeiro - MATRIZ 2026</a>
-      <a href="#" onclick="alert('Selecione um relatório no menu para navegar.'); return false;">📂 Outros Relatórios NNÓS</a>
-    </div>
-  </div>
-  <a href="#visao">Visão executiva</a><a href="#imobilizado">Imobilizado & Reforma</a><a href="#lideres">Líderes</a>
-  <a href="#portfolio">Portfólio</a><a href="#dre">Resultado ajustado</a><a href="#logistica">Viagens & Reembolsos</a><a href="#detalhe">Detalhamento</a>
-</div></nav>
+<!-- 📌 NAV PERFORMANCE DE PROJETOS 📌 -->
+<nav class="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-md border-b border-surface-variant shadow-lg">
+<div class="max-w-[1440px] mx-auto px-6 overflow-x-auto">
+<div class="flex items-center justify-between gap-2 py-2.5 min-w-max">
+<div class="flex items-center gap-1">
+<a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-text-muted hover:text-white hover:bg-surface-variant transition-colors flex items-center gap-1.5" href="#visao"><span class="material-symbols-outlined text-sm text-sky-400">monitoring</span> Visão executiva</a>
+<a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-text-muted hover:text-white hover:bg-surface-variant transition-colors flex items-center gap-1.5" href="#imobilizado"><span class="material-symbols-outlined text-sm text-sky-400">inventory_2</span> Imobilizado & Reforma</a>
+<a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-text-muted hover:text-white hover:bg-surface-variant transition-colors flex items-center gap-1.5" href="#lideres"><span class="material-symbols-outlined text-sm text-sky-400">groups</span> Líderes</a>
+<a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-text-muted hover:text-white hover:bg-surface-variant transition-colors flex items-center gap-1.5" href="#portfolio"><span class="material-symbols-outlined text-sm text-sky-400">analytics</span> Portfólio</a>
+<a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-text-muted hover:text-white hover:bg-surface-variant transition-colors flex items-center gap-1.5" href="#dre"><span class="material-symbols-outlined text-sm text-sky-400">assessment</span> Resultado ajustado</a>
+<a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-text-muted hover:text-white hover:bg-surface-variant transition-colors flex items-center gap-1.5" href="#logistica"><span class="material-symbols-outlined text-sm text-sky-400">flight_takeoff</span> Viagens & Reembolsos</a>
+<a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-text-muted hover:text-white hover:bg-surface-variant transition-colors flex items-center gap-1.5" href="#detalhe"><span class="material-symbols-outlined text-sm text-sky-400">table_chart</span> Detalhamento</a>
+</div>
+<div class="flex items-center gap-2.5 ml-auto">
+<button onclick="showView('matriz')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-brand-blue bg-blue-500/20 hover:bg-blue-500/30 border border-brand-blue/40 transition-all flex items-center gap-1.5 shadow-sm hover:scale-[1.02] cursor-pointer">
+  <span class="material-symbols-outlined text-sm text-brand-blue">analytics</span>
+  <span>Relatório Matriz</span>
+</button>
+<button onclick="showView('uva')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-amber-300 bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/40 transition-all flex items-center gap-1.5 shadow-sm hover:scale-[1.02] cursor-pointer">
+  <span class="material-symbols-outlined text-sm text-amber-300">account_balance_wallet</span>
+  <span>Campus BH UVA</span>
+</button>
+<button onclick="showView('hub')" class="px-3 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 border border-white/10 transition-colors flex items-center gap-1.5 cursor-pointer">
+  <span class="material-symbols-outlined text-sm">grid_view</span> Menu
+</button>
+<button onclick="logout()" class="px-3 py-1.5 rounded-lg text-xs font-bold text-rose-300 hover:bg-rose-500/20 border border-rose-500/30 transition-colors flex items-center gap-1.5 cursor-pointer">
+  <span class="material-symbols-outlined text-sm">lock</span> Sair
+</button>
+</div>
+</div>
+</div>
+</nav>
+
 
 <main class="wrap">
 
@@ -1080,8 +1087,6 @@ O <strong class="text-white">PIX instantâneo</strong> responde por <strong clas
 
 
   </div>
-
-</div>
 
 <!-- ═══════════ SCRIPTS DE LÓGICA E GRÁFICOS ═══════════ -->
 <script>
