@@ -1,17 +1,21 @@
-﻿# Script de montagem do Portal Integrado NNÓS 2026
+# Script de montagem do Portal Integrado NNÓS 2026
 # Este script junta o Relatório Matriz e o Contas a Pagar UVA no index.html
 
-$repoDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-if (-not $repoDir) { $repoDir = "c:\Users\Leonardo Campos\OneDrive - NNÓS CONSULTORIA E TREINAMENTO\Contabilidade\Relatórios\2026 - Relatório Financeiro - NNÓS -26" }
+$repoDir = $PSScriptRoot
+if (-not $repoDir) { $repoDir = (Get-Item -Path ".").FullName }
 
-$uvaFile = "c:\Users\Leonardo Campos\OneDrive - NNÓS CONSULTORIA E TREINAMENTO\Contabilidade\Relatórios\UVA\NNÓS Group _ Contas a Pagar - Campus BH UVA.html"
-$matrizFile = "$repoDir\2026 - Relatório Financeiro - NNÓS - MATRIZ-26.html"
-$outputIndex = "$repoDir\index.html"
+$matrizFile = (Get-ChildItem -Path $repoDir -Filter "*MATRIZ-26.html" | Select-Object -First 1).FullName
+$outputIndex = Join-Path $repoDir "index.html"
+$uvaFile = Join-Path $repoDir "contas-a-pagar-uva.html"
+if (-not (Test-Path $uvaFile)) {
+    $parentDir = Split-Path $repoDir -Parent
+    $uvaFile = (Get-ChildItem -Path $parentDir -Filter "*Campus BH UVA.html" -Recurse | Select-Object -First 1).FullName
+}
 
 # Ler o logo em base64 da pasta do repo ou UVA
-$logoPath = "$repoDir\logo_white_trans.png"
+$logoPath = Join-Path $repoDir "logo_white_trans.png"
 if (-not (Test-Path $logoPath)) {
-    $logoPath = "c:\Users\Leonardo Campos\OneDrive - NNÓS CONSULTORIA E TREINAMENTO\Contabilidade\Relatórios\UVA\logo_white_trans.png"
+    $logoPath = Join-Path (Split-Path $repoDir -Parent) "UVA\logo_white_trans.png"
 }
 $logoBytes = [System.IO.File]::ReadAllBytes($logoPath)
 $logoB64 = [Convert]::ToBase64String($logoBytes)
@@ -616,6 +620,38 @@ document.addEventListener('DOMContentLoaded', () => {
     unlockDashboard();
   }
 });
+
+// 🛡️ Camada de Segurança: Bloqueio de DevTools, Atalhos e Menu de Contexto
+document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+}, false);
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'F12' || e.keyCode === 123) {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+  }
+  if ((e.ctrlKey || e.metaKey) && e.shiftKey && (
+      e.key === 'I' || e.key === 'i' || e.keyCode === 73 ||
+      e.key === 'J' || e.key === 'j' || e.keyCode === 74 ||
+      e.key === 'C' || e.key === 'c' || e.keyCode === 67
+  )) {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+  }
+  if ((e.ctrlKey || e.metaKey) && (e.key === 'U' || e.key === 'u' || e.keyCode === 85)) {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+  }
+  if ((e.ctrlKey || e.metaKey) && (e.key === 'S' || e.key === 's' || e.keyCode === 83)) {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+  }
+}, false);
 </script>
 </body>
 </html>
