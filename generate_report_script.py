@@ -235,8 +235,7 @@ un_display_names = {
     'BUSINESS SOLUTIONS': 'BUSINESS SOLUTIONS',
     'DEALER DEVELOPMENT': 'DEALER DEVELOPMENT',
     'INNOVATION': 'INNOVATION',
-    'CAMPUS BH': 'CAMPUS BH',
-    'EDUCA\xc7\xc3O': 'EDUCA\xc7\xc3O',
+    'EDUCAÇÃO': 'EDUCAÇÃO',
 }
 for idx, (un, val) in enumerate(sorted(d['un_ytd'].items(), key=lambda x: x[1], reverse=True)):
     pct = (val / tot_rec_ytd) * 100

@@ -39,9 +39,9 @@ with open('Agosto - Receita JAN-AGO.csv', 'r', encoding='cp1252') as f:
             val = parse_num(row[4])
             un = row[5].strip()
 
-            # CAMPUS BH (UNIV. VEIGA DE ALMEIDA) é uma UN própria
+            # CAMPUS BH é um projeto pertencente à Unidade de Negócio EDUCAÇÃO
             if 'CAMPUS BH' in proj.upper():
-                un = 'CAMPUS BH'
+                un = 'EDUCAÇÃO'
 
             if m_str in month_map:
                 m_idx = month_map[m_str]
