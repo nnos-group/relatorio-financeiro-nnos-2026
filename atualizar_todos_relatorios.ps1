@@ -19,6 +19,10 @@ function Log-Message([string]$msg) {
 Log-Message "=== Iniciando rotina diária de atualização ==="
 
 try {
+    # 0. Sincroniza Dashboard de Performance via Google Sheets API
+    Log-Message "0. Sincronizando Performance de Projetos via Google Sheets API..."
+    & py "$repoDir\sync_booking_from_sheets.py" *>> $logFile
+
     # 1. Recalcula bases financeiras e DRE
     Log-Message "1. Executando generate_report_script.py..."
     & py "$repoDir\generate_report_script.py" *>> $logFile
