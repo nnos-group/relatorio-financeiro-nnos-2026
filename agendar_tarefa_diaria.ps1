@@ -11,10 +11,12 @@ $taskName = "NNOS_Atualizacao_Relatorios_2026"
 Write-Host "Configurando tarefa agendada: $taskName" -ForegroundColor Cyan
 Write-Host "Horário de disparo: $Horario (diariamente)" -ForegroundColor Cyan
 Write-Host "Script: $scriptPath" -ForegroundColor Cyan
+Write-Host "Diretório de trabalho: $repoDir" -ForegroundColor Cyan
 
 $action = New-ScheduledTaskAction `
     -Execute "powershell.exe" `
-    -Argument "-NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File `"$scriptPath`""
+    -Argument "-NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File `"$scriptPath`"" `
+    -WorkingDirectory "$repoDir"
 
 $trigger = New-ScheduledTaskTrigger -Daily -At $Horario
 

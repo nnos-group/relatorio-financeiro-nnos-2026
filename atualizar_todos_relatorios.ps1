@@ -5,6 +5,8 @@ param(
 
 $repoDir = $PSScriptRoot
 if (-not $repoDir) { $repoDir = (Get-Item -Path ".").FullName }
+Set-Location -Path $repoDir
+
 $logFile = Join-Path $repoDir "execucao_automatica.log"
 
 function Log-Message([string]$msg) {
