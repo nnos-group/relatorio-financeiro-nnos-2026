@@ -100,6 +100,16 @@ def sync_booking():
     if '</head>' in html and 'nnos_auth' not in html:
         html = html.replace('</head>', security_auth_head + '\n</head>')
 
+    favicon_tags = """
+<link rel="icon" type="image/png" href="assets/logo-nnos.png"/>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png"/>
+<link rel="icon" type="image/png" sizes="64x64" href="favicon.png"/>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+<link rel="apple-touch-icon" href="assets/logo-nnos.png"/>
+"""
+    if 'rel="icon"' not in html and '</head>' in html:
+        html = html.replace('</head>', favicon_tags.strip() + '\n</head>')
+
     # Substituir Navbar simples pela Navbar integrada com links para Matriz, UVA e Menu
     integrated_nav = """
 <nav class="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-md border-b border-white/10 shadow-lg">

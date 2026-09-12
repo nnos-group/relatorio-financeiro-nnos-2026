@@ -36,11 +36,23 @@ auth_script = """
 </script>
 """
 
+favicon_tags = """<link rel="icon" type="image/png" href="assets/logo-nnos.png"/>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png"/>
+<link rel="icon" type="image/png" sizes="64x64" href="favicon.png"/>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+<link rel="apple-touch-icon" href="assets/logo-nnos.png"/>"""
+
+def ensure_favicon(html):
+    if 'rel="icon"' not in html and '</head>' in html:
+        return html.replace('</head>', favicon_tags + '\n</head>')
+    return html
+
 def build():
     # 1. Sync Matriz
     if os.path.exists(matriz_file):
         with open(matriz_file, "r", encoding="utf-8") as f:
             matriz_raw = f.read()
+        matriz_raw = ensure_favicon(matriz_raw)
         if 'sessionStorage.getItem' not in matriz_raw:
             matriz_raw = matriz_raw.replace('</head>', auth_script + '</head>')
         
@@ -53,6 +65,7 @@ def build():
     if os.path.exists(uva_file):
         with open(uva_file, "r", encoding="utf-8") as f:
             uva_raw = f.read()
+        uva_raw = ensure_favicon(uva_raw)
         if 'sessionStorage.getItem' not in uva_raw:
             uva_raw = uva_raw.replace('</head>', auth_script + '</head>')
         with open(uva_target, "w", encoding="utf-8") as f:
@@ -64,12 +77,22 @@ def build():
     if os.path.exists(booking_file):
         with open(booking_file, "r", encoding="utf-8") as f:
             booking_raw = f.read()
+        booking_raw = ensure_favicon(booking_raw)
         if 'sessionStorage.getItem' not in booking_raw:
             booking_raw = booking_raw.replace('</head>', auth_script + '</head>')
         with open(booking_target, "w", encoding="utf-8") as f:
             f.write(booking_raw)
         with open(booking_file, "w", encoding="utf-8") as f:
             f.write(booking_raw)
+
+    # 4. Sync Index
+    if os.path.exists(output_index):
+        with open(output_index, "r", encoding="utf-8") as f:
+            index_raw = f.read()
+        index_updated = ensure_favicon(index_raw)
+        if index_updated != index_raw:
+            with open(output_index, "w", encoding="utf-8") as f:
+                f.write(index_updated)
 
     print("Portal e demonstrativos independentes (matriz.html, uva.html, booking.html, index.html) sincronizados com sucesso!")
 
