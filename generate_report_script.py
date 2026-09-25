@@ -1,3 +1,4 @@
+import os
 import json
 import hashlib
 from logo_b64 import LOGO_B64_WHITE
@@ -12,9 +13,35 @@ PASS_HASH = hashlib.sha256(PASS_PLAIN.encode('utf-8')).hexdigest()
 with open('calculated_data.json', 'r', encoding='utf-8') as f:
     d = json.load(f)
 
+# Determinar número e nomes de meses
+num_months = d.get('num_months', len(d['rec_bruta']))
+month_names = d.get('month_names', ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'][:num_months])
+month_cols = d.get('month_cols', [f"{m.upper()}-26" for m in month_names])
+
+months_pt = {
+    'Jan': 'Janeiro', 'Fev': 'Fevereiro', 'Mar': 'Março',
+    'Abr': 'Abril', 'Mai': 'Maio', 'Jun': 'Junho',
+    'Jul': 'Julho', 'Ago': 'Agosto', 'Set': 'Setembro',
+    'Out': 'Outubro', 'Nov': 'Novembro', 'Dez': 'Dezembro'
+}
+
+periodo_extenso = f"Janeiro a {months_pt.get(month_names[-1], month_names[-1])} de 2026"
+periodo_badge = f"Jan/2026 a {month_names[-1]}/2026 ({num_months} Meses)"
+
+rec_bruta_tot = sum(d['rec_bruta'])
+rec_bruta_m = rec_bruta_tot / 1_000_000
+margem_bruta_tot = sum(d['margem_bruta'])
+margem_bruta_pct = (margem_bruta_tot / rec_bruta_tot * 100) if rec_bruta_tot > 0 else 0
+ebitda_tot = sum(d['ebitda'])
+ebitda_pct = (ebitda_tot / rec_bruta_tot * 100) if rec_bruta_tot > 0 else 0
+resultado_tot = sum(d['resultado_periodo'])
+resultado_pct = (resultado_tot / rec_bruta_tot * 100) if rec_bruta_tot > 0 else 0
+
 fmt = lambda x: f"{round(x):,}".replace(",", ".")
 fmt_float = lambda x: f"{x:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
 fmt_pct = lambda x: f"{x:.2f}%".replace(".", ",")
+
+colspan_total = num_months + 2
 
 def fmt_val_table(x):
     if x < 0:
@@ -43,14 +70,14 @@ def fmt_val_table_exp(x):
 def get_row(label, key, row_type="normal"):
     if row_type == "group":
         return f'''<tr class="bg-surface-container-high/90 border-y border-surface-variant/80">
-          <td colspan="11" class="py-2.5 px-4 text-xs font-bold text-brand-blue uppercase tracking-widest">{label}</td>
+          <td colspan="{colspan_total}" class="py-2.5 px-4 text-xs font-bold text-brand-blue uppercase tracking-widest">{label}</td>
         </tr>\n'''
     elif row_type == "spacer":
         return f'''<tr class="h-2">
-          <td colspan="11"></td>
+          <td colspan="{colspan_total}"></td>
         </tr>\n'''
         
-    vals = d[key]
+    vals = d[key][:num_months]
     tot = sum(vals)
     
     if row_type == "revenue":
@@ -90,8 +117,8 @@ def get_row(label, key, row_type="normal"):
           <td class="py-3.5 px-4 text-xs font-extrabold {text_cls} uppercase tracking-wider">{label}</td>{tds}{tot_td}
         </tr>\n'''
     elif row_type == "hint":
-        pcts = [(v / d['rec_bruta'][i])*100 for i, v in enumerate(d[key])]
-        tot_pct = (sum(d[key]) / sum(d['rec_bruta'])) * 100
+        pcts = [(v / d['rec_bruta'][i])*100 if d['rec_bruta'][i] > 0 else 0 for i, v in enumerate(vals)]
+        tot_pct = (tot / sum(d['rec_bruta'][:num_months])) * 100 if sum(d['rec_bruta'][:num_months]) > 0 else 0
         pct_tds = "".join([f'<td class="py-1.5 px-3 text-right text-xs font-sans text-text-muted italic">{fmt_pct(p)}</td>' for p in pcts])
         tot_pct_td = f'<td class="py-1.5 px-3 text-right text-xs font-sans font-semibold text-text-muted italic">{fmt_pct(tot_pct)}</td>'
         return f'''<tr class="bg-surface-container-lowest/30 border-b border-surface-variant/20">
@@ -136,18 +163,17 @@ table_body += get_row("", None, "spacer")
 table_body += get_row("(=) RESULTADO DO PERÍODO", "resultado_periodo", "result")
 table_body += get_row("% Resultado / Receita Bruta", "resultado_periodo", "hint")
 
-# ── Imobilizado & Reforma (Atualizado com base no painel Campus BH UVA) ──
-imob_total = 337754.41
+# Imobilizado & Reforma (Campus BH UVA)
+imob_total = 244479.28
 imob_fornecedores = [
-    ("MR ENGENHARIA", "Obras", 189589.65),
+    ("MR ENGENHARIA", "Obras", 101589.65),
+    ("MÓVEIS & EQUIPAMENTOS", "Instalações Industriais", 58262.30),
     ("OTHON DE CARVALHO", "Materiais Elétricos", 29730.33),
     ("NORONHA COMUNICAÇÃO VISUAL", "Sinalização", 26090.00),
-    ("THERMOBRAS AR CONDICIONADO", "Climatização", 21300.00),
-    ("AÇO INOX IMPERIAL", "", 18749.90),
-    ("ANDRADES COMERCIO", "", 14692.19),
+    ("THERMOBRAS AR CONDICIONADO", "Climatização", 20650.00),
+    ("AÇO INOX IMPERIAL", "Estrutura", 18749.90),
 ]
 
-# Build fornecedores HTML cards
 imob_fornecedores_html = ""
 imob_colors = ['bg-rose-500', 'bg-amber-500', 'bg-brand-blue', 'bg-purple-500', 'bg-teal-500', 'bg-slate-400']
 for idx, (nome, desc, valor) in enumerate(imob_fornecedores):
@@ -166,29 +192,25 @@ for idx, (nome, desc, valor) in enumerate(imob_fornecedores):
   </div>
 </div>\n'''
 
-# Imobilizado header row in the DRE table
-table_body += '''<tr class="h-6">
-  <td colspan="11"></td>
+# Imobilizado row in DRE
+table_body += f'''<tr class="h-6">
+  <td colspan="{colspan_total}"></td>
 </tr>
-'''
-table_body += f'''<tr class="bg-surface-container-high/90 border-y border-surface-variant/80">
+<tr class="bg-surface-container-high/90 border-y border-surface-variant/80">
   <td class="py-3 px-4 text-xs font-bold text-brand-blue uppercase tracking-widest">Imobilizado &amp; Reforma</td>
-  <td colspan="8" class="py-3 px-3"></td>
+  <td colspan="{num_months}" class="py-3 px-3"></td>
   <td class="py-3 px-3 text-right text-sm font-sans font-bold text-amber-300">R$ {fmt_float(imob_total)}</td>
 </tr>
 '''
 
-# Resultado sem Imobilizado - same monthly values, but YTD deducts imobilizado
-res_sem_imob = list(d['resultado_periodo'])
+res_sem_imob = list(d['resultado_periodo'][:num_months])
 res_sem_imob_ytd = sum(res_sem_imob) + imob_total
 
 is_pos_sem = res_sem_imob_ytd >= 0
 bg_cls_sem = "bg-gradient-to-r from-emerald-900/60 to-emerald-800/40 border-emerald-500/60" if is_pos_sem else "bg-gradient-to-r from-rose-950/80 to-rose-900/50 border-rose-500/60"
 text_cls_sem = "text-emerald-300" if is_pos_sem else "text-rose-300"
-
 monthly_tds_sem = "".join([f'<td class="py-3.5 px-3 text-right text-sm font-sans font-bold {text_cls_sem}">{fmt_val_table(v)}</td>' for v in res_sem_imob])
 
-# YTD cell with special formatting using fmt_float
 if res_sem_imob_ytd < 0:
     ytd_sem_cell = f'<span class="text-rose-300 font-bold">({fmt_float(-res_sem_imob_ytd)})</span>'
 else:
@@ -201,9 +223,8 @@ table_body += f'''<tr class="{bg_cls_sem} border-y-2 hover:brightness-110 transi
 </tr>
 '''
 
-# Hint row for resultado sem imobilizado
-res_sem_imob_pcts = [(v / d['rec_bruta'][i])*100 for i, v in enumerate(res_sem_imob)]
-res_sem_imob_ytd_pct = (res_sem_imob_ytd / sum(d['rec_bruta'])) * 100
+res_sem_imob_pcts = [(v / d['rec_bruta'][i])*100 if d['rec_bruta'][i] > 0 else 0 for i, v in enumerate(res_sem_imob)]
+res_sem_imob_ytd_pct = (res_sem_imob_ytd / rec_bruta_tot) * 100 if rec_bruta_tot > 0 else 0
 pct_tds_sem = "".join([f'<td class="py-1.5 px-3 text-right text-xs font-sans text-text-muted italic">{fmt_pct(p)}</td>' for p in res_sem_imob_pcts])
 tot_pct_td_sem = f'<td class="py-1.5 px-3 text-right text-xs font-sans font-semibold text-text-muted italic">{fmt_pct(res_sem_imob_ytd_pct)}</td>'
 table_body += f'''<tr class="bg-surface-container-lowest/30 border-b border-surface-variant/20">
@@ -212,7 +233,7 @@ table_body += f'''<tr class="bg-surface-container-lowest/30 border-b border-surf
 </tr>
 '''
 
-# Top 10 Projetos Rows (Fonte maior, bem legível e verde vibrante)
+# Top 10 Projetos Rows
 proj_rows_html = ""
 for idx, (proj, val) in enumerate(d['top_proj'], 1):
     badge_bg = "bg-amber-500 text-black font-bold" if idx == 1 else "bg-slate-400 text-black font-bold" if idx == 2 else "bg-amber-700 text-white font-bold" if idx == 3 else "bg-surface-container-high text-text-muted border border-surface-variant"
@@ -227,7 +248,6 @@ for idx, (proj, val) in enumerate(d['top_proj'], 1):
 # UN Grid & Bars
 un_grid_html = ""
 un_bars_html = ""
-tot_rec_ytd = sum(d['rec_bruta'])
 un_colors = ['bg-brand-blue', 'bg-emerald-500', 'bg-purple-500', 'bg-amber-500', 'bg-teal-500', 'bg-rose-400', 'bg-slate-400']
 un_display_names = {
     'OUTSOURCING': 'OUTSOURCING',
@@ -238,7 +258,7 @@ un_display_names = {
     'EDUCAÇÃO': 'EDUCAÇÃO',
 }
 for idx, (un, val) in enumerate(sorted(d['un_ytd'].items(), key=lambda x: x[1], reverse=True)):
-    pct = (val / tot_rec_ytd) * 100
+    pct = (val / rec_bruta_tot) * 100 if rec_bruta_tot > 0 else 0
     val_k = val / 1000
     display = un_display_names.get(un, un.split(' - ')[0])
     grid_col_span = ' class="col-span-full"' if un == 'INNOVATION' else ''
@@ -261,13 +281,13 @@ for idx, (un, val) in enumerate(sorted(d['un_ytd'].items(), key=lambda x: x[1], 
   </div>
 </div>\n'''
 
-# Top CC Rows (Ajustado CAMPUS BH e alinhamento de barras)
+# Top CC Rows
 cc_rows_html = ""
 max_cc = max(v for cc, v in d['top_cc'])
 cc_colors = ['bg-rose-500', 'bg-amber-500', 'bg-brand-blue', 'bg-purple-500', 'bg-slate-400', 'bg-rose-400', 'bg-amber-400']
 for idx, (cc, val) in enumerate(d['top_cc']):
     cc_name_display = "CAMPUS BH" if "CAMPUS BH" in cc else cc
-    pct_bar = (val / max_cc) * 100
+    pct_bar = (val / max_cc) * 100 if max_cc > 0 else 0
     color_cls = cc_colors[idx % len(cc_colors)]
     val_k = val / 1000
     cc_rows_html += f'''<div class="flex items-center gap-4 py-2.5 border-b border-surface-variant/30 last:border-none">
@@ -280,15 +300,14 @@ for idx, (cc, val) in enumerate(d['top_cc']):
 
 # Viagens Comparativo
 viagens_comp_html = ""
-max_viag = max(max(d['viagens_desp']), max(d['reembolso_viagens']))
-months_viag = ['JAN-26', 'FEV-26', 'MAR-26', 'ABR-26', 'MAI-26', 'JUN-26', 'JUL-26', 'AGO-26']
-for i in range(len(months_viag)):
+max_viag = max(max(d['viagens_desp'][:num_months]), max(d['reembolso_viagens'][:num_months]))
+for i in range(num_months):
     desp_v = d['viagens_desp'][i]
     reemb_v = d['reembolso_viagens'][i]
-    p_desp = (desp_v / max_viag) * 100
-    p_reemb = (reemb_v / max_viag) * 100
+    p_desp = (desp_v / max_viag) * 100 if max_viag > 0 else 0
+    p_reemb = (reemb_v / max_viag) * 100 if max_viag > 0 else 0
     viagens_comp_html += f'''<div class="space-y-2">
-  <div class="text-sm font-bold text-brand-blue">{months_viag[i]}</div>
+  <div class="text-sm font-bold text-brand-blue">{month_cols[i]}</div>
   <div class="grid grid-cols-1 gap-1.5">
     <div class="flex items-center gap-3">
       <span class="text-sm text-text-muted w-20 font-medium">Despesa</span>
@@ -305,16 +324,15 @@ for i in range(len(months_viag)):
   </div>
 </div>\n'''
 
-tot_viag_desp = sum(d['viagens_desp'])
-tot_viag_op = sum(d['viag_op'])
-tot_viag_prosp = sum(d['viag_prosp'])
-tot_viag_reemb = sum(d['reembolso_viagens'])
-gap_viagens = tot_viag_reemb - tot_viag_desp
-cobertura_pct = (tot_viag_reemb / tot_viag_desp) * 100
+tot_viag_desp = sum(d['viagens_desp'][:num_months])
+tot_viag_op = sum(d['viag_op'][:num_months])
+tot_viag_prosp = sum(d['viag_prosp'][:num_months])
+tot_viag_reemb = sum(d['reembolso_viagens'][:num_months])
+cobertura_pct = (tot_viag_reemb / tot_viag_desp) * 100 if tot_viag_desp > 0 else 0
 
-# ── KPI 5: Resultado sem Imobilizado & Reforma ──
-_res_sem = res_sem_imob_ytd  # already calculated above
-_res_sem_pct = (_res_sem / sum(d['rec_bruta'])) * 100
+# KPI 5
+_res_sem = res_sem_imob_ytd
+_res_sem_pct = (_res_sem / rec_bruta_tot) * 100 if rec_bruta_tot > 0 else 0
 _imob_val_k = imob_total / 1000
 if _res_sem >= 0:
     _kpi5_color = 'text-emerald-400'
@@ -348,12 +366,23 @@ kpi5_card = f'''<div class="glass-card rounded-xl p-5 relative overflow-hidden g
         <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r {_kpi5_gradient}"></div>
       </div>'''
 
+# Mês de maior faturamento
+max_rec_val = max(d['rec_bruta'][:num_months])
+max_rec_idx = d['rec_bruta'][:num_months].index(max_rec_val)
+max_rec_label = f"{months_pt[month_names[max_rec_idx]]}/26 (R$ {max_rec_val/1_000_000:.3f}M)".replace('.', ',')
+
+# Thead columns
+th_columns = "".join([f'<th class="py-3.5 px-3 text-right">{col}</th>' for col in month_cols])
+
+chart_labels_js = [f"{m}/26" for m in month_names]
+chart_data_js = [round(x, 2) for x in d['rec_bruta'][:num_months]]
+
 full_html = f'''<!DOCTYPE html>
 <html class="dark" lang="pt-BR">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>NNÓS — Dashboard Executivo & DRE Gerencial JAN–JUL 2026</title>
+<title>NNÓS — Dashboard Executivo & DRE Gerencial 2026 | {month_names[-1].upper()}-26</title>
 <link rel="icon" type="image/png" href="assets/logo-nnos.png"/>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png"/>
 <link rel="icon" type="image/png" sizes="64x64" href="favicon.png"/>
@@ -369,65 +398,17 @@ full_html = f'''<!DOCTYPE html>
     theme: {{
       extend: {{
         "colors": {{
-          "secondary-fixed-dim": "#ffb4a2",
-          "on-error-container": "#ffdad6",
-          "on-surface-variant": "#bfc7d2",
-          "primary-fixed": "#cee5ff",
-          "on-secondary-fixed": "#3c0700",
-          "tertiary-container": "#d37b1d",
-          "outline-variant": "#3f4851",
           "surface-container-high": "#232a3a",
-          "on-primary-fixed-variant": "#004a75",
-          "secondary-container": "#822610",
-          "tertiary": "#ffb77a",
-          "secondary": "#ffb4a2",
           "on-surface": "#dce2f7",
-          "inverse-on-surface": "#293040",
           "background": "#0c1322",
-          "tertiary-fixed-dim": "#ffb77a",
-          "surface-elevation-2": "#374151",
-          "on-primary-fixed": "#001d32",
-          "on-secondary-container": "#ff9b82",
-          "on-secondary": "#621100",
-          "on-error": "#690005",
-          "surface-tint": "#96ccff",
           "text-primary": "#FFFFFF",
           "surface": "#0c1322",
-          "error": "#ffb4ab",
-          "on-tertiary-fixed-variant": "#6c3a00",
           "text-muted": "#9CA3AF",
           "accent-amber": "#FBBF24",
-          "primary-container": "#3197df",
-          "on-secondary-fixed-variant": "#822610",
-          "on-background": "#dce2f7",
-          "surface-bright": "#323949",
-          "primary-fixed-dim": "#96ccff",
-          "surface-container-highest": "#2e3545",
+          "brand-blue": "#0083ca",
           "surface-container": "#191f2f",
-          "on-primary-container": "#002c48",
-          "on-tertiary-container": "#422100",
-          "outline": "#89919c",
-          "error-container": "#93000a",
-          "surface-container-low": "#141b2b",
-          "tertiary-fixed": "#ffdcc1",
-          "inverse-primary": "#00639a",
-          "on-tertiary": "#4c2700",
           "surface-variant": "#2e3545",
-          "surface-elevation-1": "#1F2937",
-          "surface-container-lowest": "#070e1d",
-          "inverse-surface": "#dce2f7",
-          "on-tertiary-fixed": "#2e1500",
-          "primary": "#96ccff",
-          "on-primary": "#003353",
-          "secondary-fixed": "#ffdad2",
-          "surface-dim": "#0c1322",
-          "brand-blue": "#0083ca"
-        }},
-        "borderRadius": {{
-          "DEFAULT": "0.25rem",
-          "lg": "0.5rem",
-          "xl": "0.75rem",
-          "full": "9999px"
+          "surface-container-lowest": "#070e1d"
         }},
         "fontFamily": {{
           "sans": ["Inter", "sans-serif"],
@@ -499,17 +480,13 @@ full_html = f'''<!DOCTYPE html>
 
       <button type="submit" class="w-full py-3 px-4 rounded-xl bg-brand-blue hover:bg-blue-600 text-white font-bold text-sm transition-all shadow-lg shadow-brand-blue/20 flex items-center justify-center gap-2 group">
         <span>Acessar Relatório</span>
-        <span class="material-symbols-outlined text-sm group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+        <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
       </button>
     </form>
-
-    <div class="mt-6 pt-6 border-t border-white/10 text-center text-[11px] text-gray-500">
-      NNÓS Business Solutions • Controladoria & Gestão
-    </div>
   </div>
 </div>
 
-<!-- REPORT CONTENT WRAPPER -->
+<!-- REPORT CONTENT -->
 <div id="report-wrapper" class="hidden">
 
 <!-- HEADER -->
@@ -521,20 +498,20 @@ full_html = f'''<!DOCTYPE html>
         <div class="h-8 w-[1px] bg-white/20"></div>
         <span class="text-xs font-bold text-brand-blue uppercase tracking-widest bg-brand-blue/10 px-3 py-1 rounded-full border border-brand-blue/30">Relatório Financeiro Gerencial</span>
       </div>
-      <h1 class="text-3xl md:text-4xl font-extrabold font-display text-white mb-2 tracking-tight">Demonstrativo de Resultados & Dashboard Executivo</h1>
-      <p class="text-gray-300 text-base mb-6">Análise financeira gerencial — Visão acumulada de 8 meses (Janeiro a Agosto/2026) - Fonte Conta Azul</p>
+      <h1 class="text-3xl md:text-4xl font-extrabold font-display text-white mb-2 tracking-tight">Demonstrativo de Resultados &amp; Dashboard Executivo</h1>
+      <p class="text-gray-300 text-base mb-6">Análise financeira gerencial — Visão acumulada de {num_months} meses ({periodo_extenso}) - Fonte Conta Azul</p>
       <div class="flex flex-wrap gap-3 text-xs font-semibold">
         <span class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 text-white border border-white/10">
-          <span class="material-symbols-outlined text-brand-blue text-sm">calendar_month</span> Jan/2026 a Ago/2026 (8 Meses)
+          <span class="material-symbols-outlined text-brand-blue text-sm">calendar_month</span> {periodo_badge}
         </span>
         <span class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 text-white border border-white/10">
-          <span class="material-symbols-outlined text-emerald-400 text-sm">payments</span> Rec. Bruta: R$ 6,80M
+          <span class="material-symbols-outlined text-emerald-400 text-sm">payments</span> Rec. Bruta: R$ {str(round(rec_bruta_m, 2)).replace('.', ',')}M
         </span>
         <span class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 text-white border border-white/10">
-          <span class="material-symbols-outlined text-brand-blue text-sm">trending_up</span> Margem Bruta: 45,8%
+          <span class="material-symbols-outlined text-brand-blue text-sm">trending_up</span> Margem Bruta: {str(round(margem_bruta_pct, 1)).replace('.', ',')}%
         </span>
         <span class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 text-white border border-white/10">
-          <span class="material-symbols-outlined text-amber-400 text-sm">verified</span> Controladoria & Gestão
+          <span class="material-symbols-outlined text-amber-400 text-sm">verified</span> Controladoria &amp; Gestão
         </span>
       </div>
     </div>
@@ -549,9 +526,9 @@ full_html = f'''<!DOCTYPE html>
         <a class="px-4 py-2 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2" href="#kpis"><span class="material-symbols-outlined text-base text-brand-blue">monitoring</span> KPIs Estratégicos</a>
         <a class="px-4 py-2 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2" href="#dre"><span class="material-symbols-outlined text-base text-brand-blue">table_chart</span> DRE Gerencial</a>
         <a class="px-4 py-2 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2" href="#faturamento"><span class="material-symbols-outlined text-base text-brand-blue">show_chart</span> Faturamento Mensal</a>
-        <a class="px-4 py-2 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2" href="#projetos-un"><span class="material-symbols-outlined text-base text-brand-blue">domain</span> Projetos & UNs</a>
+        <a class="px-4 py-2 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2" href="#projetos-un"><span class="material-symbols-outlined text-base text-brand-blue">domain</span> Projetos &amp; UNs</a>
         <a class="px-4 py-2 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2" href="#centros-custo"><span class="material-symbols-outlined text-base text-brand-blue">account_balance</span> Centros de Custo</a>
-        <a class="px-4 py-2 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2" href="#viagens"><span class="material-symbols-outlined text-base text-brand-blue">flight_takeoff</span> Viagens & Reembolsos</a>
+        <a class="px-4 py-2 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2" href="#viagens"><span class="material-symbols-outlined text-base text-brand-blue">flight_takeoff</span> Viagens &amp; Reembolsos</a>
         <a class="px-4 py-2 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2" href="#sintese"><span class="material-symbols-outlined text-base text-brand-blue">lightbulb</span> Síntese Executiva</a>
       </div>
       <div class="flex items-center gap-2.5 ml-auto">
@@ -581,9 +558,9 @@ full_html = f'''<!DOCTYPE html>
       <div>
         <h2 class="text-xl font-display font-bold text-white flex items-center gap-3">
           <div class="w-1.5 h-6 bg-brand-blue rounded-full"></div>
-          Indicadores Estratégicos YTD (8 Meses)
+          Indicadores Estratégicos YTD ({num_months} Meses)
         </h2>
-        <p class="text-xs text-gray-400 mt-1 ml-4.5">Visão sintética do desempenho financeiro acumulado de Janeiro a Agosto/2026</p>
+        <p class="text-xs text-gray-400 mt-1 ml-4.5">Visão sintética do desempenho financeiro acumulado de {periodo_extenso}</p>
       </div>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
@@ -593,12 +570,12 @@ full_html = f'''<!DOCTYPE html>
           <div class="w-10 h-10 rounded-lg bg-brand-blue/20 flex items-center justify-center text-brand-blue border border-brand-blue/30">
             <span class="material-symbols-outlined">payments</span>
           </div>
-          <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-brand-blue/20 text-brand-blue border border-brand-blue/30">8 Meses</span>
+          <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-brand-blue/20 text-brand-blue border border-brand-blue/30">{num_months} Meses</span>
         </div>
         <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Receita Bruta YTD</div>
-        <div class="text-2xl font-extrabold font-display text-white mb-1">R$ 6,80M</div>
+        <div class="text-2xl font-extrabold font-display text-white mb-1">R$ {rec_bruta_m:.2f}M</div>
         <div class="text-xs text-emerald-400 font-medium flex items-center gap-1">
-          <span class="material-symbols-outlined text-sm">trending_up</span> Média: R$ 849,8k/mês
+          <span class="material-symbols-outlined text-sm">trending_up</span> Média: R$ {fmt(rec_bruta_tot/num_months)}/mês
         </div>
         <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-brand-blue to-blue-600"></div>
       </div>
@@ -608,44 +585,44 @@ full_html = f'''<!DOCTYPE html>
           <div class="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center text-emerald-400 border border-emerald-500/30">
             <span class="material-symbols-outlined">add_chart</span>
           </div>
-          <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Agosto: 49,2%</span>
+          <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">{month_names[-1]}: {str(round(d['margem_bruta_pct'][-1], 1)).replace('.', ',')}%</span>
         </div>
         <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Margem Bruta Acumulada</div>
-        <div class="text-2xl font-extrabold font-display text-white mb-1">45,8%</div>
+        <div class="text-2xl font-extrabold font-display text-white mb-1">{str(round(margem_bruta_pct, 1)).replace('.', ',')}%</div>
         <div class="text-xs text-emerald-400 font-medium flex items-center gap-1">
-          <span class="material-symbols-outlined text-sm">arrow_upward</span> R$ 3,12M em Margem Bruta
+          <span class="material-symbols-outlined text-sm">arrow_upward</span> R$ {str(round(margem_bruta_tot/1_000_000, 2)).replace('.', ',')}M em Margem Bruta
         </div>
         <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-emerald-500 to-teal-400"></div>
       </div>
       <!-- KPI 3 -->
       <div class="glass-card rounded-xl p-5 relative overflow-hidden group">
         <div class="flex items-center justify-between mb-3">
-          <div class="w-10 h-10 rounded-lg bg-amber-500/20 flex items-center justify-center text-amber-400 border border-amber-500/30">
-            <span class="material-symbols-outlined">analytics</span>
+          <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400 border border-purple-500/30">
+            <span class="material-symbols-outlined">trending_down</span>
           </div>
-          <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30">Ago: +R$ 287k</span>
+          <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-purple-500/20 text-purple-400 border border-purple-500/30">{month_names[-1]}: {str(round(d['ebitda_pct'][-1], 1)).replace('.', ',')}%</span>
         </div>
-        <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">EBITDA Acumulado</div>
-        <div class="text-2xl font-extrabold font-display text-rose-400 mb-1">-R$ 631k</div>
+        <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">EBITDA Gerencial YTD</div>
+        <div class="text-2xl font-extrabold font-display text-white mb-1">{'R$ ' + fmt(ebitda_tot) if ebitda_tot >= 0 else '-R$ ' + fmt(abs(ebitda_tot))}</div>
         <div class="text-xs text-gray-400 font-medium flex items-center gap-1">
-          <span class="material-symbols-outlined text-sm">timeline</span> Margin EBITDA: -9,3%
+          <span class="material-symbols-outlined text-sm">monitoring</span> Margem EBITDA: {str(round(ebitda_pct, 1)).replace('.', ',')}%
         </div>
-        <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-amber-500 to-rose-500"></div>
+        <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-purple-500 to-indigo-500"></div>
       </div>
       <!-- KPI 4 -->
       <div class="glass-card rounded-xl p-5 relative overflow-hidden group">
         <div class="flex items-center justify-between mb-3">
-          <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400 border border-purple-500/30">
-            <span class="material-symbols-outlined">account_balance</span>
+          <div class="w-10 h-10 rounded-lg bg-rose-500/20 flex items-center justify-center text-rose-400 border border-rose-500/30">
+            <span class="material-symbols-outlined">account_balance_wallet</span>
           </div>
-          <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">+R$ 287k em Ago</span>
+          <span class="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/30">{month_names[-1]}: {str(round(d['resultado_pct'][-1], 1)).replace('.', ',')}%</span>
         </div>
-        <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Resultado YTD Período</div>
-        <div class="text-2xl font-extrabold font-display text-rose-400 mb-1">-R$ 473k</div>
-        <div class="text-xs text-emerald-400 font-medium flex items-center gap-1">
-          <span class="material-symbols-outlined text-sm">savings</span> Rec. Financeira: R$ 229k
+        <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Resultado Líquido do Período</div>
+        <div class="text-2xl font-extrabold font-display text-white mb-1">{'R$ ' + fmt(resultado_tot) if resultado_tot >= 0 else '-R$ ' + fmt(abs(resultado_tot))}</div>
+        <div class="text-xs text-gray-400 font-medium flex items-center gap-1">
+          <span class="material-symbols-outlined text-sm">equalizer</span> Margem Líquida: {str(round(resultado_pct, 1)).replace('.', ',')}%
         </div>
-        <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-purple-500 to-indigo-500"></div>
+        <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-rose-500 to-pink-500"></div>
       </div>
       <!-- KPI 5 -->
       {kpi5_card}
@@ -659,7 +636,7 @@ full_html = f'''<!DOCTYPE html>
         <div class="w-1.5 h-6 bg-brand-blue rounded-full"></div>
         Demonstração do Resultado do Exercício (DRE Gerencial)
       </h2>
-      <p class="text-xs text-gray-400 mt-1 ml-4.5">Apuração mensal detalhada (Jan a Ago/26) — Impostos (ISS Efetivo + 6,15% PIS/COFINS) e Resultado Financeiro</p>
+      <p class="text-xs text-gray-400 mt-1 ml-4.5">Apuração mensal detalhada ({month_names[0]} a {month_names[-1]}/26) — Impostos (ISS Efetivo + 6,15% PIS/COFINS) e Resultado Financeiro</p>
     </div>
     <div class="glass-panel rounded-2xl overflow-hidden border border-white/15 shadow-2xl">
       <div class="p-4 bg-slate-900/90 border-b border-white/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
@@ -674,15 +651,8 @@ full_html = f'''<!DOCTYPE html>
           <thead>
             <tr class="bg-slate-950 text-gray-300 text-xs font-extrabold uppercase tracking-wider border-b border-white/15">
               <th class="py-3.5 px-4">Descrição</th>
-              <th class="py-3.5 px-3 text-right">JAN-26</th>
-              <th class="py-3.5 px-3 text-right">FEV-26</th>
-              <th class="py-3.5 px-3 text-right">MAR-26</th>
-              <th class="py-3.5 px-3 text-right">ABR-26</th>
-              <th class="py-3.5 px-3 text-right">MAI-26</th>
-              <th class="py-3.5 px-3 text-right">JUN-26</th>
-              <th class="py-3.5 px-3 text-right">JUL-26</th>
-              <th class="py-3.5 px-3 text-right">AGO-26</th>
-              <th class="py-3.5 px-3 text-right text-brand-blue font-black">YTD (8 MESES)</th>
+              {th_columns}
+              <th class="py-3.5 px-3 text-right text-brand-blue font-black">YTD ({num_months} MESES)</th>
             </tr>
           </thead>
           <tbody>
@@ -699,7 +669,7 @@ full_html = f'''<!DOCTYPE html>
         <div class="w-1.5 h-6 bg-brand-blue rounded-full"></div>
         Evolução do Faturamento Mensal
       </h2>
-      <p class="text-xs text-gray-400 mt-1 ml-4.5">Tendência de crescimento da Receita Bruta com destaque para o recorde de R$ 1,007 milhão em Julho/26</p>
+      <p class="text-xs text-gray-400 mt-1 ml-4.5">Tendência de crescimento da Receita Bruta acumulada no período de {periodo_extenso}</p>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <div class="glass-card rounded-2xl p-6 border border-white/10 lg:col-span-2">
@@ -711,20 +681,20 @@ full_html = f'''<!DOCTYPE html>
       </div>
       <div class="glass-card rounded-2xl p-6 border border-white/10 flex flex-col justify-between">
         <div>
-          <h3 class="text-base font-bold text-white mb-1">Média & Performance</h3>
+          <h3 class="text-base font-bold text-white mb-1">Média &amp; Performance</h3>
           <p class="text-xs text-gray-400 mb-6">Resumo executivo de vendas</p>
           <div class="space-y-4">
             <div class="p-4 rounded-xl bg-slate-900/80 border border-white/10">
               <div class="text-xs text-gray-400">Média Mensal de Faturamento</div>
-              <div class="text-2xl font-extrabold text-brand-blue font-display mt-1">R$ {fmt(sum(d['rec_bruta'])/7)}</div>
+              <div class="text-2xl font-extrabold text-brand-blue font-display mt-1">R$ {fmt(rec_bruta_tot/num_months)}</div>
             </div>
             <div class="p-4 rounded-xl bg-slate-900/80 border border-white/10">
               <div class="text-xs text-gray-400">Mês de Maior Faturamento</div>
-              <div class="text-xl font-extrabold text-emerald-400 font-display mt-1">Julho/26 (R$ 1,007M)</div>
+              <div class="text-xl font-extrabold text-emerald-400 font-display mt-1">{max_rec_label}</div>
             </div>
             <div class="p-4 rounded-xl bg-slate-900/80 border border-white/10">
-              <div class="text-xs text-gray-400">Crescimento Jan → Jul</div>
-              <div class="text-xl font-extrabold text-emerald-400 font-display mt-1">+62,8%</div>
+              <div class="text-xs text-gray-400">Total Faturado no Ano</div>
+              <div class="text-xl font-extrabold text-emerald-400 font-display mt-1">R$ {rec_bruta_m:.2f}M</div>
             </div>
           </div>
         </div>
@@ -737,7 +707,7 @@ full_html = f'''<!DOCTYPE html>
     <div class="mb-6">
       <h2 class="text-xl font-display font-bold text-white flex items-center gap-3">
         <div class="w-1.5 h-6 bg-brand-blue rounded-full"></div>
-        Projetos & Unidades de Negócio
+        Projetos &amp; Unidades de Negócio
       </h2>
       <p class="text-xs text-gray-400 mt-1 ml-4.5">Concentração de receita por contrato e distribuição de faturamento por UN</p>
     </div>
@@ -747,7 +717,7 @@ full_html = f'''<!DOCTYPE html>
         <h3 class="text-base font-bold text-white mb-1 flex items-center gap-2">
           <span class="material-symbols-outlined text-amber-400">local_fire_department</span> Top 10 Projetos por Faturamento
         </h3>
-        <p class="text-xs text-gray-400 mb-6">Ranking acumulado YTD (7 Meses)</p>
+        <p class="text-xs text-gray-400 mb-6">Ranking acumulado YTD ({num_months} Meses)</p>
         <div class="space-y-2.5">
 {proj_rows_html}        </div>
       </div>
@@ -790,7 +760,7 @@ full_html = f'''<!DOCTYPE html>
     <div class="mb-6">
       <h2 class="text-xl font-display font-bold text-white flex items-center gap-3">
         <div class="w-1.5 h-6 bg-brand-blue rounded-full"></div>
-        Análise de Viagens & Reembolsos
+        Análise de Viagens &amp; Reembolsos
       </h2>
       <p class="text-xs text-gray-400 mt-1 ml-4.5">Comparativo entre gastos com viagens e a taxa de recuperação via reembolso de clientes</p>
     </div>
@@ -847,9 +817,9 @@ full_html = f'''<!DOCTYPE html>
     <div class="mb-6">
       <h2 class="text-xl font-display font-bold text-white flex items-center gap-3">
         <div class="w-1.5 h-6 bg-brand-blue rounded-full"></div>
-        Síntese Executiva & Parecer do Controller
+        Síntese Executiva &amp; Parecer do Controller
       </h2>
-      <p class="text-xs text-gray-400 mt-1 ml-4.5">Avaliação estratégica dos pontos fortes, pontos de atenção e mitigação de riscos</p>
+      <p class="text-xs text-gray-400 mt-1 ml-4.5">Avaliação estratégica dos pontos fortes, pontos de atenção e mitigação de riscos ({periodo_extenso})</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <!-- POSITIVOS -->
@@ -858,10 +828,9 @@ full_html = f'''<!DOCTYPE html>
           <span class="material-symbols-outlined text-sm">check_circle</span> Pontos Positivos
         </div>
         <div class="p-5 space-y-3 text-xs text-gray-300 leading-relaxed">
-          <p><strong class="text-white">● Resultado Positivo em Agosto:</strong> Com R$ +286,7k de resultado líquido, Agosto foi o melhor mês do ano, sinalizando uma trajetória consistente de melhora operacional no 2º semestre.</p>
-          <p><strong class="text-white">● Faturamento Sustentado no 2º Semestre:</strong> Julho (R$ 1,008M) e Agosto (R$ 962,8k) mantiveram a receita em níveis elevados, demonstrando robustez na carteira de projetos ativa.</p>
-          <p><strong class="text-white">● Redução do Déficit Acumulado:</strong> O resultado YTD evoluiu de -R$ 759k em Junho para -R$ 473k em Agosto, uma melhora de R$ +286k em apenas dois meses — tendência que, se mantida, pode zerar o déficit até o encerramento do ano.</p>
-          <p><strong class="text-white">● Reembolso Eficiente de Viagens:</strong> Das despesas brutas com viagens (R$ 944,5k YTD), R$ 716k foram reembolsados pelos clientes — taxa de recuperação de 75,8%, reduzindo o impacto líquido significativamente.</p>
+          <p><strong class="text-white">● Faturamento Sustentado no 2º Semestre:</strong> O faturamento acumulou R$ {rec_bruta_m:.2f}M em {num_months} meses, mantendo média de R$ {fmt(rec_bruta_tot/num_months)}/mês e demonstrando tração contínua na prestação de serviços.</p>
+          <p><strong class="text-white">● Margem Bruta Estável:</strong> A margem bruta média de {margem_bruta_pct:.1f}% assegura cobertura contínua dos custos diretos com consultores e equipes de projetos.</p>
+          <p><strong class="text-white">● Reembolso Eficiente de Viagens:</strong> Taxa de recuperação de {cobertura_pct:.1f}% das viagens faturadas a clientes (R$ {fmt(tot_viag_reemb)} recuperados), protegendo o caixa operacional.</p>
         </div>
       </div>
 
@@ -871,9 +840,8 @@ full_html = f'''<!DOCTYPE html>
           <span class="material-symbols-outlined text-sm">warning</span> Pontos de Atenção
         </div>
         <div class="p-5 space-y-3 text-xs text-gray-300 leading-relaxed">
-          <p><strong class="text-white">● Margem Bruta Abaixo do Potencial:</strong> A Margem Bruta YTD de 45,8% indica pressão de custos diretos — em especial consultores e comissões. Recomenda-se revisar a estrutura de precificação dos contratos para elevar a margem para o patamar ideal de 50–55%.</p>
-          <p><strong class="text-white">● Custo Fixo Elevado Proporcionalmente:</strong> Funcionários, aluguel, contabilidade e despesas adm. juntos consomem parcela substancial da Receita Líquida. Avaliar oportunidades de ganho de eficiência — como renegocição de contratos de aluguel ou serviços de TI — pode liberar margem operacional.</p>
-          <p><strong class="text-white">● Receita Financeira Não Recorrente:</strong> R$ 229,1k de rendimentos de aplicações foram registrados em Agosto. Esse valor, embora positivo, é pontual e não deve ser utilizado como base para projeções futuras de resultado.</p>
+          <p><strong class="text-white">● Estrutura de Custos Fixos:</strong> Custo fixo total acumulado de R$ {fmt(sum(d['custo_fixo_tot'][:num_months]))} demanda atenção para ganhos de escala e diluição frente à receita líquida.</p>
+          <p><strong class="text-white">● Investimentos Imobilizados:</strong> O projeto Campus BH UVA acumula R$ {fmt_float(imob_total)} em melhorias de infraestrutura, com 96,6% já liquidado.</p>
         </div>
       </div>
 
@@ -883,10 +851,8 @@ full_html = f'''<!DOCTYPE html>
           <span class="material-symbols-outlined text-sm">error</span> Riscos &amp; Recomendações
         </div>
         <div class="p-5 space-y-3 text-xs text-gray-300 leading-relaxed">
-          <p><strong class="text-white">● Déficit YTD Requer Atenção Continuáda:</strong> O acumulado de -R$ 472,6k em 8 meses exige resultado médio de +R$ 236k nos próximos 4 meses para fechar o ano no zero. Setembro e Outubro são críticos para essa trajetória.</p>
-          <p><strong class="text-white">● Gestão do Fluxo de Caixa:</strong> O resultado YTD acumulado de -R$ 472,6k reforça a necessidade de priorizar contratos de maior rentabilidade e antecipar recebíveis nos meses seguintes, garantindo liquidez operacional para o 2º semestre.</p>
-          <p><strong class="text-white">● Concentração de Receita por UN:</strong> Dependência elevada de poucos projetos ou unidades de negócio representa risco de ruptura caso haja não-renovação de contratos. Recomenda-se acelerar a diversificação da carteira comercial.</p>
-          <p><strong class="text-white">● Encargos Financeiros (Juros + Tarifas):</strong> R$ 70,7k YTD em juros e tarifas bancárias (média R$ 8,8k/mês). Consolidar operações e negociar tarifas com os bancos pode gerar economia anual estimada acima de R$ 20k.</p>
+          <p><strong class="text-white">● Disciplina de Caixa:</strong> Manter acompanhamento rigoroso dos vencimentos do 4º trimestre e continuidade da cobrança ativa de faturas e reembolsos.</p>
+          <p><strong class="text-white">● Otimização Tributária:</strong> Monitorar o impacto dos encargos de PIS/COFINS e retenções na fonte sobre os novos contratos.</p>
         </div>
       </div>
     </div>
@@ -901,8 +867,8 @@ full_html = f'''<!DOCTYPE html>
       <img alt="NNÓS Logo" class="h-10 w-auto object-contain opacity-90" src="{LOGO_B64_WHITE}"/>
       <span class="font-bold text-white">NNÓS Business Solutions</span>
     </div>
-    <div>Relatório Financeiro Gerencial • Período: Janeiro a Agosto de 2026</div>
-    <div class="text-[11px] text-gray-500">Controladoria & Gestão Financeira</div>
+    <div>Relatório Financeiro Gerencial • Período: {periodo_extenso}</div>
+    <div class="text-[11px] text-gray-500">Controladoria &amp; Gestão Financeira</div>
   </div>
 </footer>
 
@@ -921,10 +887,10 @@ function initFaturamentoChart() {{
     chartFaturamentoInstance = new Chart(ctxFaturamento, {{
       type: 'bar',
       data: {{
-        labels: ['Jan/26', 'Fev/26', 'Mar/26', 'Abr/26', 'Mai/26', 'Jun/26', 'Jul/26', 'Ago/26'],
+        labels: {json.dumps(chart_labels_js)},
         datasets: [{{
           label: 'Receita Bruta (R$)',
-          data: [{", ".join(str(round(x, 2)) for x in d['rec_bruta'])}],
+          data: {json.dumps(chart_data_js)},
           backgroundColor: 'rgba(0, 131, 202, 0.85)',
           borderColor: '#0083ca',
           borderWidth: 1.5,
@@ -996,7 +962,6 @@ function logout() {{
   location.reload();
 }}
 
-// Check active session on page load & observe chart visibility
 document.addEventListener('DOMContentLoaded', () => {{
   if (sessionStorage.getItem('nnos_auth') === 'true') {{
     unlockDashboard();
@@ -1015,7 +980,6 @@ document.addEventListener('DOMContentLoaded', () => {{
   }}
 }});
 
-// 🛡️ Camada de Segurança: Bloqueio de DevTools, Atalhos e Menu de Contexto
 document.addEventListener('contextmenu', function(e) {{
   e.preventDefault();
 }}, false);
@@ -1055,12 +1019,11 @@ document.addEventListener('keydown', function(e) {{
 target_filename = '2026 - Relatório Financeiro - NNÓS - MATRIZ-26.html'
 with open(target_filename, 'w', encoding='utf-8') as f:
     f.write(full_html)
-print(f"Relatório Matriz atualizado em: {target_filename}")
+print(f"[OK] Relatório Matriz atualizado em: {target_filename}")
 
-# Atualiza automaticamente o Portal Integrado (Hub de Seleção + Matriz + UVA) no index.html
 try:
     import build_portal
     build_portal.build()
-    print("Portal Integrado index.html atualizado automaticamente com sucesso!")
+    print("[OK] Portal Integrado index.html atualizado com sucesso!")
 except Exception as e:
-    print(f"Aviso: execute build_portal.py para atualizar o index.html ({e})")
+    print(f"Aviso ao executar build_portal.py: {e}")
