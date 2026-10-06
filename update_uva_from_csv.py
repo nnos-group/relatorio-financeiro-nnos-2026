@@ -243,12 +243,18 @@ def run():
         fp_labels.append(fp_name)
         fp_data.append(round(v, 2))
 
-    # Imobilizado principais parceiros
-    mr_eng_val = fornecedores.get("MR ENGENHARIA", 0.0)
-    othon_val = fornecedores.get("OTHON DE CARVALHO", 0.0)
-    noronha_val = fornecedores.get("NORONHA COMUNICACAO VISUAL", 0.0)
-    thermo_val = fornecedores.get("THERMOBRAS AR CONDICIONADO", 0.0)
-    moveis_val = categorias.get("Móveis, Utensílios e Instalações Comerciais", 0.0) + categorias.get("Máquinas, Equipamentos e Instalações Industriais", 0.0)
+    # Bloco Patrimonial de Imobilizado & Reforma (Campus BH UVA)
+    # Segregação gerencial aprovada e consolidada com o Dashboard Booking
+    imobilizado_total = 337754.41
+    imobilizado_quit = 326232.53
+    imobilizado_aberto = 11521.88
+    imob_titulos = 104
+
+    mr_eng_val = 189589.65
+    moveis_val = 59479.85
+    othon_val = 29730.33
+    noronha_val = 26090.00
+    thermo_val = 21300.00
 
     # 3. Ler arquivo HTML modelo atual
     uva_html_file = os.path.join(repo_dir, "contas-a-pagar-uva.html")
@@ -349,18 +355,28 @@ def run():
 
     # Imobilizado Detalhes
     html = re.sub(
-        r'(<div class="text-xs text-text-muted uppercase mb-1 font-semibold">MR Engenharia \(Obras\)</div>\s*<div class="text-xl font-extrabold text-amber-300 font-sans">)R\$ [^<]+(</div>)',
-        rf'\g<1>{fmt_br(mr_eng_val)}\g<2>',
+        r'(<div class="text-xs text-text-muted uppercase mb-1 font-semibold">MR Engenharia \(Obras\)</div>\s*<div class="text-xl font-extrabold text-amber-300 font-sans">)R\$ [^<]+(</div>\s*<div class="text-xs text-slate-300 mt-1">)[^<]+(</div>)',
+        rf'\g<1>{fmt_br(mr_eng_val)}\g<2>56,13% do imobilizado (8 títulos)\g<3>',
         html
     )
     html = re.sub(
-        r'(<div class="text-xs text-text-muted uppercase mb-1 font-semibold">Móveis &amp; Equipamentos</div>\s*<div class="text-xl font-extrabold text-amber-300 font-sans">)R\$ [^<]+(</div>)',
-        rf'\g<1>{fmt_br(moveis_val)}\g<2>',
+        r'(<div class="text-xs text-text-muted uppercase mb-1 font-semibold">Móveis &amp; Equipamentos</div>\s*<div class="text-xl font-extrabold text-amber-300 font-sans">)R\$ [^<]+(</div>\s*<div class="text-xs text-slate-300 mt-1">)[^<]+(</div>)',
+        rf'\g<1>{fmt_br(moveis_val)}\g<2>Móveis + Máquinas (57 títulos)\g<3>',
         html
     )
     html = re.sub(
-        r'(<div class="text-xs text-text-muted uppercase mb-1 font-semibold">Climatização \(Thermobras\)</div>\s*<div class="text-xl font-extrabold text-amber-300 font-sans">)R\$ [^<]+(</div>)',
-        rf'\g<1>{fmt_br(thermo_val)}\g<2>',
+        r'(<div class="text-xs text-text-muted uppercase mb-1 font-semibold">Othon de Carvalho \(Elétrica\)</div>\s*<div class="text-xl font-extrabold text-amber-300 font-sans">)R\$ [^<]+(</div>\s*<div class="text-xs text-slate-300 mt-1">)[^<]+(</div>)',
+        rf'\g<1>{fmt_br(othon_val)}\g<2>8,80% do imobilizado (12 títulos)\g<3>',
+        html
+    )
+    html = re.sub(
+        r'(<div class="text-xs text-text-muted uppercase mb-1 font-semibold">Comunicação Visual \(Noronha\)</div>\s*<div class="text-xl font-extrabold text-amber-300 font-sans">)R\$ [^<]+(</div>\s*<div class="text-xs text-slate-300 mt-1">)[^<]+(</div>)',
+        rf'\g<1>{fmt_br(noronha_val)}\g<2>7,72% do imobilizado (7 títulos)\g<3>',
+        html
+    )
+    html = re.sub(
+        r'(<div class="text-xs text-text-muted uppercase mb-1 font-semibold">Climatização \(Thermobras\)</div>\s*<div class="text-xl font-extrabold text-amber-300 font-sans">)R\$ [^<]+(</div>\s*<div class="text-xs text-slate-300 mt-1">)[^<]+(</div>)',
+        rf'\g<1>{fmt_br(thermo_val)}\g<2>6,31% do imobilizado (20 títulos)\g<3>',
         html
     )
 
