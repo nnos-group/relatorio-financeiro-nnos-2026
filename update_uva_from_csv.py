@@ -129,6 +129,11 @@ def run():
             dt_comp = r[col_comp].strip() if len(r) > col_comp else ''
             dt_venc = r[col_venc].strip() if len(r) > col_venc else ''
             desc = r[col_desc].strip() if len(r) > col_desc else ''
+            
+            # Regra de negócio: ignorar lançamentos de guias mensais de ISS (padrão ISS*- 26 na descrição)
+            if re.search(r'ISS.*-\s*26', desc, re.IGNORECASE):
+                continue
+
             sit = r[col_sit].strip().lower() if len(r) > col_sit else ''
             val = parse_val(r[col_val])
             forma = r[col_forma].strip() if len(r) > col_forma else ''
