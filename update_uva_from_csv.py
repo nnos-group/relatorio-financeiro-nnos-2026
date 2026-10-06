@@ -121,7 +121,7 @@ def run():
         elif 'situa' in cn: col_sit = idx
         elif ('original' in cn or 'valor' in cn) and 'cat' not in cn and 'pago' not in cn: col_val = idx
         elif 'forma' in cn: col_forma = idx
-        elif 'categoria 1' in cn or ('categoria' in cn and 'valor' not in cn): col_cat = idx
+        elif 'categoria' in cn and 'valor' not in cn: col_cat = idx
 
     for r in raw_rows[1:]:
         if len(r) > max(col_forn, col_comp, col_venc, col_desc, col_sit, col_val):
@@ -197,8 +197,19 @@ def run():
     print(f"  A Vencer: {fmt_br(tot_aberto)} ({pct_aberto:.2f}%)")
     print(f"  Títulos: {num_lanc} | Fornecedores: {num_forn}")
 
-    # Meses ordenados
-    all_months = sorted(set(list(mensal_quit.keys()) + list(mensal_aberto.keys())))
+    # Meses ordenados cronologicamente (ano, mês)
+    def parse_month_key(m_str):
+        try:
+            parts = m_str.split('/')
+            return (int(parts[1]), int(parts[0]))
+        except:
+            return (9999, 99)
+
+    valid_months = [m for m in set(list(mensal_quit.keys()) + list(mensal_aberto.keys())) if m != "Outro"]
+    all_months = sorted(valid_months, key=parse_month_key)
+    if "Outro" in mensal_quit or "Outro" in mensal_aberto:
+        all_months.append("Outro")
+
     # Converter para formato curto Jan/26
     month_name_map = {
         '01': 'Jan', '02': 'Fev', '03': 'Mar', '04': 'Abr',
@@ -483,6 +494,10 @@ def run():
     # Salvar em contas-a-pagar-uva.html e uva.html
     target_uva = os.path.join(repo_dir, "contas-a-pagar-uva.html")
     with open(target_uva, 'w', encoding='utf-8') as f:
+        f.write(html)
+
+    target_uva_portal = os.path.join(repo_dir, "uva.html")
+    with open(target_uva_portal, 'w', encoding='utf-8') as f:
         f.write(html)
 
     # Sincronizar com a pasta ..\UVA se existir

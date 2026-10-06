@@ -84,7 +84,7 @@
 <p class="text-text-muted text-lg mb-6 text-gray-200">Universidade Veiga de Almeida — Realizado + Projeções por Data de Vencimento</p>
 <div class="flex flex-wrap gap-4 text-sm font-medium">
 <span class="flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container text-white border border-surface-variant">
-<span class="material-symbols-outlined text-sky-400 text-sm">calendar_month</span> Jan/26 a Dez/26</span>
+<span class="material-symbols-outlined text-sky-400 text-sm">calendar_month</span> Out/25 a Jan/27</span>
 <span class="flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container text-white border border-surface-variant">
 <span class="material-symbols-outlined text-sky-400 text-sm">payments</span> Total: R$ 598.495,41</span>
 <span class="flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container text-white border border-surface-variant">
@@ -151,7 +151,7 @@ Indicadores Estratégicos
 <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">Total Geral</div>
 </div>
 <div class="text-3xl font-extrabold font-sans text-white mb-1 tracking-tight">R$ 598.495,41</div>
-<div class="text-xs text-text-muted">240 títulos de Jan/26 a Dez/26</div>
+<div class="text-xs text-text-muted">240 títulos de Out/25 a Jan/27</div>
 <div class="absolute bottom-0 left-0 h-1 w-full bg-sky-400"></div>
 </div>
 
@@ -564,18 +564,18 @@ new Chart(document.getElementById('chartFornecedores'), {
 new Chart(document.getElementById('chartMensalExtendido'), {
   type: 'bar',
   data: {
-    labels: ["Jan/26", "Jan/27", "Fev/26", "Mar/26", "Abr/26", "Mai/26", "Jun/26", "Jul/26", "Ago/26", "Set/26", "Out/25", "Out/26", "Nov/25", "Nov/26", "Dez/25", "Dez/26"],
+    labels: ["Out/25", "Nov/25", "Dez/25", "Jan/26", "Fev/26", "Mar/26", "Abr/26", "Mai/26", "Jun/26", "Jul/26", "Ago/26", "Set/26", "Out/26", "Nov/26", "Dez/26", "Jan/27"],
     datasets: [
       {
         label: 'Quitado (R\$)',
-        data: [123960.28, 0.0, 30235.52, 80794.49, 45058.11, 45159.57, 39825.22, 35807.39, 30245.66, 28810.71, 6150.0, 9927.0, 9458.55, 0.0, 102332.0, 0.0],
+        data: [6150.0, 9458.55, 102332.0, 123960.28, 30235.52, 80794.49, 45058.11, 45159.57, 39825.22, 35807.39, 30245.66, 28810.71, 9927.0, 0.0, 0.0, 0.0],
         backgroundColor: '#38bdf8cc',
         borderColor: '#38bdf8',
         borderWidth: 1, borderRadius: 2
       },
       {
         label: 'A Vencer (R\$)',
-        data: [0.0, 650.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2717.97, 0.0, 4644.97, 0.0, 2717.97],
+        data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2717.97, 4644.97, 2717.97, 650.0],
         backgroundColor: '#fb7185cc',
         borderColor: '#fb7185',
         borderWidth: 1, borderRadius: 2
@@ -596,16 +596,25 @@ new Chart(document.getElementById('chartMensalExtendido'), {
 new Chart(document.getElementById('chartCategorias'), {
   type: 'doughnut',
   data: {
-    labels: ["-8.000,00", "-52.800,00", "-26.400,00", "-12.000,00", "-35.200,00", "-32.743,00", "-4.000,00", "Outros"],
+    labels: ["Manutenção Predial", "Honorários Prestação d...", "Móveis, Utensílios e I...", "Despesas Operacionais", "Máquinas, Equipamentos...", "Viagens", "Ajuda de Custo", "Outros"],
     datasets: [{
-      data: [80000.0, 52800.0, 52800.0, 36000.0, 35200.0, 32743.0, 16000.0, 292952.41],
+      data: [278892.11, 164821.61, 37062.25, 26230.08, 21800.05, 16807.9, 10439.0, 42442.41],
       backgroundColor: ['#38bdf8', '#60a5fa', '#a78bfa', '#fbbf24', '#34d399', '#f472b6', '#fb923c', '#94a3b8'],
       borderWidth: 0
     }]
   },
   options: {
     responsive: true, maintainAspectRatio: false, cutout: '65%',
-    plugins: { legend: { position: 'right', labels: { color: '#f1f5f9', font: { weight: '500' }, usePointStyle: true } } }
+    plugins: {
+      legend: { position: 'right', labels: { color: '#f1f5f9', font: { weight: '500' }, usePointStyle: true } },
+      tooltip: {
+        callbacks: {
+          label: function(ctx) {
+            return ' ' + ctx.label + ': R$ ' + Number(ctx.raw || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+          }
+        }
+      }
+    }
   }
 });
 
