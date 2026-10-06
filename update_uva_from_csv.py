@@ -251,8 +251,8 @@ def run():
     # Bloco Patrimonial de Imobilizado & Reforma (Campus BH UVA)
     # Segregação gerencial aprovada e consolidada com o Dashboard Booking
     imobilizado_total = 337754.41
-    imobilizado_quit = 326232.53
-    imobilizado_aberto = 11521.88
+    imobilizado_aberto = 8803.91
+    imobilizado_quit = round(imobilizado_total - imobilizado_aberto, 2)  # R$ 328.950,50
     imob_titulos = 104
 
     mr_eng_val = 189589.65
