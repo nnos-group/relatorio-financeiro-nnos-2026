@@ -533,25 +533,35 @@ full_html = f'''<!DOCTYPE html>
 </header>
 
 <!-- NAV BAR -->
-<nav class="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-md border-b border-white/10 shadow-lg">
+<nav class="sticky top-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-white/10 shadow-xl">
+  <!-- Linha 1: Seções do Relatório -->
   <div class="max-w-[1440px] mx-auto px-6 overflow-x-auto">
-    <div class="flex items-center justify-between gap-2 py-2.5 min-w-max">
+    <div class="flex items-center gap-1.5 py-2 min-w-max">
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2" href="#kpis"><span class="material-symbols-outlined text-base text-brand-blue">monitoring</span> KPIs Estratégicos</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2" href="#dre"><span class="material-symbols-outlined text-base text-brand-blue">table_chart</span> DRE Gerencial</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2" href="#faturamento"><span class="material-symbols-outlined text-base text-brand-blue">show_chart</span> Faturamento Mensal</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2" href="#projetos-un"><span class="material-symbols-outlined text-base text-brand-blue">domain</span> Projetos &amp; UNs</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2" href="#centros-custo"><span class="material-symbols-outlined text-base text-brand-blue">account_balance</span> Centros de Custo</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2" href="#viagens"><span class="material-symbols-outlined text-base text-brand-blue">flight_takeoff</span> Viagens &amp; Reembolsos</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2" href="#sintese"><span class="material-symbols-outlined text-base text-brand-blue">lightbulb</span> Síntese Executiva</a>
+    </div>
+  </div>
+
+  <!-- Linha 2: Ações Rápidas Fixadas Abaixo do Menu -->
+  <div class="border-t border-white/10 bg-slate-900/90 px-6 py-1.5">
+    <div class="max-w-[1440px] mx-auto flex items-center justify-between gap-3 flex-wrap">
       <div class="flex items-center gap-2">
-        <a class="px-4 py-2 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2" href="#kpis"><span class="material-symbols-outlined text-base text-brand-blue">monitoring</span> KPIs Estratégicos</a>
-        <a class="px-4 py-2 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2" href="#dre"><span class="material-symbols-outlined text-base text-brand-blue">table_chart</span> DRE Gerencial</a>
-        <a class="px-4 py-2 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2" href="#faturamento"><span class="material-symbols-outlined text-base text-brand-blue">show_chart</span> Faturamento Mensal</a>
-        <a class="px-4 py-2 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2" href="#projetos-un"><span class="material-symbols-outlined text-base text-brand-blue">domain</span> Projetos &amp; UNs</a>
-        <a class="px-4 py-2 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2" href="#centros-custo"><span class="material-symbols-outlined text-base text-brand-blue">account_balance</span> Centros de Custo</a>
-        <a class="px-4 py-2 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2" href="#viagens"><span class="material-symbols-outlined text-base text-brand-blue">flight_takeoff</span> Viagens &amp; Reembolsos</a>
-        <a class="px-4 py-2 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-2" href="#sintese"><span class="material-symbols-outlined text-base text-brand-blue">lightbulb</span> Síntese Executiva</a>
-      </div>
-      <div class="flex items-center gap-2.5 ml-auto">
-        <a href="uva.html" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-amber-300 bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/40 transition-all flex items-center gap-1.5 shadow-sm hover:scale-[1.02] cursor-pointer">
+        <span class="text-[11px] font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1.5 mr-1">
+          <span class="material-symbols-outlined text-sm text-sky-400">alt_route</span> Outros Relatórios:
+        </span>
+        <a href="uva.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-amber-300 bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/40 transition-all flex items-center gap-1.5 shadow-sm hover:scale-[1.02] cursor-pointer">
           <span class="material-symbols-outlined text-sm">account_balance</span> Campus BH UVA
         </a>
-        <a href="booking.html" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-emerald-300 bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/40 transition-all flex items-center gap-1.5 shadow-sm hover:scale-[1.02] cursor-pointer">
+        <a href="booking.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-emerald-300 bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/40 transition-all flex items-center gap-1.5 shadow-sm hover:scale-[1.02] cursor-pointer">
           <span class="material-symbols-outlined text-sm">trending_up</span> Performance Projetos
         </a>
+      </div>
+      <div class="flex items-center gap-2 ml-auto">
         <a href="index.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 border border-white/10 transition-colors flex items-center gap-1.5 cursor-pointer">
           <span class="material-symbols-outlined text-sm">grid_view</span> Menu
         </a>
