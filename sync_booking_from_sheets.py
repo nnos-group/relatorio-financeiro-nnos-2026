@@ -6,7 +6,9 @@ import shutil
 
 def sync_booking():
     repo_dir = os.path.dirname(os.path.abspath(__file__))
-    booking_dir = r"C:\Users\Leonardo Campos\OneDrive - NNÓS CONSULTORIA E TREINAMENTO\Contabilidade\Relatórios\Booking - Dashboard Executivo de Performance"
+    booking_dir = os.path.abspath(os.path.join(repo_dir, "..", "Booking - Dashboard Executivo de Performance"))
+    if not os.path.exists(booking_dir):
+        booking_dir = r"C:\Users\Leonardo Campos\OneDrive - NNÓS CONSULTORIA E TREINAMENTO\Contabilidade\Relatórios\Booking - Dashboard Executivo de Performance"
     
     if not os.path.exists(booking_dir):
         print(f"[AVISO] Pasta Booking não encontrada em: {booking_dir}")

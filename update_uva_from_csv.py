@@ -9,31 +9,36 @@ def run():
     repo_dir = os.path.dirname(os.path.abspath(__file__))
     uva_dir = os.path.abspath(os.path.join(repo_dir, "..", "UVA"))
     
-    # 1. Procurar CSV do UVA mais recente (na pasta UVA ou na pasta do repo)
+    # 1. Procurar CSV ou XLS do UVA mais recente (na pasta UVA ou na pasta do repo)
     candidates = []
     if os.path.exists(uva_dir):
         candidates.extend(glob.glob(os.path.join(uva_dir, "Relat*UVA*.csv")))
+        candidates.extend(glob.glob(os.path.join(uva_dir, "Relat*UVA*.xls*")))
     candidates.extend(glob.glob(os.path.join(repo_dir, "Relat*UVA*.csv")))
+    candidates.extend(glob.glob(os.path.join(repo_dir, "Relat*UVA*.xls*")))
     
     if not candidates:
-        print("Aviso: Nenhum arquivo CSV do UVA encontrado.")
+        print("Aviso: Nenhum arquivo CSV/XLS do UVA encontrado.")
         return
 
     # Ordenar por data de modificação decrescente
     candidates.sort(key=os.path.getmtime, reverse=True)
-    uva_csv = candidates[0]
-    print(f"Processando base UVA: {os.path.basename(uva_csv)}")
+    uva_file_src = candidates[0]
+    print(f"Processando base UVA: {os.path.basename(uva_file_src)}")
     
     # Detectar o mês de referência do nome do arquivo (ex: SET-26 ou AGO-26)
     mes_ref = "SET/2026"
-    if "SET" in os.path.basename(uva_csv).upper():
+    fname_upper = os.path.basename(uva_file_src).upper()
+    if "SET" in fname_upper:
         mes_ref = "SET/2026"
-    elif "AGO" in os.path.basename(uva_csv).upper():
+    elif "AGO" in fname_upper:
         mes_ref = "AGO/2026"
-    elif "OUT" in os.path.basename(uva_csv).upper():
+    elif "OUT" in fname_upper:
         mes_ref = "OUT/2026"
+    elif "JUL" in fname_upper:
+        mes_ref = "JUL/2026"
 
-    # 2. Ler e agregar dados do CSV
+    # 2. Ler e agregar dados do arquivo
     lancamentos = []
     fornecedores = defaultdict(float)
     categorias = defaultdict(float)
@@ -48,62 +53,126 @@ def run():
     imob_forn = defaultdict(float)
 
     def parse_val(s):
-        if not s: return 0.0
-        return float(s.replace('.', '').replace(',', '.'))
+        if s is None: return 0.0
+        if isinstance(s, (int, float)): return float(s)
+        s_clean = str(s).strip()
+        if not s_clean or s_clean in ['-', '', ' - ', '—']: return 0.0
+        if ',' in s_clean:
+            cleaned = s_clean.replace('.', '').replace(',', '.')
+        else:
+            cleaned = s_clean
+        try:
+            return float(cleaned)
+        except:
+            return 0.0
 
-    with open(uva_csv, 'r', encoding='latin1') as f:
-        reader = csv.reader(f, delimiter=';')
-        header = next(reader)
-        for r in reader:
-            if len(r) >= 6:
-                forn = r[0].strip()
-                dt_comp = r[1].strip()
-                dt_venc = r[2].strip()
-                desc = r[3].strip()
-                sit = r[4].strip().lower()
-                val = parse_val(r[5])
-                forma = r[6].strip() if len(r) > 6 else ''
-                cat = r[8].strip() if len(r) > 8 else ''
+    raw_rows = []
+    if uva_file_src.endswith('.xls') or uva_file_src.endswith('.xlsx'):
+        import zipfile
+        import xml.etree.ElementTree as ET
+        with zipfile.ZipFile(uva_file_src, 'r') as z:
+            sst = []
+            if 'xl/sharedStrings.xml' in z.namelist():
+                tree = ET.fromstring(z.read('xl/sharedStrings.xml'))
+                for si in tree.findall('{http://schemas.openxmlformats.org/spreadsheetml/2006/main}si'):
+                    t = si.find('{http://schemas.openxmlformats.org/spreadsheetml/2006/main}t')
+                    sst.append(t.text if t is not None and t.text else ''.join([el.text for el in si.iter() if el.text]))
+            sheet_tree = ET.fromstring(z.read('xl/worksheets/sheet1.xml'))
+            for r in sheet_tree.findall('{http://schemas.openxmlformats.org/spreadsheetml/2006/main}sheetData/{http://schemas.openxmlformats.org/spreadsheetml/2006/main}row'):
+                row_vals = []
+                for c in r.findall('{http://schemas.openxmlformats.org/spreadsheetml/2006/main}c'):
+                    t = c.get('t')
+                    v = c.find('{http://schemas.openxmlformats.org/spreadsheetml/2006/main}v')
+                    val = ''
+                    if v is not None and v.text is not None:
+                        val = sst[int(v.text)] if t == 's' else v.text
+                    row_vals.append(val)
+                raw_rows.append(row_vals)
+    else:
+        for enc in ['latin1', 'utf-8', 'utf-8-sig', 'cp1252']:
+            try:
+                with open(uva_file_src, 'r', encoding=enc) as f:
+                    reader = csv.reader(f, delimiter=';')
+                    raw_rows = [r for r in reader]
+                break
+            except UnicodeDecodeError:
+                continue
+
+    if not raw_rows:
+        print("[ERRO] Não foi possível ler as linhas do arquivo UVA.")
+        return
+
+    header = raw_rows[0]
+    col_forn = 0
+    col_comp = 1
+    col_venc = 2
+    col_desc = 3
+    col_sit = 4
+    col_val = 5
+    col_forma = 6
+    col_cat = 8
+
+    for idx, c in enumerate(header):
+        cn = c.lower().strip()
+        if 'fornecedor' in cn: col_forn = idx
+        elif 'compet' in cn: col_comp = idx
+        elif 'vencimento' in cn: col_venc = idx
+        elif 'descri' in cn: col_desc = idx
+        elif 'situa' in cn: col_sit = idx
+        elif ('original' in cn or 'valor' in cn) and 'cat' not in cn and 'pago' not in cn: col_val = idx
+        elif 'forma' in cn: col_forma = idx
+        elif 'categoria 1' in cn or ('categoria' in cn and 'valor' not in cn): col_cat = idx
+
+    for r in raw_rows[1:]:
+        if len(r) > max(col_forn, col_comp, col_venc, col_desc, col_sit, col_val):
+            forn = r[col_forn].strip()
+            dt_comp = r[col_comp].strip() if len(r) > col_comp else ''
+            dt_venc = r[col_venc].strip() if len(r) > col_venc else ''
+            desc = r[col_desc].strip() if len(r) > col_desc else ''
+            sit = r[col_sit].strip().lower() if len(r) > col_sit else ''
+            val = parse_val(r[col_val])
+            forma = r[col_forma].strip() if len(r) > col_forma else ''
+            cat = r[col_cat].strip() if len(r) > col_cat else ''
+            
+            is_quit = 'quit' in sit or 'pago' in sit or 'liquid' in sit
+            lancamentos.append({
+                "forn": forn, "val": val, "is_quit": is_quit,
+                "dt_venc": dt_venc, "cat": cat, "forma": forma, "desc": desc
+            })
+            fornecedores[forn] += val
+            if cat: categorias[cat] += val
+            if forma: formas_pag[forma] += val
+            
+            # Mês de vencimento MM/YYYY
+            try:
+                parts = dt_venc.split('/')
+                m_key = f"{int(parts[1]):02d}/{parts[2]}"
+            except:
+                m_key = "Outro"
                 
-                is_quit = 'quit' in sit or 'pago' in sit or 'liquid' in sit
-                lancamentos.append({
-                    "forn": forn, "val": val, "is_quit": is_quit,
-                    "dt_venc": dt_venc, "cat": cat, "forma": forma, "desc": desc
-                })
-                fornecedores[forn] += val
-                if cat: categorias[cat] += val
-                if forma: formas_pag[forma] += val
+            if is_quit:
+                mensal_quit[m_key] += val
+            else:
+                mensal_aberto[m_key] += val
                 
-                # Mês de vencimento MM/YYYY
-                try:
-                    parts = dt_venc.split('/')
-                    m_key = f"{int(parts[1]):02d}/{parts[2]}"
-                except:
-                    m_key = "Outro"
-                    
-                if is_quit:
-                    mensal_quit[m_key] += val
-                else:
-                    mensal_aberto[m_key] += val
-                    
-                # Classificação de Imobilizado & Obras
-                cat_l = cat.lower()
-                desc_l = desc.lower()
-                forn_l = forn.lower()
-                is_imob = (
-                    'predial' in cat_l or 'reforma' in desc_l or 'imobiliz' in cat_l or 
-                    'móveis' in cat_l or 'moveis' in cat_l or 'instalações' in cat_l or 
-                    'instalacoes' in cat_l or 'máquinas' in cat_l or 'maquinas' in cat_l or 
-                    'equipamentos' in cat_l or 'mr engenharia' in forn_l or 'othon' in forn_l or 
-                    'noronha' in forn_l or 'thermobras' in forn_l or 'aco inox' in forn_l or 
-                    'deflex' in forn_l or 'andrades' in forn_l
-                )
-                if is_imob:
-                    imobilizado_total += val
-                    imob_titulos += 1
-                    imob_forn[forn] += val
-                    if is_quit: imobilizado_quit += val
-                    else: imobilizado_aberto += val
+            # Classificação de Imobilizado & Obras
+            cat_l = cat.lower()
+            desc_l = desc.lower()
+            forn_l = forn.lower()
+            is_imob = (
+                'predial' in cat_l or 'reforma' in desc_l or 'imobiliz' in cat_l or 
+                'móveis' in cat_l or 'moveis' in cat_l or 'instalações' in cat_l or 
+                'instalacoes' in cat_l or 'máquinas' in cat_l or 'maquinas' in cat_l or 
+                'equipamentos' in cat_l or 'mr engenharia' in forn_l or 'othon' in forn_l or 
+                'noronha' in forn_l or 'thermobras' in forn_l or 'aco inox' in forn_l or 
+                'deflex' in forn_l or 'andrades' in forn_l
+            )
+            if is_imob:
+                imobilizado_total += val
+                imob_titulos += 1
+                imob_forn[forn] += val
+                if is_quit: imobilizado_quit += val
+                else: imobilizado_aberto += val
 
     tot_geral = sum(x['val'] for x in lancamentos)
     tot_quit = sum(x['val'] for x in lancamentos if x['is_quit'])

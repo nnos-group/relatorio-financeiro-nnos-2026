@@ -1,5 +1,6 @@
 import os
 import re
+import json
 import shutil
 
 repo_dir = os.path.dirname(os.path.abspath(__file__))
@@ -85,14 +86,74 @@ def build():
         with open(booking_file, "w", encoding="utf-8") as f:
             f.write(booking_raw)
 
-    # 4. Sync Index
+    # 4. Sync Index Cards
     if os.path.exists(output_index):
         with open(output_index, "r", encoding="utf-8") as f:
             index_raw = f.read()
+
+        # Update Card 1 from calculated_data.json
+        calc_path = os.path.join(repo_dir, "calculated_data.json")
+        if os.path.exists(calc_path):
+            with open(calc_path, "r", encoding="utf-8") as f:
+                cdata = json.load(f)
+            num_m = cdata.get('num_months', 8)
+            last_m = cdata.get('month_names', ['Ago'])[-1]
+            rec_ytd = sum(cdata.get('rec_bruta', []))
+            marg_ytd = sum(cdata.get('margem_bruta', []))
+            pct_marg = (marg_ytd / rec_ytd * 100) if rec_ytd > 0 else 0
+            
+            rec_ytd_str = f"R$ {rec_ytd/1e6:.2f}M".replace('.', ',')
+            pct_marg_str = f"{pct_marg:.1f}%".replace('.', ',')
+            period_str = f"{num_m} Meses"
+            desc_m = f"Demonstrativo de Resultados acumulado de {num_m} meses (Jan a {last_m}/2026), Faturamento Mensal, Análise por Unidades de Negócio, Centros de Custo, Viagens & Reembolsos e Síntese Executiva."
+            
+            # Card 1 description and KPIs
+            index_raw = re.sub(
+                r'Demonstrativo de Resultados acumulado de \d+ meses \([^)]+\)[^<]+',
+                desc_m,
+                index_raw
+            )
+            card1_pattern = r'(<!-- Card 1: Relatório Matriz.*?Receita YTD</div>\s*<div class="[^"]*">)[^<]+(</div>.*?Margem Bruta</div>\s*<div class="[^"]*">)[^<]+(</div>.*?Período</div>\s*<div class="[^"]*">)[^<]+(</div>)'
+            def replace_card1(m):
+                return f"{m.group(1)}{rec_ytd_str}{m.group(2)}{pct_marg_str}{m.group(3)}{period_str}{m.group(4)}"
+            index_raw = re.sub(card1_pattern, replace_card1, index_raw, flags=re.DOTALL)
+
+        # Update Card 2 from UVA html
+        if os.path.exists(uva_file):
+            with open(uva_file, "r", encoding="utf-8") as f:
+                uva_content = f.read()
+            m_badge = re.search(r'<span class="material-symbols-outlined text-emerald-400 text-sm">update</span>\s*([A-Z]{3}/\d{4})', uva_content)
+            m_tot = re.search(r'Total:\s*R\$\s*([0-9.,]+)', uva_content)
+            m_quit = re.search(r'Quitado: R\$\s*[0-9.,]+\s*\(([0-9.,]+)%\)', uva_content)
+            m_imob = re.search(r'Imobilizado &amp; Reforma</div>\s*</div>\s*<div class="[^"]*">R\$\s*([0-9.,]+)', uva_content)
+            
+            uva_ref = m_badge.group(1) if m_badge else "SET/2026"
+            if m_tot:
+                tot_num = float(m_tot.group(1).replace('.', '').replace(',', '.'))
+                uva_tot_str = f"R$ {tot_num/1e3:.1f}K".replace('.', ',')
+            else:
+                uva_tot_str = "R$ 765,9K"
+            uva_quit_str = f"{m_quit.group(1)}%" if m_quit else "94,51%"
+            if m_imob:
+                imob_num = float(m_imob.group(1).replace('.', '').replace(',', '.'))
+                uva_imob_str = f"R$ {imob_num/1e3:.1f}K".replace('.', ',')
+            else:
+                uva_imob_str = "R$ 337,8K"
+
+            # Badge Card 2
+            index_raw = re.sub(
+                r'Campus BH UVA • [A-Z]{3}/\d{4}',
+                f'Campus BH UVA • {uva_ref}',
+                index_raw
+            )
+            card2_pattern = r'(<!-- Card 2: Campus BH UVA.*?Total Geral</div>\s*<div class="[^"]*">)[^<]+(</div>.*?Taxa Quitação</div>\s*<div class="[^"]*">)[^<]+(</div>.*?Imobilizado</div>\s*<div class="[^"]*">)[^<]+(</div>)'
+            def replace_card2(m):
+                return f"{m.group(1)}{uva_tot_str}{m.group(2)}{uva_quit_str}{m.group(3)}{uva_imob_str}{m.group(4)}"
+            index_raw = re.sub(card2_pattern, replace_card2, index_raw, flags=re.DOTALL)
+
         index_updated = ensure_favicon(index_raw)
-        if index_updated != index_raw:
-            with open(output_index, "w", encoding="utf-8") as f:
-                f.write(index_updated)
+        with open(output_index, "w", encoding="utf-8") as f:
+            f.write(index_updated)
 
     print("Portal e demonstrativos independentes (matriz.html, uva.html, booking.html, index.html) sincronizados com sucesso!")
 
