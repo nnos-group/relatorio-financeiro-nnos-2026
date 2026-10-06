@@ -164,14 +164,28 @@ table_body += get_row("(=) RESULTADO DO PERÍODO", "resultado_periodo", "result"
 table_body += get_row("% Resultado / Receita Bruta", "resultado_periodo", "hint")
 
 # Imobilizado & Reforma (Campus BH UVA)
-imob_total = 244479.28
+imob_total = 337754.41
+imob_quit_pct = 97.39
+try:
+    uva_path = os.path.join(repo_dir, "contas-a-pagar-uva.html")
+    if os.path.exists(uva_path):
+        with open(uva_path, "r", encoding="utf-8") as f_uva:
+            uva_c = f_uva.read()
+            m_imob = re.search(r'Imobilizado &amp; Reforma</div>\s*</div>\s*<div[^>]*>R\$\s*([0-9.,]+)', uva_c)
+            if m_imob:
+                imob_total = float(m_imob.group(1).replace('.', '').replace(',', '.'))
+            m_pct = re.search(r'Total Liquidado \(Quitado\)</div>\s*<div[^>]*>R\$ [0-9.,]+ <span[^>]*>\(([0-9.,]+)%\)</span>', uva_c)
+            if m_pct:
+                imob_quit_pct = float(m_pct.group(1).replace(',', '.'))
+except Exception:
+    pass
+
 imob_fornecedores = [
-    ("MR ENGENHARIA", "Obras", 101589.65),
-    ("MÓVEIS & EQUIPAMENTOS", "Instalações Industriais", 58262.30),
+    ("MR ENGENHARIA", "Obras", 189589.65),
+    ("MÓVEIS & EQUIPAMENTOS", "Móveis e Máquinas", 59479.85),
     ("OTHON DE CARVALHO", "Materiais Elétricos", 29730.33),
     ("NORONHA COMUNICAÇÃO VISUAL", "Sinalização", 26090.00),
-    ("THERMOBRAS AR CONDICIONADO", "Climatização", 20650.00),
-    ("AÇO INOX IMPERIAL", "Estrutura", 18749.90),
+    ("THERMOBRAS AR CONDICIONADO", "Climatização", 21300.00),
 ]
 
 imob_fornecedores_html = ""
@@ -841,7 +855,7 @@ full_html = f'''<!DOCTYPE html>
         </div>
         <div class="p-5 space-y-3 text-xs text-gray-300 leading-relaxed">
           <p><strong class="text-white">● Estrutura de Custos Fixos:</strong> Custo fixo total acumulado de R$ {fmt(sum(d['custo_fixo_tot'][:num_months]))} demanda atenção para ganhos de escala e diluição frente à receita líquida.</p>
-          <p><strong class="text-white">● Investimentos Imobilizados:</strong> O projeto Campus BH UVA acumula R$ {fmt_float(imob_total)} em melhorias de infraestrutura, com 96,6% já liquidado.</p>
+          <p><strong class="text-white">● Investimentos Imobilizados:</strong> O projeto Campus BH UVA acumula R$ {fmt_float(imob_total)} em melhorias de infraestrutura, com {imob_quit_pct:.1f}% já liquidado.</p>
         </div>
       </div>
 

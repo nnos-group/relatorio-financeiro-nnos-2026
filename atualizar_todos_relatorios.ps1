@@ -27,13 +27,13 @@ try {
     Log-Message "1. Processando bases financeiras CSV da Matriz (parse_financial_data.py)..."
     & py "$repoDir\parse_financial_data.py" *>> $logFile
 
-    # 2. Recalcula o demonstrativo e DRE da Matriz
-    Log-Message "2. Gerando relatorio e DRE da Matriz (generate_report_script.py)..."
-    & py "$repoDir\generate_report_script.py" *>> $logFile
-
-    # 3. Processa a base de dados mais recente do Campus BH UVA
-    Log-Message "3. Processando base de dados CSV do Campus BH UVA (update_uva_from_csv.py)..."
+    # 2. Processa a base de dados mais recente do Campus BH UVA
+    Log-Message "2. Processando base de dados CSV do Campus BH UVA (update_uva_from_csv.py)..."
     & py "$repoDir\update_uva_from_csv.py" *>> $logFile
+
+    # 3. Recalcula o demonstrativo e DRE da Matriz
+    Log-Message "3. Gerando relatorio e DRE da Matriz (generate_report_script.py)..."
+    & py "$repoDir\generate_report_script.py" *>> $logFile
 
     # 4. Sincroniza portal e demonstrativos integrados
     Log-Message "4. Reconstruindo portal integrado (build_portal.py)..."
