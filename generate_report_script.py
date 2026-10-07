@@ -896,7 +896,7 @@ full_html = f'''<!DOCTYPE html>
   <div class="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
     <div class="flex items-center gap-3">
       <img alt="NNÓS Logo" class="h-10 w-auto object-contain opacity-90" src="{LOGO_B64_WHITE}"/>
-      <span class="font-bold text-white">NNÓS Business Solutions</span>
+      <span class="font-bold text-white">NNÓS Controladoria &amp; Gestão Financeira</span>
     </div>
     <div>Relatório Financeiro Gerencial • Período: {periodo_extenso}</div>
     <div class="text-[11px] text-gray-500">Controladoria &amp; Gestão Financeira</div>

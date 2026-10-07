@@ -184,6 +184,22 @@ def sync_booking():
     </div>"""
     html = re.sub(r'<div class="hero-code1-copy">.*?</div>\s*</div>\s*</header>', optimized_hero_html + '\n  </div>\n</header>', html, flags=re.DOTALL)
 
+    # Padronizar Rodapé
+    standard_footer_booking = """
+<!-- FOOTER -->
+<footer class="bg-slate-950 border-t border-white/10 py-8 px-6 text-center text-xs text-gray-400">
+  <div class="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <img alt="NNÓS Logo" class="h-10 w-auto object-contain opacity-90" src="assets/logo-nnos.png"/>
+      <span class="font-bold text-white">NNÓS Controladoria &amp; Gestão Financeira</span>
+    </div>
+    <div>Relatório Financeiro Gerencial • Período: Janeiro a Dezembro de 2026</div>
+    <div class="text-[11px] text-gray-500">Controladoria &amp; Gestão Financeira</div>
+  </div>
+</footer>
+"""
+    html = re.sub(r'<footer class="footer">.*?</footer>', standard_footer_booking.strip(), html, flags=re.DOTALL)
+
     target_booking = os.path.join(repo_dir, "booking.html")
     target_dashboard = os.path.join(repo_dir, "dashboard-executivo-booking.html")
 

@@ -283,12 +283,21 @@ def sync_prospeccao():
         flags=re.DOTALL
     )
 
-    # Substituir logo externo do footer pelo asset local
-    html = re.sub(
-        r'<img alt="NNÓS Logo" class="h-8 mx-auto mb-4[^"]*" src="[^"]*">',
-        '<img alt="NNÓS Logo" class="h-8 mx-auto mb-4 opacity-75" src="assets/logo-nnos.png">',
-        html
-    )
+    # Padronizar Rodapé
+    standard_footer_prosp = """
+<!-- FOOTER -->
+<footer class="bg-slate-950 border-t border-white/10 py-8 px-6 text-center text-xs text-gray-400">
+  <div class="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <img alt="NNÓS Logo" class="h-10 w-auto object-contain opacity-90" src="assets/logo-nnos.png"/>
+      <span class="font-bold text-white">NNÓS Controladoria &amp; Gestão Financeira</span>
+    </div>
+    <div>Relatório Financeiro Gerencial • Período: Janeiro a Setembro de 2026</div>
+    <div class="text-[11px] text-gray-500">Controladoria &amp; Gestão Financeira</div>
+  </div>
+</footer>
+"""
+    html = re.sub(r'(<!-- FOOTER -->\s*)?<footer.*?</footer\s*>', standard_footer_prosp.strip(), html, flags=re.DOTALL)
 
     # 4. Atualizar KPIs Cards (Seção #kpis)
     kpis_html = f"""
