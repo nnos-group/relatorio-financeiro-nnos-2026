@@ -180,6 +180,14 @@ def sync_prospeccao():
         flags=re.DOTALL
     )
 
+    # Remover Card 1 de Imagem Quebrada (Visão 2026 / Transformando estratégias em realidade)
+    html = re.sub(
+        r'<div class="hidden md:block w-72 h-48 rounded-xl.*?</div>\s*</div>\s*</div>\s*</header>',
+        '</div>\n  </div>\n</header>',
+        html,
+        flags=re.DOTALL
+    )
+
     # 3. Substituição da Navbar: Padronização em 2 Linhas com Outros Relatórios (Matriz, UVA, Booking, Menu, Sair)
     standard_nav = """
 <nav class="sticky top-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-white/10 shadow-xl">
@@ -228,7 +236,44 @@ def sync_prospeccao():
   </div>
 </nav>
 """
-    html = re.sub(r'<nav class="sticky top-0 z-50 glass-nav">.*?</nav>', standard_nav.strip(), html, flags=re.DOTALL)
+    html = re.sub(r'<nav.*?</nav>', standard_nav.strip(), html, flags=re.DOTALL)
+
+    # Remover Card 2 de Imagem Quebrada (Reunião de Diretoria — BH/MG) e otimizar Nacional vs Internacional
+    chart_nac_card = f"""<div class="flex flex-col gap-6">
+<div class="glass-card rounded-xl p-6 border border-surface-variant flex-1 flex flex-col justify-between">
+<div>
+  <h3 class="text-lg font-medium text-white mb-1">Nacional vs. Internacional</h3>
+  <p class="text-sm text-text-muted mb-6">Proporção dos gastos acumulados</p>
+</div>
+<div class="h-64 w-full relative"><canvas id="chartNacIntl"></canvas></div>
+<div class="grid grid-cols-2 gap-3 pt-4 border-t border-surface-variant text-center">
+  <div class="p-3 rounded-lg bg-surface-container border border-surface-variant">
+    <div class="text-[11px] text-text-muted uppercase font-bold tracking-wider">Nacional</div>
+    <div class="text-base font-extrabold text-white font-mono mt-1">{fmt_brl(total_nac).split(',')[0]}</div>
+    <div class="text-[11px] text-emerald-400 font-medium">{pct_nac:.1f}%</div>
+  </div>
+  <div class="p-3 rounded-lg bg-surface-container border border-surface-variant">
+    <div class="text-[11px] text-text-muted uppercase font-bold tracking-wider">Internacional</div>
+    <div class="text-base font-extrabold text-white font-mono mt-1">{fmt_brl(total_intl).split(',')[0]}</div>
+    <div class="text-[11px] text-brand-blue font-medium">{pct_intl:.1f}%</div>
+  </div>
+</div>
+</div>
+</div>"""
+
+    html = re.sub(
+        r'<div class="flex flex-col gap-6">\s*<div class="glass-card rounded-xl p-6 border border-surface-variant flex-1">.*?</div>\s*</div>\s*</div>\s*</div>\s*</section>',
+        chart_nac_card + '\n</div>\n</section>',
+        html,
+        flags=re.DOTALL
+    )
+
+    # Substituir logo externo do footer pelo asset local
+    html = re.sub(
+        r'<img alt="NNÓS Logo" class="h-8 mx-auto mb-4[^"]*" src="[^"]*">',
+        '<img alt="NNÓS Logo" class="h-8 mx-auto mb-4 opacity-75" src="assets/logo-nnos.png">',
+        html
+    )
 
     # 4. Atualizar KPIs Cards (Seção #kpis)
     kpis_html = f"""
