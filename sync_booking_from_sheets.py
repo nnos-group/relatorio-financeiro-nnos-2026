@@ -194,7 +194,6 @@ def sync_booking():
       <span class="font-bold text-white">NNÓS Controladoria &amp; Gestão Financeira</span>
     </div>
     <div>Relatório Financeiro Gerencial • Período: Janeiro a Dezembro de 2026</div>
-    <div class="text-[11px] text-gray-500">Controladoria &amp; Gestão Financeira</div>
   </div>
 </footer>
 """

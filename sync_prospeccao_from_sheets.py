@@ -92,13 +92,18 @@ def sync_prospeccao():
     cenario_plan = [a for a in atividades if a.get("categoria") == "Planejamento & Diretoria"]
     cenario_refeicoes = [a for a in atividades if a.get("categoria") == "Refeições de Negócio"]
     cenario_eventos = [a for a in atividades if a.get("categoria") == "Eventos & Feiras"]
-    cenario_visitas = [a for a in atividades if a.get("categoria") == "Visitas Técnicas"]
 
     def fmt_brl(val):
         return f"R$ {val:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
 
     def fmt_k(val):
         return f"R$ {val/1e3:,.1f}K".replace(".", ",")
+
+    def clean_name(nome):
+        # Corrigir potenciais truncamentos como "eunião" -> "Reunião"
+        if nome.startswith("eunião"):
+            return "R" + nome
+        return nome
 
     # Carregar template base code.html
     code_path = os.path.join(repo_dir, "code.html")
@@ -157,7 +162,7 @@ def sync_prospeccao():
     if 'sessionStorage.getItem' not in html:
         html = html.replace("</head>", security_auth_head + "\n</head>")
 
-    # 2. Header: Período, Total, Atividades, Destinos
+    # 2. Header: Período, Total, Atividades, Destinos & Logo ao lado do Título
     destinos_unicos = len(set(a["local"] for a in atividades))
     header_badges = f"""
         <span class="flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container text-on-surface border border-surface-variant">
@@ -180,7 +185,7 @@ def sync_prospeccao():
         flags=re.DOTALL
     )
 
-    # Remover Card 1 de Imagem Quebrada (Visão 2026 / Transformando estratégias em realidade)
+    # Remover Card de Imagem Quebrada se houver
     html = re.sub(
         r'<div class="hidden md:block w-72 h-48 rounded-xl.*?</div>\s*</div>\s*</div>\s*</header>',
         '</div>\n  </div>\n</header>',
@@ -203,7 +208,7 @@ def sync_prospeccao():
         html
     )
 
-    # 3. Substituição da Navbar: Padronização em 2 Linhas com Outros Relatórios (Matriz, UVA, Booking, Menu, Sair)
+    # 3. Substituição da Navbar: Padronização em 2 Linhas
     standard_nav = """
 <nav class="sticky top-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-white/10 shadow-xl">
   <!-- Linha 1: Seções do Relatório -->
@@ -253,37 +258,7 @@ def sync_prospeccao():
 """
     html = re.sub(r'<nav.*?</nav>', standard_nav.strip(), html, flags=re.DOTALL)
 
-    # Remover Card 2 de Imagem Quebrada (Reunião de Diretoria — BH/MG) e otimizar Nacional vs Internacional
-    chart_nac_card = f"""<div class="flex flex-col gap-6">
-<div class="glass-card rounded-xl p-6 border border-surface-variant flex-1 flex flex-col justify-between">
-<div>
-  <h3 class="text-lg font-medium text-white mb-1">Nacional vs. Internacional</h3>
-  <p class="text-sm text-text-muted mb-6">Proporção dos gastos acumulados</p>
-</div>
-<div class="h-64 w-full relative"><canvas id="chartNacIntl"></canvas></div>
-<div class="grid grid-cols-2 gap-3 pt-4 border-t border-surface-variant text-center">
-  <div class="p-3 rounded-lg bg-surface-container border border-surface-variant">
-    <div class="text-[11px] text-text-muted uppercase font-bold tracking-wider">Nacional</div>
-    <div class="text-base font-extrabold text-white font-mono mt-1">{fmt_brl(total_nac).split(',')[0]}</div>
-    <div class="text-[11px] text-emerald-400 font-medium">{pct_nac:.1f}%</div>
-  </div>
-  <div class="p-3 rounded-lg bg-surface-container border border-surface-variant">
-    <div class="text-[11px] text-text-muted uppercase font-bold tracking-wider">Internacional</div>
-    <div class="text-base font-extrabold text-white font-mono mt-1">{fmt_brl(total_intl).split(',')[0]}</div>
-    <div class="text-[11px] text-brand-blue font-medium">{pct_intl:.1f}%</div>
-  </div>
-</div>
-</div>
-</div>"""
-
-    html = re.sub(
-        r'<div class="flex flex-col gap-6">\s*<div class="glass-card rounded-xl p-6 border border-surface-variant flex-1">.*?</div>\s*</div>\s*</div>\s*</div>\s*</section>',
-        chart_nac_card + '\n</div>\n</section>',
-        html,
-        flags=re.DOTALL
-    )
-
-    # Padronizar Rodapé
+    # Padronizar Rodapé (sem o texto duplicado da direita)
     standard_footer_prosp = """
 <!-- FOOTER -->
 <footer class="bg-slate-950 border-t border-white/10 py-8 px-6 text-center text-xs text-gray-400">
@@ -293,7 +268,6 @@ def sync_prospeccao():
       <span class="font-bold text-white">NNÓS Controladoria &amp; Gestão Financeira</span>
     </div>
     <div>Relatório Financeiro Gerencial • Período: Janeiro a Setembro de 2026</div>
-    <div class="text-[11px] text-gray-500">Controladoria &amp; Gestão Financeira</div>
   </div>
 </footer>
 """
@@ -395,14 +369,39 @@ def sync_prospeccao():
         html
     )
 
-    # Helper para gerar linhas de tabela de cenário
+    # Renderizar todas as 50 linhas na tabela estática
+    static_table_rows = ""
+    for idx, a in enumerate(atividades, start=1):
+        tipo_badge = '<span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-error/10 text-error border border-error/20"><span class="material-symbols-outlined text-[14px]">public</span> Intl</span>' if a["tipo"] == "intl" else '<span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-brand-blue/10 text-brand-blue border border-brand-blue/20"><span class="material-symbols-outlined text-[14px]">map</span> Nac</span>'
+        static_table_rows += f"""<tr class="hover:bg-surface-container-high/50 transition-colors">
+      <td class="py-3 px-4 text-text-muted">{idx}</td>
+      <td class="py-3 px-4 font-medium text-white">{clean_name(a['nome'])}</td>
+      <td class="py-3 px-4 text-text-muted">{a['local']}</td>
+      <td class="py-3 px-4 text-text-muted">{a['mes']}</td>
+      <td class="py-3 px-4">{tipo_badge}</td>
+      <td class="py-3 px-4 text-right font-medium text-brand-blue font-mono">{fmt_brl(a['valor'])}</td>
+    </tr>"""
+
+    html = re.sub(
+        r'<h3 class="font-medium text-white flex items-center gap-2" id="tableTitle">.*?</h3>',
+        f'<h3 class="font-medium text-white flex items-center gap-2" id="tableTitle"><span class="material-symbols-outlined text-brand-blue">list</span> {total_atividades} atividades encontradas</h3>',
+        html
+    )
+    html = re.sub(
+        r'<tbody class="divide-y divide-surface-variant" id="tabelaBody">.*?</tbody>',
+        f'<tbody class="divide-y divide-surface-variant" id="tabelaBody">{static_table_rows}</tbody>',
+        html,
+        flags=re.DOTALL
+    )
+
+    # 6. Helper para gerar linhas de tabela de cenário
     def render_scenario_rows(lista):
         rows = ""
         for a in sorted(lista, key=lambda x: x["valor"], reverse=True):
-            rows += f"<tr><td class=\"py-2.5 px-3 text-white\">{a['nome']}</td><td class=\"py-2.5 px-3 text-text-muted\">{a['local']}</td><td class=\"py-2.5 px-3 text-text-muted\">{a['mes']}</td><td class=\"py-2.5 px-3 text-right font-medium text-brand-blue font-mono\">{fmt_brl(a['valor'])}</td></tr>\n"
+            rows += f"<tr><td class=\"py-2.5 px-3 text-white\">{clean_name(a['nome'])}</td><td class=\"py-2.5 px-3 text-text-muted\">{a['local']}</td><td class=\"py-2.5 px-3 text-text-muted\">{a['mes']}</td><td class=\"py-2.5 px-3 text-right font-medium text-brand-blue font-mono\">{fmt_brl(a['valor'])}</td></tr>\n"
         return rows
 
-    # 6. Atualizar Cenário 0: Prospecção
+    # Cenário 0: Prospecção
     total_cen_prosp = sum(a["valor"] for a in cenario_prospeccao)
     count_cen_prosp = len(cenario_prospeccao)
     pct_cen_prosp = (total_cen_prosp / total_gasto * 100) if total_gasto > 0 else 0
@@ -446,18 +445,110 @@ def sync_prospeccao():
         </table>
       </div>
       <p class="mt-4 p-3 rounded-lg text-sm bg-brand-blue/10 text-brand-blue border border-brand-blue/20">
-        💡 <strong>Insight Estratégico:</strong> 7 frentes ativas de prospecção comercial (incluindo as recentes de Belo Horizonte e Mercedes em SP). Recomenda-se correlacionar com a taxa de conversão do CRM de Vendas.
+        💡 <strong>Insight Estratégico:</strong> 7 frentes corporativas ativas de prospecção comercial (DAF, Porsche Jan e Mar, Mercedes SP, BH, Pouso Alegre, Betim). Recomenda-se correlacionar com a taxa de conversão do CRM de Vendas.
       </p>
     </div>
 """
-    html = re.sub(
-        r'<!-- Cenário 0: Prospecção -->.*?<!-- Cenário 1: Internacional -->',
-        cenario0_html.strip() + "\n\n    <!-- Cenário 1: Internacional -->",
-        html,
-        flags=re.DOTALL
-    )
 
-    # Atualizar Cenário 3: Refeições
+    # Cenário 1: Internacional
+    total_cen_intl = sum(a["valor"] for a in cenario_intl)
+    count_cen_intl = len(cenario_intl)
+    pct_cen_intl = (total_cen_intl / total_gasto * 100) if total_gasto > 0 else 0
+    tkt_cen_intl = total_cen_intl / count_cen_intl if count_cen_intl > 0 else 0
+    intl_rows_html = render_scenario_rows(cenario_intl)
+
+    cenario1_html = f"""
+    <!-- Cenário 1: Internacional -->
+    <div class="scenario-content glass-card rounded-lg p-6 border border-surface-variant hidden" id="cenario1">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div class="bg-surface-container-high/60 border-l-2 border-brand-blue rounded-lg p-4">
+          <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">Total Internacional</div>
+          <div class="data-number text-white mt-1">{fmt_brl(total_cen_intl)}</div>
+        </div>
+        <div class="bg-surface-container-high/60 border-l-2 border-brand-blue rounded-lg p-4">
+          <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">Viagens</div>
+          <div class="data-number text-white mt-1">{count_cen_intl}</div>
+        </div>
+        <div class="bg-surface-container-high/60 border-l-2 border-brand-blue rounded-lg p-4">
+          <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">% do Total</div>
+          <div class="data-number text-white mt-1">{pct_cen_intl:.1f}%</div>
+        </div>
+        <div class="bg-surface-container-high/60 border-l-2 border-brand-blue rounded-lg p-4">
+          <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">Países</div>
+          <div class="data-number text-white mt-1">3</div>
+        </div>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse text-sm scenario-table">
+          <thead>
+            <tr class="bg-surface-container/50">
+              <th class="py-2.5 px-3 text-xs font-semibold text-text-muted uppercase tracking-wider border-b border-surface-variant">Atividade</th>
+              <th class="py-2.5 px-3 text-xs font-semibold text-text-muted uppercase tracking-wider border-b border-surface-variant">Local</th>
+              <th class="py-2.5 px-3 text-xs font-semibold text-text-muted uppercase tracking-wider border-b border-surface-variant">Mês</th>
+              <th class="py-2.5 px-3 text-xs font-semibold text-text-muted uppercase tracking-wider border-b border-surface-variant text-right">Valor</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-surface-variant">
+            {intl_rows_html}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 p-3 rounded-lg text-sm bg-accent-amber/10 text-accent-amber border border-accent-amber/20">
+        ⚠️ <strong>Atenção:</strong> EUA e China concentram {((19757.53 + 1554.50 + 5500.00 + 19181.83) / total_cen_intl * 100):.1f}% do desembolso internacional (CONEXPO, Missão China, Summit NY).
+      </p>
+    </div>
+"""
+
+    # Cenário 2: Planejamento & Diretoria
+    total_cen_plan = sum(a["valor"] for a in cenario_plan)
+    count_cen_plan = len(cenario_plan)
+    pct_cen_plan = (total_cen_plan / total_gasto * 100) if total_gasto > 0 else 0
+    tkt_cen_plan = total_cen_plan / count_cen_plan if count_cen_plan > 0 else 0
+    plan_rows_html = render_scenario_rows(cenario_plan)
+
+    cenario2_html = f"""
+    <!-- Cenário 2: Planejamento & Diretoria -->
+    <div class="scenario-content glass-card rounded-lg p-6 border border-surface-variant hidden" id="cenario2">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div class="bg-surface-container-high/60 border-l-2 border-brand-blue rounded-lg p-4">
+          <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">Total Planejamento</div>
+          <div class="data-number text-white mt-1">{fmt_brl(total_cen_plan)}</div>
+        </div>
+        <div class="bg-surface-container-high/60 border-l-2 border-brand-blue rounded-lg p-4">
+          <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">Atividades</div>
+          <div class="data-number text-white mt-1">{count_cen_plan}</div>
+        </div>
+        <div class="bg-surface-container-high/60 border-l-2 border-brand-blue rounded-lg p-4">
+          <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">% do Total</div>
+          <div class="data-number text-white mt-1">{pct_cen_plan:.1f}%</div>
+        </div>
+        <div class="bg-surface-container-high/60 border-l-2 border-brand-blue rounded-lg p-4">
+          <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">Ticket Médio</div>
+          <div class="data-number text-white mt-1">{fmt_brl(tkt_cen_plan).split(',')[0]}</div>
+        </div>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse text-sm scenario-table">
+          <thead>
+            <tr class="bg-surface-container/50">
+              <th class="py-2.5 px-3 text-xs font-semibold text-text-muted uppercase tracking-wider border-b border-surface-variant">Atividade</th>
+              <th class="py-2.5 px-3 text-xs font-semibold text-text-muted uppercase tracking-wider border-b border-surface-variant">Local</th>
+              <th class="py-2.5 px-3 text-xs font-semibold text-text-muted uppercase tracking-wider border-b border-surface-variant">Mês</th>
+              <th class="py-2.5 px-3 text-xs font-semibold text-text-muted uppercase tracking-wider border-b border-surface-variant text-right">Valor</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-surface-variant">
+            {plan_rows_html}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 p-3 rounded-lg text-sm bg-error/10 text-error border border-error/20">
+        🔴 <strong>Destaque:</strong> O Planejamento Estratégico de fevereiro consumiu <strong>R$ 31.785,07</strong> somando todos os custos relacionados (coordenação, Patricia, alimentação e gráficas).
+      </p>
+    </div>
+"""
+
+    # Cenário 3: Refeições
     total_cen_ref = sum(a["valor"] for a in cenario_refeicoes)
     count_cen_ref = len(cenario_refeicoes)
     pct_cen_ref = (total_cen_ref / total_gasto * 100) if total_gasto > 0 else 0
@@ -502,48 +593,169 @@ def sync_prospeccao():
       </div>
     </div>
 """
+
+    # Cenário 4: Eventos & Feiras
+    total_cen_ev = sum(a["valor"] for a in cenario_eventos)
+    count_cen_ev = len(cenario_eventos)
+    pct_cen_ev = (total_cen_ev / total_gasto * 100) if total_gasto > 0 else 0
+    tkt_cen_ev = total_cen_ev / count_cen_ev if count_cen_ev > 0 else 0
+    ev_rows_html = render_scenario_rows(cenario_eventos)
+
+    cenario4_html = f"""
+    <!-- Cenário 4: Eventos & Feiras -->
+    <div class="scenario-content glass-card rounded-lg p-6 border border-surface-variant hidden" id="cenario4">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div class="bg-surface-container-high/60 border-l-2 border-brand-blue rounded-lg p-4">
+          <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">Total Eventos</div>
+          <div class="data-number text-white mt-1">{fmt_brl(total_cen_ev)}</div>
+        </div>
+        <div class="bg-surface-container-high/60 border-l-2 border-brand-blue rounded-lg p-4">
+          <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">Atividades</div>
+          <div class="data-number text-white mt-1">{count_cen_ev}</div>
+        </div>
+        <div class="bg-surface-container-high/60 border-l-2 border-brand-blue rounded-lg p-4">
+          <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">% do Total</div>
+          <div class="data-number text-white mt-1">{pct_cen_ev:.1f}%</div>
+        </div>
+        <div class="bg-surface-container-high/60 border-l-2 border-brand-blue rounded-lg p-4">
+          <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">Ticket Médio</div>
+          <div class="data-number text-white mt-1">{fmt_brl(tkt_cen_ev).split(',')[0]}</div>
+        </div>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse text-sm scenario-table">
+          <thead>
+            <tr class="bg-surface-container/50">
+              <th class="py-2.5 px-3 text-xs font-semibold text-text-muted uppercase tracking-wider border-b border-surface-variant">Atividade</th>
+              <th class="py-2.5 px-3 text-xs font-semibold text-text-muted uppercase tracking-wider border-b border-surface-variant">Local</th>
+              <th class="py-2.5 px-3 text-xs font-semibold text-text-muted uppercase tracking-wider border-b border-surface-variant">Mês</th>
+              <th class="py-2.5 px-3 text-xs font-semibold text-text-muted uppercase tracking-wider border-b border-surface-variant text-right">Valor</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-surface-variant">
+            {ev_rows_html}
+          </tbody>
+        </table>
+      </div>
+    </div>
+"""
+
+    all_cenarios_html = f"""<!-- ──────── CENÁRIOS ──────── -->
+  <section class="scroll-mt-24" id="cenarios">
+    <div class="mb-8">
+      <h2 class="text-2xl font-display font-semibold text-white flex items-center gap-3">
+        <div class="w-1.5 h-6 bg-brand-blue rounded-full"></div>
+        Cenários Estratégicos
+      </h2>
+      <p class="text-text-muted mt-2 ml-4">Análises segmentadas por tipo de atividade para tomada de decisão.</p>
+    </div>
+    <div class="flex flex-wrap gap-2 mb-6" id="scenarioTabs">
+      <button onclick="showScenario(0)" class="scenario-tab-active px-5 py-2.5 rounded-lg text-sm font-medium border border-surface-variant transition-colors flex items-center gap-2" data-idx="0">
+        <span class="material-symbols-outlined text-lg">target</span> Prospecção
+      </button>
+      <button onclick="showScenario(1)" class="px-5 py-2.5 rounded-lg text-sm font-medium border border-surface-variant text-text-muted hover:text-white hover:border-brand-blue transition-colors flex items-center gap-2" data-idx="1">
+        <span class="material-symbols-outlined text-lg">public</span> Internacional
+      </button>
+      <button onclick="showScenario(2)" class="px-5 py-2.5 rounded-lg text-sm font-medium border border-surface-variant text-text-muted hover:text-white hover:border-brand-blue transition-colors flex items-center gap-2" data-idx="2">
+        <span class="material-symbols-outlined text-lg">groups</span> Planejamento & Diretoria
+      </button>
+      <button onclick="showScenario(3)" class="px-5 py-2.5 rounded-lg text-sm font-medium border border-surface-variant text-text-muted hover:text-white hover:border-brand-blue transition-colors flex items-center gap-2" data-idx="3">
+        <span class="material-symbols-outlined text-lg">restaurant</span> Refeições de Negócio
+      </button>
+      <button onclick="showScenario(4)" class="px-5 py-2.5 rounded-lg text-sm font-medium border border-surface-variant text-text-muted hover:text-white hover:border-brand-blue transition-colors flex items-center gap-2" data-idx="4">
+        <span class="material-symbols-outlined text-lg">celebration</span> Eventos & Feiras
+      </button>
+    </div>
+{cenario0_html}
+{cenario1_html}
+{cenario2_html}
+{cenario3_html}
+{cenario4_html}
+  </section>"""
+
     html = re.sub(
-        r'<!-- Cenário 3: Refeições -->.*?<!-- Cenário 4: Eventos & Feiras -->',
-        cenario3_html.strip() + "\n\n    <!-- Cenário 4: Eventos & Feiras -->",
+        r'<!-- ──────── CENÁRIOS ──────── -->.*?</section>',
+        lambda m: all_cenarios_html,
         html,
+        count=1,
         flags=re.DOTALL
     )
 
-    # Renderizar todas as 50 linhas na tabela estática
-    static_table_rows = ""
-    for idx, a in enumerate(atividades, start=1):
-        tipo_badge = '<span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-error/10 text-error border border-error/20"><span class="material-symbols-outlined text-[14px]">public</span> Intl</span>' if a["tipo"] == "intl" else '<span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-brand-blue/10 text-brand-blue border border-brand-blue/20"><span class="material-symbols-outlined text-[14px]">map</span> Nac</span>'
-        static_table_rows += f"""<tr class="hover:bg-surface-container-high/50 transition-colors">
-      <td class="py-3 px-4 text-text-muted">{idx}</td>
-      <td class="py-3 px-4 font-medium text-white">{a['nome']}</td>
-      <td class="py-3 px-4 text-text-muted">{a['local']}</td>
-      <td class="py-3 px-4 text-text-muted">{a['mes']}</td>
-      <td class="py-3 px-4">{tipo_badge}</td>
-      <td class="py-3 px-4 text-right font-medium text-brand-blue font-mono">{fmt_brl(a['valor'])}</td>
-    </tr>"""
-
-    html = re.sub(
-        r'<h3 class="font-medium text-white flex items-center gap-2" id="tableTitle">.*?</h3>',
-        f'<h3 class="font-medium text-white flex items-center gap-2" id="tableTitle"><span class="material-symbols-outlined text-brand-blue">list</span> {total_atividades} atividades encontradas</h3>',
-        html
-    )
-    html = re.sub(
-        r'<tbody class="divide-y divide-surface-variant" id="tabelaBody">.*?</tbody>',
-        f'<tbody class="divide-y divide-surface-variant" id="tabelaBody">{static_table_rows}</tbody>',
-        html,
-        flags=re.DOTALL
-    )
-
-
-    # 7. Atualizar Timeline: Inclusão de Agosto e Setembro
-    timeline_ago_set = f"""
+    # 7. Atualizar Timeline: Todos os 9 meses (Jan a Set)
+    all_timeline_html = f"""<!-- ──────── TIMELINE ──────── -->
+  <section class="scroll-mt-24" id="timeline">
+    <div class="mb-8">
+      <h2 class="text-2xl font-display font-semibold text-white flex items-center gap-3">
+        <div class="w-1.5 h-6 bg-brand-blue rounded-full"></div>
+        Linha do Tempo
+      </h2>
+      <p class="text-text-muted mt-2 ml-4">Principais marcos e atividades executadas mês a mês.</p>
+    </div>
+    <div class="relative pl-10 border-l-2 border-surface-variant space-y-4">
+      <div class="glass-card rounded-lg p-5 border border-surface-variant relative timeline-item">
+        <div class="flex items-center gap-3 mb-2 flex-wrap">
+          <div class="text-white font-display font-semibold">📅 JANEIRO</div>
+          <div class="text-brand-blue font-mono font-bold">{fmt_brl(mes_gastos['Jan'])}</div>
+          <span class="text-text-muted text-sm">| {mes_counts['Jan']} atividades</span>
+        </div>
+        <p class="text-sm text-on-surface">Concentração de <strong class="text-white">Reuniões de Diretoria (R$ 10.442,93)</strong> • Início prospecção Porsche • Back Office Curitiba • Assunção/Paraguai • RH Leadership Xperience</p>
+      </div>
+      <div class="glass-card rounded-lg p-5 border border-surface-variant relative timeline-item">
+        <div class="flex items-center gap-3 mb-2 flex-wrap">
+          <div class="text-white font-display font-semibold">📅 FEVEREIRO</div>
+          <div class="text-brand-blue font-mono font-bold">{fmt_brl(mes_gastos['Fev'])}</div>
+          <span class="text-text-muted text-sm">| {mes_counts['Fev']} atividades</span>
+          <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-error/10 text-error border border-error/20">🔥 MÊS PICO</span>
+        </div>
+        <p class="text-sm text-on-surface">★ <strong class="text-white">Planejamento Estratégico consolidado (R$ 31.785,07)</strong> — maior gasto do período • Viagem Tape/Paraguai • Workshop Manutenção em Sorocaba • Visita Diretoria UVA</p>
+      </div>
+      <div class="glass-card rounded-lg p-5 border border-surface-variant relative timeline-item">
+        <div class="flex items-center gap-3 mb-2 flex-wrap">
+          <div class="text-white font-display font-semibold">📅 MARÇO</div>
+          <div class="text-brand-blue font-mono font-bold">{fmt_brl(mes_gastos['Mar'])}</div>
+          <span class="text-text-muted text-sm">| {mes_counts['Mar']} atividades</span>
+        </div>
+        <p class="text-sm text-on-surface">★ <strong class="text-white">CONEXPO Las Vegas (R$ 19,7K)</strong> • Visitas a São Paulo + JAECCO • Segundo maior mês em gastos</p>
+      </div>
+      <div class="glass-card rounded-lg p-5 border border-surface-variant relative timeline-item">
+        <div class="flex items-center gap-3 mb-2 flex-wrap">
+          <div class="text-white font-display font-semibold">📅 ABRIL</div>
+          <div class="text-brand-blue font-mono font-bold">{fmt_brl(mes_gastos['Abr'])}</div>
+          <span class="text-text-muted text-sm">| {mes_counts['Abr']} atividades</span>
+        </div>
+        <p class="text-sm text-on-surface">★ <strong class="text-white">Missão China (R$ 19,2K)</strong> • Agrishow Ribeirão Preto (R$ 9,7K) • Maior ticket médio do período</p>
+      </div>
+      <div class="glass-card rounded-lg p-5 border border-surface-variant relative timeline-item">
+        <div class="flex items-center gap-3 mb-2 flex-wrap">
+          <div class="text-white font-display font-semibold">📅 MAIO</div>
+          <div class="text-brand-blue font-mono font-bold">{fmt_brl(mes_gastos['Mai'])}</div>
+          <span class="text-text-muted text-sm">| {mes_counts['Mai']} atividades</span>
+        </div>
+        <p class="text-sm text-on-surface">Summit VOA NY • Acelera TRP Curitiba • Jantares de relacionamento • Visita Sodecia</p>
+      </div>
+      <div class="glass-card rounded-lg p-5 border border-surface-variant relative timeline-item">
+        <div class="flex items-center gap-3 mb-2 flex-wrap">
+          <div class="text-white font-display font-semibold">📅 JUNHO</div>
+          <div class="text-brand-blue font-mono font-bold">{fmt_brl(mes_gastos['Jun'])}</div>
+          <span class="text-text-muted text-sm">| {mes_counts['Jun']} atividades</span>
+        </div>
+        <p class="text-sm text-on-surface">Prospecções DAF e Pouso Alegre • Jantar Dealer em Toledo • NNÓS Day</p>
+      </div>
+      <div class="glass-card rounded-lg p-5 border border-surface-variant relative timeline-item">
+        <div class="flex items-center gap-3 mb-2 flex-wrap">
+          <div class="text-white font-display font-semibold">📅 JULHO</div>
+          <div class="text-brand-blue font-mono font-bold">{fmt_brl(mes_gastos['Jul'])}</div>
+          <span class="text-text-muted text-sm">| {mes_counts['Jul']} atividade</span>
+        </div>
+        <p class="text-sm text-on-surface">Jantar NH Construction em BH • Mês com menor desembolso registrado</p>
+      </div>
       <div class="glass-card rounded-lg p-5 border border-surface-variant relative timeline-item">
         <div class="flex items-center gap-3 mb-2 flex-wrap">
           <div class="text-white font-display font-semibold">📅 AGOSTO</div>
           <div class="text-brand-blue font-mono font-bold">{fmt_brl(mes_gastos['Ago'])}</div>
           <span class="text-text-muted text-sm">| {mes_counts['Ago']} atividades</span>
         </div>
-        <p class="text-sm text-on-surface">★ <strong class="text-white">Prospeção SP Mercedes (R$ 2.248,94)</strong> • Visita Terceiros CT (R$ 1.575,31) • Prospecção BH (R$ 1.042,17) • Almoços Comerciais UVA e Tecar</p>
+        <p class="text-sm text-on-surface">★ <strong class="text-white">Prospecção SP Mercedes (R$ 2.248,94)</strong> • Visita Terceiros CT Sorocaba (R$ 1.575,31) • Prospecção BH (R$ 1.042,17) • Almoços Comerciais UVA e Tecar</p>
       </div>
       <div class="glass-card rounded-lg p-5 border border-surface-variant relative timeline-item">
         <div class="flex items-center gap-3 mb-2 flex-wrap">
@@ -551,92 +763,144 @@ def sync_prospeccao():
           <div class="text-brand-blue font-mono font-bold">{fmt_brl(mes_gastos['Set'])}</div>
           <span class="text-text-muted text-sm">| {mes_counts['Set']} atividades</span>
         </div>
-        <p class="text-sm text-on-surface">★ <strong class="text-white">Visita Técnica à Volvo em Curitiba (R$ 3.436,15)</strong> • Almoço em SP com Stellantis (R$ 209,08) • Almoço Comercial UVA (R$ 170,04)</p>
+        <p class="text-sm text-on-surface">★ <strong class="text-white">Visita Técnica à Volvo em Curitiba (R$ 3.436,15)</strong> • Almoço em SP com Stellantis (R$ 209,08) • Suporte Visita Volvo / Almoço Comercial UVA (R$ 170,04)</p>
       </div>
     </div>
-"""
+  </section>"""
+
     html = re.sub(
-        r'<div class="flex items-center gap-3 mb-2 flex-wrap">\s*<div class="text-white font-display font-semibold">📅 JULHO</div>.*?</div>\s*</div>\s*</section>',
-        f"""<div class="flex items-center gap-3 mb-2 flex-wrap">
-          <div class="text-white font-display font-semibold">📅 JULHO</div>
-          <div class="text-brand-blue font-mono font-bold">{fmt_brl(mes_gastos['Jul'])}</div>
-          <span class="text-text-muted text-sm">| {mes_counts['Jul']} atividade</span>
-        </div>
-        <p class="text-sm text-on-surface">Jantar NH Construction em BH • Mês com menor desembolso registrado</p>
-      </div>
-{timeline_ago_set}
-  </section>""",
+        r'<!-- ──────── TIMELINE ──────── -->.*?</section>',
+        lambda m: all_timeline_html,
         html,
+        count=1,
         flags=re.DOTALL
     )
 
     # 8. Alertas e Insights atualizados
-    alertas_html = f"""
+    alertas_html = f"""<!-- ──────── ALERTAS ──────── -->
+  <section class="scroll-mt-24" id="alertas">
+    <div class="mb-8">
+      <h2 class="text-2xl font-display font-semibold text-white flex items-center gap-3">
+        <div class="w-1.5 h-6 bg-brand-blue rounded-full"></div>
+        Alertas e Insights
+      </h2>
+      <p class="text-text-muted mt-2 ml-4">Pontos de atenção atualizados com base no consolidado de 50 atividades.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <div class="glass-card rounded-lg p-5 border-l-4 border-error">
         <div class="flex items-center gap-2 mb-2 text-error">
           <span class="material-symbols-outlined">trending_up</span>
-          <h4 class="font-display font-semibold text-white">Fevereiro: Mês-Pico Histórico</h4>
+          <h4 class="font-display font-semibold text-white">Fevereiro: mês-pico</h4>
         </div>
-        <p class="text-sm text-on-surface-variant">Fevereiro permanece como o mês de maior custo com <strong class="text-white">{fmt_brl(mes_gastos['Fev'])} (24,6% do total)</strong> decorrente da concentração do Planejamento Estratégico.</p>
+        <p class="text-sm text-on-surface-variant">Com a inclusão dos custos de alimentação e gráfica, fevereiro saltou para <strong class="text-white">{fmt_brl(mes_gastos['Fev'])} (24,6% do total)</strong>, superando março.</p>
       </div>
       <div class="glass-card rounded-lg p-5 border-l-4 border-accent-amber">
         <div class="flex items-center gap-2 mb-2 text-accent-amber">
           <span class="material-symbols-outlined">groups</span>
-          <h4 class="font-display font-semibold text-white">Internacional e Planejamento: 58,9%</h4>
+          <h4 class="font-display font-semibold text-white">Planejamento consome 27,3%</h4>
         </div>
-        <p class="text-sm text-on-surface-variant">As duas maiores categorias somam <strong class="text-white">{fmt_brl(total_intl + cat_totais['Planejamento & Diretoria'])}</strong> de um total geral de {fmt_brl(total_gasto)}.</p>
+        <p class="text-sm text-on-surface-variant">Planejamento & Diretoria é a <strong class="text-white">maior categoria individual</strong>, totalizando {fmt_brl(cat_totais['Planejamento & Diretoria'])} — superando visitas e eventos.</p>
       </div>
       <div class="glass-card rounded-lg p-5 border-l-4 border-emerald-500">
         <div class="flex items-center gap-2 mb-2 text-emerald-400">
           <span class="material-symbols-outlined">check_circle</span>
           <h4 class="font-display font-semibold text-white">Consolidação de 50 Atividades</h4>
         </div>
-        <p class="text-sm text-on-surface-variant">Base totalmente apurada cobrindo 9 meses (Jan a Set/2026), com inclusão de Agosto ({fmt_brl(mes_gastos['Ago'])}) e Setembro ({fmt_brl(mes_gastos['Set'])}).</p>
+        <p class="text-sm text-on-surface-variant">Todos os <strong class="text-white">{total_atividades} registros</strong> apurados de Janeiro a Setembro de 2026, totalizando {fmt_brl(total_gasto)}.</p>
       </div>
       <div class="glass-card rounded-lg p-5 border-l-4 border-accent-amber">
         <div class="flex items-center gap-2 mb-2 text-accent-amber">
           <span class="material-symbols-outlined">event_upcoming</span>
-          <h4 class="font-display font-semibold text-white">Média Mensal Diluída</h4>
+          <h4 class="font-display font-semibold text-white">Projeção anual atualizada</h4>
         </div>
-        <p class="text-sm text-on-surface-variant">Com a moderação nos meses de Junho a Setembro, a média mensal reduziu de R$ 21,1K para <strong class="text-white">{fmt_brl(media_mensal).split(',')[0]}/mês</strong>, reduzindo a projeção anual para ~{fmt_k(projecao_anual)}.</p>
+        <p class="text-sm text-on-surface-variant">Média apurada: <strong class="text-white">{fmt_brl(media_mensal).split(',')[0]}/mês</strong>. Projeção anual: ~{fmt_k(projecao_anual)} — estabilidade orçamentária no 2º semestre.</p>
       </div>
       <div class="glass-card rounded-lg p-5 border-l-4 border-emerald-500">
         <div class="flex items-center gap-2 mb-2 text-emerald-400">
-          <span class="material-symbols-outlined">target</span>
-          <h4 class="font-display font-semibold text-white">Prospecção em Expansão</h4>
+          <span class="material-symbols-outlined">calendar_month</span>
+          <h4 class="font-display font-semibold text-white">Q1 concentra 62,9% dos gastos</h4>
         </div>
-        <p class="text-sm text-on-surface-variant">Novas investidas comerciais em Agosto somaram <strong class="text-white">{fmt_brl(total_cen_prosp)}</strong> ao todo em 7 frentes corporativas (DAF, Porsche, Mercedes, Outsourcing, Pouso Alegre, BH).</p>
+        <p class="text-sm text-on-surface-variant">Janeiro a março somam <strong class="text-white">{fmt_brl(mes_gastos['Jan'] + mes_gastos['Fev'] + mes_gastos['Mar'])}</strong> — avaliar desconcentração para Q2 e Q3 nos próximos ciclos.</p>
       </div>
       <div class="glass-card rounded-lg p-5 border-l-4 border-error">
         <div class="flex items-center gap-2 mb-2 text-error">
           <span class="material-symbols-outlined">warning</span>
-          <h4 class="font-display font-semibold text-white">Controle de Adiantamentos</h4>
+          <h4 class="font-display font-semibold text-white">Planejamento de Fevereiro</h4>
         </div>
-        <p class="text-sm text-on-surface-variant">Recomenda-se formalizar no sistema todos os comprovantes de alimentação e traslados para preservar 100% de rastreabilidade fiscal.</p>
+        <p class="text-sm text-on-surface-variant">Somando coordenação + Patricia + alimentação + gráficas: <strong class="text-white">R$ 31.785,07</strong> em um único evento.</p>
       </div>
-"""
+    </div>
+  </section>"""
+
     html = re.sub(
-        r'<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">.*?</div>\s*</section>',
-        f'<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">{alertas_html}</div>\n  </section>',
+        r'<!-- ──────── ALERTAS ──────── -->.*?</section>',
+        lambda m: alertas_html,
         html,
+        count=1,
         flags=re.DOTALL
     )
 
-    # 9. Injetar Dados JavaScript Dinâmicos no Script
-    js_atividades = json.dumps(atividades, ensure_ascii=False, indent=2)
+    # 9. Recomendações atualizadas
+    recomendacoes_html = f"""<!-- ──────── RECOMENDAÇÕES ──────── -->
+  <section class="scroll-mt-24" id="recomendacoes">
+    <div class="mb-8">
+      <h2 class="text-2xl font-display font-semibold text-white flex items-center gap-3">
+        <div class="w-1.5 h-6 bg-brand-blue rounded-full"></div>
+        Recomendações para a Diretoria
+      </h2>
+      <p class="text-text-muted mt-2 ml-4">Ações estratégicas revisadas com base na nova realidade dos dados consolidados.</p>
+    </div>
+    <div class="space-y-4">
+      <div class="glass-card rounded-lg p-5 border border-surface-variant flex gap-4 items-start">
+        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-brand-blue to-primary flex items-center justify-center text-white font-display font-bold">1</div>
+        <div>
+          <h4 class="text-white font-display font-semibold mb-1">Revisão do Orçamento 2027</h4>
+          <p class="text-sm text-on-surface-variant">Projeção revisada para ~{fmt_k(projecao_anual)}/ano. Recomenda-se margem de 20% sobre esse valor (total ~R$ 250K) para cobrir imprevistos e oscilações cambiais.</p>
+        </div>
+      </div>
+      <div class="glass-card rounded-lg p-5 border border-surface-variant flex gap-4 items-start">
+        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-brand-blue to-primary flex items-center justify-center text-white font-display font-bold">2</div>
+        <div>
+          <h4 class="text-white font-display font-semibold mb-1">Planejamento Estratégico: centro de custo dedicado</h4>
+          <p class="text-sm text-on-surface-variant">Criar um centro de custo específico para o Planejamento Estratégico (R$ 31,8K em 2026), segregando alimentação, gráfica e logística.</p>
+        </div>
+      </div>
+      <div class="glass-card rounded-lg p-5 border border-surface-variant flex gap-4 items-start">
+        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-brand-blue to-primary flex items-center justify-center text-white font-display font-bold">3</div>
+        <div>
+          <h4 class="text-white font-display font-semibold mb-1">Alçada para viagens internacionais</h4>
+          <p class="text-sm text-on-surface-variant">Implementar aprovação em dois níveis para viagens acima de R$ 10K, com análise prévia de ROI e cotação em ao menos dois fornecedores.</p>
+        </div>
+      </div>
+      <div class="glass-card rounded-lg p-5 border border-surface-variant flex gap-4 items-start">
+        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-brand-blue to-primary flex items-center justify-center text-white font-display font-bold">4</div>
+        <div>
+          <h4 class="text-white font-display font-semibold mb-1">Desconcentração do Q1</h4>
+          <p class="text-sm text-on-surface-variant">62,9% dos gastos concentram-se no primeiro trimestre. Avaliar mover parte das reuniões de diretoria para o segundo semestre, diluindo o impacto.</p>
+        </div>
+      </div>
+      <div class="glass-card rounded-lg p-5 border border-surface-variant flex gap-4 items-start">
+        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-brand-blue to-primary flex items-center justify-center text-white font-display font-bold">5</div>
+        <div>
+          <h4 class="text-white font-display font-semibold mb-1">Métricas de ROI por atividade</h4>
+          <p class="text-sm text-on-surface-variant">Implementar tag obrigatória de "retorno esperado" (prospecção, relacionamento, evento, capacitação) em cada lançamento para futura correlação com resultados comerciais.</p>
+        </div>
+      </div>
+    </div>
+  </section>"""
 
-    chart_mensal_vals = [round(mes_gastos[m], 2) for m in mes_order]
-    chart_ativ_vals = [mes_counts[m] for m in mes_order]
+    html = re.sub(
+        r'<!-- ──────── RECOMENDAÇÕES ──────── -->.*?</section>',
+        lambda m: recomendacoes_html,
+        html,
+        count=1,
+        flags=re.DOTALL
+    )
 
-    chart_cat_labels = [c for c in cat_order if cat_totais[c] > 0]
-    chart_cat_vals = [round(cat_totais[c], 2) for c in chart_cat_labels]
-
-    chart_dest_labels = [d[0] for d in top10_destinos]
-    chart_dest_vals = [round(d[1], 2) for d in top10_destinos]
-
+    # 10. Atualizar JavaScript com Dados Dinâmicos e Chart.js Configs
     script_patch = f"""
 // ═══════════ DADOS DINÂMICOS CONSOLIDADOS (GOOGLE SHEETS) ═══════════
-const atividades = {js_atividades};
+const atividades = {json.dumps(atividades, indent=2, ensure_ascii=False)};
 
 // ═══════════ TABELA ═══════════
 function renderTabela(lista) {{
@@ -691,46 +955,51 @@ function showScenario(idx) {{
     if (i === idx) {{
       t.classList.add("scenario-tab-active");
       t.classList.remove("text-text-muted");
-      t.classList.add("text-white");
     }} else {{
       t.classList.remove("scenario-tab-active");
-      t.classList.remove("text-white");
       t.classList.add("text-text-muted");
     }}
   }});
   contents.forEach(function(c, i) {{
-    if (i === idx) c.classList.remove("hidden");
-    else c.classList.add("hidden");
+    if (i === idx) {{
+      c.classList.remove("hidden");
+    }} else {{
+      c.classList.add("hidden");
+    }}
   }});
 }}
 
-// ═══════════ CHARTS ═══════════
+// ═══════════ CHART.JS INITIALIZATION ═══════════
 document.addEventListener("DOMContentLoaded", function() {{
-  Chart.defaults.font.family = "'Inter', 'Manrope', sans-serif";
+  Chart.defaults.font.family = "'Inter', sans-serif";
   Chart.defaults.color = "#9CA3AF";
+
   const brandBlue = "#0083CA";
-  const cores = ["#0083CA", "#E87154", "#FBBF24", "#10b981", "#8b5cf6", "#ec4899", "#14b8a6", "#6366f1", "#84cc16", "#94a3b8"];
+  const cores = [
+    "#0083CA", "#E87154", "#FBBF24", "#34D399",
+    "#A78BFA", "#F472B6", "#60A5FA", "#F87171",
+    "#818CF8", "#4ADE80"
+  ];
 
   const tooltipBase = {{
-    backgroundColor: "#1F2937",
-    titleColor: "#fff",
+    backgroundColor: "#191f2f",
+    titleColor: "#FFFFFF",
     bodyColor: "#dce2f7",
-    borderColor: "#374151",
+    borderColor: "#2e3545",
     borderWidth: 1,
-    padding: 10,
-    cornerRadius: 8
+    padding: 10
   }};
 
-  // Gráfico Mensal
+  // Gasto Mensal (Jan a Set)
   new Chart(document.getElementById("chartMensal"), {{
     type: "bar",
     data: {{
       labels: {json.dumps(mes_order)},
       datasets: [{{
         label: "Gasto Mensal (R$)",
-        data: {json.dumps(chart_mensal_vals)},
-        backgroundColor: cores.slice(0, {len(mes_order)}).map(c => c + "99"),
-        borderColor: cores.slice(0, {len(mes_order)}),
+        data: [{', '.join(str(round(mes_gastos[m], 2)) for m in mes_order)}],
+        backgroundColor: {json.dumps([f"{'#E87154' if m == 'Fev' else '#0083CA'}99" for m in mes_order])},
+        borderColor: {json.dumps(['#E87154' if m == 'Fev' else '#0083CA' for m in mes_order])},
         borderWidth: 1,
         borderRadius: 6
       }}]
@@ -742,9 +1011,7 @@ document.addEventListener("DOMContentLoaded", function() {{
         legend: {{ display: false }},
         tooltip: Object.assign({{}}, tooltipBase, {{
           callbacks: {{
-            label: function(ctx) {{
-              return "R$ " + ctx.parsed.y.toLocaleString("pt-BR", {{minimumFractionDigits:2}});
-            }}
+            label: function(ctx) {{ return "R$ " + ctx.parsed.y.toLocaleString("pt-BR", {{minimumFractionDigits:2}}); }}
           }}
         }})
       }},
@@ -759,18 +1026,18 @@ document.addEventListener("DOMContentLoaded", function() {{
     }}
   }});
 
-  // Atividades por Mês
+  // Atividades por Mês (Jan a Set)
   new Chart(document.getElementById("chartAtividadesMes"), {{
     type: "line",
     data: {{
       labels: {json.dumps(mes_order)},
       datasets: [{{
         label: "Atividades",
-        data: {json.dumps(chart_ativ_vals)},
+        data: [{', '.join(str(mes_counts[m]) for m in mes_order)}],
         borderColor: brandBlue,
-        backgroundColor: brandBlue + "33",
+        backgroundColor: "rgba(0, 131, 202, 0.15)",
         fill: true,
-        tension: 0.4,
+        tension: 0.35,
         pointRadius: 4,
         pointBackgroundColor: brandBlue,
         borderWidth: 2
@@ -781,33 +1048,32 @@ document.addEventListener("DOMContentLoaded", function() {{
       maintainAspectRatio: false,
       plugins: {{ legend: {{ display: false }}, tooltip: tooltipBase }},
       scales: {{
-        y: {{ beginAtZero: true, ticks: {{ stepSize: 2, color: "#9CA3AF" }}, grid: {{ color: "rgba(255,255,255,0.05)" }} }},
+        y: {{
+          beginAtZero: true,
+          ticks: {{ stepSize: 2, color: "#9CA3AF" }},
+          grid: {{ color: "rgba(255,255,255,0.05)" }}
+        }},
         x: {{ ticks: {{ color: "#9CA3AF" }}, grid: {{ display: false }} }}
       }}
     }}
   }});
 
-  // Categorias (Donut)
+  // Composição por Categoria (Donut)
   new Chart(document.getElementById("chartCategorias"), {{
     type: "doughnut",
     data: {{
-      labels: {json.dumps(chart_cat_labels, ensure_ascii=False)},
+      labels: {json.dumps(cat_order)},
       datasets: [{{
-        data: {json.dumps(chart_cat_vals)},
-        backgroundColor: cores,
-        borderWidth: 0,
-        hoverOffset: 4
+        data: [{', '.join(str(round(cat_totais[c], 2)) for c in cat_order)}],
+        backgroundColor: cores.slice(0, {len(cat_order)}),
+        borderWidth: 0
       }}]
     }},
     options: {{
       responsive: true,
       maintainAspectRatio: false,
-      cutout: "70%",
       plugins: {{
-        legend: {{
-          position: "right",
-          labels: {{ color: "#9CA3AF", padding: 12, font: {{ size: 11 }}, usePointStyle: true }}
-        }},
+        legend: {{ position: "right", labels: {{ color: "#9CA3AF", padding: 12, font: {{ size: 11 }} }} }},
         tooltip: Object.assign({{}}, tooltipBase, {{
           callbacks: {{
             label: function(ctx) {{
@@ -821,16 +1087,16 @@ document.addEventListener("DOMContentLoaded", function() {{
     }}
   }});
 
-  // Categorias (Barras)
+  // Valor por Categoria (Barras Horizontais)
   new Chart(document.getElementById("chartCategoriasBar"), {{
     type: "bar",
     data: {{
-      labels: {json.dumps(chart_cat_labels, ensure_ascii=False)},
+      labels: {json.dumps([c.replace('Viagens ', '').replace(' de Negócio', '') for c in cat_order[:-1]])},
       datasets: [{{
         label: "Valor (R$)",
-        data: {json.dumps(chart_cat_vals)},
-        backgroundColor: cores.slice(0, {len(chart_cat_labels)}).map(c => c + "99"),
-        borderColor: cores.slice(0, {len(chart_cat_labels)}),
+        data: [{', '.join(str(round(cat_totais[c], 2)) for c in cat_order[:-1])}],
+        backgroundColor: cores.slice(0, 7).map(c => c + "99"),
+        borderColor: cores.slice(0, 7),
         borderWidth: 1,
         borderRadius: 6
       }}]
@@ -862,10 +1128,10 @@ document.addEventListener("DOMContentLoaded", function() {{
   new Chart(document.getElementById("chartDestinos"), {{
     type: "bar",
     data: {{
-      labels: {json.dumps(chart_dest_labels, ensure_ascii=False)},
+      labels: {json.dumps([d[0] for d in top10_destinos])},
       datasets: [{{
         label: "Gasto (R$)",
-        data: {json.dumps(chart_dest_vals)},
+        data: [{', '.join(str(round(d[1], 2)) for d in top10_destinos)}],
         backgroundColor: cores.map(c => c + "99"),
         borderColor: cores,
         borderWidth: 1,
@@ -925,7 +1191,7 @@ document.addEventListener("DOMContentLoaded", function() {{
   new Chart(document.getElementById("chartTop10"), {{
     type: "bar",
     data: {{
-      labels: top10.map(a => a.nome),
+      labels: top10.map(a => a.nome.startsWith("eunião") ? "R" + a.nome : a.nome),
       datasets: [{{
         label: "Valor (R$)",
         data: top10.map(a => a.valor),
@@ -945,7 +1211,9 @@ document.addEventListener("DOMContentLoaded", function() {{
           callbacks: {{
             label: function(ctx) {{ return "R$ " + ctx.parsed.x.toLocaleString("pt-BR", {{minimumFractionDigits:2}}); }},
             title: function(items) {{
-              return top10[items[0].dataIndex].nome + " (" + top10[items[0].dataIndex].local + ")";
+              const item = top10[items[0].dataIndex];
+              const nome = item.nome.startsWith("eunião") ? "R" + item.nome : item.nome;
+              return nome + " (" + item.local + ")";
             }}
           }}
         }})
@@ -980,12 +1248,12 @@ document.addEventListener("DOMContentLoaded", function() {{
 
     html = re.sub(
         r'<script>\s*// ═══════════ DADOS.*?// (?:Scroll suave|Smooth scroll).*?</script>',
-        f'<script>\n{script_patch}\n</script>',
+        lambda m: f'<script>\n{script_patch}\n</script>',
         html,
         flags=re.DOTALL
     )
 
-    # 10. Salvar em prospeccao.html e dashboard-executivo-prospeccao.html
+    # 11. Salvar em prospeccao.html e dashboard-executivo-prospeccao.html
     target_prosp = os.path.join(repo_dir, "prospeccao.html")
     target_dash = os.path.join(repo_dir, "dashboard-executivo-prospeccao.html")
 

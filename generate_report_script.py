@@ -899,7 +899,6 @@ full_html = f'''<!DOCTYPE html>
       <span class="font-bold text-white">NNÓS Controladoria &amp; Gestão Financeira</span>
     </div>
     <div>Relatório Financeiro Gerencial • Período: {periodo_extenso}</div>
-    <div class="text-[11px] text-gray-500">Controladoria &amp; Gestão Financeira</div>
   </div>
 </footer>
 
