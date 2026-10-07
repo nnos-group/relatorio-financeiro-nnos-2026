@@ -12,6 +12,8 @@ booking_file = os.path.join(repo_dir, "dashboard-executivo-booking.html")
 booking_target = os.path.join(repo_dir, "booking.html")
 prospeccao_file = os.path.join(repo_dir, "dashboard-executivo-prospeccao.html")
 prospeccao_target = os.path.join(repo_dir, "prospeccao.html")
+lider_file = os.path.join(repo_dir, "painel-por-lider.html")
+lider_target = os.path.join(repo_dir, "lider.html")
 output_index = os.path.join(repo_dir, "index.html")
 
 auth_script = """
@@ -100,7 +102,19 @@ def build():
         with open(prospeccao_file, "w", encoding="utf-8") as f:
             f.write(prosp_raw)
 
-    # 5. Sync Index Cards
+    # 5. Sync Painel por Líder
+    if os.path.exists(lider_file):
+        with open(lider_file, "r", encoding="utf-8") as f:
+            lider_raw = f.read()
+        lider_raw = ensure_favicon(lider_raw)
+        if 'sessionStorage.getItem' not in lider_raw:
+            lider_raw = lider_raw.replace('</head>', auth_script + '</head>')
+        with open(lider_target, "w", encoding="utf-8") as f:
+            f.write(lider_raw)
+        with open(lider_file, "w", encoding="utf-8") as f:
+            f.write(lider_raw)
+
+    # 6. Sync Index Cards
     if os.path.exists(output_index):
         with open(output_index, "r", encoding="utf-8") as f:
             index_raw = f.read()
@@ -182,11 +196,28 @@ def build():
                 return f"{m.group(1)}{p_total_str}{m.group(2)}{p_count}{m.group(3)}{p_prosp_str}{m.group(4)}"
             index_raw = re.sub(card4_pattern, replace_card4, index_raw, flags=re.DOTALL)
 
+        # Update Card 5 from lider_data.json
+        lider_json = os.path.join(repo_dir, "lider_data.json")
+        if os.path.exists(lider_json):
+            with open(lider_json, "r", encoding="utf-8") as f:
+                l_data = json.load(f)
+            l_summary = l_data.get("summary", {})
+            l_tot_rec = l_summary.get("total_receita", 0)
+            l_tot_proj = l_summary.get("total_projetos", 0)
+            l_tot_leaders = l_summary.get("total_leaders", 0)
+            
+            l_tot_rec_str = f"R$ {l_tot_rec/1e6:.2f}M".replace('.', ',')
+            
+            card5_pattern = r'(<!-- Card 5: Painel por Líder.*?Líderes</div>\s*<div class="[^"]*">)[^<]+(</div>.*?Projetos</div>\s*<div class="[^"]*">)[^<]+(</div>.*?Receita Total</div>\s*<div class="[^"]*">)[^<]+(</div>)'
+            def replace_card5(m):
+                return f"{m.group(1)}{l_tot_leaders}{m.group(2)}{l_tot_proj}{m.group(3)}{l_tot_rec_str}{m.group(4)}"
+            index_raw = re.sub(card5_pattern, replace_card5, index_raw, flags=re.DOTALL)
+
         index_updated = ensure_favicon(index_raw)
         with open(output_index, "w", encoding="utf-8") as f:
             f.write(index_updated)
 
-    print("Portal e demonstrativos independentes (matriz.html, uva.html, booking.html, prospeccao.html, index.html) sincronizados com sucesso!")
+    print("Portal e demonstrativos independentes (matriz.html, uva.html, booking.html, prospeccao.html, lider.html, index.html) sincronizados com sucesso!")
 
 if __name__ == "__main__":
     build()

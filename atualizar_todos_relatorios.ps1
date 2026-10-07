@@ -27,6 +27,10 @@ try {
     Log-Message "0.1 Sincronizando Despesas Operacionais & Prospecção via Google Sheets API..."
     & py "$repoDir\sync_prospeccao_from_sheets.py" *>> $logFile
 
+    # 0.2 Sincroniza Painel por Líder via Google Sheets API
+    Log-Message "0.2 Sincronizando Painel por Líder via Google Sheets API..."
+    & py "$repoDir\sync_lider_from_sheets.py" *>> $logFile
+
     # 1. Processa as bases CSV mais recentes da Matriz (Receita, Despesas, Reembolsos)
     Log-Message "1. Processando bases financeiras CSV da Matriz (parse_financial_data.py)..."
     & py "$repoDir\parse_financial_data.py" *>> $logFile
