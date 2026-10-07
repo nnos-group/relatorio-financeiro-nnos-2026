@@ -41,9 +41,9 @@ def sync_lider():
 
     def fmt_k(val):
         if val is None:
-            return "R$ 0K"
+            return "R$ 0"
         neg = val < 0
-        s = f"R$ {abs(val)/1e3:,.1f}K".replace(".", ",")
+        s = f"R$ {abs(val):,.0f}".replace(",", ".")
         return f"-{s}" if neg else s
 
     def fmt_pct(val):
@@ -51,7 +51,28 @@ def sync_lider():
             return "0,0%"
         return f"{val:,.2f}%".replace(".", ",")
 
-    # Cores e avatares para cada líder
+    # Iniciais dos líderes para avatar no ranking
+    leader_iniciais = {
+        "Vinicius Souza": "VS",
+        "Beatriz Picorelli": "BP",
+        "Jefferson Souza": "JS",
+        "Caroline Amieva": "CA",
+        "Fábio Canassa": "FC",
+        "Joice Lage": "JL",
+        "Leonardo Campos": "LC"
+    }
+
+    leader_avatar_bg = {
+        "Vinicius Souza": "bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300",
+        "Beatriz Picorelli": "bg-purple-100 dark:bg-purple-950/60 text-purple-800 dark:text-purple-300",
+        "Jefferson Souza": "bg-blue-100 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300",
+        "Caroline Amieva": "bg-pink-100 dark:bg-pink-950/60 text-pink-800 dark:text-pink-300",
+        "Fábio Canassa": "bg-sky-100 dark:bg-sky-950/60 text-sky-800 dark:text-sky-300",
+        "Joice Lage": "bg-rose-100 dark:bg-rose-950/60 text-rose-800 dark:text-rose-300",
+        "Leonardo Campos": "bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300"
+    }
+
+    # Cores e avatares para cada líder nas raias kanban
     leader_styles = {
         "Beatriz Picorelli": {"from": "from-purple-600", "to": "to-indigo-500", "accent": "purple", "cargo": "Líder de Projetos Corporativos"},
         "Caroline Amieva": {"from": "from-amber-600", "to": "to-orange-500", "accent": "amber", "cargo": "Líder de Gestão Organizacional"},
@@ -79,17 +100,17 @@ def sync_lider():
 
         # Status badge do líder
         if marg_tot < 0:
-            status_badge = f'<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-rose-400 animate-ping"></span> Alerta: Déficit ({fmt_pct(marg_pct)})</span>'
-            header_border = "border-rose-500/30"
+            status_badge = f'<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-500/15 text-rose-700 dark:text-rose-300 border border-rose-300 dark:border-rose-500/40 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-ping"></span> Alerta: Déficit ({fmt_pct(marg_pct)})</span>'
+            header_border = "border-rose-300 dark:border-rose-500/30"
         elif marg_pct >= 30:
-            status_badge = f'<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Alta Rentabilidade ({fmt_pct(marg_pct)})</span>'
-            header_border = "border-emerald-500/30"
+            status_badge = f'<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-500/40 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Alta Rentabilidade ({fmt_pct(marg_pct)})</span>'
+            header_border = "border-emerald-300 dark:border-emerald-500/30"
         elif marg_pct >= 20:
-            status_badge = f'<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-sky-500/20 text-sky-300 border border-sky-400/40 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span> Margem Saudável ({fmt_pct(marg_pct)})</span>'
-            header_border = "border-sky-500/30"
+            status_badge = f'<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-sky-500/15 text-sky-800 dark:text-sky-300 border border-sky-300 dark:border-sky-400/40 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-sky-500"></span> Margem Saudável ({fmt_pct(marg_pct)})</span>'
+            header_border = "border-sky-300 dark:border-sky-500/30"
         else:
-            status_badge = f'<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-400/40 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Margem Moderada ({fmt_pct(marg_pct)})</span>'
-            header_border = "border-amber-500/30"
+            status_badge = f'<span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-500/15 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-400/40 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Margem Moderada ({fmt_pct(marg_pct)})</span>'
+            header_border = "border-amber-300 dark:border-amber-500/30"
 
         # Cards de projetos
         cards_html = ""
@@ -114,91 +135,91 @@ def sync_lider():
 
             # Bottom styling
             if p_marg < 0:
-                bottom_bg = "bg-rose-950/60 border-rose-500/40 text-rose-300"
-                badge_bg = "bg-rose-500 text-white"
-                card_border = "border-rose-500/30 hover:border-rose-500/60"
+                bottom_bg = "bg-rose-100/90 dark:bg-rose-950/60 border-rose-300 dark:border-rose-500/40 text-rose-900 dark:text-rose-200"
+                badge_bg = "bg-rose-600 text-white"
+                card_border = "border-rose-300 dark:border-rose-500/40 hover:border-rose-500"
             elif p_marg_pct >= 30:
-                bottom_bg = "bg-emerald-950/50 border-emerald-500/30 text-emerald-300"
-                badge_bg = "bg-emerald-500 text-white"
-                card_border = "border-white/10 hover:border-emerald-500/50"
+                bottom_bg = "bg-emerald-50 dark:bg-emerald-950/50 border-emerald-200 dark:border-emerald-500/30 text-emerald-900 dark:text-emerald-200"
+                badge_bg = "bg-emerald-600 text-white"
+                card_border = "border-slate-200/90 dark:border-white/10 hover:border-emerald-500/50"
             elif p_marg_pct >= 20:
-                bottom_bg = "bg-sky-950/50 border-sky-500/30 text-sky-300"
-                badge_bg = "bg-sky-500 text-white"
-                card_border = "border-white/10 hover:border-sky-500/50"
+                bottom_bg = "bg-sky-50 dark:bg-sky-950/50 border-sky-200 dark:border-sky-500/30 text-sky-900 dark:text-sky-200"
+                badge_bg = "bg-sky-600 text-white"
+                card_border = "border-slate-200/90 dark:border-white/10 hover:border-sky-500/50"
             else:
-                bottom_bg = "bg-amber-950/50 border-amber-500/30 text-amber-300"
+                bottom_bg = "bg-amber-50 dark:bg-amber-950/50 border-amber-200 dark:border-amber-500/30 text-amber-900 dark:text-amber-200"
                 badge_bg = "bg-amber-500 text-white"
-                card_border = "border-white/10 hover:border-amber-500/50"
+                card_border = "border-slate-200/90 dark:border-white/10 hover:border-amber-500/50"
 
             cards_html += f"""
-        <article class="project-card group relative bg-slate-900/80 rounded-2xl p-5 border {card_border} shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between backdrop-blur" data-titulo="{p['titulo'].lower()}" data-lider="{nome.lower()}">
+        <article class="project-card group relative bg-white dark:bg-slate-900/80 rounded-2xl p-5 border {card_border} shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between" data-titulo="{p['titulo'].lower()}" data-lider="{nome.lower()}">
           <div class="space-y-4">
             <!-- Header do Card -->
             <div class="flex items-start justify-between gap-2 min-h-[44px]">
-              <h4 class="font-bold text-white text-sm leading-snug group-hover:text-sky-300 transition-colors">{p['titulo']}</h4>
+              <h4 class="font-bold text-slate-900 dark:text-white text-sm leading-snug group-hover:text-sky-600 dark:group-hover:text-sky-300 transition-colors">{p['titulo']}</h4>
             </div>
 
             <!-- Destaque de Receita -->
-            <div class="bg-slate-950/60 rounded-xl p-3 border border-white/5">
+            <div class="bg-slate-50 dark:bg-slate-950/60 rounded-xl p-3 border border-slate-200/70 dark:border-white/5">
               <div class="flex justify-between items-center text-xs">
-                <span class="text-gray-400 font-medium">RECEITA TOTAL</span>
-                <span class="font-bold text-gray-500 font-mono">100,0%</span>
+                <span class="text-slate-500 dark:text-gray-400 font-medium">RECEITA TOTAL</span>
+                <span class="font-bold text-slate-400 dark:text-gray-500 tabular-nums">100,0%</span>
               </div>
-              <div class="text-lg font-bold text-white font-mono mt-0.5">
+              <div class="text-lg font-bold text-slate-900 dark:text-white tabular-nums mt-0.5">
                 {fmt_brl(p_rec)}
               </div>
             </div>
 
             <!-- Distribuição Financeira -->
-            <div class="space-y-2 text-xs font-mono">
-              <div class="flex justify-between items-center py-1 border-b border-white/5">
-                <span class="text-gray-400 flex items-center gap-1.5 font-sans">
+            <div class="space-y-2 text-xs">
+              <div class="flex justify-between items-center py-1 border-b border-slate-100 dark:border-white/5">
+                <span class="text-slate-600 dark:text-gray-400 flex items-center gap-1.5 font-medium">
                   <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Impostos
                 </span>
-                <div class="text-right">
-                  <span class="font-semibold text-gray-300">{fmt_brl(p_imp)}</span>
-                  <span class="text-[11px] text-gray-500 ml-1">({fmt_pct(p_imp_pct)})</span>
+                <div class="text-right tabular-nums">
+                  <span class="font-semibold text-slate-800 dark:text-gray-300">{fmt_brl(p_imp)}</span>
+                  <span class="text-[11px] text-slate-400 dark:text-gray-500 ml-1">({fmt_pct(p_imp_pct)})</span>
                 </div>
               </div>
 
-              <div class="flex justify-between items-center py-1 border-b border-white/5">
-                <span class="text-gray-400 flex items-center gap-1.5 font-sans">
+              <div class="flex justify-between items-center py-1 border-b border-slate-100 dark:border-white/5">
+                <span class="text-slate-600 dark:text-gray-400 flex items-center gap-1.5 font-medium">
                   <span class="w-1.5 h-1.5 rounded-full {'bg-rose-500' if p_cust_pct > 70 else 'bg-amber-400'}"></span> Custos Operacionais
                 </span>
-                <div class="text-right">
-                  <span class="font-semibold {'text-rose-400 font-bold' if p_cust_pct > 70 else 'text-gray-300'}">{fmt_brl(p_cust)}</span>
-                  <span class="text-[11px] {'text-rose-400 font-bold' if p_cust_pct > 70 else 'text-gray-500'} ml-1">({fmt_pct(p_cust_pct)})</span>
+                <div class="text-right tabular-nums">
+                  <span class="font-semibold {'text-rose-600 dark:text-rose-400 font-bold' if p_cust_pct > 70 else 'text-slate-800 dark:text-gray-300'}">{fmt_brl(p_cust)}</span>
+                  <span class="text-[11px] {'text-rose-600 dark:text-rose-400 font-bold' if p_cust_pct > 70 else 'text-slate-400 dark:text-gray-500'} ml-1">({fmt_pct(p_cust_pct)})</span>
                 </div>
               </div>
 
-              <div class="flex justify-between items-center py-1 border-b border-white/5">
-                <span class="text-gray-400 flex items-center gap-1.5 font-sans">
+              <div class="flex justify-between items-center py-1 border-b border-slate-100 dark:border-white/5">
+                <span class="text-slate-600 dark:text-gray-400 flex items-center gap-1.5 font-medium">
                   <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span> Logística
                 </span>
-                <div class="text-right">
-                  <span class="font-semibold text-gray-300">{fmt_brl(p_log)}</span>
-                  <span class="text-[11px] text-gray-500 ml-1">({fmt_pct(p_log_pct)})</span>
+                <div class="text-right tabular-nums">
+                  <span class="font-semibold text-slate-800 dark:text-gray-300">{fmt_brl(p_log)}</span>
+                  <span class="text-[11px] text-slate-400 dark:text-gray-500 ml-1">({fmt_pct(p_log_pct)})</span>
                 </div>
               </div>
 
-              <div class="flex justify-between items-center py-1 border-b border-white/5">
-                <span class="text-gray-400 flex items-center gap-1.5 font-sans">
-                  <span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span> Repasse
+              <div class="flex justify-between items-center py-1 border-b border-slate-100 dark:border-white/5">
+                <span class="text-slate-600 dark:text-gray-400 flex items-center gap-1.5 font-medium">
+                  <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Repasse
                 </span>
-                <div class="text-right">
-                  <span class="font-semibold text-gray-300">{fmt_brl(p_rep)}</span>
-                  <span class="text-[11px] text-gray-500 ml-1">({fmt_pct(p_rep_pct)})</span>
+                <div class="text-right tabular-nums">
+                  <span class="font-semibold text-slate-800 dark:text-gray-300">{fmt_brl(p_rep)}</span>
+                  <span class="text-[11px] text-slate-400 dark:text-gray-500 ml-1">({fmt_pct(p_rep_pct)})</span>
                 </div>
               </div>
             </div>
 
             <!-- Barra de Distribuição Visual -->
             <div class="space-y-1">
-              <div class="flex justify-between text-[10px] text-gray-400 font-medium">
+              <div class="flex justify-between text-[10px] text-slate-500 dark:text-gray-400 font-medium">
                 <span>Composição de Custos</span>
-                <span class="{'text-rose-400 font-bold' if p_marg < 0 else 'text-emerald-400 font-bold'}">Margem {fmt_pct(p_marg_pct)}</span>
+                <span class="{'text-rose-600 dark:text-rose-400 font-bold' if p_marg < 0 else 'text-emerald-700 dark:text-emerald-400 font-bold'}">Margem {fmt_pct(p_marg_pct)}</span>
               </div>
-              <div class="w-full h-2 bg-slate-950 rounded-full overflow-hidden flex border border-white/5">
+              <div class="w-full h-2 bg-slate-100 dark:bg-slate-950 rounded-full overflow-hidden flex border border-slate-200 dark:border-white/5">
                 <div class="bg-slate-400 h-full" style="width: {w_imp}%" title="Impostos: {p_imp_pct:.1f}%"></div>
                 <div class="{'bg-rose-500' if p_cust_pct > 70 else 'bg-amber-400'} h-full" style="width: {w_cust}%" title="Custos: {p_cust_pct:.1f}%"></div>
                 <div class="bg-sky-400 h-full" style="width: {w_log}%" title="Logística: {p_log_pct:.1f}%"></div>
@@ -211,9 +232,9 @@ def sync_lider():
           <div class="mt-5 pt-3.5 border-t -mx-5 -mb-5 px-5 py-3 rounded-b-2xl flex items-center justify-between {bottom_bg}">
             <div>
               <span class="text-[10px] font-bold uppercase tracking-wider block opacity-80">MARGEM LÍQUIDA</span>
-              <span class="text-base font-bold font-mono">{fmt_brl(p_marg)}</span>
+              <span class="text-base font-bold tabular-nums">{fmt_brl(p_marg)}</span>
             </div>
-            <span class="px-2.5 py-1 rounded-lg text-xs font-bold font-mono shadow-sm {badge_bg}">
+            <span class="px-2.5 py-1 rounded-lg text-xs font-bold tabular-nums shadow-sm {badge_bg}">
               {fmt_pct(p_marg_pct)}
             </span>
           </div>
@@ -223,41 +244,41 @@ def sync_lider():
     <!-- SWIMLANE: {nome.upper()} -->
     <section class="leader-swimlane space-y-4" data-leader-name="{nome.lower()}">
       <!-- Header da Raia / Líder -->
-      <div class="flex flex-wrap items-center justify-between gap-4 p-5 rounded-2xl bg-slate-900/90 border {header_border} shadow-lg backdrop-blur">
+      <div class="flex flex-wrap items-center justify-between gap-4 p-5 rounded-2xl bg-white dark:bg-slate-900/90 border {header_border} shadow-sm dark:shadow-lg">
         <div class="flex items-center space-x-4">
-          <div class="w-12 h-12 rounded-xl bg-gradient-to-br {style['from']} {style['to']} flex items-center justify-center font-bold text-white text-base shadow-lg shadow-black/40 flex-shrink-0">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br {style['from']} {style['to']} flex items-center justify-center font-bold text-white text-base shadow-md flex-shrink-0">
             {iniciais}
           </div>
           <div>
             <div class="flex items-center gap-2.5 flex-wrap">
-              <h3 class="text-lg font-bold text-white tracking-tight">{nome}</h3>
-              <span class="px-2 py-0.5 rounded-full text-xs font-semibold bg-white/10 text-gray-300 border border-white/15">
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white tracking-tight">{nome}</h3>
+              <span class="px-2 py-0.5 rounded-full text-xs font-semibold bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-gray-300 border border-slate-200 dark:border-white/15">
                 {style['cargo']}
               </span>
               {status_badge}
-              <span class="px-2 py-0.5 rounded-full text-xs font-medium bg-slate-800 text-gray-400">
+              <span class="px-2 py-0.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-gray-400">
                 {len(projetos)} { "Projeto Ativo" if len(projetos) == 1 else "Projetos Ativos" }
               </span>
             </div>
-            <p class="text-xs text-gray-400 mt-1">Consolidação executiva de contratos, rentabilidade e custos sob gestão.</p>
+            <p class="text-xs text-slate-500 dark:text-gray-400 mt-1">Consolidação executiva de contratos, rentabilidade e custos sob gestão.</p>
           </div>
         </div>
 
         <!-- Totais Consolidados do Líder -->
-        <div class="flex items-center gap-5 bg-slate-950/70 px-4 py-2.5 rounded-xl border border-white/10 text-xs font-mono">
+        <div class="flex items-center gap-5 bg-slate-50 dark:bg-slate-950/70 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/10 text-xs tabular-nums">
           <div>
-            <span class="block text-[10px] text-gray-400 uppercase font-sans font-medium">Receita Portfólio</span>
-            <span class="font-bold text-white text-sm">{fmt_brl(rec_tot)}</span>
+            <span class="block text-[10px] text-slate-400 uppercase font-medium">Receita Portfólio</span>
+            <span class="font-bold text-slate-900 dark:text-white text-sm">{fmt_brl(rec_tot)}</span>
           </div>
-          <div class="h-8 w-px bg-white/10"></div>
+          <div class="h-8 w-px bg-slate-200 dark:bg-white/10"></div>
           <div>
-            <span class="block text-[10px] text-gray-400 uppercase font-sans font-medium">Custos Consolidados</span>
-            <span class="font-bold text-white text-sm">{fmt_brl(cust_tot)} <span class="text-[10px] text-gray-400 font-sans font-normal">({fmt_pct(cust_pct)})</span></span>
+            <span class="block text-[10px] text-slate-400 uppercase font-medium">Custos Consolidados</span>
+            <span class="font-bold text-slate-900 dark:text-white text-sm">{fmt_brl(cust_tot)} <span class="text-[10px] text-slate-500 dark:text-gray-400 font-normal">({fmt_pct(cust_pct)})</span></span>
           </div>
-          <div class="h-8 w-px bg-white/10"></div>
+          <div class="h-8 w-px bg-slate-200 dark:bg-white/10"></div>
           <div>
-            <span class="block text-[10px] text-gray-400 uppercase font-sans font-medium">Margem Operacional</span>
-            <span class="font-bold {'text-rose-400' if marg_tot < 0 else 'text-emerald-400'} text-sm">{fmt_brl(marg_tot)} <span class="text-[10px] font-sans font-bold px-1.5 py-0.5 rounded {'bg-rose-500/20 text-rose-300' if marg_tot < 0 else 'bg-emerald-500/20 text-emerald-300'}">{fmt_pct(marg_pct)}</span></span>
+            <span class="block text-[10px] text-slate-400 uppercase font-medium">Margem Operacional</span>
+            <span class="font-bold {'text-rose-600 dark:text-rose-400' if marg_tot < 0 else 'text-emerald-600 dark:text-emerald-400'} text-sm">{fmt_brl(marg_tot)} <span class="text-[10px] font-bold px-1.5 py-0.5 rounded {'bg-rose-100 dark:bg-rose-500/20 text-rose-800 dark:text-rose-300' if marg_tot < 0 else 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-300'}">{fmt_pct(marg_pct)}</span></span>
           </div>
         </div>
       </div>
@@ -269,50 +290,124 @@ def sync_lider():
     </section>
 """
 
-    # Gerar Tabela: 20 Projetos Mais Rentáveis
-    mais_rows_html = ""
-    for p in mais_rentaveis:
-        rank = p["ranking"]
-        badge_rank = f'<span class="inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold {"bg-amber-400 text-slate-950 shadow-md" if rank == 1 else "bg-slate-300 text-slate-950" if rank == 2 else "bg-amber-700 text-white" if rank == 3 else "bg-slate-800 text-gray-300"}">{rank}</span>'
-        mais_rows_html += f"""
-        <tr class="hover:bg-slate-800/50 transition-colors border-b border-white/5">
-          <td class="py-3 px-4 text-center">{badge_rank}</td>
-          <td class="py-3 px-4 font-bold text-white">{p['projeto']}</td>
-          <td class="py-3 px-4 text-gray-300 text-xs font-medium">{p['lider']}</td>
-          <td class="py-3 px-4 text-right font-mono text-gray-300">{fmt_brl(p['receita'])}</td>
-          <td class="py-3 px-4 text-right font-mono font-bold text-emerald-400">{fmt_brl(p['margem'])}</td>
-          <td class="py-3 px-4 text-right font-mono font-bold text-emerald-300">{fmt_pct(p['margemPct'])}</td>
-        </tr>"""
+    # Cálculos dos Top KPIs para o Ranking
+    rec_top20 = sum(p.get("receita", 0) for p in mais_rentaveis)
+    marg_top20 = sum(p.get("margem", 0) for p in mais_rentaveis)
+    pct_top20 = (marg_top20 / rec_top20 * 100) if rec_top20 > 0 else 0
+    deficit_bottom10 = sum(p.get("margem", 0) for p in menos_rentaveis if p.get("margem", 0) < 0)
 
-    # Gerar Tabela: 10 Projetos Menos Rentáveis
-    menos_rows_html = ""
+    # Função auxiliar para gerar item do ranking Top 20
+    def render_top20_item(p, rank):
+        lider_nome = p.get("lider", "")
+        iniciais = leader_iniciais.get(lider_nome, "LP")
+        av_class = leader_avatar_bg.get(lider_nome, "bg-slate-100 text-slate-700")
+
+        if rank == 1:
+            badge_pos = '<span class="flex-shrink-0 w-5 h-5 rounded bg-emerald-600 text-white font-extrabold text-[10px] flex items-center justify-center shadow-xs">#1</span>'
+            border_pos = "border-emerald-400/50 hover:border-emerald-500"
+            pct_badge = "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-500/30"
+        elif rank <= 3:
+            badge_pos = f'<span class="flex-shrink-0 w-5 h-5 rounded bg-blue-900 text-white font-bold text-[10px] flex items-center justify-center">#{rank}</span>'
+            border_pos = "border-slate-200/90 dark:border-white/10 hover:border-blue-400"
+            pct_badge = "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30"
+        elif rank <= 10:
+            badge_pos = f'<span class="flex-shrink-0 w-5 h-5 rounded bg-slate-700 dark:bg-slate-700 text-white font-bold text-[10px] flex items-center justify-center">#{rank}</span>'
+            border_pos = "border-slate-200/90 dark:border-white/10 hover:border-blue-400"
+            pct_badge = "bg-teal-50 text-teal-800 dark:bg-teal-950/50 dark:text-teal-300 border border-teal-200 dark:border-teal-500/30"
+        else:
+            badge_pos = f'<span class="flex-shrink-0 w-5 h-5 rounded bg-slate-500 text-white font-bold text-[10px] flex items-center justify-center">#{rank}</span>'
+            border_pos = "border-slate-200/90 dark:border-white/10 hover:border-blue-400"
+            pct_badge = "bg-amber-50 text-amber-800 dark:bg-amber-950/50 dark:text-amber-300 border border-amber-200 dark:border-amber-500/30"
+
+        return f"""
+        <div class="bg-white dark:bg-slate-900 rounded-lg p-2 border {border_pos} shadow-sm hover:shadow transition-all">
+          <div class="flex items-center justify-between gap-1.5">
+            <div class="flex items-center gap-1.5 min-w-0">
+              {badge_pos}
+              <span class="font-bold text-slate-900 dark:text-white text-xs truncate" title="{p['projeto']}">{p['projeto']}</span>
+            </div>
+            <div class="flex items-center gap-1.5 flex-shrink-0 tabular-nums">
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-gray-200 border border-slate-200 dark:border-white/10"><span class="text-slate-400 font-medium text-[9px]">Rec:</span> {fmt_k(p['receita'])}</span>
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-extrabold {pct_badge}">{fmt_pct(p['margemPct'])}</span>
+            </div>
+          </div>
+          <div class="flex items-center justify-between mt-1 pt-1 border-t border-slate-100 dark:border-white/5 text-[11px]">
+            <div class="flex items-center gap-1 text-slate-500 dark:text-gray-400 truncate">
+              <span class="w-4 h-4 rounded-full {av_class} text-[8px] font-bold flex items-center justify-center flex-shrink-0">{iniciais}</span>
+              <span class="truncate">{lider_nome}</span>
+            </div>
+            <div class="text-right flex items-center gap-1 flex-shrink-0 tabular-nums">
+              <span class="text-[10px] text-slate-400 font-medium">Margem:</span>
+              <span class="font-extrabold text-emerald-600 dark:text-emerald-400 text-xs">{fmt_brl(p['margem'])}</span>
+            </div>
+          </div>
+        </div>"""
+
+    # Gerar itens Coluna 1 (#1 a #10)
+    top20_col1_html = "".join(render_top20_item(p, p["ranking"]) for p in mais_rentaveis[:10])
+
+    # Gerar itens Coluna 2 (#11 a #20)
+    top20_col2_html = "".join(render_top20_item(p, p["ranking"]) for p in mais_rentaveis[10:20])
+
+    # Gerar itens Coluna 3 (Bottom 10)
+    bottom10_html = ""
     for p in menos_rentaveis:
         rank = p["ranking"]
-        is_neg = p["margem"] < 0
-        badge_rank = f'<span class="inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold {"bg-rose-500 text-white shadow-md animate-pulse" if is_neg else "bg-slate-800 text-gray-300"}">{rank}</span>'
-        menos_rows_html += f"""
-        <tr class="hover:bg-slate-800/50 transition-colors border-b border-white/5 {'bg-rose-950/20' if is_neg else ''}">
-          <td class="py-3 px-4 text-center">{badge_rank}</td>
-          <td class="py-3 px-4 font-bold {'text-rose-300' if is_neg else 'text-white'}">{p['projeto']}</td>
-          <td class="py-3 px-4 text-gray-300 text-xs font-medium">{p['lider']}</td>
-          <td class="py-3 px-4 text-right font-mono text-gray-300">{fmt_brl(p['receita'])}</td>
-          <td class="py-3 px-4 text-right font-mono font-bold {'text-rose-400' if is_neg else 'text-emerald-400'}">{fmt_brl(p['margem'])}</td>
-          <td class="py-3 px-4 text-right font-mono font-bold {'text-rose-300' if is_neg else 'text-emerald-300'}">{fmt_pct(p['margemPct'])}</td>
-        </tr>"""
+        lider_nome = p.get("lider", "")
+        iniciais = leader_iniciais.get(lider_nome, "LP")
+        av_class = leader_avatar_bg.get(lider_nome, "bg-slate-100 text-slate-700")
+        is_neg = p.get("margem", 0) < 0
+
+        if is_neg:
+            card_box = "bg-rose-50/70 dark:bg-rose-950/30 border border-rose-300 dark:border-rose-500/40 hover:border-rose-400"
+            badge_pos = f'<span class="flex-shrink-0 w-5 h-5 rounded bg-rose-600 text-white font-extrabold text-[10px] flex items-center justify-center shadow-xs">#{rank}</span>'
+            pct_badge = "bg-rose-600 text-white font-black"
+            foot_label = "Prejuízo:"
+            foot_val_class = "font-black text-rose-700 dark:text-rose-400"
+        else:
+            card_box = "bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-white/10 hover:border-amber-400"
+            badge_pos = f'<span class="flex-shrink-0 w-5 h-5 rounded bg-slate-500 text-white font-bold text-[10px] flex items-center justify-center">#{rank}</span>'
+            pct_badge = "bg-amber-50 dark:bg-amber-950/50 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-500/30 font-extrabold"
+            foot_label = "Margem:"
+            foot_val_class = "font-bold text-slate-800 dark:text-gray-200"
+
+        bottom10_html += f"""
+        <div class="rounded-lg p-2 {card_box} shadow-sm hover:shadow transition-all">
+          <div class="flex items-center justify-between gap-1.5">
+            <div class="flex items-center gap-1.5 min-w-0">
+              {badge_pos}
+              <span class="font-bold text-slate-900 dark:text-white text-xs truncate" title="{p['projeto']}">{p['projeto']}</span>
+            </div>
+            <div class="flex items-center gap-1.5 flex-shrink-0 tabular-nums">
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-white dark:bg-slate-800 text-slate-800 dark:text-gray-200 border border-slate-200 dark:border-white/10"><span class="text-slate-400 font-medium text-[9px]">Rec:</span> {fmt_k(p['receita'])}</span>
+              <span class="px-1.5 py-0.5 rounded text-[10px] {pct_badge}">{fmt_pct(p['margemPct'])}</span>
+            </div>
+          </div>
+          <div class="flex items-center justify-between mt-1 pt-1 border-t border-slate-200/60 dark:border-white/5 text-[11px]">
+            <div class="flex items-center gap-1 text-slate-500 dark:text-gray-400 truncate">
+              <span class="w-4 h-4 rounded-full {av_class} text-[8px] font-bold flex items-center justify-center flex-shrink-0">{iniciais}</span>
+              <span class="truncate">{lider_nome}</span>
+            </div>
+            <div class="text-right flex items-center gap-1 flex-shrink-0 tabular-nums">
+              <span class="text-[10px] text-slate-400 font-medium">{foot_label}</span>
+              <span class="{foot_val_class} text-xs">{fmt_brl(p['margem'])}</span>
+            </div>
+          </div>
+        </div>"""
 
     # Gerar Tabela: Metas por Área
     metas_rows_html = ""
     for m in metas_areas:
         is_total = m.get("isTotal", False)
-        row_class = "bg-slate-800/80 font-bold border-t-2 border-sky-500/50" if is_total else "hover:bg-slate-800/50 border-b border-white/5"
+        row_class = "bg-slate-100 dark:bg-slate-800/80 font-bold border-t-2 border-sky-500/50" if is_total else "hover:bg-slate-50 dark:hover:bg-slate-800/50 border-b border-slate-200 dark:border-white/5"
         metas_rows_html += f"""
         <tr class="{row_class} transition-colors">
-          <td class="py-3 px-4 {'text-sky-300 font-bold' if is_total else 'text-white'}">{m['area']}</td>
-          <td class="py-3 px-4 text-right font-mono text-gray-300">{fmt_brl(m['meta'])}</td>
-          <td class="py-3 px-4 text-right font-mono font-bold text-emerald-400">{fmt_brl(m['realizado'])}</td>
-          <td class="py-3 px-4 text-right font-mono font-bold text-sky-400">{m['atingidoPct']}</td>
-          <td class="py-3 px-4 text-right font-mono text-amber-300">{fmt_brl(m['falta'])}</td>
-          <td class="py-3 px-4 text-right font-mono text-gray-400">{m['faltaPct']}</td>
+          <td class="py-3 px-4 {'text-sky-600 dark:text-sky-300 font-bold' if is_total else 'text-slate-900 dark:text-white'}">{m['area']}</td>
+          <td class="py-3 px-4 text-right tabular-nums text-slate-700 dark:text-gray-300">{fmt_brl(m['meta'])}</td>
+          <td class="py-3 px-4 text-right tabular-nums font-bold text-emerald-600 dark:text-emerald-400">{fmt_brl(m['realizado'])}</td>
+          <td class="py-3 px-4 text-right tabular-nums font-bold text-sky-600 dark:text-sky-400">{m['atingidoPct']}</td>
+          <td class="py-3 px-4 text-right tabular-nums text-amber-700 dark:text-amber-300">{fmt_brl(m['falta'])}</td>
+          <td class="py-3 px-4 text-right tabular-nums text-slate-500 dark:text-gray-400">{m['faltaPct']}</td>
         </tr>"""
 
     html = f"""<!DOCTYPE html>
@@ -320,12 +415,12 @@ def sync_lider():
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>Painel por Líder de Projeto | NNÓS Controladoria &amp; Gestão Financeira</title>
+  <title>Painel Financeiro por Líder de Projeto | NNÓS Controladoria &amp; Gestão Financeira</title>
 
-  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <!-- Google Fonts: Plus Jakarta Sans (Sem números de máquina de escrever) -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 
   <!-- Tailwind CSS CDN -->
@@ -336,8 +431,7 @@ def sync_lider():
       theme: {{
         extend: {{
           fontFamily: {{
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-            mono: ['"JetBrains Mono"', 'monospace'],
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
           }},
           colors: {{
             brand: {{
@@ -381,87 +475,154 @@ def sync_lider():
   </script>
 
   <style>
-    /* Estilos de rolagem suave */
+    /* Suporte a números tabulares limpos e amigáveis */
+    .tabular-nums {{
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.01em;
+    }}
     html {{ scroll-behavior: smooth; }}
-    .glass-card {{
-      background: rgba(15, 23, 42, 0.75);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {{
+      width: 8px;
+      height: 8px;
+    }}
+    ::-webkit-scrollbar-track {{
+      background: rgba(15, 23, 42, 0.6);
+    }}
+    ::-webkit-scrollbar-thumb {{
+      background: rgba(148, 163, 184, 0.4);
+      border-radius: 9999px;
+    }}
+    ::-webkit-scrollbar-thumb:hover {{
+      background: rgba(148, 163, 184, 0.7);
+    }}
+
+    /* Adaptações do Tema Claro */
+    html.light body {{
+      background-color: #eef2f6 !important;
+      color: #1e293b !important;
+    }}
+    html.light .bg-slate-950,
+    html.light .bg-slate-900 {{
+      background-color: #ffffff !important;
+      color: #1e293b !important;
+    }}
+    html.light [class*="border-white"] {{
+      border-color: rgba(226, 232, 240, 0.9) !important;
+    }}
+    html.light .text-white {{
+      color: #0f172a !important;
+    }}
+    html.light .text-gray-300,
+    html.light .text-gray-400 {{
+      color: #64748b !important;
+    }}
+    html.light header {{
+      background: #ffffff !important;
+      border-bottom: 1px solid #e2e8f0 !important;
+    }}
+    html.light nav[class*="bg-slate-950"] {{
+      background-color: rgba(255, 255, 255, 0.95) !important;
+      border-bottom: 1px solid #e2e8f0 !important;
+    }}
+    html.light [class*="bg-slate-900"] {{
+      background-color: #f8fafc !important;
+      border-bottom: 1px solid #e2e8f0 !important;
+    }}
+    html.light [class*="bg-slate-950"] {{
+      background-color: #f1f5f9 !important;
+      border-color: #e2e8f0 !important;
+    }}
+    html.light .project-card {{
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.05) !important;
+    }}
+    html.light .project-card:hover {{
+      box-shadow: 0 10px 25px -4px rgba(0, 0, 0, 0.1) !important;
     }}
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans min-h-screen antialiased selection:bg-brand-500 selection:text-white">
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen antialiased selection:bg-brand-500 selection:text-white transition-colors duration-200">
 
 <!-- ═══════════ HEADER ═══════════ -->
-<header class="relative overflow-hidden border-b border-white/10 bg-slate-950">
+<header class="relative overflow-hidden border-b border-white/10 bg-slate-950 transition-colors duration-200">
   <div class="absolute inset-0 z-0 pointer-events-none">
     <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-brand-600/15 via-purple-600/10 to-transparent"></div>
     <div class="absolute -top-40 -right-40 w-96 h-96 bg-brand-500/20 rounded-full blur-3xl"></div>
   </div>
-  <div class="max-w-[1720px] mx-auto px-6 py-8 relative z-10">
-    <div class="flex items-center gap-5 mb-5 flex-wrap">
-      <img alt="NNÓS Logo" class="h-14 sm:h-16 w-auto object-contain flex-shrink-0 opacity-95" src="assets/logo-nnos.png"/>
-      <div class="h-12 w-[1px] bg-white/20 hidden sm:block"></div>
-      <div>
-        <div class="flex items-center gap-3 flex-wrap">
-          <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">Painel Financeiro por Líder de Projeto</h1>
-          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5 animate-ping"></span>
-            Dados Sincronizados
-          </span>
+  <div class="max-w-[1720px] mx-auto px-6 py-6 relative z-10">
+    <div class="flex items-center justify-between gap-5 flex-wrap">
+      <!-- Lado Esquerdo: Logo e Títulos -->
+      <div class="flex items-center gap-5 flex-wrap">
+        <img alt="NNÓS Logo" class="h-12 sm:h-14 w-auto object-contain flex-shrink-0 opacity-95" src="assets/logo-nnos.png"/>
+        <div class="h-10 w-[1px] bg-slate-200 dark:bg-white/20 hidden sm:block"></div>
+        <div>
+          <div class="flex items-center gap-3">
+            <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white">Painel Financeiro por Líder de Projeto</h1>
+          </div>
+          <p class="text-xs text-slate-500 dark:text-gray-400 mt-0.5">Controle de rentabilidade, centros de custos e margem operacional por contrato corporativo</p>
         </div>
-        <p class="text-xs sm:text-sm text-gray-400 mt-1">Controle de rentabilidade, centros de custos e margem operacional por contrato corporativo — Fonte Google Sheets.</p>
+      </div>
+
+      <!-- Lado Direito: Toggle Modo Escuro / Claro -->
+      <div class="flex items-center gap-3">
+        <button id="themeToggleBtn" onclick="toggleTheme()" class="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-700 dark:text-amber-300 bg-slate-100 dark:bg-amber-500/20 hover:bg-slate-200 dark:hover:bg-amber-500/30 border border-slate-300 dark:border-amber-400/30 transition-all flex items-center gap-2 shadow-sm cursor-pointer" title="Alternar entre Modo Escuro e Claro">
+          <span class="material-symbols-outlined text-base" id="themeIcon">light_mode</span>
+          <span id="themeText">Modo Claro</span>
+        </button>
       </div>
     </div>
 
     <!-- Tags / Badges Rápidas -->
-    <div class="flex flex-wrap items-center gap-3 text-xs sm:text-sm font-medium">
-      <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900 text-gray-300 border border-white/10 whitespace-nowrap">
+    <div class="flex flex-wrap items-center gap-2.5 mt-4 text-xs font-medium">
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-slate-900 text-slate-700 dark:text-gray-300 border border-slate-200 dark:border-white/10 tabular-nums">
         <span class="material-symbols-outlined text-brand-500 text-sm">calendar_month</span> YTD 2026
       </span>
-      <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900 text-white border border-white/10 font-bold whitespace-nowrap">
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-slate-900 text-slate-900 dark:text-white border border-slate-200 dark:border-white/10 font-bold tabular-nums">
         <span class="material-symbols-outlined text-brand-500 text-sm">payments</span> Total: {fmt_brl(macro.get('receita', 0))}
       </span>
-      <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900 text-gray-300 border border-white/10 whitespace-nowrap">
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-slate-900 text-slate-700 dark:text-gray-300 border border-slate-200 dark:border-white/10 tabular-nums">
         <span class="material-symbols-outlined text-brand-500 text-sm">groups</span> {macro.get('totalLideres', 7)} Líderes
       </span>
-      <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900 text-gray-300 border border-white/10 whitespace-nowrap">
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-slate-900 text-slate-700 dark:text-gray-300 border border-slate-200 dark:border-white/10 tabular-nums">
         <span class="material-symbols-outlined text-brand-500 text-sm">assignment</span> {macro.get('totalProjetos', 44)} Projetos Ativos
       </span>
-      <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900 text-emerald-400 border border-white/10 font-bold whitespace-nowrap">
-        <span class="material-symbols-outlined text-emerald-400 text-sm">trending_up</span> Margem Geral: {fmt_pct(macro.get('margemPct', 0))}
+      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-slate-900 text-emerald-600 dark:text-emerald-400 border border-slate-200 dark:border-white/10 font-bold tabular-nums">
+        <span class="material-symbols-outlined text-emerald-500 text-sm">trending_up</span> Margem Geral: {fmt_pct(macro.get('margemPct', 0))}
       </span>
     </div>
   </div>
 </header>
 
 <!-- ═══════════ NAVBAR INTEGRADA ═══════════ -->
-<nav class="sticky top-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-white/10 shadow-xl">
+<nav class="sticky top-0 z-50 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md border-b border-slate-200 dark:border-white/10 shadow-md transition-colors duration-200">
   <!-- Linha 1: Outros Relatórios e Ações Globais -->
-  <div class="bg-slate-900/90 px-6 py-1.5 border-b border-white/10">
+  <div class="bg-slate-100/90 dark:bg-slate-900/90 px-6 py-1.5 border-b border-slate-200 dark:border-white/10">
     <div class="max-w-[1720px] mx-auto flex items-center justify-between gap-3 flex-wrap">
       <div class="flex items-center gap-2">
-        <span class="text-[11px] font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1.5 mr-1">
-          <span class="material-symbols-outlined text-sm text-sky-400">alt_route</span> Outros Relatórios:
+        <span class="text-[11px] font-bold text-slate-500 dark:text-gray-400 uppercase tracking-wider flex items-center gap-1.5 mr-1">
+          <span class="material-symbols-outlined text-sm text-sky-500">alt_route</span> Outros Relatórios:
         </span>
-        <a href="matriz.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-sky-300 bg-sky-500/20 hover:bg-sky-500/30 border border-sky-400/40 transition-all flex items-center gap-1.5 shadow-sm hover:scale-[1.02] cursor-pointer">
+        <a href="matriz.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-sky-700 dark:text-sky-300 bg-sky-100 dark:bg-sky-500/20 hover:bg-sky-200 dark:hover:bg-sky-500/30 border border-sky-300 dark:border-sky-400/40 transition-all flex items-center gap-1.5 shadow-sm hover:scale-[1.02] cursor-pointer">
           <span class="material-symbols-outlined text-sm">monitoring</span> Matriz 2026
         </a>
-        <a href="uva.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-amber-300 bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/40 transition-all flex items-center gap-1.5 shadow-sm hover:scale-[1.02] cursor-pointer">
+        <a href="uva.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-amber-700 dark:text-amber-300 bg-amber-100 dark:bg-amber-500/20 hover:bg-amber-200 dark:hover:bg-amber-500/30 border border-amber-300 dark:border-amber-400/40 transition-all flex items-center gap-1.5 shadow-sm hover:scale-[1.02] cursor-pointer">
           <span class="material-symbols-outlined text-sm">account_balance</span> Campus BH UVA
         </a>
-        <a href="booking.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-emerald-300 bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/40 transition-all flex items-center gap-1.5 shadow-sm hover:scale-[1.02] cursor-pointer">
+        <a href="booking.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-500/20 hover:bg-emerald-200 dark:hover:bg-emerald-500/30 border border-emerald-300 dark:border-emerald-400/40 transition-all flex items-center gap-1.5 shadow-sm hover:scale-[1.02] cursor-pointer">
           <span class="material-symbols-outlined text-sm">trending_up</span> Performance Projetos
         </a>
-        <a href="prospeccao.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-purple-300 bg-purple-500/20 hover:bg-purple-500/30 border border-purple-400/40 transition-all flex items-center gap-1.5 shadow-sm hover:scale-[1.02] cursor-pointer">
+        <a href="prospeccao.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-purple-700 dark:text-purple-300 bg-purple-100 dark:bg-purple-500/20 hover:bg-purple-200 dark:hover:bg-purple-500/30 border border-purple-300 dark:border-purple-400/40 transition-all flex items-center gap-1.5 shadow-sm hover:scale-[1.02] cursor-pointer">
           <span class="material-symbols-outlined text-sm">explore</span> Prospecção
         </a>
       </div>
       <div class="flex items-center gap-2 ml-auto">
-        <a href="index.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 border border-white/10 transition-colors flex items-center gap-1.5 cursor-pointer">
+        <a href="index.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-white/10 border border-slate-300 dark:border-white/10 transition-colors flex items-center gap-1.5 cursor-pointer">
           <span class="material-symbols-outlined text-sm">grid_view</span> Menu
         </a>
-        <button onclick="logout()" class="px-3 py-1.5 rounded-lg text-xs font-bold text-rose-400 hover:bg-rose-500/20 border border-rose-500/30 transition-colors flex items-center gap-1 cursor-pointer" title="Encerrar Sessão">
+        <button onclick="logout()" class="px-3 py-1.5 rounded-lg text-xs font-bold text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-500/20 border border-rose-300 dark:border-rose-500/30 transition-colors flex items-center gap-1 cursor-pointer" title="Encerrar Sessão">
           <span class="material-symbols-outlined text-sm">logout</span> Sair
         </button>
       </div>
@@ -471,211 +632,280 @@ def sync_lider():
   <!-- Linha 2: Seções do Relatório -->
   <div class="max-w-[1720px] mx-auto px-6 overflow-x-auto">
     <div class="flex items-center gap-1.5 py-2 min-w-max">
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#resumo"><span class="material-symbols-outlined text-sm text-sky-400">monitoring</span> Resumo Geral</a>
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#lideres"><span class="material-symbols-outlined text-sm text-sky-400">groups</span> Painel dos Líderes</a>
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#mais-rentaveis"><span class="material-symbols-outlined text-sm text-emerald-400">stars</span> 20 Mais Rentáveis</a>
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#menos-rentaveis"><span class="material-symbols-outlined text-sm text-rose-400">warning</span> 10 Menos Rentáveis</a>
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#metas"><span class="material-symbols-outlined text-sm text-amber-400">flag</span> Metas por Área</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#resumo"><span class="material-symbols-outlined text-sm text-sky-500">monitoring</span> Resumo Geral</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#lideres"><span class="material-symbols-outlined text-sm text-sky-500">groups</span> Painel dos Líderes</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#ranking-rentabilidade"><span class="material-symbols-outlined text-sm text-emerald-500">stars</span> Ranking de Rentabilidade (Top 20 / Bottom 10)</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#metas"><span class="material-symbols-outlined text-sm text-amber-500">flag</span> Metas por Área</a>
     </div>
   </div>
 </nav>
 
 <!-- ═══════════ CONTEÚDO PRINCIPAL ═══════════ -->
-<main class="max-w-[1720px] w-full mx-auto px-6 py-8 space-y-10">
+<main class="max-w-[1720px] w-full mx-auto px-6 py-6 space-y-8">
 
   <!-- ──────── MACRO METRICS OVERVIEW ──────── -->
   <section id="resumo" class="scroll-mt-28 space-y-4">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       <!-- Métrica 1: Receita Bruta -->
-      <div class="bg-slate-900/90 border border-white/10 rounded-2xl p-5 shadow-lg backdrop-blur relative overflow-hidden group">
-        <div class="flex items-center justify-between text-gray-400 mb-2">
+      <div class="bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-white/10 rounded-2xl p-5 shadow-sm dark:shadow-lg relative overflow-hidden group">
+        <div class="flex items-center justify-between text-slate-500 dark:text-gray-400 mb-2">
           <span class="text-xs font-bold uppercase tracking-wider">Receita Bruta Consolidada</span>
-          <div class="w-8 h-8 rounded-lg bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold text-sm">$</div>
+          <div class="w-8 h-8 rounded-lg bg-sky-50 dark:bg-sky-500/20 text-sky-600 dark:text-sky-400 flex items-center justify-center font-bold text-sm">$</div>
         </div>
-        <div class="text-2xl font-bold tracking-tight text-white font-mono">
+        <div class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white tabular-nums">
           {fmt_brl(macro.get('receita', 0))}
         </div>
-        <p class="text-xs text-gray-400 mt-1.5">Soma de todos os 44 contratos sob gestão</p>
+        <p class="text-xs text-slate-400 dark:text-gray-400 mt-1.5">Soma de todos os 44 contratos sob gestão</p>
         <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-sky-500 to-transparent"></div>
       </div>
 
       <!-- Métrica 2: Custos Operacionais -->
-      <div class="bg-slate-900/90 border border-white/10 rounded-2xl p-5 shadow-lg backdrop-blur relative overflow-hidden group">
-        <div class="flex items-center justify-between text-gray-400 mb-2">
+      <div class="bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-white/10 rounded-2xl p-5 shadow-sm dark:shadow-lg relative overflow-hidden group">
+        <div class="flex items-center justify-between text-slate-500 dark:text-gray-400 mb-2">
           <span class="text-xs font-bold uppercase tracking-wider">Custos Operacionais</span>
-          <div class="w-8 h-8 rounded-lg bg-rose-500/20 text-rose-400 flex items-center justify-center font-bold text-sm">
+          <div class="w-8 h-8 rounded-lg bg-rose-50 dark:bg-rose-500/20 text-rose-600 dark:text-rose-400 flex items-center justify-center font-bold text-sm">
             <span class="material-symbols-outlined text-base">trending_down</span>
           </div>
         </div>
         <div class="flex items-baseline gap-2">
-          <span class="text-2xl font-bold tracking-tight text-white font-mono">{fmt_brl(macro.get('custos', 0))}</span>
-          <span class="text-xs font-bold text-rose-400">{fmt_pct(macro.get('custosPct', 0))}</span>
+          <span class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white tabular-nums">{fmt_brl(macro.get('custos', 0))}</span>
+          <span class="text-xs font-bold text-rose-600 dark:text-rose-400 tabular-nums">{fmt_pct(macro.get('custosPct', 0))}</span>
         </div>
-        <p class="text-xs text-gray-400 mt-1.5">Custos diretos e contratações executadas</p>
+        <p class="text-xs text-slate-400 dark:text-gray-400 mt-1.5">Custos diretos e contratações executadas</p>
         <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-rose-500 to-transparent"></div>
       </div>
 
       <!-- Métrica 3: Margem Líquida Realizada -->
-      <div class="bg-slate-900/90 border border-white/10 rounded-2xl p-5 shadow-lg backdrop-blur relative overflow-hidden group">
-        <div class="flex items-center justify-between text-gray-400 mb-2">
+      <div class="bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-white/10 rounded-2xl p-5 shadow-sm dark:shadow-lg relative overflow-hidden group">
+        <div class="flex items-center justify-between text-slate-500 dark:text-gray-400 mb-2">
           <span class="text-xs font-bold uppercase tracking-wider">Margem Líquida Realizada</span>
-          <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-sm">%</div>
+          <div class="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-sm">%</div>
         </div>
         <div class="flex items-baseline gap-2">
-          <span class="text-2xl font-bold tracking-tight text-emerald-400 font-mono">{fmt_brl(macro.get('margem', 0))}</span>
-          <span class="text-xs font-bold text-emerald-300 bg-emerald-500/20 px-2 py-0.5 rounded-full border border-emerald-500/30">{fmt_pct(macro.get('margemPct', 0))}</span>
+          <span class="text-2xl font-bold tracking-tight text-emerald-600 dark:text-emerald-400 tabular-nums">{fmt_brl(macro.get('margem', 0))}</span>
+          <span class="text-xs font-bold text-emerald-800 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-500/20 px-2 py-0.5 rounded-full border border-emerald-300 dark:border-emerald-500/30 tabular-nums">{fmt_pct(macro.get('margemPct', 0))}</span>
         </div>
-        <p class="text-xs text-gray-400 mt-1.5">Resultado operacional livre após despesas e impostos</p>
+        <p class="text-xs text-slate-400 dark:text-gray-400 mt-1.5">Resultado operacional livre após despesas e impostos</p>
         <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-emerald-500 to-transparent"></div>
       </div>
 
       <!-- Métrica 4: Impostos & Logística -->
-      <div class="bg-slate-900/90 border border-white/10 rounded-2xl p-5 shadow-lg backdrop-blur relative overflow-hidden group">
-        <div class="flex items-center justify-between text-gray-400 mb-2">
+      <div class="bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-white/10 rounded-2xl p-5 shadow-sm dark:shadow-lg relative overflow-hidden group">
+        <div class="flex items-center justify-between text-slate-500 dark:text-gray-400 mb-2">
           <span class="text-xs font-bold uppercase tracking-wider">Impostos &amp; Logística</span>
-          <div class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-sm">
+          <div class="w-8 h-8 rounded-lg bg-indigo-50 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-sm">
             <span class="material-symbols-outlined text-base">receipt_long</span>
           </div>
         </div>
         <div class="flex items-baseline gap-2">
-          <span class="text-2xl font-bold tracking-tight text-white font-mono">{fmt_brl(macro.get('impostos', 0) + macro.get('logistica', 0))}</span>
-          <span class="text-xs font-bold text-indigo-400">{fmt_pct((macro.get('impostos', 0) + macro.get('logistica', 0)) / macro.get('receita', 1) * 100)}</span>
+          <span class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white tabular-nums">{fmt_brl(macro.get('impostos', 0) + macro.get('logistica', 0))}</span>
+          <span class="text-xs font-bold text-slate-500 dark:text-gray-400 tabular-nums">{fmt_pct(macro.get('impostosPct', 12.25) + macro.get('logisticaPct', 0))}</span>
         </div>
-        <p class="text-xs text-gray-400 mt-1.5">Impostos: 12,25% fixos • Logística: 7,21%</p>
+        <p class="text-xs text-slate-400 dark:text-gray-400 mt-1.5">Impostos: {fmt_pct(macro.get('impostosPct', 12.25))} | Logística: {fmt_pct(macro.get('logisticaPct', 0))}</p>
         <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-indigo-500 to-transparent"></div>
       </div>
     </div>
   </section>
 
-  <!-- ──────── FILTROS RÁPIDOS INTERATIVOS ──────── -->
-  <section class="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-slate-900/90 border border-white/10 backdrop-blur">
-    <div class="flex items-center gap-3 flex-wrap">
-      <span class="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
-        <span class="material-symbols-outlined text-sm text-sky-400">filter_alt</span> Filtrar Líder:
-      </span>
-      <button onclick="filtrarLider('todos')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-sky-500 text-white border border-sky-400 transition-all cursor-pointer" data-filter="todos">
+  <!-- ──────── FILTROS POR LÍDER E BUSCA ──────── -->
+  <section class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 p-4 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-white/10 shadow-sm dark:shadow-lg">
+    <!-- Filtros de Líderes -->
+    <div class="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
+      <span class="text-xs font-bold text-slate-500 dark:text-gray-400 uppercase tracking-wider whitespace-nowrap mr-1">Filtrar Líder:</span>
+      <button onclick="filtrarLider('todos')" data-filter="todos" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-sky-500 text-white border border-sky-400 transition-all cursor-pointer">
         Todos (7)
       </button>
-      {" ".join([f'<button onclick="filtrarLider(\'{l["nome"].lower()}\')" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-gray-300 hover:text-white hover:bg-slate-700 border border-white/10 transition-all cursor-pointer" data-filter="{l["nome"].lower()}">{l["nome"]}</button>' for l in leaders])}
+      <button onclick="filtrarLider('beatriz picorelli')" data-filter="beatriz picorelli" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
+        Beatriz
+      </button>
+      <button onclick="filtrarLider('caroline amieva')" data-filter="caroline amieva" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
+        Caroline
+      </button>
+      <button onclick="filtrarLider('jefferson souza')" data-filter="jefferson souza" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
+        Jefferson
+      </button>
+      <button onclick="filtrarLider('joice lage')" data-filter="joice lage" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
+        Joice
+      </button>
+      <button onclick="filtrarLider('leonardo campos')" data-filter="leonardo campos" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
+        Leonardo
+      </button>
+      <button onclick="filtrarLider('vinicius souza')" data-filter="vinicius souza" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
+        Vinicius
+      </button>
+      <button onclick="filtrarLider('fábio canassa')" data-filter="fábio canassa" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
+        Fábio
+      </button>
     </div>
 
-    <!-- Campo de Busca por Projeto -->
-    <div class="relative min-w-[260px]">
-      <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-base">search</span>
-      <input id="searchProject" onkeyup="buscarProjetos()" type="text" placeholder="Buscar contrato ou projeto..." class="w-full pl-9 pr-3 py-1.5 text-xs bg-slate-950/80 rounded-lg border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all"/>
-    </div>
-  </section>
-
-  <!-- ──────── SEÇÃO SWIMLANES DOS LÍDERES ──────── -->
-  <section id="lideres" class="scroll-mt-28 space-y-8">
-    <div class="flex items-center justify-between flex-wrap gap-2">
-      <div>
-        <h2 class="text-2xl font-extrabold text-white tracking-tight flex items-center gap-3">
-          <div class="w-1.5 h-6 bg-sky-500 rounded-full"></div>
-          Painel Financeiro por Líder
-        </h2>
-        <p class="text-xs sm:text-sm text-gray-400 mt-1">Visão detalhada em cards kanban para cada líder corporativo e seus projetos ativos.</p>
-      </div>
-      <div class="text-xs text-gray-400 flex items-center gap-3">
-        <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> &gt; 30% Margem</span>
-        <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-sky-400"></span> 20% a 30%</span>
-        <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-400"></span> 0% a 20%</span>
-        <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-rose-400"></span> Déficit</span>
-      </div>
-    </div>
-
-    <div class="space-y-8">
-      {swimlanes_html}
+    <!-- Campo de Busca de Projetos -->
+    <div class="relative min-w-[240px]">
+      <span class="material-symbols-outlined text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 text-sm">search</span>
+      <input id="searchProject" oninput="buscarProjetos()" type="text" placeholder="Filtrar contrato ou líder..." class="w-full pl-9 pr-3 py-2 text-xs bg-slate-100 dark:bg-slate-950/70 border border-slate-200 dark:border-white/10 rounded-xl text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500/30 transition-all"/>
     </div>
   </section>
 
-  <!-- ──────── 20 PROJETOS MAIS RENTÁVEIS ──────── -->
-  <section id="mais-rentaveis" class="scroll-mt-28 space-y-4">
-    <div class="flex items-center justify-between flex-wrap gap-2">
-      <div>
-        <h2 class="text-2xl font-extrabold text-white tracking-tight flex items-center gap-3">
-          <div class="w-1.5 h-6 bg-emerald-500 rounded-full"></div>
-          20 Projetos Mais Rentáveis
-        </h2>
-        <p class="text-xs sm:text-sm text-gray-400 mt-1">Ranking consolidado dos contratos com maior geração de margem líquida em valor monetário (R$).</p>
-      </div>
-      <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
-        Critério: Margem em Valor (R$)
-      </span>
-    </div>
-
-    <div class="overflow-x-auto rounded-2xl border border-white/10 bg-slate-900/90 shadow-xl backdrop-blur">
-      <table class="w-full text-left border-collapse text-sm">
-        <thead>
-          <tr class="bg-slate-950/80 text-[11px] font-bold text-gray-400 uppercase tracking-wider border-b border-white/10">
-            <th class="py-3.5 px-4 text-center w-16">Ranking</th>
-            <th class="py-3.5 px-4">Projeto / Contrato</th>
-            <th class="py-3.5 px-4">Líder do Projeto</th>
-            <th class="py-3.5 px-4 text-right">Receita (R$)</th>
-            <th class="py-3.5 px-4 text-right">Margem Líquida (R$)</th>
-            <th class="py-3.5 px-4 text-right">Margem (%)</th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-white/5">
-          {mais_rows_html}
-        </tbody>
-      </table>
-    </div>
+  <!-- ──────── RAIAS KANBAN DOS LÍDERES ──────── -->
+  <section id="lideres" class="scroll-mt-28 space-y-10">
+    {swimlanes_html}
   </section>
 
-  <!-- ──────── 10 PROJETOS MENOS RENTÁVEIS ──────── -->
-  <section id="menos-rentaveis" class="scroll-mt-28 space-y-4">
-    <div class="flex items-center justify-between flex-wrap gap-2">
-      <div>
-        <h2 class="text-2xl font-extrabold text-white tracking-tight flex items-center gap-3">
-          <div class="w-1.5 h-6 bg-rose-500 rounded-full"></div>
-          10 Projetos Menos Rentáveis / Déficit
-        </h2>
-        <p class="text-xs sm:text-sm text-gray-400 mt-1">Projetos com menor geração de margem ou déficit operacional apurado no período.</p>
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- 🏆 PAINEL FINANCEIRO - RANKING DE RENTABILIDADE DE PROJETOS        -->
+  <!-- Layout Balanceado em 3 Colunas: Top 1-10, Top 11-20 e Bottom 10    -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section id="ranking-rentabilidade" class="scroll-mt-28 space-y-4 pt-4 border-t border-slate-200 dark:border-white/10">
+
+    <!-- Header da Seção de Rankings -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-md shadow-blue-500/20 flex-shrink-0">
+          <span class="material-symbols-outlined text-xl">leaderboard</span>
+        </div>
+        <div>
+          <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">Painel Financeiro - Ranking de Rentabilidade</h2>
+          <p class="text-xs text-slate-500 dark:text-gray-400">Visão consolidada Top 20 Mais Rentáveis &amp; Bottom 10 por centro de custo</p>
+        </div>
       </div>
-      <span class="px-3 py-1 rounded-full text-xs font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40">
-        Atenção da Diretoria
-      </span>
+      <div class="inline-flex items-center gap-2">
+        <span class="px-3 py-1 rounded-lg text-xs font-bold bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-500/30">
+          Top 20 Rentáveis &amp; Bottom 10
+        </span>
+      </div>
     </div>
 
-    <div class="overflow-x-auto rounded-2xl border border-white/10 bg-slate-900/90 shadow-xl backdrop-blur">
-      <table class="w-full text-left border-collapse text-sm">
-        <thead>
-          <tr class="bg-slate-950/80 text-[11px] font-bold text-gray-400 uppercase tracking-wider border-b border-white/10">
-            <th class="py-3.5 px-4 text-center w-16">Ranking</th>
-            <th class="py-3.5 px-4">Projeto / Contrato</th>
-            <th class="py-3.5 px-4">Líder do Projeto</th>
-            <th class="py-3.5 px-4 text-right">Receita (R$)</th>
-            <th class="py-3.5 px-4 text-right">Margem (R$)</th>
-            <th class="py-3.5 px-4 text-right">Margem (%)</th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-white/5">
-          {menos_rows_html}
-        </tbody>
-      </table>
+    <!-- Top KPIs do Ranking (Compact Bar) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      <!-- Card KPI 1: Receita Top 20 -->
+      <div class="bg-white dark:bg-slate-900 rounded-xl px-4 py-3 border border-slate-200/90 dark:border-white/10 shadow-sm flex items-center justify-between">
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 block">Receita Top 20 Rentáveis</span>
+          <div class="text-lg font-black text-slate-900 dark:text-white tabular-nums">{fmt_brl(rec_top20)}</div>
+          <span class="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">20 projetos consolidados</span>
+        </div>
+        <div class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-xs shadow-inner">$</div>
+      </div>
+
+      <!-- Card KPI 2: Margem Nominal Top 20 -->
+      <div class="bg-white dark:bg-slate-900 rounded-xl px-4 py-3 border border-slate-200/90 dark:border-white/10 shadow-sm flex items-center justify-between">
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 block">Margem Nominal Top 20</span>
+          <div class="text-lg font-black text-emerald-600 dark:text-emerald-400 tabular-nums">{fmt_brl(marg_top20)}</div>
+          <span class="text-[10px] text-slate-500 dark:text-gray-400 font-medium">Média consolidada: <strong class="text-slate-800 dark:text-gray-200 tabular-nums">{fmt_pct(pct_top20)}</strong></span>
+        </div>
+        <div class="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-xs shadow-inner">%</div>
+      </div>
+
+      <!-- Card KPI 3: Déficit Bottom 10 -->
+      <div class="bg-white dark:bg-slate-900 rounded-xl px-4 py-3 border border-rose-200 dark:border-rose-500/40 shadow-sm flex items-center justify-between bg-gradient-to-r from-white to-rose-50/30 dark:from-slate-900 dark:to-rose-950/20">
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400 block">Déficit Bottom 10 (Menos Rentáveis)</span>
+          <div class="text-lg font-black text-rose-600 dark:text-rose-400 tabular-nums">{fmt_brl(deficit_bottom10)}</div>
+          <span class="text-[10px] text-rose-600/90 dark:text-rose-400 font-medium">Impacto: <strong>NNOS Academy</strong> e <strong>Campus BH</strong></span>
+        </div>
+        <div class="w-8 h-8 rounded-lg bg-rose-50 dark:bg-rose-500/20 text-rose-600 dark:text-rose-400 flex items-center justify-center font-bold text-xs shadow-inner">
+          <span class="material-symbols-outlined text-base">arrow_downward</span>
+        </div>
+      </div>
+
+      <!-- Card KPI 4: Critério de Ordenação -->
+      <div class="bg-white dark:bg-slate-900 rounded-xl px-4 py-3 border border-slate-200/90 dark:border-white/10 shadow-sm flex items-center justify-between">
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 block">Critério de Ordenação</span>
+          <div class="text-sm font-extrabold text-slate-900 dark:text-white leading-snug">Margem Nominal Líquida</div>
+          <span class="text-[10px] text-slate-500 dark:text-gray-400 font-medium">Ordenação prioritária em moeda (<strong class="text-slate-700 dark:text-gray-300">R$</strong>)</span>
+        </div>
+        <div class="w-8 h-8 rounded-lg bg-indigo-50 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-xs shadow-inner">
+          <span class="material-symbols-outlined text-base">receipt_long</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grade em 3 Colunas dos Rankings -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 items-stretch">
+
+      <!-- ======================================================== -->
+      <!-- COLUNA 1: TOP 20 MAIS RENTÁVEIS (POSIÇÕES #1 A #10)      -->
+      <!-- ======================================================== -->
+      <div class="flex flex-col bg-white dark:bg-slate-900 rounded-xl border border-slate-200/90 dark:border-white/10 shadow-sm overflow-hidden">
+        <div class="bg-[#1b365d] px-3.5 py-2.5 flex items-center justify-between text-white border-b border-[#142948]">
+          <div class="flex items-center gap-2">
+            <span class="flex h-5 w-5 items-center justify-center rounded bg-emerald-500/20 text-[10px] font-extrabold text-emerald-300 border border-emerald-400/30">
+              01
+            </span>
+            <h3 class="text-xs font-bold tracking-tight uppercase">Top 20 • Líderes (#1 a #10)</h3>
+          </div>
+          <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 tabular-nums">
+            Top 1-10
+          </span>
+        </div>
+        <div class="p-2 space-y-1.5 flex-1 flex flex-col justify-between bg-slate-50/50 dark:bg-slate-950/40">
+          {top20_col1_html}
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- COLUNA 2: TOP 20 MAIS RENTÁVEIS (POSIÇÕES #11 A #20)     -->
+      <!-- ======================================================== -->
+      <div class="flex flex-col bg-white dark:bg-slate-900 rounded-xl border border-slate-200/90 dark:border-white/10 shadow-sm overflow-hidden">
+        <div class="bg-[#1b365d] px-3.5 py-2.5 flex items-center justify-between text-white border-b border-[#142948]">
+          <div class="flex items-center gap-2">
+            <span class="flex h-5 w-5 items-center justify-center rounded bg-emerald-500/20 text-[10px] font-extrabold text-emerald-300 border border-emerald-400/30">
+              02
+            </span>
+            <h3 class="text-xs font-bold tracking-tight uppercase">Top 20 • Sequência (#11 a #20)</h3>
+          </div>
+          <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 tabular-nums">
+            Top 11-20
+          </span>
+        </div>
+        <div class="p-2 space-y-1.5 flex-1 flex flex-col justify-between bg-slate-50/50 dark:bg-slate-950/40">
+          {top20_col2_html}
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- COLUNA 3: 10 PROJETOS MENOS RENTÁVEIS (BOTTOM 10)         -->
+      <!-- ======================================================== -->
+      <div class="flex flex-col bg-white dark:bg-slate-900 rounded-xl border border-slate-200/90 dark:border-white/10 shadow-sm overflow-hidden">
+        <div class="bg-[#c24141] px-3.5 py-2.5 flex items-center justify-between text-white border-b border-[#991b1b]">
+          <div class="flex items-center gap-2">
+            <span class="flex h-5 w-5 items-center justify-center rounded bg-white/20 text-[10px] font-extrabold text-white border border-white/20">
+              10
+            </span>
+            <h3 class="text-xs font-bold tracking-tight uppercase">10 Projetos Menos Rentáveis</h3>
+          </div>
+          <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-white/20 text-white border border-white/20">
+            Atenção Diretoria
+          </span>
+        </div>
+        <div class="p-2 space-y-1.5 flex-1 flex flex-col justify-between bg-slate-50/50 dark:bg-slate-950/40">
+          {bottom10_html}
+        </div>
+      </div>
+
     </div>
   </section>
 
   <!-- ──────── CONTROLE DE METAS POR ÁREA 2026 ──────── -->
-  <section id="metas" class="scroll-mt-28 space-y-4">
+  <section id="metas" class="scroll-mt-28 space-y-4 pt-4 border-t border-slate-200 dark:border-white/10">
     <div class="flex items-center justify-between flex-wrap gap-2">
       <div>
-        <h2 class="text-2xl font-extrabold text-white tracking-tight flex items-center gap-3">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight flex items-center gap-3">
           <div class="w-1.5 h-6 bg-amber-500 rounded-full"></div>
           Controle de Metas por Área | 2026
         </h2>
-        <p class="text-xs sm:text-sm text-gray-400 mt-1">Acompanhamento consolidado entre a meta orçada e a receita realizada por unidade de negócio.</p>
+        <p class="text-xs sm:text-sm text-slate-500 dark:text-gray-400 mt-1">Acompanhamento consolidado entre a meta orçada e a receita realizada por unidade de negócio.</p>
       </div>
-      <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">
+      <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-500/40">
         Exercício 2026
       </span>
     </div>
 
-    <div class="overflow-x-auto rounded-2xl border border-white/10 bg-slate-900/90 shadow-xl backdrop-blur">
+    <div class="overflow-x-auto rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900/90 shadow-sm dark:shadow-xl">
       <table class="w-full text-left border-collapse text-sm">
         <thead>
-          <tr class="bg-slate-950/80 text-[11px] font-bold text-gray-400 uppercase tracking-wider border-b border-white/10">
+          <tr class="bg-slate-50 dark:bg-slate-950/80 text-[11px] font-bold text-slate-500 dark:text-gray-400 uppercase tracking-wider border-b border-slate-200 dark:border-white/10">
             <th class="py-3.5 px-4">Área / Unidade</th>
             <th class="py-3.5 px-4 text-right">Meta 2026 (R$)</th>
             <th class="py-3.5 px-4 text-right">Realizado (R$)</th>
@@ -684,7 +914,7 @@ def sync_lider():
             <th class="py-3.5 px-4 text-right">Falta (%)</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-white/5">
+        <tbody class="divide-y divide-slate-100 dark:divide-white/5">
           {metas_rows_html}
         </tbody>
       </table>
@@ -694,11 +924,11 @@ def sync_lider():
 </main>
 
 <!-- ═══════════ FOOTER ═══════════ -->
-<footer class="bg-slate-950 border-t border-white/10 py-8 px-6 text-center text-xs text-gray-400">
+<footer class="bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-white/10 py-6 px-6 text-center text-xs text-slate-500 dark:text-gray-400 transition-colors duration-200">
   <div class="max-w-[1720px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
     <div class="flex items-center gap-3">
-      <img alt="NNÓS Logo" class="h-10 w-auto object-contain opacity-90" src="assets/logo-nnos.png"/>
-      <span class="font-bold text-white">NNÓS Controladoria &amp; Gestão Financeira</span>
+      <img alt="NNÓS Logo" class="h-8 w-auto object-contain opacity-90" src="assets/logo-nnos.png"/>
+      <span class="font-bold text-slate-800 dark:text-white">NNÓS Controladoria &amp; Gestão Financeira</span>
     </div>
     <div>Relatório Financeiro Gerencial • Período: Janeiro a Setembro de 2026</div>
   </div>
@@ -706,14 +936,46 @@ def sync_lider():
 
 <!-- ═══════════ SCRIPTS INTERATIVOS ═══════════ -->
 <script>
+  // 🌓 Toggle Dark / Light Mode
+  function applyTheme(theme) {{
+    const html = document.documentElement;
+    const icon = document.getElementById('themeIcon');
+    const text = document.getElementById('themeText');
+    if (theme === 'light') {{
+      html.classList.remove('dark');
+      html.classList.add('light');
+      if (icon) icon.textContent = 'dark_mode';
+      if (text) text.textContent = 'Modo Escuro';
+      localStorage.setItem('nnos_lider_theme', 'light');
+    }} else {{
+      html.classList.remove('light');
+      html.classList.add('dark');
+      if (icon) icon.textContent = 'light_mode';
+      if (text) text.textContent = 'Modo Claro';
+      localStorage.setItem('nnos_lider_theme', 'dark');
+    }}
+  }}
+
+  function toggleTheme() {{
+    const isLight = document.documentElement.classList.contains('light');
+    applyTheme(isLight ? 'dark' : 'light');
+  }}
+
+  // Inicializar tema com base na preferência salva
+  (function() {{
+    const saved = localStorage.getItem('nnos_lider_theme') || 'dark';
+    applyTheme(saved);
+  }})();
+
+  // 🔍 Filtro por Líder
   function filtrarLider(lider) {{
     document.querySelectorAll('.filter-btn').forEach(btn => {{
       if (btn.getAttribute('data-filter') === lider) {{
         btn.classList.add('bg-sky-500', 'text-white', 'border-sky-400');
-        btn.classList.remove('bg-slate-800', 'text-gray-300');
+        btn.classList.remove('bg-slate-100', 'dark:bg-slate-800', 'text-slate-700', 'dark:text-gray-300');
       }} else {{
         btn.classList.remove('bg-sky-500', 'text-white', 'border-sky-400');
-        btn.classList.add('bg-slate-800', 'text-gray-300');
+        btn.classList.add('bg-slate-100', 'dark:bg-slate-800', 'text-slate-700', 'dark:text-gray-300');
       }}
     }});
 
@@ -727,6 +989,7 @@ def sync_lider():
     }});
   }}
 
+  // 🔎 Busca de Contratos
   function buscarProjetos() {{
     const q = document.getElementById('searchProject').value.toLowerCase().trim();
     document.querySelectorAll('.project-card').forEach(card => {{
