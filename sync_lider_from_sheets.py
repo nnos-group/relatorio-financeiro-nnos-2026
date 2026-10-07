@@ -395,19 +395,128 @@ def sync_lider():
           </div>
         </div>"""
 
-    # Gerar Tabela: Metas por Área
+    # Formatação compacta para tabela de Metas (estilo 300K, 1,5M, 10,65M)
+    def fmt_meta_compact(val):
+        if val is None or val == 0:
+            return "0"
+        abs_v = abs(val)
+        if abs_v >= 1e6:
+            # Ex: 1,5M, 8,0M, 3,5M, 1,7M, 10,65M, 15,0M
+            if (abs_v / 1e6) >= 10:
+                s = f"{abs_v / 1e6:.2f}".rstrip('0').rstrip('.') if len(f"{abs_v / 1e6:.2f}".split('.')[1].rstrip('0')) > 1 else f"{abs_v / 1e6:.1f}"
+            else:
+                s = f"{abs_v / 1e6:.2f}".rstrip('0').rstrip('.') if len(f"{abs_v / 1e6:.2f}".split('.')[1].rstrip('0')) > 1 else f"{abs_v / 1e6:.1f}"
+            return f"{s}M".replace(".", ",")
+        elif abs_v >= 1e3:
+            s = f"{abs_v / 1e3:.1f}" if (abs_v / 1e3) % 1 != 0 else f"{abs_v / 1e3:.0f}"
+            return f"{s}K".replace(".", ",")
+        else:
+            return f"{abs_v:,.0f}".replace(".", ",")
+
+    def get_pct_float(pct_str):
+        if not pct_str or pct_str == "—":
+            return 0.0
+        clean = pct_str.replace('%', '').replace(',', '.').strip()
+        try:
+            return float(clean)
+        except:
+            return 0.0
+
+    # Gerar Tabela: Metas por Área (Conforme modelo de inspiração)
     metas_rows_html = ""
     for m in metas_areas:
         is_total = m.get("isTotal", False)
-        row_class = "bg-slate-100 dark:bg-slate-800/80 font-bold border-t-2 border-sky-500/50" if is_total else "hover:bg-slate-50 dark:hover:bg-slate-800/50 border-b border-slate-200 dark:border-white/5"
-        metas_rows_html += f"""
-        <tr class="{row_class} transition-colors">
-          <td class="py-3 px-4 {'text-sky-600 dark:text-sky-300 font-bold' if is_total else 'text-slate-900 dark:text-white'}">{m['area']}</td>
-          <td class="py-3 px-4 text-right tabular-nums text-slate-700 dark:text-gray-300">{fmt_brl(m['meta'])}</td>
-          <td class="py-3 px-4 text-right tabular-nums font-bold text-emerald-600 dark:text-emerald-400">{fmt_brl(m['realizado'])}</td>
-          <td class="py-3 px-4 text-right tabular-nums font-bold text-sky-600 dark:text-sky-400">{m['atingidoPct']}</td>
-          <td class="py-3 px-4 text-right tabular-nums text-amber-700 dark:text-amber-300">{fmt_brl(m['falta'])}</td>
-          <td class="py-3 px-4 text-right tabular-nums text-slate-500 dark:text-gray-400">{m['faltaPct']}</td>
+        area_nome = m["area"].strip()
+        area_upper = area_nome.upper()
+        
+        meta_val = m.get("meta", 0)
+        real_val = m.get("realizado", 0)
+        falta_val = m.get("falta", 0)
+        
+        meta_str = fmt_meta_compact(meta_val)
+        real_str = fmt_meta_compact(real_val)
+        falta_str = fmt_meta_compact(falta_val)
+        
+        atingido_str = m.get("atingidoPct", "—")
+        falta_pct_str = m.get("faltaPct", "—")
+        pct_num = get_pct_float(atingido_str)
+        pct_clamped = min(100.0, max(0.0, pct_num))
+
+        if is_total:
+            metas_rows_html += f"""
+        <tr class="bg-[#fef3c7] dark:bg-amber-950/60 border-t-2 border-amber-400 font-black">
+          <td class="py-3.5 px-5 font-black text-slate-950 dark:text-amber-200 text-sm sm:text-base uppercase tracking-tight">
+            META GERAL 2026
+          </td>
+          <td class="py-3.5 px-4 text-center font-black text-slate-950 dark:text-white tabular-nums text-sm sm:text-base">
+            {meta_str}
+          </td>
+          <td class="py-3.5 px-4 text-center font-black text-slate-950 dark:text-white tabular-nums text-sm sm:text-base">
+            {real_str}
+          </td>
+          <td class="py-3.5 px-5 text-left">
+            <div class="flex items-center gap-3">
+              <div class="w-24 sm:w-28 h-3.5 bg-amber-300/80 dark:bg-amber-950 rounded-full overflow-hidden p-0.5 border border-amber-500/40 flex-shrink-0">
+                <div class="h-full rounded-full bg-gradient-to-r from-amber-600 to-amber-500 shadow-sm" style="width: {pct_clamped}%"></div>
+              </div>
+              <span class="font-black text-slate-950 dark:text-amber-200 tabular-nums text-xs sm:text-sm">{atingido_str}</span>
+            </div>
+          </td>
+          <td class="py-3.5 px-4 text-center font-black text-slate-950 dark:text-white tabular-nums text-sm sm:text-base">
+            {falta_str}
+          </td>
+          <td class="py-3.5 px-4 text-center font-black text-slate-950 dark:text-white tabular-nums text-sm sm:text-base">
+            {falta_pct_str}
+          </td>
+          <td class="py-3.5 px-5 text-center">
+            <span class="inline-flex items-center justify-center px-3.5 py-1 rounded-full text-xs font-black bg-amber-400 text-amber-950 border border-amber-500 shadow-sm">
+              EM ANDAMENTO
+            </span>
+          </td>
+        </tr>"""
+        else:
+            if "EDUCA" in area_upper:
+                prog_bar_html = f"""
+            <div class="flex items-center gap-3">
+              <div class="w-24 sm:w-28 h-3 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden p-0.5 border border-slate-200 dark:border-white/10 flex-shrink-0">
+                <div class="h-full rounded-full bg-transparent" style="width: 0%"></div>
+              </div>
+              <span class="font-bold text-slate-400 dark:text-gray-500 text-xs sm:text-sm">—</span>
+            </div>"""
+                situacao_html = '<span class="inline-flex items-center justify-center px-3.5 py-1 rounded-full text-[11px] font-bold bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-600">SEM META</span>'
+            else:
+                prog_bar_html = f"""
+            <div class="flex items-center gap-3">
+              <div class="w-24 sm:w-28 h-3.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden p-0.5 border border-slate-200 dark:border-white/10 flex-shrink-0">
+                <div class="h-full rounded-full bg-gradient-to-r from-sky-400 to-blue-600 shadow-sm" style="width: {pct_clamped}%"></div>
+              </div>
+              <span class="font-bold text-slate-800 dark:text-gray-200 tabular-nums text-xs sm:text-sm">{atingido_str}</span>
+            </div>"""
+                situacao_html = '<span class="inline-flex items-center justify-center px-3.5 py-1 rounded-full text-[11px] font-extrabold bg-[#fef3c7] dark:bg-amber-500/20 text-[#92400e] dark:text-amber-300 border border-[#fcd34d] dark:border-amber-500/40 shadow-xs">EM ANDAMENTO</span>'
+
+            metas_rows_html += f"""
+        <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors border-b border-slate-100 dark:border-white/5">
+          <td class="py-3 px-5 font-extrabold text-slate-900 dark:text-white text-xs sm:text-sm uppercase tracking-wide">
+            {area_upper}
+          </td>
+          <td class="py-3 px-4 text-center font-bold text-slate-800 dark:text-gray-200 tabular-nums text-xs sm:text-sm">
+            {meta_str}
+          </td>
+          <td class="py-3 px-4 text-center font-bold text-slate-800 dark:text-gray-200 tabular-nums text-xs sm:text-sm">
+            {real_str}
+          </td>
+          <td class="py-3 px-5 text-left">
+            {prog_bar_html}
+          </td>
+          <td class="py-3 px-4 text-center font-bold text-slate-800 dark:text-gray-200 tabular-nums text-xs sm:text-sm">
+            {falta_str}
+          </td>
+          <td class="py-3 px-4 text-center font-bold text-slate-800 dark:text-gray-200 tabular-nums text-xs sm:text-sm">
+            {falta_pct_str}
+          </td>
+          <td class="py-3 px-5 text-center">
+            {situacao_html}
+          </td>
         </tr>"""
 
     html = f"""<!DOCTYPE html>
@@ -888,30 +997,36 @@ def sync_lider():
   </section>
 
   <!-- ──────── CONTROLE DE METAS POR ÁREA 2026 ──────── -->
-  <section id="metas" class="scroll-mt-28 space-y-4 pt-4 border-t border-slate-200 dark:border-white/10">
-    <div class="flex items-center justify-between flex-wrap gap-2">
-      <div>
-        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight flex items-center gap-3">
-          <div class="w-1.5 h-6 bg-amber-500 rounded-full"></div>
-          Controle de Metas por Área | 2026
-        </h2>
-        <p class="text-xs sm:text-sm text-slate-500 dark:text-gray-400 mt-1">Acompanhamento consolidado entre a meta orçada e a receita realizada por unidade de negócio.</p>
+  <section id="metas" class="scroll-mt-28 space-y-4 pt-6 border-t border-slate-200 dark:border-white/10">
+    <div class="flex items-center justify-between flex-wrap gap-3">
+      <div class="flex items-center gap-3.5">
+        <div class="w-11 h-11 rounded-full bg-[#002b49] text-white flex items-center justify-center shadow-md shadow-blue-950/20 flex-shrink-0">
+          <span class="material-symbols-outlined text-2xl text-sky-400">bar_chart</span>
+        </div>
+        <div>
+          <h2 class="text-xl sm:text-2xl font-black tracking-tight text-slate-900 dark:text-white uppercase">
+            CONTROLE DE METAS POR ÁREA <span class="text-[#b45309] dark:text-amber-500 font-black">| 2026</span>
+          </h2>
+          <p class="text-xs text-slate-500 dark:text-gray-400 mt-0.5">Acompanhamento consolidado entre a meta orçada e a receita realizada por unidade de negócio.</p>
+        </div>
       </div>
       <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-500/40">
         Exercício 2026
       </span>
     </div>
 
-    <div class="overflow-x-auto rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900/90 shadow-sm dark:shadow-xl">
-      <table class="w-full text-left border-collapse text-sm">
+    <!-- Tabela Estilizada conforme Modelo -->
+    <div class="overflow-x-auto rounded-2xl border border-slate-200/90 dark:border-white/10 bg-white dark:bg-slate-900 shadow-md">
+      <table class="w-full text-left border-collapse text-xs sm:text-sm">
         <thead>
-          <tr class="bg-slate-50 dark:bg-slate-950/80 text-[11px] font-bold text-slate-500 dark:text-gray-400 uppercase tracking-wider border-b border-slate-200 dark:border-white/10">
-            <th class="py-3.5 px-4">Área / Unidade</th>
-            <th class="py-3.5 px-4 text-right">Meta 2026 (R$)</th>
-            <th class="py-3.5 px-4 text-right">Realizado (R$)</th>
-            <th class="py-3.5 px-4 text-right">Atingido (%)</th>
-            <th class="py-3.5 px-4 text-right">Falta (R$)</th>
-            <th class="py-3.5 px-4 text-right">Falta (%)</th>
+          <tr class="bg-gradient-to-r from-[#00223a] via-[#003865] to-[#00223a] text-white font-black text-[11px] sm:text-xs uppercase tracking-wider">
+            <th class="py-3 px-5 text-left">ÁREA</th>
+            <th class="py-3 px-4 text-center">META</th>
+            <th class="py-3 px-4 text-center">REALIZADO</th>
+            <th class="py-3 px-5 text-left min-w-[190px]">ATINGIDO</th>
+            <th class="py-3 px-4 text-center">FALTA</th>
+            <th class="py-3 px-4 text-center">FALTA %</th>
+            <th class="py-3 px-5 text-center">SITUAÇÃO</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-slate-100 dark:divide-white/5">
