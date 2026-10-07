@@ -10,6 +10,8 @@ uva_file = os.path.join(repo_dir, "contas-a-pagar-uva.html")
 uva_target = os.path.join(repo_dir, "uva.html")
 booking_file = os.path.join(repo_dir, "dashboard-executivo-booking.html")
 booking_target = os.path.join(repo_dir, "booking.html")
+prospeccao_file = os.path.join(repo_dir, "dashboard-executivo-prospeccao.html")
+prospeccao_target = os.path.join(repo_dir, "prospeccao.html")
 output_index = os.path.join(repo_dir, "index.html")
 
 auth_script = """
@@ -86,7 +88,19 @@ def build():
         with open(booking_file, "w", encoding="utf-8") as f:
             f.write(booking_raw)
 
-    # 4. Sync Index Cards
+    # 4. Sync Prospeccao
+    if os.path.exists(prospeccao_file):
+        with open(prospeccao_file, "r", encoding="utf-8") as f:
+            prosp_raw = f.read()
+        prosp_raw = ensure_favicon(prosp_raw)
+        if 'sessionStorage.getItem' not in prosp_raw:
+            prosp_raw = prosp_raw.replace('</head>', auth_script + '</head>')
+        with open(prospeccao_target, "w", encoding="utf-8") as f:
+            f.write(prosp_raw)
+        with open(prospeccao_file, "w", encoding="utf-8") as f:
+            f.write(prosp_raw)
+
+    # 5. Sync Index Cards
     if os.path.exists(output_index):
         with open(output_index, "r", encoding="utf-8") as f:
             index_raw = f.read()
@@ -151,11 +165,28 @@ def build():
                 return f"{m.group(1)}{uva_tot_str}{m.group(2)}{uva_quit_str}{m.group(3)}{uva_imob_str}{m.group(4)}"
             index_raw = re.sub(card2_pattern, replace_card2, index_raw, flags=re.DOTALL)
 
+        # Update Card 4 from prospeccao_data.json
+        prosp_json = os.path.join(repo_dir, "prospeccao_data.json")
+        if os.path.exists(prosp_json):
+            with open(prosp_json, "r", encoding="utf-8") as f:
+                p_items = json.load(f)
+            p_total = sum(it["valor"] for it in p_items)
+            p_count = len(p_items)
+            p_prosp = sum(it["valor"] for it in p_items if it.get("categoria") == "Prospecção")
+            
+            p_total_str = f"R$ {p_total/1e3:.1f}K".replace('.', ',')
+            p_prosp_str = f"R$ {p_prosp/1e3:.1f}K".replace('.', ',')
+            
+            card4_pattern = r'(<!-- Card 4: Despesas Operacionais.*?Total Geral</div>\s*<div class="[^"]*">)[^<]+(</div>.*?Atividades</div>\s*<div class="[^"]*">)[^<]+(</div>.*?Prospecção</div>\s*<div class="[^"]*">)[^<]+(</div>)'
+            def replace_card4(m):
+                return f"{m.group(1)}{p_total_str}{m.group(2)}{p_count}{m.group(3)}{p_prosp_str}{m.group(4)}"
+            index_raw = re.sub(card4_pattern, replace_card4, index_raw, flags=re.DOTALL)
+
         index_updated = ensure_favicon(index_raw)
         with open(output_index, "w", encoding="utf-8") as f:
             f.write(index_updated)
 
-    print("Portal e demonstrativos independentes (matriz.html, uva.html, booking.html, index.html) sincronizados com sucesso!")
+    print("Portal e demonstrativos independentes (matriz.html, uva.html, booking.html, prospeccao.html, index.html) sincronizados com sucesso!")
 
 if __name__ == "__main__":
     build()
