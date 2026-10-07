@@ -188,6 +188,21 @@ def sync_prospeccao():
         flags=re.DOTALL
     )
 
+    # Otimizar Cabeçalho para formato compacto lado a lado (Logo ao lado do Título)
+    html = html.replace(
+        'max-w-[1440px] mx-auto px-6 py-12 relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-8',
+        'max-w-[1440px] mx-auto px-6 py-6 relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6'
+    )
+    html = html.replace(
+        '<div class="max-w-2xl">\n<img alt="NNÓS Logo" class="h-16 w-auto object-contain mb-6"',
+        '<div class="max-w-4xl">\n<div class="flex items-center gap-5 mb-4">\n<img alt="NNÓS Logo" class="h-16 w-auto object-contain flex-shrink-0 opacity-95"'
+    )
+    html = re.sub(
+        r'(<img alt="NNÓS Logo"[^>]+>)\s*<h1 class="text-3xl md:text-4xl font-bold font-display text-text-primary mb-3 tracking-tight">([^<]+)</h1>\s*<p class="text-text-muted text-lg mb-6 text-gray-200">([^<]+)</p>',
+        r'\1\n<div class="h-12 w-[1px] bg-white/20 hidden sm:block"></div>\n<div>\n<h1 class="text-2xl md:text-3xl font-bold font-display text-text-primary tracking-tight leading-tight">\2</h1>\n<p class="text-text-muted text-sm md:text-base text-gray-200 mt-0.5">\3</p>\n</div>\n</div>',
+        html
+    )
+
     # 3. Substituição da Navbar: Padronização em 2 Linhas com Outros Relatórios (Matriz, UVA, Booking, Menu, Sair)
     standard_nav = """
 <nav class="sticky top-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-white/10 shadow-xl">

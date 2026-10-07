@@ -505,15 +505,19 @@ full_html = f'''<!DOCTYPE html>
 
 <!-- HEADER -->
 <header class="relative overflow-hidden bg-transparent border-b border-white/10">
-  <div class="max-w-[1440px] mx-auto px-6 py-10 relative z-10 flex items-center justify-between gap-8">
-    <div class="max-w-4xl">
-      <div class="flex items-center gap-4 mb-4">
-        <img alt="NNÓS Logo" class="h-16 w-auto object-contain" src="{LOGO_B64_WHITE}"/>
-        <div class="h-8 w-[1px] bg-white/20"></div>
-        <span class="text-xs font-bold text-brand-blue uppercase tracking-widest bg-brand-blue/10 px-3 py-1 rounded-full border border-brand-blue/30">Relatório Financeiro Gerencial</span>
+  <div class="max-w-[1440px] mx-auto px-6 py-6 relative z-10 flex items-center justify-between gap-6">
+    <div class="max-w-5xl">
+      <div class="flex items-center gap-5 mb-4">
+        <img alt="NNÓS Logo" class="h-16 w-auto object-contain flex-shrink-0" src="{LOGO_B64_WHITE}"/>
+        <div class="h-12 w-[1px] bg-white/20 hidden sm:block"></div>
+        <div>
+          <div class="flex items-center gap-3 mb-1">
+            <h1 class="text-2xl md:text-3xl font-extrabold font-display text-white tracking-tight leading-tight">Demonstrativo de Resultados &amp; Dashboard Executivo</h1>
+            <span class="text-[10px] font-bold text-brand-blue uppercase tracking-widest bg-brand-blue/10 px-2.5 py-0.5 rounded-full border border-brand-blue/30 hidden md:inline-block">Relatório Gerencial</span>
+          </div>
+          <p class="text-gray-300 text-xs md:text-sm">Análise financeira gerencial — Visão acumulada de {num_months} meses ({periodo_extenso}) - Fonte Conta Azul</p>
+        </div>
       </div>
-      <h1 class="text-3xl md:text-4xl font-extrabold font-display text-white mb-2 tracking-tight">Demonstrativo de Resultados &amp; Dashboard Executivo</h1>
-      <p class="text-gray-300 text-base mb-6">Análise financeira gerencial — Visão acumulada de {num_months} meses ({periodo_extenso}) - Fonte Conta Azul</p>
       <div class="flex flex-wrap gap-3 text-xs font-semibold">
         <span class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 text-white border border-white/10">
           <span class="material-symbols-outlined text-brand-blue text-sm">calendar_month</span> {periodo_badge}
