@@ -65,15 +65,6 @@ async function run() {
     const valStr = (r[5] || '').toString().trim().replace(/\./g, '').replace(',', '.');
     const valor = parseFloat(valStr) || 0;
 
-    // Normalização de linhas vazias identificadas no Google Sheets
-    if (!ativ && dtIni === '24/01/2026' && valor === 1486.20) {
-      ativ = 'Reunião Diretoria NNÓS (24/Jan)';
-      local = 'Nova Lima | MG';
-    } else if (!ativ && dtIni === '09/09/2026' && valor === 170.04) {
-      ativ = 'Alimentação Visita Volvo';
-      local = 'Curitiba | PR';
-    }
-
     if (!ativ && valor === 0) continue;
 
     // Padronizar separador de localidade

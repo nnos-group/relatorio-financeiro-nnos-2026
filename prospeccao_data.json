@@ -50,8 +50,8 @@
   {
     "id": 5,
     "projeto": "",
-    "nome": "Alimentação Visita Volvo",
-    "local": "Curitiba - PR",
+    "nome": "ALMOÇO COMERCIAL UVA",
+    "local": "BELO HORIZONTE - MG",
     "mes": "Set",
     "tipo": "nac",
     "valor": 170.04,
@@ -446,8 +446,8 @@
   {
     "id": 38,
     "projeto": "",
-    "nome": "Reunião Diretoria NNÓS (24/Jan)",
-    "local": "Nova Lima - MG",
+    "nome": "REUNIÃO DIRETORIA NNÓS",
+    "local": "NOVA LIMA - MG",
     "mes": "Jan",
     "tipo": "nac",
     "valor": 1486.2,

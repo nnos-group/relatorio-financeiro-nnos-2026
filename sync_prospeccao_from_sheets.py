@@ -482,7 +482,7 @@ def sync_prospeccao():
           <div class="text-brand-blue font-mono font-bold">{fmt_brl(mes_gastos['Set'])}</div>
           <span class="text-text-muted text-sm">| {mes_counts['Set']} atividades</span>
         </div>
-        <p class="text-sm text-on-surface">★ <strong class="text-white">Visita Técnica à Volvo em Curitiba (R$ 3.436,15)</strong> • Almoço em SP com Stellantis (R$ 209,08) • Alimentação / Logística Volvo (R$ 170,04)</p>
+        <p class="text-sm text-on-surface">★ <strong class="text-white">Visita Técnica à Volvo em Curitiba (R$ 3.436,15)</strong> • Almoço em SP com Stellantis (R$ 209,08) • Almoço Comercial UVA (R$ 170,04)</p>
       </div>
     </div>
 """
