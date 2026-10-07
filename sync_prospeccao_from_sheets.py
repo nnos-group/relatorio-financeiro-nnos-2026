@@ -259,27 +259,11 @@ def sync_prospeccao():
         flags=re.DOTALL
     )
 
-    # 3. Substituição da Navbar: Padronização em 2 Linhas
+    # 3. Substituição da Navbar: Padronização em 2 Linhas (Outros Relatórios Acima)
     standard_nav = """
 <nav class="sticky top-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-white/10 shadow-xl">
-  <!-- Linha 1: Seções do Relatório -->
-  <div class="max-w-[1440px] mx-auto px-6 overflow-x-auto">
-    <div class="flex items-center gap-1.5 py-2 min-w-max">
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#kpis"><span class="material-symbols-outlined text-sm text-purple-400">monitoring</span> KPIs</a>
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#mensal"><span class="material-symbols-outlined text-sm text-purple-400">show_chart</span> Gasto Mensal</a>
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#categorias"><span class="material-symbols-outlined text-sm text-purple-400">category</span> Categorias</a>
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#geografico"><span class="material-symbols-outlined text-sm text-purple-400">map</span> Geográfico</a>
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#top10"><span class="material-symbols-outlined text-sm text-purple-400">local_fire_department</span> Top 10</a>
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#atividades"><span class="material-symbols-outlined text-sm text-purple-400">list_alt</span> Atividades</a>
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#cenarios"><span class="material-symbols-outlined text-sm text-purple-400">explore</span> Cenários</a>
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#timeline"><span class="material-symbols-outlined text-sm text-purple-400">timeline</span> Timeline</a>
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#alertas"><span class="material-symbols-outlined text-sm text-purple-400">warning</span> Alertas</a>
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#recomendacoes"><span class="material-symbols-outlined text-sm text-purple-400">lightbulb</span> Recomendações</a>
-    </div>
-  </div>
-
-  <!-- Linha 2: Ações Rápidas Fixadas Abaixo do Menu -->
-  <div class="border-t border-white/10 bg-slate-900/90 px-6 py-1.5">
+  <!-- Linha 1: Outros Relatórios e Ações Globais -->
+  <div class="bg-slate-900/90 px-6 py-1.5 border-b border-white/10">
     <div class="max-w-[1440px] mx-auto flex items-center justify-between gap-3 flex-wrap">
       <div class="flex items-center gap-2">
         <span class="text-[11px] font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1.5 mr-1">
@@ -303,6 +287,22 @@ def sync_prospeccao():
           <span class="material-symbols-outlined text-sm">logout</span> Sair
         </button>
       </div>
+    </div>
+  </div>
+
+  <!-- Linha 2: Seções do Relatório -->
+  <div class="max-w-[1440px] mx-auto px-6 overflow-x-auto">
+    <div class="flex items-center gap-1.5 py-2 min-w-max">
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#kpis"><span class="material-symbols-outlined text-sm text-purple-400">monitoring</span> KPIs</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#mensal"><span class="material-symbols-outlined text-sm text-purple-400">show_chart</span> Gasto Mensal</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#categorias"><span class="material-symbols-outlined text-sm text-purple-400">category</span> Categorias</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#geografico"><span class="material-symbols-outlined text-sm text-purple-400">map</span> Geográfico</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#top10"><span class="material-symbols-outlined text-sm text-purple-400">local_fire_department</span> Top 10</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#atividades"><span class="material-symbols-outlined text-sm text-purple-400">list_alt</span> Atividades</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#cenarios"><span class="material-symbols-outlined text-sm text-purple-400">explore</span> Cenários</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#timeline"><span class="material-symbols-outlined text-sm text-purple-400">timeline</span> Timeline</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#alertas"><span class="material-symbols-outlined text-sm text-purple-400">warning</span> Alertas</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#recomendacoes"><span class="material-symbols-outlined text-sm text-purple-400">lightbulb</span> Recomendações</a>
     </div>
   </div>
 </nav>
