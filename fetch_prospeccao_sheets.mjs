@@ -53,6 +53,55 @@ async function run() {
     '07': 'Jul', '08': 'Ago', '09': 'Set', '10': 'Out', '11': 'Nov', '12': 'Dez'
   };
 
+const SIGLAS = new Set([
+  'NNÓS', 'NNOS', 'MG', 'SP', 'PR', 'RJ', 'EUA', 'USA', 'PAR', 'CT', 'UVA', 
+  'TRP', 'LATAM', 'BI', 'ADS', 'NH', 'IA', 'IVECO', 'DAF', 'BH', 'RH', 'NY', 
+  'VOA', 'DRE', 'ROI', 'YTD', 'CRM', 'ERP', 'SODECIA', 'JAECCO'
+]);
+
+const LOWERCASE_WORDS = new Set([
+  'de', 'da', 'do', 'das', 'dos', 'em', 'com', 'para', 'por', 'e', 'a', 'ao', 'aos', 'à', 'às'
+]);
+
+function cleanTitleCase(text) {
+  if (!text) return text;
+  const parts = text.split(/(\s*[-–—/\\+&]\s*|\s*\(\s*|\s*\)\s*)/);
+  const resParts = parts.map(part => {
+    if (/^\s*[-–—/\\+&]\s*$/.test(part) || /^\s*[\(\)]\s*$/.test(part)) return part;
+    const tokens = part.match(/[\wÀ-ÿ]+|[^\w\sÀ-ÿ]+|\s+/g) || [];
+    let isFirst = true;
+    return tokens.map(token => {
+      if (/^[\wÀ-ÿ]+$/.test(token)) {
+        const upper = token.toUpperCase();
+        let formatted = '';
+        for (const s of SIGLAS) {
+          if (upper === s.toUpperCase()) {
+            formatted = s;
+            break;
+          }
+        }
+        if (!formatted) {
+          if (!isFirst && LOWERCASE_WORDS.has(upper.toLowerCase())) {
+            formatted = upper.toLowerCase();
+          } else {
+            formatted = token.charAt(0).toUpperCase() + token.slice(1).toLowerCase();
+          }
+        }
+        isFirst = false;
+        return formatted;
+      } else {
+        if (/[:.!]/.test(token)) isFirst = true;
+        return token;
+      }
+    }).join('');
+  });
+  let res = resParts.join('');
+  res = res.replace(/\bProspeção\b/gi, 'Prospecção');
+  res = res.replace(/\bProspecçao\b/gi, 'Prospecção');
+  res = res.replace(/\bAssunçao\b/gi, 'Assunção');
+  return res;
+}
+
   const items = [];
   for (let i = 1; i < rows.length; i++) {
     const r = rows[i];
@@ -70,6 +119,11 @@ async function run() {
     // Padronizar separador de localidade
     local = local.replace(/\s*\|\s*/g, ' - ');
     if (!local) local = 'Brasil';
+
+    // Converter caixa alta para Title Case preservando siglas
+    ativ = cleanTitleCase(ativ);
+    local = cleanTitleCase(local);
+    if (proj) proj = cleanTitleCase(proj);
 
     // Mês da atividade
     const mNum = dtIni.split('/')[1];

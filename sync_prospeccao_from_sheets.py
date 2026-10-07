@@ -26,6 +26,63 @@ def sync_prospeccao():
     with open(data_json, "r", encoding="utf-8") as f:
         atividades = json.load(f)
 
+    SIGLAS = {
+        'NNÓS', 'NNOS', 'MG', 'SP', 'PR', 'RJ', 'EUA', 'USA', 'PAR', 'CT', 'UVA', 
+        'TRP', 'LATAM', 'BI', 'ADS', 'NH', 'IA', 'IVECO', 'DAF', 'BH', 'RH', 'NY', 
+        'VOA', 'DRE', 'ROI', 'YTD', 'CRM', 'ERP', 'SODECIA', 'JAECCO'
+    }
+
+    LOWERCASE_WORDS = {
+        'de', 'da', 'do', 'das', 'dos', 'em', 'com', 'para', 'por', 'e', 'a', 'ao', 'aos', 'à', 'às'
+    }
+
+    def clean_title_case(text):
+        if not text:
+            return text
+        def format_word(match, is_first):
+            w = match.group(0)
+            upper_w = w.upper()
+            for s in SIGLAS:
+                if upper_w == s.upper():
+                    return s
+            if not is_first and upper_w.lower() in LOWERCASE_WORDS:
+                return upper_w.lower()
+            return w.capitalize()
+
+        parts = re.split(r'(\s*[-–—/\\+&]\s*|\s*\(\s*|\s*\)\s*)', text)
+        res_parts = []
+        for part in parts:
+            if re.match(r'^\s*[-–—/\\+&]\s*$|^\s*[\(\)]\s*$', part):
+                res_parts.append(part)
+                continue
+            words = re.findall(r'[\wÀ-ÿ]+|[^\w\sÀ-ÿ]+|\s+', part)
+            part_out = []
+            is_first = True
+            for token in words:
+                if re.match(r'^[\wÀ-ÿ]+$', token):
+                    part_out.append(format_word(re.match(r'^[\wÀ-ÿ]+$', token), is_first))
+                    is_first = False
+                else:
+                    part_out.append(token)
+                    if token.strip() in {':', '.', '!'}:
+                        is_first = True
+            res_parts.append(''.join(part_out))
+        
+        res = ''.join(res_parts)
+        res = re.sub(r'\bProspeção\b', 'Prospecção', res, flags=re.IGNORECASE)
+        res = re.sub(r'\bProspecçao\b', 'Prospecção', res, flags=re.IGNORECASE)
+        res = re.sub(r'\bAssunçao\b', 'Assunção', res, flags=re.IGNORECASE)
+        return res
+
+    for a in atividades:
+        nome = a.get("nome", "")
+        if nome.startswith("eunião"):
+            nome = "R" + nome
+        a["nome"] = clean_title_case(nome)
+        a["local"] = clean_title_case(a.get("local", ""))
+        if a.get("projeto"):
+            a["projeto"] = clean_title_case(a.get("projeto", ""))
+
     total_gasto = sum(a["valor"] for a in atividades)
     total_atividades = len(atividades)
     ticket_medio = total_gasto / total_atividades if total_atividades > 0 else 0
@@ -164,48 +221,42 @@ def sync_prospeccao():
 
     # 2. Header: Período, Total, Atividades, Destinos & Logo ao lado do Título
     destinos_unicos = len(set(a["local"] for a in atividades))
-    header_badges = f"""
-        <span class="flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container text-on-surface border border-surface-variant">
-          <span class="material-symbols-outlined text-brand-blue text-sm">calendar_month</span> Jan/2026 a Set/2026
-        </span>
-        <span class="flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container text-on-surface border border-surface-variant font-bold text-white">
-          <span class="material-symbols-outlined text-brand-blue text-sm">payments</span> Total: {fmt_brl(total_gasto)}
-        </span>
-        <span class="flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container text-on-surface border border-surface-variant">
-          <span class="material-symbols-outlined text-brand-blue text-sm">assignment</span> {total_atividades} Atividades
-        </span>
-        <span class="flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container text-on-surface border border-surface-variant">
-          <span class="material-symbols-outlined text-brand-blue text-sm">public</span> {destinos_unicos} Destinos
-        </span>
-"""
+    header_html = f"""<!-- ═══════════ HEADER ═══════════ -->
+<header class="relative overflow-hidden border-b border-surface-variant">
+  <div class="absolute inset-0 z-0">
+    <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-brand-blue/10 to-transparent"></div>
+    <div class="absolute -top-40 -right-40 w-96 h-96 bg-brand-blue/20 rounded-full blur-3xl"></div>
+  </div>
+  <div class="max-w-[1440px] mx-auto px-6 py-8 relative z-10">
+    <div class="flex items-center gap-5 mb-5">
+      <img alt="NNÓS Logo" class="h-14 sm:h-16 w-auto object-contain flex-shrink-0 opacity-95" src="assets/logo-nnos.png"/>
+      <div class="h-12 w-[1px] bg-white/20 hidden sm:block"></div>
+      <div>
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold font-display text-text-primary tracking-tight">Dashboard Executivo de Despesas Operacionais</h1>
+        <p class="text-text-muted text-sm sm:text-base mt-1">Análise consolidada de viagens e atividades corporativas — NNÓS Business Solutions</p>
+      </div>
+    </div>
+    <div class="flex flex-wrap items-center gap-3 text-xs sm:text-sm font-medium">
+      <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface border border-surface-variant whitespace-nowrap">
+        <span class="material-symbols-outlined text-brand-blue text-sm">calendar_month</span> Jan/2026 a Set/2026
+      </span>
+      <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface border border-surface-variant font-bold text-white whitespace-nowrap">
+        <span class="material-symbols-outlined text-brand-blue text-sm">payments</span> Total: {fmt_brl(total_gasto)}
+      </span>
+      <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface border border-surface-variant whitespace-nowrap">
+        <span class="material-symbols-outlined text-brand-blue text-sm">assignment</span> {total_atividades} Atividades
+      </span>
+      <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface border border-surface-variant whitespace-nowrap">
+        <span class="material-symbols-outlined text-brand-blue text-sm">public</span> {destinos_unicos} Destinos
+      </span>
+    </div>
+  </div>
+</header>"""
     html = re.sub(
-        r'<div class="flex flex-wrap gap-4 text-sm font-medium">.*?</div>',
-        f'<div class="flex flex-wrap gap-4 text-sm font-medium">{header_badges}</div>',
+        r'(<!-- ═══════════ HEADER ═══════════ -->\s*)?<header.*?</header>',
+        header_html,
         html,
         flags=re.DOTALL
-    )
-
-    # Remover Card de Imagem Quebrada se houver
-    html = re.sub(
-        r'<div class="hidden md:block w-72 h-48 rounded-xl.*?</div>\s*</div>\s*</div>\s*</header>',
-        '</div>\n  </div>\n</header>',
-        html,
-        flags=re.DOTALL
-    )
-
-    # Otimizar Cabeçalho para formato compacto lado a lado (Logo ao lado do Título)
-    html = html.replace(
-        'max-w-[1440px] mx-auto px-6 py-12 relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-8',
-        'max-w-[1440px] mx-auto px-6 py-6 relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6'
-    )
-    html = html.replace(
-        '<div class="max-w-2xl">\n<img alt="NNÓS Logo" class="h-16 w-auto object-contain mb-6"',
-        '<div class="max-w-4xl">\n<div class="flex items-center gap-5 mb-4">\n<img alt="NNÓS Logo" class="h-16 w-auto object-contain flex-shrink-0 opacity-95"'
-    )
-    html = re.sub(
-        r'(<img alt="NNÓS Logo"[^>]+>)\s*<h1 class="text-3xl md:text-4xl font-bold font-display text-text-primary mb-3 tracking-tight">([^<]+)</h1>\s*<p class="text-text-muted text-lg mb-6 text-gray-200">([^<]+)</p>',
-        r'\1\n<div class="h-12 w-[1px] bg-white/20 hidden sm:block"></div>\n<div>\n<h1 class="text-2xl md:text-3xl font-bold font-display text-text-primary tracking-tight leading-tight">\2</h1>\n<p class="text-text-muted text-sm md:text-base text-gray-200 mt-0.5">\3</p>\n</div>\n</div>',
-        html
     )
 
     # 3. Substituição da Navbar: Padronização em 2 Linhas
