@@ -45,7 +45,7 @@
     color: #dce2f7;
     font-family: 'Inter', sans-serif;
     min-height: 100vh;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background 0.3s ease, color 0.3s ease;
   }
   h1, h2, h3, h4, h5, h6, .font-display {
     font-family: 'Manrope', sans-serif;
@@ -96,9 +96,6 @@
   }
   html.light .kpi-label {
     color: #64748b !important;
-  }
-  html.light .kpi-val {
-    color: #0f172a !important;
   }
   html.light .portal-title {
     color: #0f172a !important;
@@ -177,11 +174,11 @@
   </div>
 </div>
 
-<!-- ═══════════ MAIN PORTAL CONTAINER ═══════════ -->
-<div id="portal-container" class="hidden min-h-screen flex flex-col justify-between py-4 px-4 sm:px-6 relative">
+<!-- ═══════════ MAIN PORTAL CONTAINER (CENTRALIZADO VERTICALMENTE) ═══════════ -->
+<div id="portal-container" class="hidden min-h-screen flex flex-col justify-center items-center py-6 px-4 sm:px-6 relative">
 
   <!-- Floating Global Actions: Theme Toggle + Logout -->
-  <div class="absolute top-4 right-4 sm:top-5 sm:right-6 z-30 flex items-center gap-2">
+  <div class="absolute top-4 right-4 sm:top-6 sm:right-6 z-30 flex items-center gap-2">
     <button id="themeToggleBtn" onclick="toggleTheme()" class="theme-toggle-btn px-3 py-1.5 rounded-xl text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white bg-white/90 dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-white/10 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm text-xs font-semibold backdrop-blur-md" title="Alternar Modo Escuro / Claro">
       <span class="material-symbols-outlined text-base theme-icon">light_mode</span>
       <span class="theme-label hidden md:inline">Modo Claro</span>
@@ -192,10 +189,10 @@
     </button>
   </div>
 
-  <div class="max-w-[1720px] mx-auto w-full flex-1 flex flex-col justify-between pt-1 pb-2">
+  <div class="max-w-[1720px] mx-auto w-full my-auto flex flex-col justify-center py-2">
 
     <!-- Top Brand & Header -->
-    <div class="text-center max-w-2xl mx-auto mb-4 2xl:mb-6">
+    <div class="text-center max-w-2xl mx-auto mb-5 2xl:mb-7">
       <img src="assets/logo-nnos-horizontal.png" alt="NNÓS Logo" class="brand-logo-auto h-11 2xl:h-12 mx-auto mb-2.5 opacity-95"/>
       <div class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-brand-blue/10 border border-brand-blue/30 text-brand-blue text-[10px] 2xl:text-[11px] font-bold uppercase tracking-wider mb-1.5 security-badge">
         <span class="material-symbols-outlined text-xs">verified_user</span> Ambiente Seguro • Controladoria Executiva
@@ -206,11 +203,11 @@
       <p class="portal-subtitle text-text-muted text-xs md:text-sm">Selecione o demonstrativo que deseja consultar em tempo real:</p>
     </div>
 
-    <!-- Grid dos Relatórios (Cards Verticais Destacados em 5 Colunas Lado a Lado) -->
+    <!-- Grid dos Relatórios (Cards Verticais Centralizados em 5 Colunas Lado a Lado) -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3.5 2xl:gap-4.5 w-full items-stretch">
 
       <!-- Card 1: Relatório Matriz -->
-      <div class="glass-card portal-card rounded-2xl p-5 2xl:p-6 flex flex-col justify-between group relative overflow-hidden min-h-[500px] 2xl:min-h-[540px]">
+      <div class="glass-card portal-card rounded-2xl p-5 2xl:p-6 flex flex-col justify-between group relative overflow-hidden min-h-[500px] 2xl:min-h-[530px]">
         <div class="absolute top-0 right-0 w-32 h-32 bg-sky-500/10 rounded-bl-full pointer-events-none group-hover:bg-sky-500/20 transition-colors"></div>
         
         <div>
@@ -237,18 +234,20 @@
         <!-- Middle & Bottom -->
         <div class="mt-auto space-y-4">
           <!-- KPI Box -->
-          <div class="card-kpi-box grid grid-cols-3 gap-1.5 py-3 px-2 rounded-xl bg-slate-900/70 border border-white/5 text-center">
-            <div>
-              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400">Receita YTD</div>
-              <div class="kpi-val text-xs 2xl:text-sm font-extrabold text-white font-mono mt-0.5">R$ 7,88M</div>
+          <div class="card-kpi-box flex items-center justify-between py-2.5 px-1.5 rounded-xl bg-slate-900/70 border border-white/5">
+            <div class="flex-1 flex flex-col items-center justify-center min-w-0 px-1">
+              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400 mb-0.5 whitespace-nowrap truncate">Receita YTD</div>
+              <div class="text-xs 2xl:text-[13px] font-bold text-slate-800 dark:text-white whitespace-nowrap tracking-tight">R$ 7,88M</div>
             </div>
-            <div class="border-x border-white/10 dark:border-white/10 border-slate-300">
-              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400">Margem Bruta</div>
-              <div class="kpi-val text-xs 2xl:text-sm font-extrabold text-emerald-500 dark:text-emerald-400 font-mono mt-0.5">46,5%</div>
+            <div class="h-7 w-px bg-slate-300 dark:bg-white/10 flex-shrink-0"></div>
+            <div class="flex-1 flex flex-col items-center justify-center min-w-0 px-1">
+              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400 mb-0.5 whitespace-nowrap truncate">Margem Bruta</div>
+              <div class="text-xs 2xl:text-[13px] font-bold text-emerald-600 dark:text-emerald-400 whitespace-nowrap tracking-tight">46,5%</div>
             </div>
-            <div>
-              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400">Período</div>
-              <div class="kpi-val text-xs 2xl:text-sm font-extrabold text-sky-500 dark:text-sky-400 mt-0.5">9 Meses</div>
+            <div class="h-7 w-px bg-slate-300 dark:bg-white/10 flex-shrink-0"></div>
+            <div class="flex-1 flex flex-col items-center justify-center min-w-0 px-1">
+              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400 mb-0.5 whitespace-nowrap truncate">Período</div>
+              <div class="text-xs 2xl:text-[13px] font-bold text-sky-600 dark:text-sky-400 whitespace-nowrap tracking-tight">9 Meses</div>
             </div>
           </div>
 
@@ -261,7 +260,7 @@
       </div>
 
       <!-- Card 2: Campus BH UVA -->
-      <div class="glass-card portal-card rounded-2xl p-5 2xl:p-6 flex flex-col justify-between group relative overflow-hidden min-h-[500px] 2xl:min-h-[540px]">
+      <div class="glass-card portal-card rounded-2xl p-5 2xl:p-6 flex flex-col justify-between group relative overflow-hidden min-h-[500px] 2xl:min-h-[530px]">
         <div class="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-bl-full pointer-events-none group-hover:bg-amber-500/20 transition-colors"></div>
         
         <div>
@@ -289,18 +288,20 @@
         <!-- Middle & Bottom -->
         <div class="mt-auto space-y-4">
           <!-- KPI Box -->
-          <div class="card-kpi-box grid grid-cols-3 gap-1.5 py-3 px-2 rounded-xl bg-slate-900/70 border border-white/5 text-center">
-            <div>
-              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400">Total Geral</div>
-              <div class="kpi-val text-xs 2xl:text-sm font-extrabold text-white font-mono mt-0.5">R$ 598,5K</div>
+          <div class="card-kpi-box flex items-center justify-between py-2.5 px-1.5 rounded-xl bg-slate-900/70 border border-white/5">
+            <div class="flex-1 flex flex-col items-center justify-center min-w-0 px-1">
+              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400 mb-0.5 whitespace-nowrap truncate">Total Geral</div>
+              <div class="text-xs 2xl:text-[13px] font-bold text-slate-800 dark:text-white whitespace-nowrap tracking-tight">R$ 598,5K</div>
             </div>
-            <div class="border-x border-white/10 dark:border-white/10 border-slate-300">
-              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400">Taxa Quitação</div>
-              <div class="kpi-val text-xs 2xl:text-sm font-extrabold text-emerald-500 dark:text-emerald-400 font-mono mt-0.5">98.21%</div>
+            <div class="h-7 w-px bg-slate-300 dark:bg-white/10 flex-shrink-0"></div>
+            <div class="flex-1 flex flex-col items-center justify-center min-w-0 px-1">
+              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400 mb-0.5 whitespace-nowrap truncate">Taxa Quitação</div>
+              <div class="text-xs 2xl:text-[13px] font-bold text-emerald-600 dark:text-emerald-400 whitespace-nowrap tracking-tight">98.21%</div>
             </div>
-            <div>
-              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400">Imobilizado</div>
-              <div class="kpi-val text-xs 2xl:text-sm font-extrabold text-amber-500 dark:text-amber-400 mt-0.5">R$ 337,8K</div>
+            <div class="h-7 w-px bg-slate-300 dark:bg-white/10 flex-shrink-0"></div>
+            <div class="flex-1 flex flex-col items-center justify-center min-w-0 px-1">
+              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400 mb-0.5 whitespace-nowrap truncate">Imobilizado</div>
+              <div class="text-xs 2xl:text-[13px] font-bold text-amber-600 dark:text-amber-400 whitespace-nowrap tracking-tight">R$ 337,8K</div>
             </div>
           </div>
 
@@ -313,7 +314,7 @@
       </div>
 
       <!-- Card 3: Performance de Projetos (Booking) -->
-      <div class="glass-card portal-card rounded-2xl p-5 2xl:p-6 flex flex-col justify-between group relative overflow-hidden min-h-[500px] 2xl:min-h-[540px]">
+      <div class="glass-card portal-card rounded-2xl p-5 2xl:p-6 flex flex-col justify-between group relative overflow-hidden min-h-[500px] 2xl:min-h-[530px]">
         <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-bl-full pointer-events-none group-hover:bg-emerald-500/20 transition-colors"></div>
         
         <div>
@@ -341,18 +342,20 @@
         <!-- Middle & Bottom -->
         <div class="mt-auto space-y-4">
           <!-- KPI Box -->
-          <div class="card-kpi-box grid grid-cols-3 gap-1.5 py-3 px-2 rounded-xl bg-slate-900/70 border border-white/5 text-center">
-            <div>
-              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400">Projetos</div>
-              <div class="kpi-val text-xs 2xl:text-sm font-extrabold text-white font-mono mt-0.5">44</div>
+          <div class="card-kpi-box flex items-center justify-between py-2.5 px-1.5 rounded-xl bg-slate-900/70 border border-white/5">
+            <div class="flex-1 flex flex-col items-center justify-center min-w-0 px-1">
+              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400 mb-0.5 whitespace-nowrap truncate">Projetos</div>
+              <div class="text-xs 2xl:text-[13px] font-bold text-slate-800 dark:text-white whitespace-nowrap tracking-tight">44</div>
             </div>
-            <div class="border-x border-white/10 dark:border-white/10 border-slate-300">
-              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400">Receita Total</div>
-              <div class="kpi-val text-xs 2xl:text-sm font-extrabold text-emerald-500 dark:text-emerald-400 font-mono mt-0.5">R$ 10,64M</div>
+            <div class="h-7 w-px bg-slate-300 dark:bg-white/10 flex-shrink-0"></div>
+            <div class="flex-1 flex flex-col items-center justify-center min-w-0 px-1">
+              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400 mb-0.5 whitespace-nowrap truncate">Receita Total</div>
+              <div class="text-xs 2xl:text-[13px] font-bold text-emerald-600 dark:text-emerald-400 whitespace-nowrap tracking-tight">R$ 10,64M</div>
             </div>
-            <div>
-              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400">Margem Bruta</div>
-              <div class="kpi-val text-xs 2xl:text-sm font-extrabold text-teal-500 dark:text-teal-400 mt-0.5">R$ 1,60M</div>
+            <div class="h-7 w-px bg-slate-300 dark:bg-white/10 flex-shrink-0"></div>
+            <div class="flex-1 flex flex-col items-center justify-center min-w-0 px-1">
+              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400 mb-0.5 whitespace-nowrap truncate">Margem Bruta</div>
+              <div class="text-xs 2xl:text-[13px] font-bold text-teal-600 dark:text-teal-400 whitespace-nowrap tracking-tight">R$ 1,60M</div>
             </div>
           </div>
 
@@ -365,7 +368,7 @@
       </div>
 
       <!-- Card 4: Despesas Operacionais & Prospecção -->
-      <div class="glass-card portal-card rounded-2xl p-5 2xl:p-6 flex flex-col justify-between group relative overflow-hidden min-h-[500px] 2xl:min-h-[540px]">
+      <div class="glass-card portal-card rounded-2xl p-5 2xl:p-6 flex flex-col justify-between group relative overflow-hidden min-h-[500px] 2xl:min-h-[530px]">
         <div class="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-bl-full pointer-events-none group-hover:bg-purple-500/20 transition-colors"></div>
         
         <div>
@@ -393,18 +396,20 @@
         <!-- Middle & Bottom -->
         <div class="mt-auto space-y-4">
           <!-- KPI Box -->
-          <div class="card-kpi-box grid grid-cols-3 gap-1.5 py-3 px-2 rounded-xl bg-slate-900/70 border border-white/5 text-center">
-            <div>
-              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400">Total Geral</div>
-              <div class="kpi-val text-xs 2xl:text-sm font-extrabold text-white font-mono mt-0.5">R$ 157,1K</div>
+          <div class="card-kpi-box flex items-center justify-between py-2.5 px-1.5 rounded-xl bg-slate-900/70 border border-white/5">
+            <div class="flex-1 flex flex-col items-center justify-center min-w-0 px-1">
+              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400 mb-0.5 whitespace-nowrap truncate">Total Geral</div>
+              <div class="text-xs 2xl:text-[13px] font-bold text-slate-800 dark:text-white whitespace-nowrap tracking-tight">R$ 157,1K</div>
             </div>
-            <div class="border-x border-white/10 dark:border-white/10 border-slate-300">
-              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400">Atividades</div>
-              <div class="kpi-val text-xs 2xl:text-sm font-extrabold text-purple-500 dark:text-purple-400 font-mono mt-0.5">52</div>
+            <div class="h-7 w-px bg-slate-300 dark:bg-white/10 flex-shrink-0"></div>
+            <div class="flex-1 flex flex-col items-center justify-center min-w-0 px-1">
+              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400 mb-0.5 whitespace-nowrap truncate">Atividades</div>
+              <div class="text-xs 2xl:text-[13px] font-bold text-purple-600 dark:text-purple-400 whitespace-nowrap tracking-tight">52</div>
             </div>
-            <div>
-              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400">Prospecção</div>
-              <div class="kpi-val text-xs 2xl:text-sm font-extrabold text-fuchsia-500 dark:text-fuchsia-400 mt-0.5">R$ 15,3K</div>
+            <div class="h-7 w-px bg-slate-300 dark:bg-white/10 flex-shrink-0"></div>
+            <div class="flex-1 flex flex-col items-center justify-center min-w-0 px-1">
+              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400 mb-0.5 whitespace-nowrap truncate">Prospecção</div>
+              <div class="text-xs 2xl:text-[13px] font-bold text-fuchsia-600 dark:text-fuchsia-400 whitespace-nowrap tracking-tight">R$ 15,3K</div>
             </div>
           </div>
 
@@ -417,7 +422,7 @@
       </div>
 
       <!-- Card 5: Painel por Líder -->
-      <div class="glass-card portal-card rounded-2xl p-5 2xl:p-6 flex flex-col justify-between group relative overflow-hidden min-h-[500px] 2xl:min-h-[540px]">
+      <div class="glass-card portal-card rounded-2xl p-5 2xl:p-6 flex flex-col justify-between group relative overflow-hidden min-h-[500px] 2xl:min-h-[530px]">
         <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-bl-full pointer-events-none group-hover:bg-blue-500/20 transition-colors"></div>
         
         <div>
@@ -445,18 +450,20 @@
         <!-- Middle & Bottom -->
         <div class="mt-auto space-y-4">
           <!-- KPI Box -->
-          <div class="card-kpi-box grid grid-cols-3 gap-1.5 py-3 px-2 rounded-xl bg-slate-900/70 border border-white/5 text-center">
-            <div>
-              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400">Líderes</div>
-              <div class="kpi-val text-xs 2xl:text-sm font-extrabold text-white font-mono mt-0.5">7</div>
+          <div class="card-kpi-box flex items-center justify-between py-2.5 px-1.5 rounded-xl bg-slate-900/70 border border-white/5">
+            <div class="flex-1 flex flex-col items-center justify-center min-w-0 px-1">
+              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400 mb-0.5 whitespace-nowrap truncate">Líderes</div>
+              <div class="text-xs 2xl:text-[13px] font-bold text-slate-800 dark:text-white whitespace-nowrap tracking-tight">7</div>
             </div>
-            <div class="border-x border-white/10 dark:border-white/10 border-slate-300">
-              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400">Projetos</div>
-              <div class="kpi-val text-xs 2xl:text-sm font-extrabold text-blue-500 dark:text-blue-400 font-mono mt-0.5">44</div>
+            <div class="h-7 w-px bg-slate-300 dark:bg-white/10 flex-shrink-0"></div>
+            <div class="flex-1 flex flex-col items-center justify-center min-w-0 px-1">
+              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400 mb-0.5 whitespace-nowrap truncate">Projetos</div>
+              <div class="text-xs 2xl:text-[13px] font-bold text-blue-600 dark:text-blue-400 whitespace-nowrap tracking-tight">44</div>
             </div>
-            <div>
-              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400">Receita Total</div>
-              <div class="kpi-val text-xs 2xl:text-sm font-extrabold text-emerald-500 dark:text-emerald-400 mt-0.5">R$ 10,64M</div>
+            <div class="h-7 w-px bg-slate-300 dark:bg-white/10 flex-shrink-0"></div>
+            <div class="flex-1 flex flex-col items-center justify-center min-w-0 px-1">
+              <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400 mb-0.5 whitespace-nowrap truncate">Receita Total</div>
+              <div class="text-xs 2xl:text-[13px] font-bold text-emerald-600 dark:text-emerald-400 whitespace-nowrap tracking-tight">R$ 10,64M</div>
             </div>
           </div>
 
