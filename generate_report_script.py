@@ -743,7 +743,7 @@ full_html = f'''<!DOCTYPE html>
 
 <!-- HEADER -->
 <header class="relative overflow-hidden bg-transparent border-b border-white/10">
-  <div class="max-w-[1440px] mx-auto px-6 py-6 relative z-10 flex items-center justify-between gap-6">
+  <div class="max-w-[1720px] mx-auto px-6 py-6 relative z-10 flex items-center justify-between gap-6">
     <div class="max-w-5xl">
       <div class="flex items-center gap-5 mb-4">
         <img alt="NNÓS Logo" class="logo-dark h-16 w-auto object-contain flex-shrink-0" src="{LOGO_B64_WHITE}"/>
@@ -779,7 +779,7 @@ full_html = f'''<!DOCTYPE html>
 <nav class="sticky top-0 z-50 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md border-b border-slate-200 dark:border-white/10 shadow-md transition-colors duration-200">
   <!-- Linha 1: Outros Relatórios e Ações Globais -->
   <div class="bg-slate-100/90 dark:bg-slate-900/90 px-6 py-1.5 border-b border-slate-200 dark:border-white/10">
-    <div class="max-w-[1440px] mx-auto flex items-center justify-between gap-3 flex-wrap">
+    <div class="max-w-[1720px] mx-auto flex items-center justify-between gap-3 flex-wrap">
       <div class="flex items-center gap-2">
         <span class="text-[11px] font-bold text-slate-500 dark:text-gray-400 uppercase tracking-wider flex items-center gap-1.5 mr-1">
           <span class="material-symbols-outlined text-sm text-sky-500">alt_route</span> Outros Relatórios:
@@ -812,7 +812,7 @@ full_html = f'''<!DOCTYPE html>
   </div>
 
   <!-- Linha 2: Seções do Relatório -->
-  <div class="max-w-[1440px] mx-auto px-6 overflow-x-auto">
+  <div class="max-w-[1720px] mx-auto px-6 overflow-x-auto">
     <div class="flex items-center gap-1.5 py-2 min-w-max">
       <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-2" href="#kpis"><span class="material-symbols-outlined text-base text-brand-blue">monitoring</span> KPIs Estratégicos</a>
       <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-2" href="#dre"><span class="material-symbols-outlined text-base text-brand-blue">table_chart</span> DRE Gerencial</a>
@@ -826,7 +826,7 @@ full_html = f'''<!DOCTYPE html>
 </nav>
 
 <!-- MAIN CONTENT -->
-<main class="max-w-[1440px] mx-auto px-6 py-10 space-y-12">
+<main class="max-w-[1720px] mx-auto px-6 py-10 space-y-12">
 
   <!-- ──────── SECTION 1: KPIS ──────── -->
   <section class="scroll-mt-24" id="kpis">
@@ -1137,11 +1137,10 @@ full_html = f'''<!DOCTYPE html>
 </main>
 
 <!-- FOOTER -->
-<footer class="bg-slate-950 border-t border-white/10 py-8 px-6 text-center text-xs text-gray-400">
-  <div class="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+<footer class="bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-white/10 py-6 px-6 text-center text-xs text-slate-500 dark:text-gray-400 transition-colors duration-200">
+  <div class="max-w-[1720px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
     <div class="flex items-center gap-3">
-      <img alt="NNÓS Logo" class="h-10 w-auto object-contain opacity-90" src="{LOGO_B64_WHITE}"/>
-      <span class="font-bold text-white">NNÓS Controladoria &amp; Gestão Financeira</span>
+      <img alt="NNÓS" class="h-8 md:h-9 w-auto object-contain rounded" src="assets/logo-nnos-horizontal.png"/>
     </div>
     <div>Relatório Financeiro Gerencial • Período: {periodo_extenso}</div>
   </div>

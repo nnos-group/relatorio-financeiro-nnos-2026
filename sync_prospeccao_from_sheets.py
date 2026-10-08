@@ -404,7 +404,7 @@ def sync_prospeccao():
     <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-brand-blue/10 to-transparent"></div>
     <div class="absolute -top-40 -right-40 w-96 h-96 bg-brand-blue/20 rounded-full blur-3xl"></div>
   </div>
-  <div class="max-w-[1440px] mx-auto px-6 py-8 relative z-10">
+  <div class="max-w-[1720px] mx-auto px-6 py-8 relative z-10">
     <div class="flex items-center gap-5 mb-5">
       <img alt="NNÓS Logo" class="h-14 sm:h-16 w-auto object-contain flex-shrink-0 opacity-95" src="assets/logo-nnos.png"/>
       <div class="h-12 w-[1px] bg-white/20 hidden sm:block"></div>
@@ -441,7 +441,7 @@ def sync_prospeccao():
 <nav class="sticky top-0 z-50 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md border-b border-slate-200 dark:border-white/10 shadow-md transition-colors duration-200">
   <!-- Linha 1: Outros Relatórios e Ações Globais -->
   <div class="bg-slate-100/90 dark:bg-slate-900/90 px-6 py-1.5 border-b border-slate-200 dark:border-white/10">
-    <div class="max-w-[1440px] mx-auto flex items-center justify-between gap-3 flex-wrap">
+    <div class="max-w-[1720px] mx-auto flex items-center justify-between gap-3 flex-wrap">
       <div class="flex items-center gap-2">
         <span class="text-[11px] font-bold text-slate-500 dark:text-gray-400 uppercase tracking-wider flex items-center gap-1.5 mr-1">
           <span class="material-symbols-outlined text-sm text-sky-500">alt_route</span> Outros Relatórios:
@@ -474,7 +474,7 @@ def sync_prospeccao():
   </div>
 
   <!-- Linha 2: Seções do Relatório -->
-  <div class="max-w-[1440px] mx-auto px-6 overflow-x-auto">
+  <div class="max-w-[1720px] mx-auto px-6 overflow-x-auto">
     <div class="flex items-center gap-1.5 py-2 min-w-max">
       <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#kpis"><span class="material-symbols-outlined text-sm text-purple-500">monitoring</span> KPIs</a>
       <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#mensal"><span class="material-symbols-outlined text-sm text-purple-500">show_chart</span> Gasto Mensal</a>
@@ -529,20 +529,21 @@ def sync_prospeccao():
     if '</body>' in html and 'theme-toggle-btn' in html and 'applyTheme' not in html:
         html = html.replace('</body>', theme_script + '\n</body>')
 
-    # Padronizar Rodapé (sem o texto duplicado da direita)
+    # Padronizar Rodapé
     standard_footer_prosp = """
 <!-- FOOTER -->
-<footer class="bg-slate-950 border-t border-white/10 py-8 px-6 text-center text-xs text-gray-400">
-  <div class="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+<footer class="bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-white/10 py-6 px-6 text-center text-xs text-slate-500 dark:text-gray-400 transition-colors duration-200">
+  <div class="max-w-[1720px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
     <div class="flex items-center gap-3">
-      <img alt="NNÓS Logo" class="h-10 w-auto object-contain opacity-90" src="assets/logo-nnos.png"/>
-      <span class="font-bold text-white">NNÓS Controladoria &amp; Gestão Financeira</span>
+      <img alt="NNÓS" class="h-8 md:h-9 w-auto object-contain rounded" src="assets/logo-nnos-horizontal.png"/>
     </div>
-    <div>Relatório Financeiro Gerencial • Período: Janeiro a Setembro de 2026</div>
+    <div>Relatório Comercial &amp; Financeiro • Período: 2026</div>
   </div>
 </footer>
 """
     html = re.sub(r'(<!-- FOOTER -->\s*)?<footer.*?</footer\s*>', standard_footer_prosp.strip(), html, flags=re.DOTALL)
+    # Padronizar todas as larguras de tela para 1720px (referência Painel por Líder)
+    html = html.replace('max-w-[1440px]', 'max-w-[1720px]')
 
     # 4. Atualizar KPIs Cards (Seção #kpis)
     kpis_html = f"""

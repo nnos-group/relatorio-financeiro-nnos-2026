@@ -303,19 +303,19 @@ def sync_lider():
         av_class = leader_avatar_bg.get(lider_nome, "bg-slate-100 text-slate-700")
 
         if rank == 1:
-            badge_pos = '<span class="flex-shrink-0 w-5 h-5 rounded bg-emerald-600 text-white font-extrabold text-[10px] flex items-center justify-center shadow-xs">#1</span>'
+            badge_pos = '<span class="flex-shrink-0 w-5 h-5 rounded bg-emerald-600 text-white font-extrabold text-[10px] flex items-center justify-center shadow-xs">1</span>'
             border_pos = "border-2 border-emerald-500/60 dark:border-emerald-500/40 hover:border-emerald-600"
             pct_badge = "bg-emerald-100 text-emerald-950 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-400 dark:border-emerald-500/40 font-black"
         elif rank <= 3:
-            badge_pos = f'<span class="flex-shrink-0 w-5 h-5 rounded bg-[#1b365d] text-white font-extrabold text-[10px] flex items-center justify-center">#{rank}</span>'
+            badge_pos = f'<span class="flex-shrink-0 w-5 h-5 rounded bg-[#1b365d] text-white font-extrabold text-[10px] flex items-center justify-center">{rank}</span>'
             border_pos = "border border-slate-300 dark:border-white/10 hover:border-blue-500"
             pct_badge = "bg-emerald-50 text-emerald-900 dark:bg-emerald-950/50 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-500/30 font-black"
         elif rank <= 10:
-            badge_pos = f'<span class="flex-shrink-0 w-5 h-5 rounded bg-slate-700 text-white font-bold text-[10px] flex items-center justify-center">#{rank}</span>'
+            badge_pos = f'<span class="flex-shrink-0 w-5 h-5 rounded bg-slate-700 text-white font-bold text-[10px] flex items-center justify-center">{rank}</span>'
             border_pos = "border border-slate-300 dark:border-white/10 hover:border-blue-500"
             pct_badge = "bg-teal-50 text-teal-900 dark:bg-teal-950/50 dark:text-teal-300 border border-teal-300 dark:border-teal-500/30 font-black"
         else:
-            badge_pos = f'<span class="flex-shrink-0 w-5 h-5 rounded bg-slate-500 text-white font-bold text-[10px] flex items-center justify-center">#{rank}</span>'
+            badge_pos = f'<span class="flex-shrink-0 w-5 h-5 rounded bg-slate-500 text-white font-bold text-[10px] flex items-center justify-center">{rank}</span>'
             border_pos = "border border-slate-300 dark:border-white/10 hover:border-blue-500"
             pct_badge = "bg-amber-50 text-amber-900 dark:bg-amber-950/50 dark:text-amber-300 border border-amber-300 dark:border-amber-500/30 font-black"
 
@@ -360,7 +360,7 @@ def sync_lider():
 
         if is_neg:
             card_box = "ranking-item-danger bg-rose-50/90 dark:bg-rose-950/40 border-2 border-rose-300 dark:border-rose-500/40 hover:border-rose-400"
-            badge_pos = f'<span class="flex-shrink-0 w-5 h-5 rounded bg-rose-600 text-white font-extrabold text-[10px] flex items-center justify-center shadow-xs">#{rank}</span>'
+            badge_pos = f'<span class="flex-shrink-0 w-5 h-5 rounded bg-rose-600 text-white font-extrabold text-[10px] flex items-center justify-center shadow-xs">{rank}</span>'
             pct_badge = "bg-rose-600 text-white font-black"
             foot_label = "Prejuízo:"
             foot_val_class = "font-black text-rose-700 dark:text-rose-400"
@@ -368,7 +368,7 @@ def sync_lider():
             border_bottom = "border-rose-200/90 dark:border-white/5"
         else:
             card_box = "bg-white dark:bg-slate-900 border border-slate-300 dark:border-white/10 hover:border-amber-400"
-            badge_pos = f'<span class="flex-shrink-0 w-5 h-5 rounded bg-slate-500 text-white font-bold text-[10px] flex items-center justify-center">#{rank}</span>'
+            badge_pos = f'<span class="flex-shrink-0 w-5 h-5 rounded bg-slate-500 text-white font-bold text-[10px] flex items-center justify-center">{rank}</span>'
             pct_badge = "bg-amber-50 dark:bg-amber-950/50 text-amber-900 dark:text-amber-300 border border-amber-300 dark:border-amber-500/30 font-black"
             foot_label = "Margem:"
             foot_val_class = "font-black text-slate-900 dark:text-gray-200"
@@ -963,7 +963,7 @@ def sync_lider():
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 items-stretch">
 
       <!-- ======================================================== -->
-      <!-- COLUNA 1: TOP 20 MAIS RENTÁVEIS (POSIÇÕES #1 A #10)      -->
+      <!-- COLUNA 1: TOP 20 MAIS RENTÁVEIS (POSIÇÕES 1 A 10)         -->
       <!-- ======================================================== -->
       <div class="flex flex-col bg-white dark:bg-slate-900 rounded-xl border border-slate-300 dark:border-white/10 shadow-sm overflow-hidden">
         <div class="bg-[#1b365d] px-3.5 py-2.5 flex items-center justify-between text-white border-b border-[#142948]">
@@ -971,7 +971,7 @@ def sync_lider():
             <span class="flex h-5 w-5 items-center justify-center rounded bg-emerald-500/20 text-[10px] font-extrabold text-emerald-300 border border-emerald-400/30">
               01
             </span>
-            <h3 class="text-xs font-bold tracking-tight uppercase">Top 20 • Líderes (#1 a #10)</h3>
+            <h3 class="text-xs font-bold tracking-tight uppercase">Top 20 • Líderes (1 a 10)</h3>
           </div>
           <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 tabular-nums">
             Top 1-10
@@ -983,7 +983,7 @@ def sync_lider():
       </div>
 
       <!-- ======================================================== -->
-      <!-- COLUNA 2: TOP 20 MAIS RENTÁVEIS (POSIÇÕES #11 A #20)     -->
+      <!-- COLUNA 2: TOP 20 MAIS RENTÁVEIS (POSIÇÕES 11 A 20)        -->
       <!-- ======================================================== -->
       <div class="flex flex-col bg-white dark:bg-slate-900 rounded-xl border border-slate-300 dark:border-white/10 shadow-sm overflow-hidden">
         <div class="bg-[#1b365d] px-3.5 py-2.5 flex items-center justify-between text-white border-b border-[#142948]">
@@ -991,7 +991,7 @@ def sync_lider():
             <span class="flex h-5 w-5 items-center justify-center rounded bg-emerald-500/20 text-[10px] font-extrabold text-emerald-300 border border-emerald-400/30">
               02
             </span>
-            <h3 class="text-xs font-bold tracking-tight uppercase">Top 20 • Sequência (#11 a #20)</h3>
+            <h3 class="text-xs font-bold tracking-tight uppercase">Top 20 • Sequência (11 a 20)</h3>
           </div>
           <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 tabular-nums">
             Top 11-20
@@ -1071,8 +1071,7 @@ def sync_lider():
 <footer class="bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-white/10 py-6 px-6 text-center text-xs text-slate-500 dark:text-gray-400 transition-colors duration-200">
   <div class="max-w-[1720px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
     <div class="flex items-center gap-3">
-      <img alt="NNÓS Logo" class="h-8 w-auto object-contain opacity-90" src="assets/logo-nnos.png"/>
-      <span class="font-bold text-slate-800 dark:text-white">NNÓS Controladoria &amp; Gestão Financeira</span>
+      <img alt="NNÓS" class="h-8 md:h-9 w-auto object-contain rounded" src="assets/logo-nnos-horizontal.png"/>
     </div>
     <div>Relatório Financeiro Gerencial • Período: Janeiro a Setembro de 2026</div>
   </div>

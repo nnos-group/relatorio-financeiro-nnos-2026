@@ -459,7 +459,7 @@ def sync_booking():
 <nav class="sticky top-0 z-50 bg-slate-950/95 dark:bg-slate-950/95 backdrop-blur-md border-b border-white/10 dark:border-white/10 shadow-md transition-colors duration-200">
   <!-- Linha 1: Outros Relatórios e Ações Globais -->
   <div class="bg-slate-900/90 dark:bg-slate-900/90 px-6 py-1.5 border-b border-white/10 dark:border-white/10">
-    <div class="max-w-[1440px] mx-auto flex items-center justify-between gap-3 flex-wrap">
+    <div class="max-w-[1720px] mx-auto flex items-center justify-between gap-3 flex-wrap">
       <div class="flex items-center gap-2">
         <span class="text-[11px] font-bold text-slate-400 dark:text-gray-400 uppercase tracking-wider flex items-center gap-1.5 mr-1">
           <span class="material-symbols-outlined text-sm text-sky-500">alt_route</span> Outros Relatórios:
@@ -492,7 +492,7 @@ def sync_booking():
   </div>
 
   <!-- Linha 2: Seções do Relatório -->
-  <div class="max-w-[1440px] mx-auto px-6 overflow-x-auto">
+  <div class="max-w-[1720px] mx-auto px-6 overflow-x-auto">
     <div class="flex items-center gap-1.5 py-2 min-w-max">
       <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#visao"><span class="material-symbols-outlined text-sm text-sky-500">monitoring</span> Visão executiva</a>
       <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#imobilizado"><span class="material-symbols-outlined text-sm text-sky-500">inventory_2</span> Imobilizado &amp; Reforma</a>
@@ -572,17 +572,22 @@ def sync_booking():
     # Padronizar Rodapé
     standard_footer_booking = """
 <!-- FOOTER -->
-<footer class="bg-slate-950 border-t border-white/10 py-8 px-6 text-center text-xs text-gray-400">
-  <div class="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+<footer class="bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-white/10 py-6 px-6 text-center text-xs text-slate-500 dark:text-gray-400 transition-colors duration-200">
+  <div class="max-w-[1720px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
     <div class="flex items-center gap-3">
-      <img alt="NNÓS Logo" class="h-10 w-auto object-contain opacity-90" src="assets/logo-nnos.png"/>
-      <span class="font-bold text-white">NNÓS Controladoria &amp; Gestão Financeira</span>
+      <img alt="NNÓS" class="h-8 md:h-9 w-auto object-contain rounded" src="assets/logo-nnos-horizontal.png"/>
     </div>
     <div>Relatório Financeiro Gerencial • Período: Janeiro a Dezembro de 2026</div>
   </div>
 </footer>
 """
     html = re.sub(r'<footer class="footer">.*?</footer>', standard_footer_booking.strip(), html, flags=re.DOTALL)
+    html = re.sub(r'<footer class="bg-slate-950.*?</footer>', standard_footer_booking.strip(), html, flags=re.DOTALL)
+
+    # Padronizar largura lateral do Booking para 1720px (referência Painel por Líder)
+    html = html.replace("width:min(1480px,calc(100% - 40px))", "width:min(1720px,calc(100% - 40px))")
+    html = html.replace("width:min(100% - 24px,1480px)", "width:min(100% - 24px,1720px)")
+    html = html.replace(".wrap{width:min(1480px", ".wrap{width:min(1720px")
 
     # Ajuste dinâmico de gráficos e tabela de acordo com o tema
     chart_tweak = """const isLight = document.documentElement.classList.contains('light');
