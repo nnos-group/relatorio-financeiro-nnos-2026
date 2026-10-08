@@ -138,6 +138,43 @@
     color: #fff;
     border-color: #0083CA;
   }
+  /* Callouts de alto contraste */
+  .callout-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.875rem 1.125rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+  .callout-icon {
+    font-size: 1.15rem;
+    line-height: 1.2;
+    flex-shrink: 0;
+  }
+  .callout-red, .callout-danger {
+    background-color: rgba(220, 38, 38, 0.15) !important;
+    border: 1px solid rgba(239, 68, 68, 0.40) !important;
+    border-left: 4px solid #ef4444 !important;
+    color: #fca5a5 !important;
+  }
+  .callout-red strong, .callout-danger strong { color: #ffffff !important; font-weight: 700 !important; }
+  .callout-amber, .callout-warning {
+    background-color: rgba(245, 158, 11, 0.15) !important;
+    border: 1px solid rgba(245, 158, 11, 0.40) !important;
+    border-left: 4px solid #f59e0b !important;
+    color: #fde68a !important;
+  }
+  .callout-amber strong, .callout-warning strong { color: #ffffff !important; font-weight: 700 !important; }
+  .callout-blue, .callout-info {
+    background-color: rgba(0, 131, 202, 0.15) !important;
+    border: 1px solid rgba(0, 131, 202, 0.40) !important;
+    border-left: 4px solid #0083ca !important;
+    color: #7dd3fc !important;
+  }
+  .callout-blue strong, .callout-info strong { color: #ffffff !important; font-weight: 700 !important; }
   .timeline-item::before {
     content: "";
     position: absolute;
@@ -568,9 +605,10 @@
           </tbody>
         </table>
       </div>
-      <p class="mt-4 p-3 rounded-lg text-sm bg-accent-amber/10 text-accent-amber border border-accent-amber/20">
-        ⚠️ <strong>Atenção:</strong> EUA concentra 53,7% do gasto internacional (R$ 26.812,03).
-      </p>
+      <div class="callout-box callout-amber mt-4">
+        <span class="callout-icon">⚠️</span>
+        <div><strong>Atenção:</strong> EUA concentra 53,7% do gasto internacional (R$ 26.812,03).</div>
+      </div>
     </div>
 
     <!-- Cenário 2: Planejamento & Diretoria -->
@@ -616,9 +654,10 @@
           </tbody>
         </table>
       </div>
-      <p class="mt-4 p-3 rounded-lg text-sm bg-error/10 text-error border border-error/20">
-        🔴 <strong>Destaque:</strong> O Planejamento Estratégico de fevereiro consumiu <strong>R$ 31.785,07</strong> somando todos os custos relacionados.
-      </p>
+      <div class="callout-box callout-red mt-4">
+        <span class="callout-icon">🔴</span>
+        <div><strong>Destaque:</strong> O Planejamento Estratégico de fevereiro consumiu <strong>R$ 31.785,07</strong> somando todos os custos relacionados.</div>
+      </div>
     </div>
 
     <!-- Cenário 3: Refeições -->

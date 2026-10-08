@@ -138,6 +138,43 @@
     color: #fff;
     border-color: #0083CA;
   }
+  /* Callouts de alto contraste */
+  .callout-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.875rem 1.125rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+  .callout-icon {
+    font-size: 1.15rem;
+    line-height: 1.2;
+    flex-shrink: 0;
+  }
+  .callout-red, .callout-danger {
+    background-color: rgba(220, 38, 38, 0.15) !important;
+    border: 1px solid rgba(239, 68, 68, 0.40) !important;
+    border-left: 4px solid #ef4444 !important;
+    color: #fca5a5 !important;
+  }
+  .callout-red strong, .callout-danger strong { color: #ffffff !important; font-weight: 700 !important; }
+  .callout-amber, .callout-warning {
+    background-color: rgba(245, 158, 11, 0.15) !important;
+    border: 1px solid rgba(245, 158, 11, 0.40) !important;
+    border-left: 4px solid #f59e0b !important;
+    color: #fde68a !important;
+  }
+  .callout-amber strong, .callout-warning strong { color: #ffffff !important; font-weight: 700 !important; }
+  .callout-blue, .callout-info {
+    background-color: rgba(0, 131, 202, 0.15) !important;
+    border: 1px solid rgba(0, 131, 202, 0.40) !important;
+    border-left: 4px solid #0083ca !important;
+    color: #7dd3fc !important;
+  }
+  .callout-blue strong, .callout-info strong { color: #ffffff !important; font-weight: 700 !important; }
   .timeline-item::before {
     content: "";
     position: absolute;
@@ -438,6 +475,181 @@
   html.light .kpi-badge-teal { background-color: #ccfbf1 !important; border-color: #99f6e4 !important; color: #0d9488 !important; }
   html.light .kpi-badge-emerald { background-color: #d1fae5 !important; border-color: #a7f3d0 !important; color: #059669 !important; }
   html.light .kpi-badge-amber { background-color: #fef3c7 !important; border-color: #fde68a !important; color: #d97706 !important; }
+
+  /* ===== Caixas de Destaque / Callouts de Alto Contraste (Dark & Light) ===== */
+  .callout-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.875rem 1.125rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  .callout-icon {
+    font-size: 1.15rem;
+    line-height: 1.2;
+    flex-shrink: 0;
+  }
+
+  /* 🔴 Callout Vermelho / Destaque Crítico (Dark Mode) */
+  .callout-red,
+  .callout-danger,
+  p[class*="bg-error"] {
+    background-color: rgba(220, 38, 38, 0.15) !important;
+    border: 1px solid rgba(239, 68, 68, 0.40) !important;
+    border-left: 4px solid #ef4444 !important;
+    color: #fca5a5 !important;
+    box-shadow: 0 4px 14px rgba(220, 38, 38, 0.12) !important;
+  }
+  .callout-red strong,
+  .callout-danger strong,
+  p[class*="bg-error"] strong {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+  }
+  .callout-red .callout-icon {
+    color: #ef4444;
+  }
+
+  /* ⚠️ Callout Âmbar / Atenção (Dark Mode) */
+  .callout-amber,
+  .callout-warning,
+  p[class*="bg-accent-amber"] {
+    background-color: rgba(245, 158, 11, 0.15) !important;
+    border: 1px solid rgba(245, 158, 11, 0.40) !important;
+    border-left: 4px solid #f59e0b !important;
+    color: #fde68a !important;
+    box-shadow: 0 4px 14px rgba(245, 158, 11, 0.12) !important;
+  }
+  .callout-amber strong,
+  .callout-warning strong,
+  p[class*="bg-accent-amber"] strong {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+  }
+  .callout-amber .callout-icon {
+    color: #f59e0b;
+  }
+
+  /* 💡 Callout Azul / Insight Estratégico (Dark Mode) */
+  .callout-blue,
+  .callout-info,
+  p[class*="bg-brand-blue"] {
+    background-color: rgba(0, 131, 202, 0.15) !important;
+    border: 1px solid rgba(0, 131, 202, 0.40) !important;
+    border-left: 4px solid #0083ca !important;
+    color: #7dd3fc !important;
+    box-shadow: 0 4px 14px rgba(0, 131, 202, 0.12) !important;
+  }
+  .callout-blue strong,
+  .callout-info strong,
+  p[class*="bg-brand-blue"] strong {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+  }
+  .callout-blue .callout-icon {
+    color: #38bdf8;
+  }
+
+  /* Badges e alertas no Dark Mode */
+  .border-l-4.border-error { border-left-color: #ef4444 !important; }
+  .border-l-4.border-accent-amber { border-left-color: #f59e0b !important; }
+
+  /* ☀️☀️☀️ LIGHT MODE OVERRIDES: Alto Contraste, Vivos & Não Opacos ☀️☀️☀️ */
+  /* 🔴 Callout Vermelho / Destaque Crítico (Light Mode) */
+  html.light .callout-red,
+  html.light .callout-danger,
+  html.light p[class*="bg-error"] {
+    background-color: #fef2f2 !important;
+    border: 1px solid #fecaca !important;
+    border-left: 4px solid #dc2626 !important;
+    color: #991b1b !important;
+    box-shadow: 0 2px 8px rgba(220, 38, 38, 0.08) !important;
+  }
+  html.light .callout-red strong,
+  html.light .callout-danger strong,
+  html.light p[class*="bg-error"] strong {
+    color: #7f1d1d !important;
+    font-weight: 700 !important;
+  }
+  html.light .callout-red .callout-icon {
+    color: #dc2626;
+  }
+
+  /* ⚠️ Callout Âmbar / Atenção (Light Mode) */
+  html.light .callout-amber,
+  html.light .callout-warning,
+  html.light p[class*="bg-accent-amber"] {
+    background-color: #fffbeb !important;
+    border: 1px solid #fde68a !important;
+    border-left: 4px solid #d97706 !important;
+    color: #92400e !important;
+    box-shadow: 0 2px 8px rgba(217, 119, 6, 0.08) !important;
+  }
+  html.light .callout-amber strong,
+  html.light .callout-warning strong,
+  html.light p[class*="bg-accent-amber"] strong {
+    color: #78350f !important;
+    font-weight: 700 !important;
+  }
+  html.light .callout-amber .callout-icon {
+    color: #d97706;
+  }
+
+  /* 💡 Callout Azul / Insight Estratégico (Light Mode) */
+  html.light .callout-blue,
+  html.light .callout-info,
+  html.light p[class*="bg-brand-blue"] {
+    background-color: #f0f9ff !important;
+    border: 1px solid #bae6fd !important;
+    border-left: 4px solid #0083ca !important;
+    color: #0369a1 !important;
+    box-shadow: 0 2px 8px rgba(0, 131, 202, 0.08) !important;
+  }
+  html.light .callout-blue strong,
+  html.light .callout-info strong,
+  html.light p[class*="bg-brand-blue"] strong {
+    color: #0c4a6e !important;
+    font-weight: 700 !important;
+  }
+  html.light .callout-blue .callout-icon {
+    color: #0083ca;
+  }
+
+  /* Utilitários Tailwind em Light Mode: substituição das cores opacas/pastel por cores vivas */
+  html.light .text-error {
+    color: #dc2626 !important;
+  }
+  html.light .text-accent-amber {
+    color: #b45309 !important;
+  }
+  html.light .bg-error\/10 {
+    background-color: #fee2e2 !important;
+  }
+  html.light .bg-accent-amber\/10 {
+    background-color: #fef3c7 !important;
+  }
+  html.light .border-error\/20 {
+    border-color: #fca5a5 !important;
+  }
+  html.light .border-accent-amber\/20 {
+    border-color: #fde68a !important;
+  }
+  html.light .border-error {
+    border-color: #dc2626 !important;
+  }
+  html.light .border-accent-amber {
+    border-color: #d97706 !important;
+  }
+  html.light .border-l-4.border-error {
+    border-left-color: #dc2626 !important;
+  }
+  html.light .border-l-4.border-accent-amber {
+    border-left-color: #d97706 !important;
+  }
 </style>
 
 </head>
@@ -1204,9 +1416,10 @@
           </tbody>
         </table>
       </div>
-      <p class="mt-4 p-3 rounded-lg text-sm bg-brand-blue/10 text-brand-blue border border-brand-blue/20">
-        💡 <strong>Insight Estratégico:</strong> 7 frentes corporativas ativas de prospecção comercial (DAF, Porsche Jan e Mar, Mercedes SP, BH, Pouso Alegre, Betim). Recomenda-se correlacionar com a taxa de conversão do CRM de Vendas.
-      </p>
+      <div class="callout-box callout-blue mt-4">
+        <span class="callout-icon">💡</span>
+        <div><strong>Insight Estratégico:</strong> 7 frentes corporativas ativas de prospecção comercial (DAF, Porsche Jan e Mar, Mercedes SP, BH, Pouso Alegre, Betim). Recomenda-se correlacionar com a taxa de conversão do CRM de Vendas.</div>
+      </div>
     </div>
 
 
@@ -1251,9 +1464,10 @@
           </tbody>
         </table>
       </div>
-      <p class="mt-4 p-3 rounded-lg text-sm bg-accent-amber/10 text-accent-amber border border-accent-amber/20">
-        ⚠️ <strong>Atenção:</strong> EUA e China concentram 92.1% do desembolso internacional (CONEXPO, Missão China, Summit NY).
-      </p>
+      <div class="callout-box callout-amber mt-4">
+        <span class="callout-icon">⚠️</span>
+        <div><strong>Atenção:</strong> EUA e China concentram 92.1% do desembolso internacional (CONEXPO, Missão China, Summit NY).</div>
+      </div>
     </div>
 
 
@@ -1302,9 +1516,10 @@
           </tbody>
         </table>
       </div>
-      <p class="mt-4 p-3 rounded-lg text-sm bg-error/10 text-error border border-error/20">
-        🔴 <strong>Destaque:</strong> O Planejamento Estratégico de fevereiro consumiu <strong>R$ 31.785,07</strong> somando todos os custos relacionados (coordenação, Patricia, alimentação e gráficas).
-      </p>
+      <div class="callout-box callout-red mt-4">
+        <span class="callout-icon">🔴</span>
+        <div><strong>Destaque:</strong> O Planejamento Estratégico de fevereiro consumiu <strong>R$ 31.785,07</strong> somando todos os custos relacionados (coordenação, Patricia, alimentação e gráficas).</div>
+      </div>
     </div>
 
 
