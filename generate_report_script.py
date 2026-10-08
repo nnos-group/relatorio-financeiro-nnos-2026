@@ -543,6 +543,159 @@ full_html = f'''<!DOCTYPE html>
     background-color: #f8fafc !important;
   }}
 </style>
+<style id="light-theme-nnos">
+  /* ===== NNÓS · Identidade clara (Matriz) =====
+     Regra: fundo escuro => texto claro | fundo claro => texto escuro */
+  .logo-light {{ display: none; }}
+  html.light .logo-light {{ display: block; }}
+  html.light .logo-dark {{ display: none; }}
+
+  html.light body {{
+    background: linear-gradient(180deg, #eef4fa 0%, #f6f9fc 40%, #f4f7fb 100%) !important;
+    color: #0f172a !important;
+  }}
+  html.light body.bg-slate-950, html.light .bg-slate-950 {{ background-color: transparent !important; }}
+
+  /* Cabeçalho */
+  html.light header {{
+    background: linear-gradient(135deg, #ffffff 0%, #eaf3fb 100%) !important;
+    border-bottom: 3px solid #0083ca !important;
+  }}
+  html.light header h1 {{ color: #1b365d !important; }}
+  html.light header p {{ color: #475569 !important; }}
+  html.light header [class*="bg-white/20"] {{ background-color: #cbd5e1 !important; }}
+  html.light header [class*="bg-brand-blue/10"] {{
+    background-color: #e0f2fe !important; color: #075985 !important; border-color: #7dd3fc !important;
+  }}
+  html.light header [class*="bg-slate-900"] {{
+    background-color: #ffffff !important; border-color: #bcd3e6 !important; color: #1b365d !important;
+    box-shadow: 0 1px 3px rgba(27,54,93,.08) !important;
+  }}
+  html.light header [class*="bg-slate-900"] .text-brand-blue {{ color: #0083ca !important; }}
+  html.light header [class*="bg-slate-900"] .text-emerald-400 {{ color: #059669 !important; }}
+  html.light header [class*="bg-slate-900"] .text-amber-400 {{ color: #b45309 !important; }}
+
+  /* Navbar */
+  html.light nav {{
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #dbe5ef !important;
+    box-shadow: 0 2px 8px rgba(27,54,93,.06) !important;
+  }}
+  html.light nav > div:first-child {{
+    background-color: #f1f6fb !important;
+    border-bottom: 1px solid #dbe5ef !important;
+  }}
+  html.light nav a[href^="#"] {{ color: #1b365d !important; }}
+  html.light nav a[href^="#"]:hover {{ background-color: #e0f2fe !important; color: #075985 !important; }}
+
+  /* Títulos de seção e textos */
+  html.light h2.text-white, html.light h2 {{ color: #1b365d !important; }}
+  html.light .text-white {{ color: #0f172a !important; }}
+  html.light .text-gray-300, html.light .text-gray-400, html.light .text-text-muted {{ color: #475569 !important; }}
+  html.light .text-gray-500 {{ color: #64748b !important; }}
+  html.light .text-brand-blue {{ color: #0369a1 !important; }}
+  html.light .text-emerald-400, html.light .text-emerald-300 {{ color: #047857 !important; }}
+  html.light .text-rose-400, html.light .text-rose-300 {{ color: #be123c !important; }}
+  html.light .text-amber-400, html.light .text-amber-300 {{ color: #b45309 !important; }}
+  html.light .text-purple-400 {{ color: #6d28d9 !important; }}
+  html.light .text-teal-300 {{ color: #0f766e !important; }}
+
+  /* Cartões */
+  html.light .glass-card, html.light .glass-panel {{
+    background: #ffffff !important;
+    border: 1px solid #dbe5ef !important;
+    box-shadow: 0 6px 18px -8px rgba(27,54,93,.18) !important;
+    backdrop-filter: none !important;
+  }}
+  html.light [class*="bg-slate-900/80"], html.light [class*="bg-slate-900/60"],
+  html.light [class*="bg-surface-container-high"], html.light [class*="bg-surface-container-lowest"] {{
+    background-color: #f1f6fb !important;
+    border-color: #dbe5ef !important;
+  }}
+  html.light [class*="bg-surface-container/80"] {{ background-color: #e8f2fa !important; }}
+  html.light [class*="hover:bg-surface-container-high"]:hover {{ background-color: #e0f2fe !important; }}
+  html.light [class*="border-surface-variant"], html.light [class*="border-white/"] {{ border-color: #dbe5ef !important; }}
+
+
+  /* Badges / ícones dos KPIs (fundo claro => texto escuro) */
+  html.light [class*="bg-brand-blue/20"] {{ background-color: #e0f2fe !important; color: #075985 !important; border-color: #7dd3fc !important; }}
+  html.light [class*="bg-emerald-500/20"] {{ background-color: #d1fae5 !important; color: #047857 !important; border-color: #6ee7b7 !important; }}
+  html.light [class*="bg-purple-500/20"] {{ background-color: #ede9fe !important; color: #6d28d9 !important; border-color: #c4b5fd !important; }}
+  html.light [class*="bg-rose-500/20"] {{ background-color: #ffe4e6 !important; color: #be123c !important; border-color: #fda4af !important; }}
+  html.light [class*="bg-teal-500/20"] {{ background-color: #ccfbf1 !important; color: #0f766e !important; border-color: #5eead4 !important; }}
+  html.light [class*="bg-amber-500/15"], html.light [class*="bg-amber-500/20"] {{ background-color: #fef3c7 !important; color: #92400e !important; border-color: #fcd34d !important; }}
+
+  /* ===== DRE: barra escura => fonte clara ===== */
+  html.light .glass-panel > div:first-child {{
+    background: linear-gradient(90deg, #1b365d 0%, #00223a 100%) !important;
+    border-bottom: 1px solid #1b365d !important;
+  }}
+  html.light .glass-panel > div:first-child h3,
+  html.light .glass-panel > div:first-child .text-white {{ color: #ffffff !important; }}
+  html.light .glass-panel > div:first-child .text-brand-blue {{ color: #7dd3fc !important; }}
+  html.light .glass-panel > div:first-child span[class*="bg-brand-blue"] {{
+    background-color: rgba(125,211,252,.18) !important; color: #e0f2fe !important; border-color: rgba(125,211,252,.5) !important;
+  }}
+  html.light table thead tr {{ background-color: #eaf3fb !important; color: #1b365d !important; border-bottom: 2px solid #0083ca !important; }}
+  html.light table thead th {{ color: #1b365d !important; }}
+  html.light table thead th.text-brand-blue {{ color: #0369a1 !important; }}
+
+  /* Linhas de grupo (RECEITAS, CUSTOS...) = barra escura => texto claro */
+  html.light table tbody tr[class*="bg-surface-container-high/90"] {{
+    background-color: #1b365d !important; border-color: #1b365d !important;
+  }}
+  html.light table tbody tr[class*="bg-surface-container-high/90"] td {{ color: #ffffff !important; }}
+  html.light table tbody tr[class*="bg-surface-container-high/90"] td.text-amber-300,
+  html.light table tbody tr[class*="bg-surface-container-high/90"] td[class*="text-amber"] {{ color: #fcd34d !important; }}
+
+  /* Subtotais (fundo claro => texto escuro) */
+  html.light table tbody tr[class*="bg-surface-container/80"] {{ background-color: #e8f2fa !important; border-color: #7dd3fc !important; }}
+  html.light table tbody tr[class*="bg-surface-container/80"] td.text-brand-blue {{ color: #0369a1 !important; }}
+  html.light table tbody tr[class*="bg-surface-container/80"] td.text-emerald-400 {{ color: #047857 !important; }}
+  html.light table tbody tr[class*="bg-surface-container/80"] td.text-rose-400 {{ color: #be123c !important; }}
+  html.light table tbody tr[class*="bg-surface-container-lowest/30"] {{ background-color: #f8fafc !important; }}
+  html.light table tbody tr[class*="bg-surface-container-lowest/30"] td {{ color: #64748b !important; }}
+
+  /* Resultado do período */
+  html.light table tbody tr[class*="from-emerald-900"] {{ background: #d1fae5 !important; border-color: #10b981 !important; }}
+  html.light table tbody tr[class*="from-emerald-900"] td {{ color: #065f46 !important; }}
+  html.light table tbody tr[class*="from-rose-950"] {{ background: #ffe4e6 !important; border-color: #f43f5e !important; }}
+  html.light table tbody tr[class*="from-rose-950"] td {{ color: #9f1239 !important; }}
+  html.light table tbody tr[class*="from-emerald-900"] td span, html.light table tbody tr[class*="from-rose-950"] td span {{ color: inherit !important; }}
+  html.light table td .text-emerald-400 {{ color: #047857 !important; }}
+  html.light table td .text-rose-400 {{ color: #be123c !important; }}
+  html.light table td > span.text-text-muted {{ color: #94a3b8 !important; }}
+
+  /* NET Operacional */
+  html.light [class*="bg-emerald-950/40"] {{ background-color: #ecfdf5 !important; border-color: #10b981 !important; }}
+  html.light [class*="bg-rose-950/40"] {{ background-color: #fff1f2 !important; border-color: #f43f5e !important; }}
+
+  /* ===== Barras de progresso: fundo escuro => texto claro ===== */
+  html.light .h-full[class*="bg-"] {{ color: #ffffff !important; }}
+  html.light .h-full.bg-rose-500, html.light .h-full.bg-rose-400 {{ background-color: #e11d48 !important; }}
+  html.light .h-full.bg-amber-500, html.light .h-full.bg-amber-400 {{ background-color: #b45309 !important; }}
+  html.light .h-full.bg-emerald-500 {{ background-color: #059669 !important; }}
+  html.light .h-full.bg-teal-500 {{ background-color: #0d9488 !important; }}
+  html.light .h-full.bg-purple-500 {{ background-color: #7c3aed !important; }}
+  html.light .h-full.bg-slate-400 {{ background-color: #475569 !important; }}
+  html.light .h-full.bg-brand-blue {{ background-color: #0083ca !important; }}
+  html.light .h-full.rounded-lg.text-white {{ color: #ffffff !important; }}
+  html.light .bg-surface-container-high.rounded-full, html.light .bg-surface-container-high.rounded-lg,
+  html.light .bg-surface-container-lowest.rounded-full {{ background-color: #e2e8f0 !important; }}
+
+  /* Badges de ranking Top 10 */
+  html.light .bg-amber-500.text-black {{ background-color: #f59e0b !important; color: #1f2937 !important; }}
+  html.light .bg-slate-400.text-black {{ background-color: #94a3b8 !important; color: #0f172a !important; }}
+  html.light .bg-amber-700.text-white {{ background-color: #b45309 !important; color: #ffffff !important; }}
+
+  /* Rodapé: barra escura => fonte clara */
+  html.light footer, html.light footer.bg-slate-950 {{ background-color: #1b365d !important; border-top: 3px solid #0083ca !important; }}
+  html.light footer, html.light footer .text-white, html.light footer span, html.light footer div {{ color: #e2e8f0 !important; }}
+  html.light footer .font-bold {{ color: #ffffff !important; }}
+
+  html.light ::-webkit-scrollbar-track {{ background: #e2e8f0; }}
+  html.light ::-webkit-scrollbar-thumb {{ background: #94a3b8; }}
+</style>
 </head>
 <body class="antialiased selection:bg-brand-blue selection:text-white bg-slate-950">
 
@@ -593,7 +746,8 @@ full_html = f'''<!DOCTYPE html>
   <div class="max-w-[1440px] mx-auto px-6 py-6 relative z-10 flex items-center justify-between gap-6">
     <div class="max-w-5xl">
       <div class="flex items-center gap-5 mb-4">
-        <img alt="NNÓS Logo" class="h-16 w-auto object-contain flex-shrink-0" src="{LOGO_B64_WHITE}"/>
+        <img alt="NNÓS Logo" class="logo-dark h-16 w-auto object-contain flex-shrink-0" src="{LOGO_B64_WHITE}"/>
+        <img alt="NNÓS Logo" class="logo-light h-16 w-auto object-contain flex-shrink-0" src="assets/logo-nnos.png"/>
         <div class="h-12 w-[1px] bg-white/20 hidden sm:block"></div>
         <div>
           <div class="flex items-center gap-3 mb-1">
@@ -1033,12 +1187,12 @@ function initFaturamentoChart() {{
         }},
         scales: {{
           y: {{
-            grid: {{ color: 'rgba(255, 255, 255, 0.1)' }},
-            ticks: {{ color: '#9CA3AF', font: {{ family: 'Inter', size: 11 }} }}
+            grid: {{ color: document.documentElement.classList.contains('light') ? 'rgba(15, 23, 42, 0.08)' : 'rgba(255, 255, 255, 0.1)' }},
+            ticks: {{ color: document.documentElement.classList.contains('light') ? '#475569' : '#9CA3AF', font: {{ family: 'Inter', size: 11 }} }}
           }},
           x: {{
             grid: {{ display: false }},
-            ticks: {{ color: '#9CA3AF', font: {{ family: 'Inter', size: 11 }} }}
+            ticks: {{ color: document.documentElement.classList.contains('light') ? '#475569' : '#9CA3AF', font: {{ family: 'Inter', size: 11 }} }}
           }}
         }}
       }}
@@ -1094,6 +1248,9 @@ function applyTheme(theme) {{
     icons.forEach(ic => ic.textContent = 'light_mode');
     buttons.forEach(btn => btn.setAttribute('title', 'Alternar para Modo Claro'));
     localStorage.setItem('nnos_theme', 'dark');
+  }}
+  if (typeof chartFaturamentoInstance !== 'undefined' && chartFaturamentoInstance) {{
+    initFaturamentoChart();
   }}
 }}
 
