@@ -107,8 +107,93 @@ def sync_booking():
   }, false);
 </script>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "brand-blue": "#0083ca",
+          "surface": "#0c1322",
+          "surface-container": "#191f2f",
+          "surface-container-high": "#232a3a"
+        },
+        fontFamily: {
+          sans: ["Inter", "sans-serif"],
+          display: ["Manrope", "sans-serif"]
+        }
+      }
+    }
+  }
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <style id="light-theme-styles">
+  /* ========================================================
+     NAVBAR & MENU: MODO ESCURO (CORREÇÃO CRÍTICA DO PRINT)
+     Garante que a barra de navegação seja 100% escura no modo escuro
+     ======================================================== */
+  html.dark nav {
+    background-color: rgba(7, 16, 30, 0.96) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35) !important;
+  }
+  html.dark nav > div:first-child {
+    background-color: rgba(13, 29, 51, 0.95) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  }
+  html.dark nav a[href^="#"],
+  html.dark nav a[href="index.html"] {
+    color: #cbd5e1 !important;
+  }
+  html.dark nav a[href^="#"]:hover,
+  html.dark nav a[href="index.html"]:hover {
+    background-color: rgba(255, 255, 255, 0.10) !important;
+    color: #ffffff !important;
+  }
+  html.dark .theme-toggle-btn {
+    color: #94a3b8 !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    background-color: rgba(255, 255, 255, 0.05) !important;
+  }
+  html.dark .theme-toggle-btn:hover {
+    color: #ffffff !important;
+    background-color: rgba(255, 255, 255, 0.12) !important;
+  }
+
+  /* ========================================================
+     NAVBAR & MENU: MODO CLARO (PADRÃO MATRIZ)
+     ======================================================== */
+  html.light nav {
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #dbe5ef !important;
+    box-shadow: 0 2px 8px rgba(27, 54, 93, 0.06) !important;
+  }
+  html.light nav > div:first-child {
+    background-color: #f1f6fb !important;
+    border-bottom: 1px solid #dbe5ef !important;
+  }
+  html.light nav a[href^="#"],
+  html.light nav a[href="index.html"] {
+    color: #1b365d !important;
+  }
+  html.light nav a[href^="#"]:hover,
+  html.light nav a[href="index.html"]:hover {
+    background-color: #e0f2fe !important;
+    color: #075985 !important;
+  }
+  html.light .theme-toggle-btn {
+    color: #475569 !important;
+    border-color: #cbd5e1 !important;
+    background-color: #f1f5f9 !important;
+  }
+  html.light .theme-toggle-btn:hover {
+    color: #0f172a !important;
+    background-color: #e2e8f0 !important;
+  }
+
+  /* ========================================================
+     IDENTIDADE VISUAL MODO CLARO (REPLICAÇÃO TOTAL MATRIZ)
+     ======================================================== */
   html.light {
     --bg: #f8fafc;
     --bg2: #ffffff;
@@ -120,230 +205,211 @@ def sync_booking():
     --shadow: 0 10px 30px rgba(0,0,0,0.06);
   }
   html.light body {
-    background: #f1f5f9 !important;
+    background: linear-gradient(180deg, #eef4fa 0%, #f6f9fc 40%, #f4f7fb 100%) !important;
     color: #0f172a !important;
   }
-  html.light .hero-code1,
-  html.light .hero {
-    background: #ffffff !important;
-    border-bottom: 1px solid #e2e8f0 !important;
+  html.light body:before { display: none !important; }
+
+  /* Cabeçalho Hero */
+  html.light .hero-code1, html.light .hero {
+    background: linear-gradient(135deg, #ffffff 0%, #eaf3fb 100%) !important;
+    border-bottom: 3px solid #0083ca !important;
   }
-  html.light .hero-code1:before,
-  html.light .hero:before {
-    display: none !important;
+  html.light .hero-code1:before, html.light .hero:before, html.light .hero:after { display: none !important; }
+  html.light .title-code1, html.light .hero-code1 h1 { color: #1b365d !important; }
+  html.light .subtitle-code1, html.light .hero-code1 p { color: #475569 !important; }
+  html.light .logo-code1 { filter: none !important; opacity: 1 !important; }
+  html.light .header-divider-code1 { background-color: #cbd5e1 !important; }
+
+  /* Títulos e Tipografia Geral */
+  html.light h1, html.light h2, html.light h3 { color: #1b365d !important; }
+  html.light p, html.light .sub { color: #475569 !important; }
+  html.light .section-head p { color: #475569 !important; }
+  html.light .line-title:before {
+    background: linear-gradient(#0083ca, #38bdf8) !important;
+    box-shadow: 0 0 10px rgba(0, 131, 202, 0.25) !important;
   }
-  html.light .title-code1,
-  html.light .hero-code1 h1 {
-    color: #0f172a !important;
-  }
-  html.light .subtitle-code1,
-  html.light .hero-code1 p {
-    color: #475569 !important;
-  }
-  html.light .header-divider-code1 {
-    background-color: #e2e8f0 !important;
-  }
-  html.light nav {
-    background-color: rgba(255, 255, 255, 0.95) !important;
-    border-bottom: 1px solid #e2e8f0 !important;
-  }
-  html.light nav > div:first-child {
-    background-color: #f8fafc !important;
-    border-bottom: 1px solid #e2e8f0 !important;
-  }
-  html.light .bg-slate-950,
-  html.light .bg-slate-900 {
-    background-color: #ffffff !important;
-    border-color: #e2e8f0 !important;
-  }
+
+  /* Cards, Painéis e KPIs */
   html.light .card,
   html.light .panel,
   html.light .kpi-card,
   html.light .kpi {
     background: #ffffff !important;
-    border: 1px solid #e2e8f0 !important;
+    border: 1px solid #dbe5ef !important;
     color: #0f172a !important;
-    box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.05) !important;
+    box-shadow: 0 4px 14px -2px rgba(27, 54, 93, 0.06) !important;
   }
-  html.light .card h2,
-  html.light .card h3,
-  html.light .panel h2,
-  html.light .panel h3 {
-    color: #0f172a !important;
-  }
-  html.light .card p,
-  html.light .panel p,
-  html.light .text-muted,
-  html.light .text-gray-400,
-  html.light .text-gray-300 {
-    color: #64748b !important;
-  }
-  html.light [class*="border-white"] {
-    border-color: #e2e8f0 !important;
-  }
+  html.light .card.kpi .label, html.light .kpi .label { color: #475569 !important; font-weight: 700 !important; }
+  html.light .card.kpi .value, html.light .kpi .value { color: #0f172a !important; font-weight: 800 !important; }
+  html.light .card.kpi.blue .value, html.light .kpi.blue .value { color: #0284c7 !important; }
+  html.light .card.kpi.green .value, html.light .kpi.green .value { color: #047857 !important; }
+  html.light .card.kpi.violet .value, html.light .kpi.violet .value { color: #6d28d9 !important; }
+  html.light .card.kpi.amber .value, html.light .kpi.amber .value { color: #b45309 !important; }
+  html.light .card.kpi.red .value, html.light .kpi.red .value { color: #be123c !important; }
+  html.light .card.kpi .note, html.light .kpi .note { color: #64748b !important; }
+  html.light .card.panel h3 { color: #1b365d !important; }
+  html.light .card.panel .sub { color: #475569 !important; }
 
-  /* 🌟 IMOBILIZADO & REFORMA (Print 5: Segregação Gerencial e cards nítidos) */
-  html.light .immob-box {
+  /* Imobilizado & Reforma (Cards, Barra e Grid) */
+  html.light .immob-highlight {
+    background: linear-gradient(135deg, #ffffff 0%, #fefce8 100%) !important;
+    border: 1px solid #fde68a !important;
+    box-shadow: 0 4px 14px -2px rgba(180, 83, 9, 0.08) !important;
+  }
+  html.light .immob-highlight .kicker,
+  html.light .immob-top .kicker { color: #b45309 !important; font-weight: 800 !important; }
+  html.light .immob-number { color: #b45309 !important; font-weight: 800 !important; }
+  html.light .immob-meta { color: #78350f !important; }
+  html.light .immob-progress {
     background: #ffffff !important;
-    border: 1px solid #e2e8f0 !important;
-    box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.05) !important;
+    border: 1px solid #dbe5ef !important;
+    box-shadow: 0 4px 14px -2px rgba(27, 54, 93, 0.06) !important;
   }
-  html.light .immob-head .eyebrow {
-    color: #b45309 !important;
-  }
-  html.light .immob-total {
-    color: #b45309 !important;
-  }
-  html.light .immob-item {
+  html.light .immob-progress-row { color: #0f172a !important; }
+  html.light .immob-progress-row strong { color: #1b365d !important; }
+  html.light .immob-progress-row span { color: #475569 !important; }
+  html.light .immob-progress div { color: #64748b !important; }
+  html.light .bar { background: #f1f5f9 !important; border: 1px solid #cbd5e1 !important; }
+  html.light .bar i { background: linear-gradient(90deg, #059669, #0284c7) !important; }
+  html.light .immob-grid .immob-item {
     background: #ffffff !important;
-    border: 1px solid #e2e8f0 !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+    border: 1px solid #dbe5ef !important;
+    box-shadow: 0 4px 12px -2px rgba(27, 54, 93, 0.06) !important;
   }
-  html.light .immob-item .eyebrow {
-    color: #64748b !important;
-  }
-  html.light .immob-name {
-    color: #0f172a !important;
-  }
-  html.light .immob-value {
-    color: #b45309 !important;
-  }
-  html.light .immob-pct {
-    color: #64748b !important;
-  }
+  html.light .immob-item .eyebrow { color: #64748b !important; }
+  html.light .immob-name { color: #0f172a !important; }
+  html.light .immob-value { color: #b45309 !important; }
+  html.light .immob-pct { color: #64748b !important; }
 
-  /* 🌟 PERFORMANCE POR LÍDER (Print 5: Cards brancos com fontes escuras) */
+  /* Performance por Líder */
   html.light .leader-card {
     background: #ffffff !important;
-    border: 1px solid #e2e8f0 !important;
-    box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.05) !important;
+    border: 1px solid #dbe5ef !important;
+    box-shadow: 0 4px 14px -2px rgba(27, 54, 93, 0.06) !important;
   }
-  html.light .leader-card h3 {
-    color: #0f172a !important;
-  }
-  html.light .leader-card .eyebrow {
-    color: #64748b !important;
-  }
-  html.light .leader-share {
-    color: #0284c7 !important;
-  }
-  html.light .leader-share span {
-    color: #64748b !important;
-  }
-  html.light .leader-value {
-    color: #0f172a !important;
-  }
+  html.light .leader-card.good { border-color: #a7f3d0 !important; }
+  html.light .leader-card.mid { border-color: #bae6fd !important; }
+  html.light .leader-card.warn { border-color: #fde68a !important; }
+  html.light .leader-card.bad { border-color: #fecdd3 !important; }
+  html.light .leader-head h3 { color: #1b365d !important; }
+  html.light .leader-head .eyebrow { color: #64748b !important; }
+  html.light .leader-share { color: #0284c7 !important; }
+  html.light .leader-share span { color: #64748b !important; }
+  html.light .leader-value { color: #0f172a !important; }
   html.light .leader-grid div {
     background: #f8fafc !important;
     border: 1px solid #e2e8f0 !important;
   }
-  html.light .leader-grid div span {
-    color: #64748b !important;
-  }
-  html.light .leader-grid div strong {
-    color: #0f172a !important;
-  }
+  html.light .leader-grid div span { color: #64748b !important; }
+  html.light .leader-grid div strong { color: #0f172a !important; }
+  html.light .progress { background: #e2e8f0 !important; }
+  html.light .progress i { background: linear-gradient(90deg, #0083ca, #38bdf8) !important; }
 
-  /* 🌟 TABELAS, DRE E PORTFÓLIO */
-  html.light table th {
-    background-color: #f1f5f9 !important;
-    color: #475569 !important;
-    border-color: #e2e8f0 !important;
-  }
-  html.light table td {
-    color: #0f172a !important;
-    border-color: #e2e8f0 !important;
-  }
-  html.light table tr:hover td {
-    background-color: #f8fafc !important;
-  }
-  html.light .chip {
-    background: #f1f5f9 !important;
-    border: 1px solid #cbd5e1 !important;
-    color: #0f172a !important;
-  }
-  html.light .kpi-value,
-  html.light .stat-value {
-    color: #0f172a !important;
-  }
-
-  /* ===== NNÓS · Identidade clara (padrão Matriz) =====
-     Regra: fundo escuro => texto claro | fundo claro => texto escuro */
-  html.light body {
-    background: linear-gradient(180deg, #eef4fa 0%, #f6f9fc 40%, #f4f7fb 100%) !important;
-  }
-  html.light .hero-code1, html.light .hero {
-    background: linear-gradient(135deg, #ffffff 0%, #eaf3fb 100%) !important;
-    border-bottom: 3px solid #0083ca !important;
-  }
-  html.light .title-code1, html.light .hero-code1 h1 { color: #1b365d !important; }
-  html.light nav {
-    background-color: #ffffff !important;
-    border-bottom: 1px solid #dbe5ef !important;
-    box-shadow: 0 2px 8px rgba(27,54,93,.06) !important;
-  }
-  html.light nav > div:first-child {
-    background-color: #f1f6fb !important;
-    border-bottom: 1px solid #dbe5ef !important;
-  }
-  html.light nav a[href^="#"] { color: #1b365d !important; }
-  html.light nav a[href^="#"]:hover { background-color: #e0f2fe !important; color: #075985 !important; }
-  html.light h2 { color: #1b365d !important; }
-  html.light .card, html.light .panel, html.light .kpi-card, html.light .kpi,
-  html.light .immob-box, html.light .immob-item, html.light .leader-card {
-    border: 1px solid #dbe5ef !important;
-    box-shadow: 0 6px 18px -8px rgba(27,54,93,.18) !important;
-  }
-  /* Cabeçalho de tabela = barra escura => texto claro */
-  html.light table thead tr, html.light table thead th, html.light table th {
-    background-color: #1b365d !important;
-    color: #ffffff !important;
-    border-color: #1b365d !important;
-  }
-  html.light table tbody tr:nth-child(even) td { background-color: #f6f9fc !important; }
-  html.light table tr:hover td { background-color: #e8f2fa !important; }
-  html.light .chip { background: #e8f2fa !important; border: 1px solid #bcd3e6 !important; color: #1b365d !important; }
-  html.light .text-emerald-400, html.light .text-emerald-300 { color: #047857 !important; }
-  html.light .text-rose-400, html.light .text-rose-300 { color: #be123c !important; }
-  html.light .text-amber-400, html.light .text-amber-300 { color: #b45309 !important; }
-  html.light .logo-code1 {
-    filter: none !important;
-    opacity: 1 !important;
-  }
-  html.light .header-divider-code1 {
-    background-color: #cbd5e1 !important;
-  }
+  /* DRE Consolidado Ajustado */
   html.light .dre-card {
     background: #ffffff !important;
     border: 1px solid #dbe5ef !important;
-    box-shadow: 0 4px 14px -2px rgba(27,54,93,.08) !important;
+    box-shadow: 0 4px 14px -2px rgba(27, 54, 93, 0.06) !important;
   }
-  html.light .dre-card .l { color: #475569 !important; }
-  html.light .dre-card .v { color: #0f172a !important; }
-  html.light .dre-card.negative .v { color: #be123c !important; }
+  html.light .dre-card .l { color: #475569 !important; font-weight: 700 !important; }
+  html.light .dre-card .v { color: #0f172a !important; font-weight: 800 !important; }
   html.light .dre-card.positive .v { color: #047857 !important; }
   html.light .dre-card.capex .v { color: #b45309 !important; }
+  html.light .dre-card.negative .v { color: #be123c !important; }
+  html.light .adjust-note {
+    background: linear-gradient(135deg, #f0fdf4 0%, #e6f9ed 100%) !important;
+    border: 1px solid #bbf7d0 !important;
+    color: #166534 !important;
+  }
+  html.light .adjust-note strong { color: #14532d !important; }
 
-  html.light .card.panel, html.light .card.kpi {
+  /* Viagens & Reembolsos */
+  html.light .travel-card {
     background: #ffffff !important;
     border: 1px solid #dbe5ef !important;
-    box-shadow: 0 4px 14px -2px rgba(27,54,93,.06) !important;
+    box-shadow: 0 4px 14px -2px rgba(27, 54, 93, 0.06) !important;
   }
-  html.light .card.kpi .label { color: #475569 !important; }
-  html.light .card.kpi .value { color: #0f172a !important; }
-  html.light .card.kpi.red .value { color: #be123c !important; }
-  html.light .card.kpi.green .value { color: #047857 !important; }
-  html.light .card.kpi.amber .value { color: #b45309 !important; }
-  html.light .card.kpi.blue .value { color: #0284c7 !important; }
-  html.light .card.kpi .note { color: #64748b !important; }
-  html.light .card.panel h3 { color: #1b365d !important; }
-  html.light .card.panel .sub { color: #475569 !important; }
+  html.light .travel-card h3 { color: #1b365d !important; }
+  html.light .travel-card .sub { color: #475569 !important; }
+  html.light .travel-coverage { color: #475569 !important; }
+  html.light .travel-coverage strong { color: #047857 !important; }
+  html.light .travel-month-title { color: #0284c7 !important; font-weight: 800 !important; }
+  html.light .travel-label { color: #475569 !important; font-weight: 600 !important; }
+  html.light .travel-track { background: #e2e8f0 !important; border: 1px solid #cbd5e1 !important; }
+  html.light .travel-hero { background: #f0fdf4 !important; border: 1px solid #bbf7d0 !important; }
+  html.light .travel-hero.negative { background: #fff1f2 !important; border: 1px solid #fecdd3 !important; }
+  html.light .travel-hero .ey { color: #475569 !important; font-weight: 700 !important; }
+  html.light .travel-hero .big { color: #047857 !important; }
+  html.light .travel-hero.negative .big { color: #be123c !important; }
+  html.light .travel-hero .desc { color: #64748b !important; }
+  html.light .travel-summary-row {
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    color: #1e293b !important;
+  }
+  html.light .travel-summary-row span { color: #475569 !important; font-weight: 600 !important; }
+  html.light .travel-summary-row.exp strong { color: #be123c !important; }
+  html.light .travel-summary-row.reimb strong { color: #047857 !important; }
+  html.light .travel-summary-row.prosp strong { color: #b45309 !important; }
+  html.light .travel-divider { background: #e2e8f0 !important; }
+  html.light .travel-caption { color: #64748b !important; }
 
+  /* Tabela e Toolbar de Filtros */
+  html.light .toolbar input,
+  html.light .toolbar select {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #0f172a !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+  }
+  html.light .toolbar input::placeholder { color: #94a3b8 !important; }
+  html.light .toolbar select option { background: #ffffff !important; color: #0f172a !important; }
+  html.light .toolbar button {
+    background: #f1f5f9 !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #1b365d !important;
+  }
+  html.light .toolbar button:hover {
+    background: #e0f2fe !important;
+    border-color: #7dd3fc !important;
+    color: #0369a1 !important;
+  }
+  html.light .table-wrap {
+    background: #ffffff !important;
+    border: 1px solid #dbe5ef !important;
+    box-shadow: 0 4px 14px -2px rgba(27, 54, 93, 0.06) !important;
+  }
+  html.light table { background: #ffffff !important; }
+  html.light table thead tr,
+  html.light table thead th,
+  html.light table th {
+    background-color: #1b365d !important;
+    color: #ffffff !important;
+    border-bottom: 2px solid #0083ca !important;
+  }
+  html.light table tbody td {
+    color: #0f172a !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+  }
+  html.light table tbody tr:nth-child(even) td { background-color: #f8fafc !important; }
+  html.light table tbody tr:hover td { background-color: #e0f2fe !important; }
+  html.light .project-name { color: #0f172a !important; font-weight: 700 !important; }
+
+  /* Badges de Status da Tabela */
+  html.light .status.excelente { background: #d1fae5 !important; color: #047857 !important; border: 1px solid #6ee7b7 !important; }
+  html.light .status.meta { background: #e0f2fe !important; color: #0284c7 !important; border: 1px solid #7dd3fc !important; }
+  html.light .status.atencao { background: #fef3c7 !important; color: #b45309 !important; border: 1px solid #fcd34d !important; }
+  html.light .status.critico { background: #ffe4e6 !important; color: #be123c !important; border: 1px solid #fda4af !important; }
+
+  /* Rodapé */
   html.light footer, html.light footer[class] {
     background-color: #1b365d !important;
     border-top: 3px solid #0083ca !important;
   }
   html.light footer, html.light footer * { color: #e2e8f0 !important; }
+  html.light footer .font-bold { color: #ffffff !important; }
   html.light ::-webkit-scrollbar-track { background: #e2e8f0; }
   html.light ::-webkit-scrollbar-thumb { background: #94a3b8; }
 </style>
@@ -353,6 +419,30 @@ def sync_booking():
             html = html.replace('</head>', security_auth_head + '\n</head>')
         elif 'light-theme-styles' not in html:
             html = html.replace('</head>', '<style id="light-theme-styles">\n' + security_auth_head.split('<style id="light-theme-styles">')[1] + '\n</head>')
+        else:
+            # Substituir estilos existentes se já presentes
+            html = re.sub(r'<style id="light-theme-styles">.*?</style>', security_auth_head.split('<style id="light-theme-styles">')[1].split('</style>')[0].join(['<style id="light-theme-styles">\n', '\n</style>']), html, flags=re.DOTALL)
+            if 'tailwind-config' not in html:
+                tailwind_cfg = """<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "brand-blue": "#0083ca",
+          "surface": "#0c1322",
+          "surface-container": "#191f2f",
+          "surface-container-high": "#232a3a"
+        },
+        fontFamily: {
+          sans: ["Inter", "sans-serif"],
+          display: ["Manrope", "sans-serif"]
+        }
+      }
+    }
+  }
+</script>"""
+                html = html.replace('</head>', tailwind_cfg + '\n</head>')
 
     favicon_tags = """
 <link rel="icon" type="image/png" href="assets/logo-nnos.png"/>
@@ -366,12 +456,12 @@ def sync_booking():
 
     # Substituir Navbar simples pela Navbar integrada com links para Matriz, UVA e Menu (Outros Relatórios Acima)
     integrated_nav = """
-<nav class="sticky top-0 z-50 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md border-b border-slate-200 dark:border-white/10 shadow-md transition-colors duration-200">
+<nav class="sticky top-0 z-50 bg-slate-950/95 dark:bg-slate-950/95 backdrop-blur-md border-b border-white/10 dark:border-white/10 shadow-md transition-colors duration-200">
   <!-- Linha 1: Outros Relatórios e Ações Globais -->
-  <div class="bg-slate-100/90 dark:bg-slate-900/90 px-6 py-1.5 border-b border-slate-200 dark:border-white/10">
+  <div class="bg-slate-900/90 dark:bg-slate-900/90 px-6 py-1.5 border-b border-white/10 dark:border-white/10">
     <div class="max-w-[1440px] mx-auto flex items-center justify-between gap-3 flex-wrap">
       <div class="flex items-center gap-2">
-        <span class="text-[11px] font-bold text-slate-500 dark:text-gray-400 uppercase tracking-wider flex items-center gap-1.5 mr-1">
+        <span class="text-[11px] font-bold text-slate-400 dark:text-gray-400 uppercase tracking-wider flex items-center gap-1.5 mr-1">
           <span class="material-symbols-outlined text-sm text-sky-500">alt_route</span> Outros Relatórios:
         </span>
         <a href="matriz.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-sky-700 dark:text-sky-300 bg-sky-100 dark:bg-sky-500/20 hover:bg-sky-200 dark:hover:bg-sky-500/30 border border-sky-300 dark:border-sky-400/40 transition-all flex items-center gap-1.5 shadow-sm hover:scale-[1.02] cursor-pointer">
@@ -388,13 +478,13 @@ def sync_booking():
         </a>
       </div>
       <div class="flex items-center gap-2 ml-auto">
-        <button id="themeToggleBtn" onclick="toggleTheme()" class="theme-toggle-btn p-1.5 rounded-lg text-slate-500 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-white/10 border border-slate-300 dark:border-white/10 transition-colors flex items-center justify-center cursor-pointer shadow-sm" title="Alternar Modo Escuro / Claro">
+        <button id="themeToggleBtn" onclick="toggleTheme()" class="theme-toggle-btn p-1.5 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 border border-white/10 transition-colors flex items-center justify-center cursor-pointer shadow-sm" title="Alternar Modo Escuro / Claro">
           <span class="material-symbols-outlined text-base theme-icon">light_mode</span>
         </button>
-        <a href="index.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-white/10 border border-slate-300 dark:border-white/10 transition-colors flex items-center gap-1.5 cursor-pointer">
+        <a href="index.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 border border-white/10 transition-colors flex items-center gap-1.5 cursor-pointer">
           <span class="material-symbols-outlined text-sm">grid_view</span> Menu
         </a>
-        <button onclick="logout()" class="px-3 py-1.5 rounded-lg text-xs font-bold text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-500/20 border border-rose-300 dark:border-rose-500/30 transition-colors flex items-center gap-1 cursor-pointer" title="Encerrar Sessão">
+        <button onclick="logout()" class="px-3 py-1.5 rounded-lg text-xs font-bold text-rose-400 hover:bg-rose-500/20 border border-rose-500/30 transition-colors flex items-center gap-1 cursor-pointer" title="Encerrar Sessão">
           <span class="material-symbols-outlined text-sm">logout</span> Sair
         </button>
       </div>
@@ -404,13 +494,13 @@ def sync_booking():
   <!-- Linha 2: Seções do Relatório -->
   <div class="max-w-[1440px] mx-auto px-6 overflow-x-auto">
     <div class="flex items-center gap-1.5 py-2 min-w-max">
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#visao"><span class="material-symbols-outlined text-sm text-sky-500">monitoring</span> Visão executiva</a>
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#imobilizado"><span class="material-symbols-outlined text-sm text-sky-500">inventory_2</span> Imobilizado &amp; Reforma</a>
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#lideres"><span class="material-symbols-outlined text-sm text-sky-500">groups</span> Líderes</a>
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#portfolio"><span class="material-symbols-outlined text-sm text-sky-500">analytics</span> Portfólio</a>
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#dre"><span class="material-symbols-outlined text-sm text-sky-500">assessment</span> Resultado ajustado</a>
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#logistica"><span class="material-symbols-outlined text-sm text-sky-500">flight_takeoff</span> Viagens &amp; Reembolsos</a>
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#detalhe"><span class="material-symbols-outlined text-sm text-sky-500">table_chart</span> Detalhamento</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#visao"><span class="material-symbols-outlined text-sm text-sky-500">monitoring</span> Visão executiva</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#imobilizado"><span class="material-symbols-outlined text-sm text-sky-500">inventory_2</span> Imobilizado &amp; Reforma</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#lideres"><span class="material-symbols-outlined text-sm text-sky-500">groups</span> Líderes</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#portfolio"><span class="material-symbols-outlined text-sm text-sky-500">analytics</span> Portfólio</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#dre"><span class="material-symbols-outlined text-sm text-sky-500">assessment</span> Resultado ajustado</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#logistica"><span class="material-symbols-outlined text-sm text-sky-500">flight_takeoff</span> Viagens &amp; Reembolsos</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#detalhe"><span class="material-symbols-outlined text-sm text-sky-500">table_chart</span> Detalhamento</a>
     </div>
   </div>
 </nav>
@@ -493,6 +583,15 @@ def sync_booking():
 </footer>
 """
     html = re.sub(r'<footer class="footer">.*?</footer>', standard_footer_booking.strip(), html, flags=re.DOTALL)
+
+    # Ajuste dinâmico de gráficos e tabela de acordo com o tema
+    chart_tweak = """const isLight = document.documentElement.classList.contains('light');
+Chart.defaults.font.family="'Inter', sans-serif";
+Chart.defaults.color = isLight ? '#1b365d' : '#aebed2';
+const gridColor = isLight ? 'rgba(27, 54, 93, 0.08)' : 'rgba(148,163,184,.11)';
+const tooltip = isLight ? {backgroundColor:'#ffffff',titleColor:'#1b365d',bodyColor:'#0f172a',borderColor:'#cbd5e1',borderWidth:1,padding:12,displayColors:false} : {backgroundColor:'#10243e',titleColor:'#fff',bodyColor:'#d9e5f3',borderColor:'rgba(148,163,184,.22)',borderWidth:1,padding:12,displayColors:false};"""
+    html = re.sub(r"Chart\.defaults\.font\.family=.*?const tooltip=\{.*?\};", chart_tweak.strip(), html, flags=re.DOTALL)
+    html = html.replace("p.margem<0?'#ff9bae':'#9bd7ff'", "p.margem<0?'#be123c':(isLight?'#047857':'#9bd7ff')")
 
     target_booking = os.path.join(repo_dir, "booking.html")
     target_dashboard = os.path.join(repo_dir, "dashboard-executivo-booking.html")

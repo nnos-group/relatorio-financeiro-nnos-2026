@@ -1,17 +1,17 @@
 {
-  "updatedAt": "2026-10-08T14:31:27.504Z",
+  "updatedAt": "2026-10-08T16:05:33.276Z",
   "macro": {
-    "receita": 10642130.78,
+    "receita": 10643175.78,
     "custos": 7658625.69,
-    "custosPct": 71.96515292212938,
-    "impostos": 1303661.03,
-    "impostosPct": 12.250000088798007,
+    "custosPct": 71.95808702503645,
+    "impostos": 1303789.05,
+    "impostosPct": 12.250000159256977,
     "logistica": 769083.91,
-    "logisticaPct": 7.226784991642436,
+    "logisticaPct": 7.226075429903311,
     "repasse": -690635.57,
-    "repassePct": -6.489636185433158,
-    "margem": 1601395.7199999997,
-    "margemPct": 15.047698182863337,
+    "repassePct": -6.488999000634752,
+    "margem": 1602312.6999999997,
+    "margemPct": 15.05483638643803,
     "totalLideres": 7,
     "totalProjetos": 44
   },
@@ -753,36 +753,36 @@
       "total": {
         "titulo": "Total - Leonardo Campos",
         "tituloRaw": "TOTAL - LEONARDO CAMPOS",
-        "receita": 35171.45,
+        "receita": 36216.45,
         "receitaPct": 100,
-        "impostos": 4308.5,
+        "impostos": 4436.52,
         "impostosPct": 12.25,
         "custos": 428359.77,
-        "custosPct": 1217.92,
+        "custosPct": 1182.78,
         "logistica": 0,
         "logisticaPct": 0,
         "repasse": 0,
         "repassePct": 0,
-        "margem": -397496.82,
-        "margemPct": -1130.17,
+        "margem": -396579.84,
+        "margemPct": -1095.03,
         "statusCor": "rose"
       },
       "projetos": [
         {
           "titulo": "NNOS Academy",
           "tituloRaw": "NNOS ACADEMY",
-          "receita": 35171.45,
+          "receita": 36216.45,
           "receitaPct": 100,
-          "impostos": 4308.5,
+          "impostos": 4436.52,
           "impostosPct": 12.25,
           "custos": 428359.77,
-          "custosPct": 1217.92,
+          "custosPct": 1182.78,
           "logistica": 0,
           "logisticaPct": 0,
           "repasse": 0,
           "repassePct": 0,
-          "margem": -397496.82,
-          "margemPct": -1130.17,
+          "margem": -396579.84,
+          "margemPct": -1095.03,
           "statusCor": "rose"
         }
       ]
@@ -1107,9 +1107,9 @@
       "ranking": 1,
       "projeto": "NNOS Academy",
       "lider": "Leonardo Campos",
-      "receita": 35171.45,
-      "margem": -397496.82,
-      "margemPct": -1130.17
+      "receita": 36216.45,
+      "margem": -396579.84,
+      "margemPct": -1095.03
     },
     {
       "ranking": 2,
@@ -1188,10 +1188,10 @@
     {
       "area": "Innovation",
       "meta": 300000,
-      "realizado": 35171.45,
-      "atingidoPct": "11,72%",
-      "falta": 264828.55,
-      "faltaPct": "88,28%",
+      "realizado": 36216.45,
+      "atingidoPct": "12,07%",
+      "falta": 263783.55,
+      "faltaPct": "87,93%",
       "isTotal": false
     },
     {
@@ -1242,9 +1242,9 @@
     {
       "area": "Meta Geral 2026",
       "meta": 15000000,
-      "realizado": 10642130.78,
+      "realizado": 10643175.78,
       "atingidoPct": "70,95%",
-      "falta": 4357869.22,
+      "falta": 4356824.22,
       "faltaPct": "29,05%",
       "isTotal": true
     }
