@@ -517,6 +517,7 @@ def sync_prospeccao():
   function toggleTheme() {
     const isLight = document.documentElement.classList.contains('light');
     applyTheme(isLight ? 'dark' : 'light');
+    location.reload();
   }
 
   (function() {

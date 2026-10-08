@@ -306,6 +306,39 @@ def sync_booking():
   html.light .text-emerald-400, html.light .text-emerald-300 { color: #047857 !important; }
   html.light .text-rose-400, html.light .text-rose-300 { color: #be123c !important; }
   html.light .text-amber-400, html.light .text-amber-300 { color: #b45309 !important; }
+  html.light .logo-code1 {
+    filter: none !important;
+    opacity: 1 !important;
+  }
+  html.light .header-divider-code1 {
+    background-color: #cbd5e1 !important;
+  }
+  html.light .dre-card {
+    background: #ffffff !important;
+    border: 1px solid #dbe5ef !important;
+    box-shadow: 0 4px 14px -2px rgba(27,54,93,.08) !important;
+  }
+  html.light .dre-card .l { color: #475569 !important; }
+  html.light .dre-card .v { color: #0f172a !important; }
+  html.light .dre-card.negative .v { color: #be123c !important; }
+  html.light .dre-card.positive .v { color: #047857 !important; }
+  html.light .dre-card.capex .v { color: #b45309 !important; }
+
+  html.light .card.panel, html.light .card.kpi {
+    background: #ffffff !important;
+    border: 1px solid #dbe5ef !important;
+    box-shadow: 0 4px 14px -2px rgba(27,54,93,.06) !important;
+  }
+  html.light .card.kpi .label { color: #475569 !important; }
+  html.light .card.kpi .value { color: #0f172a !important; }
+  html.light .card.kpi.red .value { color: #be123c !important; }
+  html.light .card.kpi.green .value { color: #047857 !important; }
+  html.light .card.kpi.amber .value { color: #b45309 !important; }
+  html.light .card.kpi.blue .value { color: #0284c7 !important; }
+  html.light .card.kpi .note { color: #64748b !important; }
+  html.light .card.panel h3 { color: #1b365d !important; }
+  html.light .card.panel .sub { color: #475569 !important; }
+
   html.light footer, html.light footer[class] {
     background-color: #1b365d !important;
     border-top: 3px solid #0083ca !important;
@@ -410,6 +443,7 @@ def sync_booking():
   function toggleTheme() {
     const isLight = document.documentElement.classList.contains('light');
     applyTheme(isLight ? 'dark' : 'light');
+    location.reload();
   }
 
   (function() {

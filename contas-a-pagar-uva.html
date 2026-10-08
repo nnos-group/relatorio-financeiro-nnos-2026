@@ -210,6 +210,46 @@
     border: 1px solid #dbe5ef !important;
     box-shadow: 0 6px 18px -8px rgba(27,54,93,.18) !important;
   }
+  html.light [class*="from-slate-900"],
+  html.light [class*="to-slate-900"] {
+    background: #ffffff !important;
+    border-color: #dbe5ef !important;
+  }
+  html.light [class*="bg-slate-900"],
+  html.light [class*="bg-slate-800"] {
+    background-color: #ffffff !important;
+    border-color: #dbe5ef !important;
+  }
+  html.light [class*="bg-slate-800/60"],
+  html.light [class*="bg-slate-800"] {
+    background-color: #f8fafc !important;
+    border-color: #dbe5ef !important;
+  }
+  html.light [class*="border-slate-700"] {
+    border-color: #dbe5ef !important;
+  }
+  html.light [class*="text-slate-400"],
+  html.light [class*="text-slate-300"],
+  html.light [class*="text-slate-200"],
+  html.light [class*="text-text-muted"] {
+    color: #475569 !important;
+  }
+  html.light [class*="text-white"],
+  html.light .font-semibold.text-sm.text-white {
+    color: #0f172a !important;
+  }
+  html.light .text-sky-300,
+  html.light [class*="text-sky-300"] {
+    color: #0284c7 !important;
+  }
+  html.light .text-amber-300,
+  html.light [class*="text-amber-300"] {
+    color: #b45309 !important;
+  }
+  html.light .text-amber-200 {
+    color: #92400e !important;
+  }
+
   /* Cabeçalho de tabela = barra escura => texto claro */
   html.light table thead tr, html.light table thead th, html.light table th {
     background-color: #1b365d !important;
@@ -737,8 +777,12 @@ O <strong class="text-white">PIX instantâneo</strong> responde por <strong clas
 </footer>
 
 <script>
+const isLightUva = document.documentElement.classList.contains('light');
+const uvaTextColor = isLightUva ? '#1b365d' : '#f1f5f9';
+const uvaGridColor = isLightUva ? 'rgba(27, 54, 93, 0.1)' : 'rgba(255,255,255,0.1)';
+
 Chart.defaults.font.family = "'Inter', sans-serif";
-Chart.defaults.color = '#f1f5f9';
+Chart.defaults.color = uvaTextColor;
 
 // Top Fornecedores
 new Chart(document.getElementById('chartFornecedores'), {
@@ -748,8 +792,8 @@ new Chart(document.getElementById('chartFornecedores'), {
     datasets: [{
       label: 'Valor Total (R\$)',
       data: [189589.65, 138574.83, 29730.33, 28369.94, 26090.0, 24306.07, 21510.63, 21300.0, 18749.9, 14692.19],
-      backgroundColor: '#38bdf8cc',
-      borderColor: '#38bdf8',
+      backgroundColor: isLightUva ? '#0284c7' : '#38bdf8cc',
+      borderColor: isLightUva ? '#0369a1' : '#38bdf8',
       borderWidth: 1, borderRadius: 4
     }]
   },
@@ -757,8 +801,8 @@ new Chart(document.getElementById('chartFornecedores'), {
     indexAxis: 'y', responsive: true, maintainAspectRatio: false,
     plugins: { legend: { display: false } },
     scales: {
-      x: { beginAtZero: true, ticks: { callback: v => 'R\$ '+(v/1000).toFixed(0)+'K', color: '#f1f5f9', font: { weight: '600' } }, grid: { color: 'rgba(255,255,255,0.1)' } },
-      y: { ticks: { color: '#f1f5f9', font: { weight: '500' } }, grid: { display: false } }
+      x: { beginAtZero: true, ticks: { callback: v => 'R\$ '+(v/1000).toFixed(0)+'K', color: uvaTextColor, font: { weight: '600' } }, grid: { color: uvaGridColor } },
+      y: { ticks: { color: uvaTextColor, font: { weight: '600' } }, grid: { display: false } }
     }
   }
 });
@@ -772,25 +816,25 @@ new Chart(document.getElementById('chartMensalExtendido'), {
       {
         label: 'Quitado (R\$)',
         data: [6150.0, 9458.55, 102332.0, 123960.28, 30235.52, 80794.49, 45058.11, 45159.57, 39825.22, 35807.39, 30245.66, 28810.71, 9927.0, 0.0, 0.0, 0.0],
-        backgroundColor: '#38bdf8cc',
-        borderColor: '#38bdf8',
+        backgroundColor: isLightUva ? '#059669' : '#38bdf8cc',
+        borderColor: isLightUva ? '#047857' : '#38bdf8',
         borderWidth: 1, borderRadius: 2
       },
       {
         label: 'A Vencer (R\$)',
         data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2717.97, 4644.97, 2717.97, 650.0],
-        backgroundColor: '#fb7185cc',
-        borderColor: '#fb7185',
+        backgroundColor: isLightUva ? '#e11d48' : '#fb7185cc',
+        borderColor: isLightUva ? '#be123c' : '#fb7185',
         borderWidth: 1, borderRadius: 2
       }
     ]
   },
   options: {
     responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { position: 'top', labels: { color: '#f1f5f9', font: { weight: '600' } } } },
+    plugins: { legend: { position: 'top', labels: { color: uvaTextColor, font: { weight: '600' } } } },
     scales: {
-      x: { stacked: true, ticks: { color: '#f1f5f9', font: { weight: '500' } }, grid: { display: false } },
-      y: { stacked: true, ticks: { callback: v => 'R\$ '+(v/1000).toFixed(0)+'K', color: '#f1f5f9', font: { weight: '600' } }, grid: { color: 'rgba(255,255,255,0.1)' } }
+      x: { stacked: true, ticks: { color: uvaTextColor, font: { weight: '600' } }, grid: { display: false } },
+      y: { stacked: true, ticks: { callback: v => 'R\$ '+(v/1000).toFixed(0)+'K', color: uvaTextColor, font: { weight: '600' } }, grid: { color: uvaGridColor } }
     }
   }
 });
@@ -802,14 +846,14 @@ new Chart(document.getElementById('chartCategorias'), {
     labels: ["Manutenção Predial", "Honorários Prestação d...", "Móveis, Utensílios e I...", "Despesas Operacionais", "Máquinas, Equipamentos...", "Viagens", "Ajuda de Custo", "Outros"],
     datasets: [{
       data: [278892.11, 164821.61, 37062.25, 26230.08, 21800.05, 16807.9, 10439.0, 42442.41],
-      backgroundColor: ['#38bdf8', '#60a5fa', '#a78bfa', '#fbbf24', '#34d399', '#f472b6', '#fb923c', '#94a3b8'],
+      backgroundColor: ['#0284c7', '#3b82f6', '#8b5cf6', '#d97706', '#059669', '#e11d48', '#ea580c', '#475569'],
       borderWidth: 0
     }]
   },
   options: {
     responsive: true, maintainAspectRatio: false, cutout: '65%',
     plugins: {
-      legend: { position: 'right', labels: { color: '#f1f5f9', font: { weight: '500' }, usePointStyle: true } },
+      legend: { position: 'right', labels: { color: uvaTextColor, font: { weight: '600' }, usePointStyle: true } },
       tooltip: {
         callbacks: {
           label: function(ctx) {
@@ -829,8 +873,8 @@ new Chart(document.getElementById('chartFormasPagamento'), {
     datasets: [{
       label: 'Valor (R\$)',
       data: [449589.61, 122024.73, 16141.77, 10739.3],
-      backgroundColor: ['#38bdf8cc', '#34d399cc', '#fbbf24cc', '#a78bfacc'],
-      borderColor: ['#38bdf8', '#34d399', '#fbbf24', '#a78bfa'],
+      backgroundColor: isLightUva ? '#0284c7' : '#38bdf8cc',
+      borderColor: isLightUva ? '#0369a1' : '#38bdf8',
       borderWidth: 1, borderRadius: 4
     }]
   },
@@ -838,8 +882,8 @@ new Chart(document.getElementById('chartFormasPagamento'), {
     responsive: true, maintainAspectRatio: false,
     plugins: { legend: { display: false } },
     scales: {
-      x: { ticks: { color: '#f1f5f9', font: { weight: '500' } }, grid: { display: false } },
-      y: { ticks: { callback: v => 'R\$ '+(v/1000).toFixed(0)+'K', color: '#f1f5f9', font: { weight: '600' } }, grid: { color: 'rgba(255,255,255,0.1)' } }
+      x: { ticks: { color: uvaTextColor, font: { weight: '600' } }, grid: { display: false } },
+      y: { ticks: { callback: v => 'R\$ '+(v/1000).toFixed(0)+'K', color: uvaTextColor, font: { weight: '600' } }, grid: { color: uvaGridColor } }
     }
   }
 });
@@ -900,6 +944,7 @@ document.addEventListener('keydown', function(e) {
   function toggleTheme() {
     const isLight = document.documentElement.classList.contains('light');
     applyTheme(isLight ? 'dark' : 'light');
+    location.reload();
   }
 
   (function() {
