@@ -742,34 +742,20 @@ full_html = f'''<!DOCTYPE html>
 <div id="report-wrapper" class="hidden">
 
 <!-- HEADER -->
-<header class="relative overflow-hidden bg-transparent border-b border-white/10">
-  <div class="max-w-[1720px] mx-auto px-6 py-6 relative z-10 flex items-center justify-between gap-6">
-    <div class="max-w-5xl">
-      <div class="flex items-center gap-5 mb-4">
-        <img alt="NNÓS Logo" class="logo-dark h-16 w-auto object-contain flex-shrink-0" src="{LOGO_B64_WHITE}"/>
-        <img alt="NNÓS Logo" class="logo-light h-16 w-auto object-contain flex-shrink-0" src="assets/logo-nnos.png"/>
+<header class="relative overflow-hidden bg-transparent border-b border-surface-variant">
+  <div class="max-w-[1720px] mx-auto px-6 py-6 relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+    <div class="max-w-4xl">
+      <div class="flex items-center gap-5">
+        <img alt="NNÓS Logo" class="logo-dark h-16 w-auto object-contain flex-shrink-0 opacity-95" src="assets/logo-nnos-white.png"/>
+        <img alt="NNÓS Logo" class="logo-light h-16 w-auto object-contain flex-shrink-0 opacity-95" src="assets/logo-nnos.png"/>
         <div class="h-12 w-[1px] bg-white/20 hidden sm:block"></div>
         <div>
-          <div class="flex items-center gap-3 mb-1">
-            <h1 class="text-2xl md:text-3xl font-extrabold font-display text-white tracking-tight leading-tight">Demonstrativo de Resultados &amp; Dashboard Executivo</h1>
+          <div class="flex items-center gap-3">
+            <h1 class="text-2xl md:text-3xl font-bold font-display text-text-primary tracking-tight leading-tight">Demonstrativo de Resultados &amp; Dashboard Executivo</h1>
             <span class="text-[10px] font-bold text-brand-blue uppercase tracking-widest bg-brand-blue/10 px-2.5 py-0.5 rounded-full border border-brand-blue/30 hidden md:inline-block">Relatório Gerencial</span>
           </div>
-          <p class="text-gray-300 text-xs md:text-sm">Análise financeira gerencial — Visão acumulada de {num_months} meses ({periodo_extenso}) - Fonte Conta Azul</p>
+          <p class="text-text-muted text-sm md:text-base text-gray-200 mt-0.5">Análise financeira gerencial — Visão acumulada de {num_months} meses ({periodo_extenso}) - Fonte Conta Azul</p>
         </div>
-      </div>
-      <div class="flex flex-wrap gap-3 text-xs font-semibold">
-        <span class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 text-white border border-white/10">
-          <span class="material-symbols-outlined text-brand-blue text-sm">calendar_month</span> {periodo_badge}
-        </span>
-        <span class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 text-white border border-white/10">
-          <span class="material-symbols-outlined text-emerald-400 text-sm">payments</span> Rec. Bruta: R$ {str(round(rec_bruta_m, 2)).replace('.', ',')}M
-        </span>
-        <span class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 text-white border border-white/10">
-          <span class="material-symbols-outlined text-brand-blue text-sm">trending_up</span> Margem Bruta: {str(round(margem_bruta_pct, 1)).replace('.', ',')}%
-        </span>
-        <span class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 text-white border border-white/10">
-          <span class="material-symbols-outlined text-amber-400 text-sm">verified</span> Controladoria &amp; Gestão
-        </span>
       </div>
     </div>
   </div>

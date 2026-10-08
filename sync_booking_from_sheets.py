@@ -545,26 +545,29 @@ def sync_booking():
     if '</body>' in html and 'theme-toggle-btn' in html and 'applyTheme' not in html:
         html = html.replace('</body>', theme_script + '\n</body>')
 
-    # Otimizar cabeçalho: logo ao lado do título com altura compacta
+    # Otimizar cabeçalho padronizado com referência Contas a Pagar | Campus BH UVA
     optimized_hero_css = """
-.hero-code1{position:relative;overflow:hidden;padding:16px 0 14px;border-bottom:1px solid rgba(255,255,255,.10);background:linear-gradient(90deg,rgba(1,49,84,.68) 0%,rgba(11,34,80,.84) 45%,rgba(18,28,91,.75) 100%)}
+.hero-code1{position:relative;overflow:hidden;padding:24px 0;border-bottom:1px solid rgba(255,255,255,.10);background:linear-gradient(90deg,rgba(1,49,84,.68) 0%,rgba(11,34,80,.84) 45%,rgba(18,28,91,.75) 100%)}
 .hero-code1:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 0% 0%,rgba(0,131,202,.20),transparent 30%),radial-gradient(circle at 100% 0%,rgba(59,130,246,.12),transparent 24%);pointer-events:none}
 .hero-code1-inner{position:relative;z-index:1}
-.hero-code1-copy{max-width:1200px;display:flex;align-items:center;gap:20px}
-.logo-code1{height:50px;margin-bottom:0;opacity:.95;flex-shrink:0}
+.hero-code1-copy{max-width:1720px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:20px}
+.logo-code1{height:64px;width:auto;object-fit:contain;margin-bottom:0;opacity:.95;flex-shrink:0}
 .logo-dark{display:block;}
 .logo-light{display:none;}
 html.light .logo-dark{display:none!important;}
 html.light .logo-light{display:block!important;}
-.header-divider-code1{width:1px;height:44px;background:rgba(255,255,255,.2);flex-shrink:0}
-.title-code1{font-size:clamp(22px,2.6vw,32px);font-weight:800;line-height:1.15;margin:0 0 4px;letter-spacing:-.03em;color:#fff;font-family:Manrope,Inter,sans-serif}
-.subtitle-code1{color:#d7e3f3;font-size:13px;line-height:1.4;margin:0}
-@media(max-width:768px){.hero-code1-copy{flex-direction:column;align-items:flex-start;gap:12px}.header-divider-code1{display:none}.logo-code1{height:38px}}
+html.light .hero-code1{background:#ffffff!important;border-bottom:1px solid #e2e8f0!important;}
+html.light .title-code1{color:#1b365d!important;}
+html.light .subtitle-code1{color:#475569!important;}
+html.light .header-divider-code1{background:rgba(0,0,0,0.15)!important;}
+.header-divider-code1{width:1px;height:48px;background:rgba(255,255,255,.2);flex-shrink:0}
+.title-code1{font-size:clamp(24px,2.8vw,30px);font-weight:700;line-height:1.25;margin:0;letter-spacing:-.02em;color:#fff;font-family:Manrope,Inter,sans-serif}
+.subtitle-code1{color:#e2e8f0;font-size:15px;line-height:1.4;margin:2px 0 0}
+@media(max-width:768px){.hero-code1-copy{flex-direction:column;align-items:flex-start;gap:12px}.header-divider-code1{display:none}.logo-code1{height:48px}}
 """
-    if '.logo-dark{' not in html:
-        html = re.sub(r'\.hero-code1\{.*?@media\(max-width:(?:620|768)px\)\{.*?\}', optimized_hero_css.strip(), html, flags=re.DOTALL)
-        if '.logo-dark{' not in html and '</style>' in html:
-            html = html.replace('</style>', optimized_hero_css.strip() + '\n</style>', 1)
+    html = re.sub(r'\.hero-code1\{.*?\@media\(max-width:768px\)\{.*?\}\s*\}', optimized_hero_css.strip(), html, flags=re.DOTALL)
+    if 'height:64px' not in html and '</style>' in html:
+        html = html.replace('</style>', optimized_hero_css.strip() + '\n</style>', 1)
 
     optimized_hero_html = """<div class="hero-code1-copy">
       <img alt="NNÓS Logo" class="logo-code1 logo-dark" src="assets/logo-nnos-white.png"/>

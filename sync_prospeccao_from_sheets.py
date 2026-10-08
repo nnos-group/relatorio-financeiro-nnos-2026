@@ -402,37 +402,20 @@ def sync_prospeccao():
         elif 'light-theme-styles' not in html:
             html = html.replace("</head>", '<style id="light-theme-styles">\n' + security_auth_head.split('<style id="light-theme-styles">')[1] + '\n</head>')
 
-    # 2. Header: Período, Total, Atividades, Destinos & Logo ao lado do Título
-    destinos_unicos = len(set(a["local"] for a in atividades))
+    # 2. Header: Padronizado com referência Campus BH UVA
     header_html = f"""<!-- ═══════════ HEADER ═══════════ -->
-<header class="relative overflow-hidden border-b border-surface-variant">
-  <div class="absolute inset-0 z-0">
-    <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-brand-blue/10 to-transparent"></div>
-    <div class="absolute -top-40 -right-40 w-96 h-96 bg-brand-blue/20 rounded-full blur-3xl"></div>
-  </div>
-  <div class="max-w-[1720px] mx-auto px-6 py-8 relative z-10">
-    <div class="flex items-center gap-5 mb-5">
-      <img alt="NNÓS Logo" class="logo-dark h-14 sm:h-16 w-auto object-contain flex-shrink-0 opacity-95" src="assets/logo-nnos-white.png"/>
-      <img alt="NNÓS Logo" class="logo-light h-14 sm:h-16 w-auto object-contain flex-shrink-0 opacity-95" src="assets/logo-nnos.png"/>
-      <div class="h-12 w-[1px] bg-white/20 hidden sm:block"></div>
-      <div>
-        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold font-display text-text-primary tracking-tight">Dashboard Executivo de Despesas Operacionais</h1>
-        <p class="text-text-muted text-sm sm:text-base mt-1">Análise consolidada de viagens e atividades corporativas — NNÓS Business Solutions</p>
+<header class="relative overflow-hidden bg-transparent border-b border-surface-variant">
+  <div class="max-w-[1720px] mx-auto px-6 py-6 relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+    <div class="max-w-4xl">
+      <div class="flex items-center gap-5">
+        <img alt="NNÓS Logo" class="logo-dark h-16 w-auto object-contain flex-shrink-0 opacity-95" src="assets/logo-nnos-white.png"/>
+        <img alt="NNÓS Logo" class="logo-light h-16 w-auto object-contain flex-shrink-0 opacity-95" src="assets/logo-nnos.png"/>
+        <div class="h-12 w-[1px] bg-white/20 hidden sm:block"></div>
+        <div>
+          <h1 class="text-2xl md:text-3xl font-bold font-display text-text-primary tracking-tight leading-tight">Dashboard Executivo de Despesas Operacionais</h1>
+          <p class="text-text-muted text-sm md:text-base text-gray-200 mt-0.5">Análise consolidada de viagens e atividades corporativas — NNÓS Business Solutions</p>
+        </div>
       </div>
-    </div>
-    <div class="flex flex-wrap items-center gap-3 text-xs sm:text-sm font-medium">
-      <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface border border-surface-variant whitespace-nowrap">
-        <span class="material-symbols-outlined text-brand-blue text-sm">calendar_month</span> Jan/2026 a Set/2026
-      </span>
-      <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface border border-surface-variant font-bold text-white whitespace-nowrap">
-        <span class="material-symbols-outlined text-brand-blue text-sm">payments</span> Total: {fmt_brl(total_gasto)}
-      </span>
-      <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface border border-surface-variant whitespace-nowrap">
-        <span class="material-symbols-outlined text-brand-blue text-sm">assignment</span> {total_atividades} Atividades
-      </span>
-      <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface border border-surface-variant whitespace-nowrap">
-        <span class="material-symbols-outlined text-brand-blue text-sm">public</span> {destinos_unicos} Destinos
-      </span>
     </div>
   </div>
 </header>"""

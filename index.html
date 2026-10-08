@@ -291,7 +291,7 @@
           <div class="card-kpi-box flex items-center justify-between py-2.5 px-1.5 rounded-xl bg-slate-900/70 border border-white/5">
             <div class="flex-1 flex flex-col items-center justify-center min-w-0 px-1">
               <div class="kpi-label text-[9px] 2xl:text-[10px] uppercase font-bold text-gray-400 mb-0.5 whitespace-nowrap truncate">Total Geral</div>
-              <div class="text-xs 2xl:text-[13px] font-bold text-slate-800 dark:text-white whitespace-nowrap tracking-tight">R$ 598,5K</div>
+              <div class="text-xs 2xl:text-[13px] font-bold text-slate-800 dark:text-white whitespace-nowrap tracking-tight">R$ 765,9K</div>
             </div>
             <div class="h-7 w-px bg-slate-300 dark:bg-white/10 flex-shrink-0"></div>
             <div class="flex-1 flex flex-col items-center justify-center min-w-0 px-1">
@@ -550,6 +550,19 @@ function toggleTheme() {
     unlockDashboard();
   }
 })();
+
+  // 🛡️ Bloqueio de DevTools e Menu de Contexto (F12, atalhos de inspeção e clique direito)
+  document.addEventListener('contextmenu', function(e) { e.preventDefault(); }, false);
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'F12' || e.keyCode === 123) { e.preventDefault(); e.stopPropagation(); return false; }
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && (
+      e.key === 'I' || e.key === 'i' || e.keyCode === 73 ||
+      e.key === 'J' || e.key === 'j' || e.keyCode === 74 ||
+      e.key === 'C' || e.key === 'c' || e.keyCode === 67
+    )) { e.preventDefault(); e.stopPropagation(); return false; }
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'U' || e.key === 'u' || e.keyCode === 85)) { e.preventDefault(); e.stopPropagation(); return false; }
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'S' || e.key === 's' || e.keyCode === 83)) { e.preventDefault(); e.stopPropagation(); return false; }
+  }, false);
 </script>
 </body>
 </html>
