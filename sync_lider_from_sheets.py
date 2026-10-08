@@ -722,16 +722,14 @@ def sync_lider():
 
 <!-- ═══════════ HEADER ═══════════ -->
 <header class="relative overflow-hidden bg-transparent border-b border-white/10 transition-colors duration-200">
-  <div class="max-w-[1720px] mx-auto px-6 py-6 relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-    <div class="max-w-4xl">
-      <div class="flex items-center gap-5">
-        <img alt="NNÓS Logo" class="logo-dark h-16 w-auto object-contain flex-shrink-0 opacity-95" src="assets/logo-nnos-white.png"/>
-        <img alt="NNÓS Logo" class="logo-light h-16 w-auto object-contain flex-shrink-0 opacity-95" src="assets/logo-nnos.png"/>
-        <div class="h-12 w-[1px] bg-white/20 hidden sm:block"></div>
-        <div>
-          <h1 class="text-2xl md:text-3xl font-bold font-display text-white tracking-tight leading-tight">Painel Financeiro por Líder de Projeto</h1>
-          <p class="text-slate-300 text-sm md:text-base mt-0.5">Controle de rentabilidade, centros de custos e margem operacional por contrato corporativo</p>
-        </div>
+  <div class="max-w-[1720px] mx-auto px-6 py-6 relative z-10 flex items-center justify-between gap-6">
+    <div class="flex items-center gap-5 min-w-0">
+      <img alt="NNÓS Logo" class="logo-dark h-16 w-auto object-contain flex-shrink-0 opacity-95" src="assets/logo-nnos-white.png"/>
+      <img alt="NNÓS Logo" class="logo-light h-16 w-auto object-contain flex-shrink-0 opacity-95" src="assets/logo-nnos.png"/>
+      <div class="h-12 w-[1px] bg-white/20 hidden sm:block flex-shrink-0"></div>
+      <div class="min-w-0">
+        <h1 class="text-2xl lg:text-3xl font-bold font-display text-white tracking-tight leading-tight whitespace-nowrap">Painel Financeiro por Líder de Projeto</h1>
+        <p class="text-slate-300 text-sm md:text-base mt-0.5 whitespace-nowrap">Controle de rentabilidade, centros de custos e margem operacional por contrato corporativo</p>
       </div>
     </div>
   </div>

@@ -381,6 +381,63 @@
   html.light footer, html.light footer * { color: #e2e8f0 !important; }
   html.light ::-webkit-scrollbar-track { background: #e2e8f0; }
   html.light ::-webkit-scrollbar-thumb { background: #94a3b8; }
+
+  /* ===== Ícones de marca d'água dos KPIs: destacados e elegantes ===== */
+  .kpi-watermark-wrap {
+    pointer-events: none;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .group:hover .kpi-watermark-wrap {
+    transform: scale(1.12) translateY(-2px);
+  }
+  .kpi-watermark-icon {
+    opacity: 0.42 !important;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
+    transition: opacity 0.3s ease, filter 0.3s ease;
+  }
+  .group:hover .kpi-watermark-icon {
+    opacity: 0.88 !important;
+    filter: drop-shadow(0 4px 12px currentColor);
+  }
+
+  /* Cores vibrantes dos ícones no Dark Mode */
+  .kpi-icon-sky { color: #38bdf8 !important; }
+  .kpi-icon-blue { color: #60a5fa !important; }
+  .kpi-icon-purple { color: #c084fc !important; }
+  .kpi-icon-teal { color: #2dd4bf !important; }
+  .kpi-icon-emerald { color: #34d399 !important; }
+  .kpi-icon-amber { color: #fbbf24 !important; }
+
+  /* Badges pequenos no Dark Mode */
+  .kpi-badge-sky { background-color: rgba(56, 189, 248, 0.15) !important; border-color: rgba(56, 189, 248, 0.35) !important; color: #38bdf8 !important; }
+  .kpi-badge-blue { background-color: rgba(96, 165, 250, 0.15) !important; border-color: rgba(96, 165, 250, 0.35) !important; color: #60a5fa !important; }
+  .kpi-badge-purple { background-color: rgba(192, 132, 252, 0.15) !important; border-color: rgba(192, 132, 252, 0.35) !important; color: #c084fc !important; }
+  .kpi-badge-teal { background-color: rgba(45, 212, 191, 0.15) !important; border-color: rgba(45, 212, 191, 0.35) !important; color: #2dd4bf !important; }
+  .kpi-badge-emerald { background-color: rgba(52, 211, 153, 0.15) !important; border-color: rgba(52, 211, 153, 0.35) !important; color: #34d399 !important; }
+  .kpi-badge-amber { background-color: rgba(251, 191, 36, 0.15) !important; border-color: rgba(251, 191, 36, 0.35) !important; color: #fbbf24 !important; }
+
+  /* Ajustes no Light Mode */
+  html.light .kpi-watermark-icon {
+    opacity: 0.45 !important;
+    filter: drop-shadow(0 2px 6px rgba(27,54,93,0.18)) !important;
+  }
+  html.light .group:hover .kpi-watermark-icon {
+    opacity: 0.90 !important;
+    filter: drop-shadow(0 4px 14px currentColor) !important;
+  }
+  html.light .kpi-icon-sky { color: #0284c7 !important; }
+  html.light .kpi-icon-blue { color: #2563eb !important; }
+  html.light .kpi-icon-purple { color: #7c3aed !important; }
+  html.light .kpi-icon-teal { color: #0d9488 !important; }
+  html.light .kpi-icon-emerald { color: #059669 !important; }
+  html.light .kpi-icon-amber { color: #d97706 !important; }
+
+  html.light .kpi-badge-sky { background-color: #e0f2fe !important; border-color: #bae6fd !important; color: #0284c7 !important; }
+  html.light .kpi-badge-blue { background-color: #dbeafe !important; border-color: #bfdbfe !important; color: #2563eb !important; }
+  html.light .kpi-badge-purple { background-color: #f3e8ff !important; border-color: #e9d5ff !important; color: #7c3aed !important; }
+  html.light .kpi-badge-teal { background-color: #ccfbf1 !important; border-color: #99f6e4 !important; color: #0d9488 !important; }
+  html.light .kpi-badge-emerald { background-color: #d1fae5 !important; border-color: #a7f3d0 !important; color: #059669 !important; }
+  html.light .kpi-badge-amber { background-color: #fef3c7 !important; border-color: #fde68a !important; color: #d97706 !important; }
 </style>
 
 </head>
@@ -390,15 +447,15 @@
 <!-- ═══════════ HEADER ═══════════ -->
 <header class="relative overflow-hidden bg-transparent border-b border-surface-variant">
   <div class="max-w-[1720px] mx-auto px-6 py-6 relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-    <div class="max-w-4xl">
-      <div class="flex items-center gap-5">
-        <img alt="NNÓS Logo" class="logo-dark h-16 w-auto object-contain flex-shrink-0 opacity-95" src="assets/logo-nnos-white.png"/>
-        <img alt="NNÓS Logo" class="logo-light h-16 w-auto object-contain flex-shrink-0 opacity-95" src="assets/logo-nnos.png"/>
-        <div class="h-12 w-[1px] bg-white/20 hidden sm:block"></div>
-        <div>
-          <h1 class="text-2xl md:text-3xl font-bold font-display text-text-primary tracking-tight leading-tight">Dashboard Executivo de Despesas Operacionais</h1>
-          <p class="text-text-muted text-sm md:text-base text-gray-200 mt-0.5">Análise consolidada de viagens e atividades corporativas — NNÓS Business Solutions</p>
+    <div class="flex items-center gap-5 min-w-0">
+      <img alt="NNÓS Logo" class="logo-dark h-16 w-auto object-contain flex-shrink-0 opacity-95" src="assets/logo-nnos-white.png"/>
+      <img alt="NNÓS Logo" class="logo-light h-16 w-auto object-contain flex-shrink-0 opacity-95" src="assets/logo-nnos.png"/>
+      <div class="h-12 w-[1px] bg-white/20 hidden sm:block flex-shrink-0"></div>
+      <div class="min-w-0">
+        <div class="flex items-center gap-3.5 flex-nowrap">
+          <h1 class="text-2xl md:text-3xl font-bold font-display text-text-primary tracking-tight leading-tight whitespace-nowrap">Dashboard Executivo de Despesas Operacionais</h1>
         </div>
+        <p class="text-text-muted text-sm md:text-base text-gray-200 mt-0.5 whitespace-nowrap">Análise consolidada de viagens e atividades corporativas — NNÓS Business Solutions</p>
       </div>
     </div>
   </div>
@@ -471,83 +528,88 @@
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
       <div class="glass-card rounded-lg p-5 relative overflow-hidden group">
-        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-          <span class="material-symbols-outlined text-5xl text-brand-blue">account_balance_wallet</span>
+        <div class="absolute top-0 right-0 p-3.5 kpi-watermark-wrap">
+          <span class="material-symbols-outlined text-5xl kpi-watermark-icon kpi-icon-sky">account_balance_wallet</span>
         </div>
         <div class="flex items-center gap-3 mb-4">
-          <div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-brand-blue border border-surface-variant">
+          <div class="w-10 h-10 rounded-lg kpi-badge-sky flex items-center justify-center border shadow-sm">
             <span class="material-symbols-outlined">payments</span>
           </div>
           <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">Gasto Total</div>
         </div>
         <div class="data-number text-white mb-1">R$ 157.090</div>
         <div class="text-xs text-text-muted">9 meses de operação</div>
-        <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-brand-blue to-transparent"></div>
+        <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-sky-400 to-transparent"></div>
       </div>
       <div class="glass-card rounded-lg p-5 relative overflow-hidden group">
-        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-          <span class="material-symbols-outlined text-5xl text-brand-blue">task</span>
+        <div class="absolute top-0 right-0 p-3.5 kpi-watermark-wrap">
+          <span class="material-symbols-outlined text-5xl kpi-watermark-icon kpi-icon-blue">task</span>
         </div>
         <div class="flex items-center gap-3 mb-4">
-          <div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-brand-blue border border-surface-variant">
+          <div class="w-10 h-10 rounded-lg kpi-badge-blue flex items-center justify-center border shadow-sm">
             <span class="material-symbols-outlined">assignment</span>
           </div>
           <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">Atividades</div>
         </div>
         <div class="data-number text-white mb-1">52</div>
         <div class="text-xs text-text-muted">Média 5.8/mês</div>
+        <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-blue-500 to-transparent"></div>
       </div>
       <div class="glass-card rounded-lg p-5 relative overflow-hidden group">
-        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-          <span class="material-symbols-outlined text-5xl text-brand-blue">analytics</span>
+        <div class="absolute top-0 right-0 p-3.5 kpi-watermark-wrap">
+          <span class="material-symbols-outlined text-5xl kpi-watermark-icon kpi-icon-purple">analytics</span>
         </div>
         <div class="flex items-center gap-3 mb-4">
-          <div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-brand-blue border border-surface-variant">
+          <div class="w-10 h-10 rounded-lg kpi-badge-purple flex items-center justify-center border shadow-sm">
             <span class="material-symbols-outlined">calculate</span>
           </div>
           <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">Ticket Médio</div>
         </div>
         <div class="data-number text-white mb-1">R$ 3.020</div>
         <div class="text-xs text-text-muted">Por atividade</div>
+        <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-purple-500 to-transparent"></div>
       </div>
       <div class="glass-card rounded-lg p-5 relative overflow-hidden group">
-        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-          <span class="material-symbols-outlined text-5xl text-brand-blue">flight_takeoff</span>
+        <div class="absolute top-0 right-0 p-3.5 kpi-watermark-wrap">
+          <span class="material-symbols-outlined text-5xl kpi-watermark-icon kpi-icon-teal">flight_takeoff</span>
         </div>
         <div class="flex items-center gap-3 mb-4">
-          <div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-brand-blue border border-surface-variant">
+          <div class="w-10 h-10 rounded-lg kpi-badge-teal flex items-center justify-center border shadow-sm">
             <span class="material-symbols-outlined">public</span>
           </div>
           <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">Internacional</div>
         </div>
         <div class="data-number text-white mb-1">R$ 49.932</div>
-        <div class="text-xs text-brand-blue font-medium">31.8% do total</div>
+        <div class="text-xs text-teal-400 font-medium">31.8% do total</div>
+        <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-teal-500 to-transparent"></div>
       </div>
       <div class="glass-card rounded-lg p-5 relative overflow-hidden group">
-        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-          <span class="material-symbols-outlined text-5xl text-brand-blue">location_on</span>
+        <div class="absolute top-0 right-0 p-3.5 kpi-watermark-wrap">
+          <span class="material-symbols-outlined text-5xl kpi-watermark-icon kpi-icon-emerald">location_on</span>
         </div>
         <div class="flex items-center gap-3 mb-4">
-          <div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-brand-blue border border-surface-variant">
+          <div class="w-10 h-10 rounded-lg kpi-badge-emerald flex items-center justify-center border shadow-sm">
             <span class="material-symbols-outlined">map</span>
           </div>
           <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">Nacional</div>
         </div>
         <div class="data-number text-white mb-1">R$ 107.158</div>
-        <div class="text-xs text-text-muted">68.2% do total</div>
+        <div class="text-xs text-emerald-400 font-medium">68.2% do total</div>
+        <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-emerald-500 to-transparent"></div>
       </div>
       <div class="glass-card rounded-lg p-5 relative overflow-hidden group">
-        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-          <span class="material-symbols-outlined text-5xl text-accent-amber">trending_up</span>
+        <div class="absolute top-0 right-0 p-3.5 kpi-watermark-wrap">
+          <span class="material-symbols-outlined text-5xl kpi-watermark-icon kpi-icon-amber">trending_up</span>
         </div>
         <div class="flex items-center gap-3 mb-4">
-          <div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-accent-amber border border-surface-variant">
+          <div class="w-10 h-10 rounded-lg kpi-badge-amber flex items-center justify-center border shadow-sm">
             <span class="material-symbols-outlined">event_upcoming</span>
           </div>
           <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">Projeção Anual</div>
         </div>
         <div class="data-number text-white mb-1">~R$ 209,5K</div>
         <div class="text-xs text-text-muted">Base: R$ 17.454/mês</div>
+        <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-amber-500 to-transparent"></div>
       </div>
 </div>
   </section>

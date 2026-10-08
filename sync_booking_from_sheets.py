@@ -561,8 +561,8 @@ html.light .title-code1{color:#1b365d!important;}
 html.light .subtitle-code1{color:#475569!important;}
 html.light .header-divider-code1{background:rgba(0,0,0,0.15)!important;}
 .header-divider-code1{width:1px;height:48px;background:rgba(255,255,255,.2);flex-shrink:0}
-.title-code1{font-size:clamp(24px,2.8vw,30px);font-weight:700;line-height:1.25;margin:0;letter-spacing:-.02em;color:#fff;font-family:Manrope,Inter,sans-serif}
-.subtitle-code1{color:#e2e8f0;font-size:15px;line-height:1.4;margin:2px 0 0}
+.title-code1{font-size:clamp(24px,2.8vw,30px);font-weight:700;line-height:1.25;margin:0;letter-spacing:-.02em;color:#fff;font-family:Manrope,Inter,sans-serif;white-space:nowrap}
+.subtitle-code1{color:#e2e8f0;font-size:15px;line-height:1.4;margin:2px 0 0;white-space:nowrap}
 @media(max-width:768px){.hero-code1-copy{flex-direction:column;align-items:flex-start;gap:12px}.header-divider-code1{display:none}.logo-code1{height:48px}}
 """
     html = re.sub(r'\.hero-code1\{.*?\@media\(max-width:768px\)\{.*?\}\s*\}', optimized_hero_css.strip(), html, flags=re.DOTALL)
