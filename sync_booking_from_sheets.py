@@ -53,9 +53,19 @@ def sync_booking():
     with open(raw_html_path, "r", encoding="utf-8") as f:
         html = f.read()
 
-    # Injetar Script de Segurança & Autenticação no <head>
+    # Injetar Script de Segurança & Autenticação e Tema no <head>
     security_auth_head = """
 <script>
+  (function() {
+    const saved = localStorage.getItem('nnos_theme') || 'dark';
+    if (saved === 'light') {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+    } else {
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.add('dark');
+    }
+  })();
   if (sessionStorage.getItem('nnos_auth') !== 'true') {
     window.location.href = 'index.html';
   }
@@ -98,9 +108,69 @@ def sync_booking():
 </script>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<style id="light-theme-styles">
+  html.light {
+    --bg: #f8fafc;
+    --bg2: #ffffff;
+    --panel: #ffffff;
+    --line: rgba(203, 213, 225, 0.8);
+    --line2: rgba(59, 130, 246, 0.3);
+    --text: #0f172a;
+    --muted: #475569;
+    --shadow: 0 10px 30px rgba(0,0,0,0.06);
+  }
+  html.light body {
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+  }
+  html.light .hero {
+    background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%) !important;
+    border-bottom: 1px solid #cbd5e1 !important;
+  }
+  html.light .title-code1,
+  html.light h1,
+  html.light h2,
+  html.light h3 {
+    color: #0f172a !important;
+  }
+  html.light .subtitle-code1,
+  html.light .hero p {
+    color: #475569 !important;
+  }
+  html.light nav {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border-bottom: 1px solid #cbd5e1 !important;
+  }
+  html.light .bg-slate-950,
+  html.light .bg-slate-900 {
+    background-color: #f8fafc !important;
+    border-color: #cbd5e1 !important;
+  }
+  html.light .card,
+  html.light .panel,
+  html.light .kpi-card {
+    background: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    color: #0f172a !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+  }
+  html.light [class*="border-white"] {
+    border-color: #cbd5e1 !important;
+  }
+  html.light .text-white {
+    color: #0f172a !important;
+  }
+  html.light .text-gray-300,
+  html.light .text-gray-400 {
+    color: #475569 !important;
+  }
+</style>
 """
-    if '</head>' in html and 'nnos_auth' not in html:
-        html = html.replace('</head>', security_auth_head + '\n</head>')
+    if '</head>' in html:
+        if 'nnos_auth' not in html:
+            html = html.replace('</head>', security_auth_head + '\n</head>')
+        elif 'light-theme-styles' not in html:
+            html = html.replace('</head>', '<style id="light-theme-styles">\n' + security_auth_head.split('<style id="light-theme-styles">')[1] + '\n</head>')
 
     favicon_tags = """
 <link rel="icon" type="image/png" href="assets/logo-nnos.png"/>
@@ -136,6 +206,9 @@ def sync_booking():
         </a>
       </div>
       <div class="flex items-center gap-2 ml-auto">
+        <button id="themeToggleBtn" onclick="toggleTheme()" class="theme-toggle-btn p-1.5 rounded-lg text-slate-500 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-white/10 border border-slate-300 dark:border-white/10 transition-colors flex items-center justify-center cursor-pointer shadow-sm" title="Alternar Modo Escuro / Claro">
+          <span class="material-symbols-outlined text-base theme-icon">light_mode</span>
+        </button>
         <a href="index.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 border border-white/10 transition-colors flex items-center gap-1.5 cursor-pointer">
           <span class="material-symbols-outlined text-sm">grid_view</span> Menu
         </a>
@@ -162,6 +235,42 @@ def sync_booking():
 """
     # Substituir navbar simples ou navbar existente
     html = re.sub(r'<nav.*?</nav>', integrated_nav.strip(), html, flags=re.DOTALL)
+
+    # Injetar script de alternância de tema no final
+    theme_script = """
+<script>
+  function applyTheme(theme) {
+    const html = document.documentElement;
+    const icons = document.querySelectorAll('.theme-icon');
+    const buttons = document.querySelectorAll('.theme-toggle-btn');
+    if (theme === 'light') {
+      html.classList.remove('dark');
+      html.classList.add('light');
+      icons.forEach(ic => ic.textContent = 'dark_mode');
+      buttons.forEach(btn => btn.setAttribute('title', 'Alternar para Modo Escuro'));
+      localStorage.setItem('nnos_theme', 'light');
+    } else {
+      html.classList.remove('light');
+      html.classList.add('dark');
+      icons.forEach(ic => ic.textContent = 'light_mode');
+      buttons.forEach(btn => btn.setAttribute('title', 'Alternar para Modo Claro'));
+      localStorage.setItem('nnos_theme', 'dark');
+    }
+  }
+
+  function toggleTheme() {
+    const isLight = document.documentElement.classList.contains('light');
+    applyTheme(isLight ? 'dark' : 'light');
+  }
+
+  (function() {
+    const saved = localStorage.getItem('nnos_theme') || 'dark';
+    applyTheme(saved);
+  })();
+</script>
+"""
+    if '</body>' in html and 'theme-toggle-btn' in html and 'applyTheme' not in html:
+        html = html.replace('</body>', theme_script + '\n</body>')
 
     # Otimizar cabeçalho: logo ao lado do título com altura compacta
     optimized_hero_css = """

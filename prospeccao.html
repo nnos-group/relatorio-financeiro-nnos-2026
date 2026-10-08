@@ -157,6 +157,16 @@
 </style>
 
 <script>
+  (function() {
+    const saved = localStorage.getItem('nnos_theme') || 'dark';
+    if (saved === 'light') {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+    } else {
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.add('dark');
+    }
+  })();
   if (sessionStorage.getItem('nnos_auth') !== 'true') {
     window.location.href = 'index.html';
   }
@@ -202,6 +212,50 @@
 <link rel="icon" type="image/png" sizes="64x64" href="favicon.png"/>
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 <link rel="apple-touch-icon" href="assets/logo-nnos.png"/>
+<style id="light-theme-styles">
+  html.light body {
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+  }
+  html.light header {
+    background: #ffffff !important;
+    border-bottom: 1px solid #cbd5e1 !important;
+  }
+  html.light .text-text-primary,
+  html.light .text-white {
+    color: #0f172a !important;
+  }
+  html.light .text-text-muted,
+  html.light .text-gray-400,
+  html.light .text-gray-300 {
+    color: #475569 !important;
+  }
+  html.light nav {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border-bottom: 1px solid #cbd5e1 !important;
+  }
+  html.light .bg-slate-950,
+  html.light .bg-slate-900 {
+    background-color: #f8fafc !important;
+    border-color: #cbd5e1 !important;
+  }
+  html.light .bg-surface,
+  html.light .bg-surface-container,
+  html.light .bg-surface-container-high,
+  html.light .glass-card {
+    background-color: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    color: #0f172a !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+  }
+  html.light [class*="border-surface-variant"],
+  html.light [class*="border-white"] {
+    border-color: #cbd5e1 !important;
+  }
+  html.light .text-on-surface {
+    color: #1e293b !important;
+  }
+</style>
 
 </head>
 
@@ -227,10 +281,10 @@
         <span class="material-symbols-outlined text-brand-blue text-sm">calendar_month</span> Jan/2026 a Set/2026
       </span>
       <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface border border-surface-variant font-bold text-white whitespace-nowrap">
-        <span class="material-symbols-outlined text-brand-blue text-sm">payments</span> Total: R$ 156.460,82
+        <span class="material-symbols-outlined text-brand-blue text-sm">payments</span> Total: R$ 157.090,34
       </span>
       <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface border border-surface-variant whitespace-nowrap">
-        <span class="material-symbols-outlined text-brand-blue text-sm">assignment</span> 50 Atividades
+        <span class="material-symbols-outlined text-brand-blue text-sm">assignment</span> 51 Atividades
       </span>
       <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container text-on-surface border border-surface-variant whitespace-nowrap">
         <span class="material-symbols-outlined text-brand-blue text-sm">public</span> 21 Destinos
@@ -262,6 +316,9 @@
         </a>
       </div>
       <div class="flex items-center gap-2 ml-auto">
+        <button id="themeToggleBtn" onclick="toggleTheme()" class="theme-toggle-btn p-1.5 rounded-lg text-slate-500 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-white/10 border border-slate-300 dark:border-white/10 transition-colors flex items-center justify-center cursor-pointer shadow-sm" title="Alternar Modo Escuro / Claro">
+          <span class="material-symbols-outlined text-base theme-icon">light_mode</span>
+        </button>
         <a href="index.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 border border-white/10 transition-colors flex items-center gap-1.5 cursor-pointer">
           <span class="material-symbols-outlined text-sm">grid_view</span> Menu
         </a>
@@ -312,7 +369,7 @@
           </div>
           <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">Gasto Total</div>
         </div>
-        <div class="data-number text-white mb-1">R$ 156.460</div>
+        <div class="data-number text-white mb-1">R$ 157.090</div>
         <div class="text-xs text-text-muted">9 meses de operação</div>
         <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-brand-blue to-transparent"></div>
       </div>
@@ -326,8 +383,8 @@
           </div>
           <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">Atividades</div>
         </div>
-        <div class="data-number text-white mb-1">50</div>
-        <div class="text-xs text-text-muted">Média 5.6/mês</div>
+        <div class="data-number text-white mb-1">51</div>
+        <div class="text-xs text-text-muted">Média 5.7/mês</div>
       </div>
       <div class="glass-card rounded-lg p-5 relative overflow-hidden group">
         <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
@@ -339,7 +396,7 @@
           </div>
           <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">Ticket Médio</div>
         </div>
-        <div class="data-number text-white mb-1">R$ 3.129</div>
+        <div class="data-number text-white mb-1">R$ 3.080</div>
         <div class="text-xs text-text-muted">Por atividade</div>
       </div>
       <div class="glass-card rounded-lg p-5 relative overflow-hidden group">
@@ -353,7 +410,7 @@
           <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">Internacional</div>
         </div>
         <div class="data-number text-white mb-1">R$ 49.932</div>
-        <div class="text-xs text-brand-blue font-medium">31.9% do total</div>
+        <div class="text-xs text-brand-blue font-medium">31.8% do total</div>
       </div>
       <div class="glass-card rounded-lg p-5 relative overflow-hidden group">
         <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
@@ -365,8 +422,8 @@
           </div>
           <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">Nacional</div>
         </div>
-        <div class="data-number text-white mb-1">R$ 106.528</div>
-        <div class="text-xs text-text-muted">68.1% do total</div>
+        <div class="data-number text-white mb-1">R$ 107.158</div>
+        <div class="text-xs text-text-muted">68.2% do total</div>
       </div>
       <div class="glass-card rounded-lg p-5 relative overflow-hidden group">
         <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
@@ -378,8 +435,8 @@
           </div>
           <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">Projeção Anual</div>
         </div>
-        <div class="data-number text-white mb-1">~R$ 208,6K</div>
-        <div class="text-xs text-text-muted">Base: R$ 17.384/mês</div>
+        <div class="data-number text-white mb-1">~R$ 209,5K</div>
+        <div class="text-xs text-text-muted">Base: R$ 17.454/mês</div>
       </div>
 </div>
   </section>
@@ -519,7 +576,7 @@
     </div>
     <div class="glass-card rounded-lg border border-surface-variant overflow-hidden">
       <div class="p-4 bg-surface-container-high border-b border-surface-variant flex justify-between items-center">
-        <h3 class="font-medium text-white flex items-center gap-2" id="tableTitle"><span class="material-symbols-outlined text-brand-blue">list</span> 50 atividades encontradas</h3>
+        <h3 class="font-medium text-white flex items-center gap-2" id="tableTitle"><span class="material-symbols-outlined text-brand-blue">list</span> 51 atividades encontradas</h3>
       </div>
       <div class="overflow-x-auto">
         <table class="w-full text-left border-collapse text-sm" id="tabelaAtividades">
@@ -742,142 +799,149 @@
       <td class="py-3 px-4 text-text-muted">Belo Horizonte - MG</td>
       <td class="py-3 px-4 text-text-muted">Ago</td>
       <td class="py-3 px-4"><span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-brand-blue/10 text-brand-blue border border-brand-blue/20"><span class="material-symbols-outlined text-[14px]">map</span> Nac</span></td>
-      <td class="py-3 px-4 text-right font-medium text-brand-blue font-mono">R$ 1.042,17</td>
+      <td class="py-3 px-4 text-right font-medium text-brand-blue font-mono">R$ 629,52</td>
     </tr><tr class="hover:bg-surface-container-high/50 transition-colors">
       <td class="py-3 px-4 text-text-muted">31</td>
+      <td class="py-3 px-4 font-medium text-white">Prospecção BH</td>
+      <td class="py-3 px-4 text-text-muted">Belo Horizonte - MG</td>
+      <td class="py-3 px-4 text-text-muted">Ago</td>
+      <td class="py-3 px-4"><span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-brand-blue/10 text-brand-blue border border-brand-blue/20"><span class="material-symbols-outlined text-[14px]">map</span> Nac</span></td>
+      <td class="py-3 px-4 text-right font-medium text-brand-blue font-mono">R$ 1.042,17</td>
+    </tr><tr class="hover:bg-surface-container-high/50 transition-colors">
+      <td class="py-3 px-4 text-text-muted">32</td>
       <td class="py-3 px-4 font-medium text-white">Prospecção SP Mercedes</td>
       <td class="py-3 px-4 text-text-muted">São Paulo - SP</td>
       <td class="py-3 px-4 text-text-muted">Ago</td>
       <td class="py-3 px-4"><span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-brand-blue/10 text-brand-blue border border-brand-blue/20"><span class="material-symbols-outlined text-[14px]">map</span> Nac</span></td>
       <td class="py-3 px-4 text-right font-medium text-brand-blue font-mono">R$ 2.248,94</td>
     </tr><tr class="hover:bg-surface-container-high/50 transition-colors">
-      <td class="py-3 px-4 text-text-muted">32</td>
+      <td class="py-3 px-4 text-text-muted">33</td>
       <td class="py-3 px-4 font-medium text-white">Prospecção DAF</td>
       <td class="py-3 px-4 text-text-muted">Curitiba - PR</td>
       <td class="py-3 px-4 text-text-muted">Jun</td>
       <td class="py-3 px-4"><span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-brand-blue/10 text-brand-blue border border-brand-blue/20"><span class="material-symbols-outlined text-[14px]">map</span> Nac</span></td>
       <td class="py-3 px-4 text-right font-medium text-brand-blue font-mono">R$ 2.875,12</td>
     </tr><tr class="hover:bg-surface-container-high/50 transition-colors">
-      <td class="py-3 px-4 text-text-muted">33</td>
+      <td class="py-3 px-4 text-text-muted">34</td>
       <td class="py-3 px-4 font-medium text-white">Prospecção Outsourcing</td>
       <td class="py-3 px-4 text-text-muted">Betim - MG</td>
       <td class="py-3 px-4 text-text-muted">Jan</td>
       <td class="py-3 px-4"><span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-brand-blue/10 text-brand-blue border border-brand-blue/20"><span class="material-symbols-outlined text-[14px]">map</span> Nac</span></td>
       <td class="py-3 px-4 text-right font-medium text-brand-blue font-mono">R$ 233,20</td>
     </tr><tr class="hover:bg-surface-container-high/50 transition-colors">
-      <td class="py-3 px-4 text-text-muted">34</td>
+      <td class="py-3 px-4 text-text-muted">35</td>
       <td class="py-3 px-4 font-medium text-white">Prospecção Porsche</td>
       <td class="py-3 px-4 text-text-muted">São Paulo - SP</td>
       <td class="py-3 px-4 text-text-muted">Mar</td>
       <td class="py-3 px-4"><span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-brand-blue/10 text-brand-blue border border-brand-blue/20"><span class="material-symbols-outlined text-[14px]">map</span> Nac</span></td>
       <td class="py-3 px-4 text-right font-medium text-brand-blue font-mono">R$ 1.618,55</td>
     </tr><tr class="hover:bg-surface-container-high/50 transition-colors">
-      <td class="py-3 px-4 text-text-muted">35</td>
+      <td class="py-3 px-4 text-text-muted">36</td>
       <td class="py-3 px-4 font-medium text-white">Prospecção Porsche</td>
       <td class="py-3 px-4 text-text-muted">São Paulo</td>
       <td class="py-3 px-4 text-text-muted">Jan</td>
       <td class="py-3 px-4"><span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-brand-blue/10 text-brand-blue border border-brand-blue/20"><span class="material-symbols-outlined text-[14px]">map</span> Nac</span></td>
       <td class="py-3 px-4 text-right font-medium text-brand-blue font-mono">R$ 3.765,70</td>
     </tr><tr class="hover:bg-surface-container-high/50 transition-colors">
-      <td class="py-3 px-4 text-text-muted">36</td>
+      <td class="py-3 px-4 text-text-muted">37</td>
       <td class="py-3 px-4 font-medium text-white">Prospecção Pouso Alegre</td>
       <td class="py-3 px-4 text-text-muted">Pouso Alegre - MG</td>
       <td class="py-3 px-4 text-text-muted">Jun</td>
       <td class="py-3 px-4"><span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-brand-blue/10 text-brand-blue border border-brand-blue/20"><span class="material-symbols-outlined text-[14px]">map</span> Nac</span></td>
       <td class="py-3 px-4 text-right font-medium text-brand-blue font-mono">R$ 2.890,22</td>
     </tr><tr class="hover:bg-surface-container-high/50 transition-colors">
-      <td class="py-3 px-4 text-text-muted">37</td>
+      <td class="py-3 px-4 text-text-muted">38</td>
       <td class="py-3 px-4 font-medium text-white">Reunião Diretoria NNÓS</td>
       <td class="py-3 px-4 text-text-muted">Nova Lima - MG</td>
       <td class="py-3 px-4 text-text-muted">Jan</td>
       <td class="py-3 px-4"><span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-brand-blue/10 text-brand-blue border border-brand-blue/20"><span class="material-symbols-outlined text-[14px]">map</span> Nac</span></td>
       <td class="py-3 px-4 text-right font-medium text-brand-blue font-mono">R$ 6.589,40</td>
     </tr><tr class="hover:bg-surface-container-high/50 transition-colors">
-      <td class="py-3 px-4 text-text-muted">38</td>
+      <td class="py-3 px-4 text-text-muted">39</td>
       <td class="py-3 px-4 font-medium text-white">Reunião Diretoria NNÓS</td>
       <td class="py-3 px-4 text-text-muted">Nova Lima - MG</td>
       <td class="py-3 px-4 text-text-muted">Jan</td>
       <td class="py-3 px-4"><span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-brand-blue/10 text-brand-blue border border-brand-blue/20"><span class="material-symbols-outlined text-[14px]">map</span> Nac</span></td>
       <td class="py-3 px-4 text-right font-medium text-brand-blue font-mono">R$ 1.486,20</td>
     </tr><tr class="hover:bg-surface-container-high/50 transition-colors">
-      <td class="py-3 px-4 text-text-muted">39</td>
+      <td class="py-3 px-4 text-text-muted">40</td>
       <td class="py-3 px-4 font-medium text-white">RH Leadership Xperience 2026 - Ingresso Explorer</td>
       <td class="py-3 px-4 text-text-muted">Belo Horizonte - MG</td>
       <td class="py-3 px-4 text-text-muted">Jan</td>
       <td class="py-3 px-4"><span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-brand-blue/10 text-brand-blue border border-brand-blue/20"><span class="material-symbols-outlined text-[14px]">map</span> Nac</span></td>
       <td class="py-3 px-4 text-right font-medium text-brand-blue font-mono">R$ 1.595,45</td>
     </tr><tr class="hover:bg-surface-container-high/50 transition-colors">
-      <td class="py-3 px-4 text-text-muted">40</td>
+      <td class="py-3 px-4 text-text-muted">41</td>
       <td class="py-3 px-4 font-medium text-white">Service Game - Visita ao Cliente</td>
       <td class="py-3 px-4 text-text-muted">CT- Sorocaba-SP e Sao Paulo</td>
       <td class="py-3 px-4 text-text-muted">Jan</td>
       <td class="py-3 px-4"><span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-brand-blue/10 text-brand-blue border border-brand-blue/20"><span class="material-symbols-outlined text-[14px]">map</span> Nac</span></td>
       <td class="py-3 px-4 text-right font-medium text-brand-blue font-mono">R$ 1.018,58</td>
     </tr><tr class="hover:bg-surface-container-high/50 transition-colors">
-      <td class="py-3 px-4 text-text-muted">41</td>
+      <td class="py-3 px-4 text-text-muted">42</td>
       <td class="py-3 px-4 font-medium text-white">Summit VOA NY</td>
       <td class="py-3 px-4 text-text-muted">Nova Iorque - EUA</td>
       <td class="py-3 px-4 text-text-muted">Mai</td>
       <td class="py-3 px-4"><span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-error/10 text-error border border-error/20"><span class="material-symbols-outlined text-[14px]">public</span> Intl</span></td>
       <td class="py-3 px-4 text-right font-medium text-brand-blue font-mono">R$ 5.500,00</td>
     </tr><tr class="hover:bg-surface-container-high/50 transition-colors">
-      <td class="py-3 px-4 text-text-muted">42</td>
+      <td class="py-3 px-4 text-text-muted">43</td>
       <td class="py-3 px-4 font-medium text-white">Viagem Tape Ruvicha</td>
       <td class="py-3 px-4 text-text-muted">Tape - Assuncion - Paraguay</td>
       <td class="py-3 px-4 text-text-muted">Fev</td>
       <td class="py-3 px-4"><span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-error/10 text-error border border-error/20"><span class="material-symbols-outlined text-[14px]">public</span> Intl</span></td>
       <td class="py-3 px-4 text-right font-medium text-brand-blue font-mono">R$ 3.510,31</td>
     </tr><tr class="hover:bg-surface-container-high/50 transition-colors">
-      <td class="py-3 px-4 text-text-muted">43</td>
+      <td class="py-3 px-4 text-text-muted">44</td>
       <td class="py-3 px-4 font-medium text-white">Visita a Volvo</td>
       <td class="py-3 px-4 text-text-muted">Volvo - Curitiba - PR</td>
       <td class="py-3 px-4 text-text-muted">Set</td>
       <td class="py-3 px-4"><span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-brand-blue/10 text-brand-blue border border-brand-blue/20"><span class="material-symbols-outlined text-[14px]">map</span> Nac</span></td>
       <td class="py-3 px-4 text-right font-medium text-brand-blue font-mono">R$ 3.436,15</td>
     </tr><tr class="hover:bg-surface-container-high/50 transition-colors">
-      <td class="py-3 px-4 text-text-muted">44</td>
+      <td class="py-3 px-4 text-text-muted">45</td>
       <td class="py-3 px-4 font-medium text-white">Visita Curitiba</td>
       <td class="py-3 px-4 text-text-muted">Curitiba - PR</td>
       <td class="py-3 px-4 text-text-muted">Mar</td>
       <td class="py-3 px-4"><span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-brand-blue/10 text-brand-blue border border-brand-blue/20"><span class="material-symbols-outlined text-[14px]">map</span> Nac</span></td>
       <td class="py-3 px-4 text-right font-medium text-brand-blue font-mono">R$ 2.994,93</td>
     </tr><tr class="hover:bg-surface-container-high/50 transition-colors">
-      <td class="py-3 px-4 text-text-muted">45</td>
+      <td class="py-3 px-4 text-text-muted">46</td>
       <td class="py-3 px-4 font-medium text-white">Visita Diretoria UVA</td>
       <td class="py-3 px-4 text-text-muted">Campus UVA - Belo Horizonte</td>
       <td class="py-3 px-4 text-text-muted">Fev</td>
       <td class="py-3 px-4"><span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-brand-blue/10 text-brand-blue border border-brand-blue/20"><span class="material-symbols-outlined text-[14px]">map</span> Nac</span></td>
       <td class="py-3 px-4 text-right font-medium text-brand-blue font-mono">R$ 488,00</td>
     </tr><tr class="hover:bg-surface-container-high/50 transition-colors">
-      <td class="py-3 px-4 text-text-muted">46</td>
+      <td class="py-3 px-4 text-text-muted">47</td>
       <td class="py-3 px-4 font-medium text-white">Visita JAECCO</td>
       <td class="py-3 px-4 text-text-muted">São Paulo</td>
       <td class="py-3 px-4 text-text-muted">Mar</td>
       <td class="py-3 px-4"><span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-brand-blue/10 text-brand-blue border border-brand-blue/20"><span class="material-symbols-outlined text-[14px]">map</span> Nac</span></td>
       <td class="py-3 px-4 text-right font-medium text-brand-blue font-mono">R$ 4.564,08</td>
     </tr><tr class="hover:bg-surface-container-high/50 transition-colors">
-      <td class="py-3 px-4 text-text-muted">47</td>
+      <td class="py-3 px-4 text-text-muted">48</td>
       <td class="py-3 px-4 font-medium text-white">Visita Progress Rail e SODECIA</td>
       <td class="py-3 px-4 text-text-muted">Sete Lagoas - MG</td>
       <td class="py-3 px-4 text-text-muted">Mai</td>
       <td class="py-3 px-4"><span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-brand-blue/10 text-brand-blue border border-brand-blue/20"><span class="material-symbols-outlined text-[14px]">map</span> Nac</span></td>
       <td class="py-3 px-4 text-right font-medium text-brand-blue font-mono">R$ 275,99</td>
     </tr><tr class="hover:bg-surface-container-high/50 transition-colors">
-      <td class="py-3 px-4 text-text-muted">48</td>
+      <td class="py-3 px-4 text-text-muted">49</td>
       <td class="py-3 px-4 font-medium text-white">Visita São Paulo</td>
       <td class="py-3 px-4 text-text-muted">São Paulo</td>
       <td class="py-3 px-4 text-text-muted">Mar</td>
       <td class="py-3 px-4"><span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-brand-blue/10 text-brand-blue border border-brand-blue/20"><span class="material-symbols-outlined text-[14px]">map</span> Nac</span></td>
       <td class="py-3 px-4 text-right font-medium text-brand-blue font-mono">R$ 6.986,46</td>
     </tr><tr class="hover:bg-surface-container-high/50 transition-colors">
-      <td class="py-3 px-4 text-text-muted">49</td>
+      <td class="py-3 px-4 text-text-muted">50</td>
       <td class="py-3 px-4 font-medium text-white">Visita Terceiros CT</td>
       <td class="py-3 px-4 text-text-muted">Sorocaba - SP</td>
       <td class="py-3 px-4 text-text-muted">Ago</td>
       <td class="py-3 px-4"><span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-brand-blue/10 text-brand-blue border border-brand-blue/20"><span class="material-symbols-outlined text-[14px]">map</span> Nac</span></td>
       <td class="py-3 px-4 text-right font-medium text-brand-blue font-mono">R$ 1.575,31</td>
     </tr><tr class="hover:bg-surface-container-high/50 transition-colors">
-      <td class="py-3 px-4 text-text-muted">50</td>
+      <td class="py-3 px-4 text-text-muted">51</td>
       <td class="py-3 px-4 font-medium text-white">Workshop Plano de Manutenção Interativo</td>
       <td class="py-3 px-4 text-text-muted">CT - Sorocaba - SP</td>
       <td class="py-3 px-4 text-text-muted">Fev</td>
@@ -921,19 +985,19 @@
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         <div class="bg-surface-container-high/60 border-l-2 border-brand-blue rounded-lg p-4">
           <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">Total Investido</div>
-          <div class="data-number text-white mt-1">R$ 14.673,90</div>
+          <div class="data-number text-white mt-1">R$ 15.303,42</div>
         </div>
         <div class="bg-surface-container-high/60 border-l-2 border-brand-blue rounded-lg p-4">
           <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">Atividades</div>
-          <div class="data-number text-white mt-1">7</div>
+          <div class="data-number text-white mt-1">8</div>
         </div>
         <div class="bg-surface-container-high/60 border-l-2 border-brand-blue rounded-lg p-4">
           <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">% do Total</div>
-          <div class="data-number text-white mt-1">9.4%</div>
+          <div class="data-number text-white mt-1">9.7%</div>
         </div>
         <div class="bg-surface-container-high/60 border-l-2 border-brand-blue rounded-lg p-4">
           <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">Ticket Médio</div>
-          <div class="data-number text-white mt-1">R$ 2.096</div>
+          <div class="data-number text-white mt-1">R$ 1.912</div>
         </div>
       </div>
       <div class="overflow-x-auto">
@@ -953,6 +1017,7 @@
 <tr><td class="py-2.5 px-3 text-white">Prospecção SP Mercedes</td><td class="py-2.5 px-3 text-text-muted">São Paulo - SP</td><td class="py-2.5 px-3 text-text-muted">Ago</td><td class="py-2.5 px-3 text-right font-medium text-brand-blue font-mono">R$ 2.248,94</td></tr>
 <tr><td class="py-2.5 px-3 text-white">Prospecção Porsche</td><td class="py-2.5 px-3 text-text-muted">São Paulo - SP</td><td class="py-2.5 px-3 text-text-muted">Mar</td><td class="py-2.5 px-3 text-right font-medium text-brand-blue font-mono">R$ 1.618,55</td></tr>
 <tr><td class="py-2.5 px-3 text-white">Prospecção BH</td><td class="py-2.5 px-3 text-text-muted">Belo Horizonte - MG</td><td class="py-2.5 px-3 text-text-muted">Ago</td><td class="py-2.5 px-3 text-right font-medium text-brand-blue font-mono">R$ 1.042,17</td></tr>
+<tr><td class="py-2.5 px-3 text-white">Prospecção BH</td><td class="py-2.5 px-3 text-text-muted">Belo Horizonte - MG</td><td class="py-2.5 px-3 text-text-muted">Ago</td><td class="py-2.5 px-3 text-right font-medium text-brand-blue font-mono">R$ 629,52</td></tr>
 <tr><td class="py-2.5 px-3 text-white">Prospecção Outsourcing</td><td class="py-2.5 px-3 text-text-muted">Betim - MG</td><td class="py-2.5 px-3 text-text-muted">Jan</td><td class="py-2.5 px-3 text-right font-medium text-brand-blue font-mono">R$ 233,20</td></tr>
 
           </tbody>
@@ -977,7 +1042,7 @@
         </div>
         <div class="bg-surface-container-high/60 border-l-2 border-brand-blue rounded-lg p-4">
           <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">% do Total</div>
-          <div class="data-number text-white mt-1">31.9%</div>
+          <div class="data-number text-white mt-1">31.8%</div>
         </div>
         <div class="bg-surface-container-high/60 border-l-2 border-brand-blue rounded-lg p-4">
           <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">Países</div>
@@ -1024,7 +1089,7 @@
         </div>
         <div class="bg-surface-container-high/60 border-l-2 border-brand-blue rounded-lg p-4">
           <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">% do Total</div>
-          <div class="data-number text-white mt-1">27.3%</div>
+          <div class="data-number text-white mt-1">27.2%</div>
         </div>
         <div class="bg-surface-container-high/60 border-l-2 border-brand-blue rounded-lg p-4">
           <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">Ticket Médio</div>
@@ -1123,7 +1188,7 @@
         </div>
         <div class="bg-surface-container-high/60 border-l-2 border-brand-blue rounded-lg p-4">
           <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">% do Total</div>
-          <div class="data-number text-white mt-1">11.2%</div>
+          <div class="data-number text-white mt-1">11.1%</div>
         </div>
         <div class="bg-surface-container-high/60 border-l-2 border-brand-blue rounded-lg p-4">
           <div class="text-xs font-semibold text-text-muted uppercase tracking-wider">Ticket Médio</div>
@@ -1223,8 +1288,8 @@
       <div class="glass-card rounded-lg p-5 border border-surface-variant relative timeline-item">
         <div class="flex items-center gap-3 mb-2 flex-wrap">
           <div class="text-white font-display font-semibold">📅 AGOSTO</div>
-          <div class="text-brand-blue font-mono font-bold">R$ 5.061,66</div>
-          <span class="text-text-muted text-sm">| 5 atividades</span>
+          <div class="text-brand-blue font-mono font-bold">R$ 5.691,18</div>
+          <span class="text-text-muted text-sm">| 6 atividades</span>
         </div>
         <p class="text-sm text-on-surface">★ <strong class="text-white">Prospecção SP Mercedes (R$ 2.248,94)</strong> • Visita Terceiros CT Sorocaba (R$ 1.575,31) • Prospecção BH (R$ 1.042,17) • Almoços Comerciais UVA e Tecar</p>
       </div>
@@ -1268,14 +1333,14 @@
           <span class="material-symbols-outlined">check_circle</span>
           <h4 class="font-display font-semibold text-white">Consolidação de 50 Atividades</h4>
         </div>
-        <p class="text-sm text-on-surface-variant">Todos os <strong class="text-white">50 registros</strong> apurados de Janeiro a Setembro de 2026, totalizando R$ 156.460,82.</p>
+        <p class="text-sm text-on-surface-variant">Todos os <strong class="text-white">51 registros</strong> apurados de Janeiro a Setembro de 2026, totalizando R$ 157.090,34.</p>
       </div>
       <div class="glass-card rounded-lg p-5 border-l-4 border-accent-amber">
         <div class="flex items-center gap-2 mb-2 text-accent-amber">
           <span class="material-symbols-outlined">event_upcoming</span>
           <h4 class="font-display font-semibold text-white">Projeção anual atualizada</h4>
         </div>
-        <p class="text-sm text-on-surface-variant">Média apurada: <strong class="text-white">R$ 17.384/mês</strong>. Projeção anual: ~R$ 208,6K — estabilidade orçamentária no 2º semestre.</p>
+        <p class="text-sm text-on-surface-variant">Média apurada: <strong class="text-white">R$ 17.454/mês</strong>. Projeção anual: ~R$ 209,5K — estabilidade orçamentária no 2º semestre.</p>
       </div>
       <div class="glass-card rounded-lg p-5 border-l-4 border-emerald-500">
         <div class="flex items-center gap-2 mb-2 text-emerald-400">
@@ -1308,7 +1373,7 @@
         <div class="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-brand-blue to-primary flex items-center justify-center text-white font-display font-bold">1</div>
         <div>
           <h4 class="text-white font-display font-semibold mb-1">Revisão do Orçamento 2027</h4>
-          <p class="text-sm text-on-surface-variant">Projeção revisada para ~R$ 208,6K/ano. Recomenda-se margem de 20% sobre esse valor (total ~R$ 250K) para cobrir imprevistos e oscilações cambiais.</p>
+          <p class="text-sm text-on-surface-variant">Projeção revisada para ~R$ 209,5K/ano. Recomenda-se margem de 20% sobre esse valor (total ~R$ 250K) para cobrir imprevistos e oscilações cambiais.</p>
         </div>
       </div>
       <div class="glass-card rounded-lg p-5 border border-surface-variant flex gap-4 items-start">
@@ -1716,13 +1781,25 @@ const atividades = [
     "local": "Belo Horizonte - MG",
     "mes": "Ago",
     "tipo": "nac",
+    "valor": 629.52,
+    "categoria": "Prospecção",
+    "dtIni": "03/08/2026",
+    "dtFim": "03/08/2026"
+  },
+  {
+    "id": 31,
+    "projeto": "",
+    "nome": "Prospecção BH",
+    "local": "Belo Horizonte - MG",
+    "mes": "Ago",
+    "tipo": "nac",
     "valor": 1042.17,
     "categoria": "Prospecção",
     "dtIni": "12/08/2026",
     "dtFim": "14/08/2026"
   },
   {
-    "id": 31,
+    "id": 32,
     "projeto": "",
     "nome": "Prospecção SP Mercedes",
     "local": "São Paulo - SP",
@@ -1734,7 +1811,7 @@ const atividades = [
     "dtFim": "27/08/2026"
   },
   {
-    "id": 32,
+    "id": 33,
     "projeto": "",
     "nome": "Prospecção DAF",
     "local": "Curitiba - PR",
@@ -1746,7 +1823,7 @@ const atividades = [
     "dtFim": "02/06/2026"
   },
   {
-    "id": 33,
+    "id": 34,
     "projeto": "",
     "nome": "Prospecção Outsourcing",
     "local": "Betim - MG",
@@ -1758,7 +1835,7 @@ const atividades = [
     "dtFim": "10/01/2026"
   },
   {
-    "id": 34,
+    "id": 35,
     "projeto": "",
     "nome": "Prospecção Porsche",
     "local": "São Paulo - SP",
@@ -1770,7 +1847,7 @@ const atividades = [
     "dtFim": "09/03/2026"
   },
   {
-    "id": 35,
+    "id": 36,
     "projeto": "",
     "nome": "Prospecção Porsche",
     "local": "São Paulo",
@@ -1782,7 +1859,7 @@ const atividades = [
     "dtFim": "23/01/2026"
   },
   {
-    "id": 36,
+    "id": 37,
     "projeto": "",
     "nome": "Prospecção Pouso Alegre",
     "local": "Pouso Alegre - MG",
@@ -1794,7 +1871,7 @@ const atividades = [
     "dtFim": "19/06/2026"
   },
   {
-    "id": 37,
+    "id": 38,
     "projeto": "",
     "nome": "Reunião Diretoria NNÓS",
     "local": "Nova Lima - MG",
@@ -1806,7 +1883,7 @@ const atividades = [
     "dtFim": "06/01/2026"
   },
   {
-    "id": 38,
+    "id": 39,
     "projeto": "",
     "nome": "Reunião Diretoria NNÓS",
     "local": "Nova Lima - MG",
@@ -1818,7 +1895,7 @@ const atividades = [
     "dtFim": "24/01/2026"
   },
   {
-    "id": 39,
+    "id": 40,
     "projeto": "",
     "nome": "RH Leadership Xperience 2026 - Ingresso Explorer",
     "local": "Belo Horizonte - MG",
@@ -1830,7 +1907,7 @@ const atividades = [
     "dtFim": "19/01/2026"
   },
   {
-    "id": 40,
+    "id": 41,
     "projeto": "",
     "nome": "Service Game - Visita ao Cliente",
     "local": "CT- Sorocaba-SP e Sao Paulo",
@@ -1842,7 +1919,7 @@ const atividades = [
     "dtFim": "21/01/2026"
   },
   {
-    "id": 41,
+    "id": 42,
     "projeto": "",
     "nome": "Summit VOA NY",
     "local": "Nova Iorque - EUA",
@@ -1854,7 +1931,7 @@ const atividades = [
     "dtFim": "25/05/2026"
   },
   {
-    "id": 42,
+    "id": 43,
     "projeto": "",
     "nome": "Viagem Tape Ruvicha",
     "local": "Tape - Assuncion - Paraguay",
@@ -1866,7 +1943,7 @@ const atividades = [
     "dtFim": "27/02/2026"
   },
   {
-    "id": 43,
+    "id": 44,
     "projeto": "",
     "nome": "Visita a Volvo",
     "local": "Volvo - Curitiba - PR",
@@ -1878,7 +1955,7 @@ const atividades = [
     "dtFim": "10/09/2026"
   },
   {
-    "id": 44,
+    "id": 45,
     "projeto": "",
     "nome": "Visita Curitiba",
     "local": "Curitiba - PR",
@@ -1890,7 +1967,7 @@ const atividades = [
     "dtFim": "24/03/2026"
   },
   {
-    "id": 45,
+    "id": 46,
     "projeto": "",
     "nome": "Visita Diretoria UVA",
     "local": "Campus UVA - Belo Horizonte",
@@ -1902,7 +1979,7 @@ const atividades = [
     "dtFim": "09/02/2026"
   },
   {
-    "id": 46,
+    "id": 47,
     "projeto": "",
     "nome": "Visita JAECCO",
     "local": "São Paulo",
@@ -1914,7 +1991,7 @@ const atividades = [
     "dtFim": "04/03/2026"
   },
   {
-    "id": 47,
+    "id": 48,
     "projeto": "",
     "nome": "Visita Progress Rail e SODECIA",
     "local": "Sete Lagoas - MG",
@@ -1926,7 +2003,7 @@ const atividades = [
     "dtFim": "08/05/2026"
   },
   {
-    "id": 48,
+    "id": 49,
     "projeto": "",
     "nome": "Visita São Paulo",
     "local": "São Paulo",
@@ -1938,7 +2015,7 @@ const atividades = [
     "dtFim": "06/03/2026"
   },
   {
-    "id": 49,
+    "id": 50,
     "projeto": "",
     "nome": "Visita Terceiros CT",
     "local": "Sorocaba - SP",
@@ -1950,7 +2027,7 @@ const atividades = [
     "dtFim": "20/08/2026"
   },
   {
-    "id": 50,
+    "id": 51,
     "projeto": "",
     "nome": "Workshop Plano de Manutenção Interativo",
     "local": "CT - Sorocaba - SP",
@@ -2058,7 +2135,7 @@ document.addEventListener("DOMContentLoaded", function() {
       labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set"],
       datasets: [{
         label: "Gasto Mensal (R$)",
-        data: [23452.04, 38414.47, 36500.66, 29448.24, 13116.86, 6336.38, 315.24, 5061.66, 3815.27],
+        data: [23452.04, 38414.47, 36500.66, 29448.24, 13116.86, 6336.38, 315.24, 5691.18, 3815.27],
         backgroundColor: ["#0083CA99", "#E8715499", "#0083CA99", "#0083CA99", "#0083CA99", "#0083CA99", "#0083CA99", "#0083CA99", "#0083CA99"],
         borderColor: ["#0083CA", "#E87154", "#0083CA", "#0083CA", "#0083CA", "#0083CA", "#0083CA", "#0083CA", "#0083CA"],
         borderWidth: 1,
@@ -2094,7 +2171,7 @@ document.addEventListener("DOMContentLoaded", function() {
       labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set"],
       datasets: [{
         label: "Atividades",
-        data: [12, 10, 6, 3, 6, 4, 1, 5, 3],
+        data: [12, 10, 6, 3, 6, 4, 1, 6, 3],
         borderColor: brandBlue,
         backgroundColor: "rgba(0, 131, 202, 0.15)",
         fill: true,
@@ -2125,7 +2202,7 @@ document.addEventListener("DOMContentLoaded", function() {
     data: {
       labels: ["Viagens Internacionais", "Planejamento & Diretoria", "Visitas T\u00e9cnicas", "Eventos & Feiras", "Prospec\u00e7\u00e3o", "Treinamentos", "Refei\u00e7\u00f5es de Neg\u00f3cio", "Outros"],
       datasets: [{
-        data: [49932.22, 42716.0, 21314.88, 17468.29, 14673.9, 6834.77, 2913.76, 607.0],
+        data: [49932.22, 42716.0, 21314.88, 17468.29, 15303.42, 6834.77, 2913.76, 607.0],
         backgroundColor: cores.slice(0, 8),
         borderWidth: 0
       }]
@@ -2155,7 +2232,7 @@ document.addEventListener("DOMContentLoaded", function() {
       labels: ["Internacionais", "Planejamento & Diretoria", "Visitas T\u00e9cnicas", "Eventos & Feiras", "Prospec\u00e7\u00e3o", "Treinamentos", "Refei\u00e7\u00f5es"],
       datasets: [{
         label: "Valor (R$)",
-        data: [49932.22, 42716.0, 21314.88, 17468.29, 14673.9, 6834.77, 2913.76],
+        data: [49932.22, 42716.0, 21314.88, 17468.29, 15303.42, 6834.77, 2913.76],
         backgroundColor: cores.slice(0, 7).map(c => c + "99"),
         borderColor: cores.slice(0, 7),
         borderWidth: 1,
@@ -2192,7 +2269,7 @@ document.addEventListener("DOMContentLoaded", function() {
       labels: ["BH/Nova Lima/MG", "Las Vegas/EUA", "Curitiba/PR", "S\u00e3o Paulo/SP", "China", "Ribeir\u00e3o Preto/SP", "Nova Iorque/EUA", "Sorocaba/SP", "Assunci\u00f3n/PAR", "Pouso Alegre/MG"],
       datasets: [{
         label: "Gasto (R$)",
-        data: [47556.34, 21312.03, 20459.29, 19392.81, 19181.83, 9745.05, 5500.0, 3966.97, 3938.36, 2890.22],
+        data: [48185.86, 21312.03, 20459.29, 19392.81, 19181.83, 9745.05, 5500.0, 3966.97, 3938.36, 2890.22],
         backgroundColor: cores.map(c => c + "99"),
         borderColor: cores,
         borderWidth: 1,
@@ -2226,8 +2303,8 @@ document.addEventListener("DOMContentLoaded", function() {
   new Chart(document.getElementById("chartNacIntl"), {
     type: "pie",
     data: {
-      labels: ["Nacional (R$ 106.528)", "Internacional (R$ 49.932)"],
-      datasets: [{ data: [106528.6, 49932.22], backgroundColor: [cores[3], cores[1]], borderWidth: 0 }]
+      labels: ["Nacional (R$ 107.158)", "Internacional (R$ 49.932)"],
+      datasets: [{ data: [107158.12, 49932.22], backgroundColor: [cores[3], cores[1]], borderWidth: 0 }]
     },
     options: {
       responsive: true,
@@ -2306,6 +2383,38 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
+</script>
+
+
+<script>
+  function applyTheme(theme) {
+    const html = document.documentElement;
+    const icons = document.querySelectorAll('.theme-icon');
+    const buttons = document.querySelectorAll('.theme-toggle-btn');
+    if (theme === 'light') {
+      html.classList.remove('dark');
+      html.classList.add('light');
+      icons.forEach(ic => ic.textContent = 'dark_mode');
+      buttons.forEach(btn => btn.setAttribute('title', 'Alternar para Modo Escuro'));
+      localStorage.setItem('nnos_theme', 'light');
+    } else {
+      html.classList.remove('light');
+      html.classList.add('dark');
+      icons.forEach(ic => ic.textContent = 'light_mode');
+      buttons.forEach(btn => btn.setAttribute('title', 'Alternar para Modo Claro'));
+      localStorage.setItem('nnos_theme', 'dark');
+    }
+  }
+
+  function toggleTheme() {
+    const isLight = document.documentElement.classList.contains('light');
+    applyTheme(isLight ? 'dark' : 'light');
+  }
+
+  (function() {
+    const saved = localStorage.getItem('nnos_theme') || 'dark';
+    applyTheme(saved);
+  })();
 </script>
 
 </body>

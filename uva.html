@@ -62,9 +62,62 @@
   ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.5); }
   ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 4px; }
   ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.3); }
+<style id="light-theme-styles">
+  html.light body {
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+  }
+  html.light header {
+    background: #ffffff !important;
+    border-bottom: 1px solid #cbd5e1 !important;
+  }
+  html.light .text-white {
+    color: #0f172a !important;
+  }
+  html.light .text-text-muted,
+  html.light .text-gray-400,
+  html.light .text-gray-300 {
+    color: #475569 !important;
+  }
+  html.light nav {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border-bottom: 1px solid #cbd5e1 !important;
+  }
+  html.light .bg-slate-950,
+  html.light .bg-slate-900 {
+    background-color: #f8fafc !important;
+    border-color: #cbd5e1 !important;
+  }
+  html.light .bg-surface,
+  html.light .bg-surface-container,
+  html.light .bg-surface-container-high,
+  html.light .glass-card,
+  html.light .glass-panel {
+    background-color: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    color: #0f172a !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+  }
+  html.light [class*="border-surface-variant"],
+  html.light [class*="border-white"] {
+    border-color: #cbd5e1 !important;
+  }
+  html.light .text-on-surface {
+    color: #1e293b !important;
+  }
 </style>
 
 <script>
+  (function() {
+    const saved = localStorage.getItem('nnos_theme') || 'dark';
+    if (saved === 'light') {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+    } else {
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.add('dark');
+    }
+  })();
   if (sessionStorage.getItem('nnos_auth') !== 'true') {
     window.location.href = 'index.html';
   }
@@ -130,6 +183,9 @@
         </a>
       </div>
       <div class="flex items-center gap-2 ml-auto">
+        <button id="themeToggleBtn" onclick="toggleTheme()" class="theme-toggle-btn p-1.5 rounded-lg text-slate-500 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-white/10 border border-slate-300 dark:border-white/10 transition-colors flex items-center justify-center cursor-pointer shadow-sm" title="Alternar Modo Escuro / Claro">
+          <span class="material-symbols-outlined text-base theme-icon">light_mode</span>
+        </button>
         <a href="index.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 border border-white/10 transition-colors flex items-center gap-1.5 cursor-pointer">
           <span class="material-symbols-outlined text-sm">grid_view</span> Menu
         </a>
@@ -699,6 +755,37 @@ document.addEventListener('keydown', function(e) {
     return false;
   }
 }, false);
+</script>
+
+<script>
+  function applyTheme(theme) {
+    const html = document.documentElement;
+    const icons = document.querySelectorAll('.theme-icon');
+    const buttons = document.querySelectorAll('.theme-toggle-btn');
+    if (theme === 'light') {
+      html.classList.remove('dark');
+      html.classList.add('light');
+      icons.forEach(ic => ic.textContent = 'dark_mode');
+      buttons.forEach(btn => btn.setAttribute('title', 'Alternar para Modo Escuro'));
+      localStorage.setItem('nnos_theme', 'light');
+    } else {
+      html.classList.remove('light');
+      html.classList.add('dark');
+      icons.forEach(ic => ic.textContent = 'light_mode');
+      buttons.forEach(btn => btn.setAttribute('title', 'Alternar para Modo Claro'));
+      localStorage.setItem('nnos_theme', 'dark');
+    }
+  }
+
+  function toggleTheme() {
+    const isLight = document.documentElement.classList.contains('light');
+    applyTheme(isLight ? 'dark' : 'light');
+  }
+
+  (function() {
+    const saved = localStorage.getItem('nnos_theme') || 'dark';
+    applyTheme(saved);
+  })();
 </script>
 </body>
 </html>

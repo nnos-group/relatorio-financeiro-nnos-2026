@@ -167,9 +167,19 @@ def sync_prospeccao():
     with open(code_path, "r", encoding="utf-8") as f:
         html = f.read()
 
-    # 1. Favicons & Auth Head Script
+    # 1. Favicons & Auth Head Script & Theme
     security_auth_head = """
 <script>
+  (function() {
+    const saved = localStorage.getItem('nnos_theme') || 'dark';
+    if (saved === 'light') {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+    } else {
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.add('dark');
+    }
+  })();
   if (sessionStorage.getItem('nnos_auth') !== 'true') {
     window.location.href = 'index.html';
   }
@@ -215,9 +225,56 @@ def sync_prospeccao():
 <link rel="icon" type="image/png" sizes="64x64" href="favicon.png"/>
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 <link rel="apple-touch-icon" href="assets/logo-nnos.png"/>
+<style id="light-theme-styles">
+  html.light body {
+    background: #f1f5f9 !important;
+    color: #0f172a !important;
+  }
+  html.light header {
+    background: #ffffff !important;
+    border-bottom: 1px solid #cbd5e1 !important;
+  }
+  html.light .text-text-primary,
+  html.light .text-white {
+    color: #0f172a !important;
+  }
+  html.light .text-text-muted,
+  html.light .text-gray-400,
+  html.light .text-gray-300 {
+    color: #475569 !important;
+  }
+  html.light nav {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border-bottom: 1px solid #cbd5e1 !important;
+  }
+  html.light .bg-slate-950,
+  html.light .bg-slate-900 {
+    background-color: #f8fafc !important;
+    border-color: #cbd5e1 !important;
+  }
+  html.light .bg-surface,
+  html.light .bg-surface-container,
+  html.light .bg-surface-container-high,
+  html.light .glass-card {
+    background-color: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    color: #0f172a !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+  }
+  html.light [class*="border-surface-variant"],
+  html.light [class*="border-white"] {
+    border-color: #cbd5e1 !important;
+  }
+  html.light .text-on-surface {
+    color: #1e293b !important;
+  }
+</style>
 """
-    if 'sessionStorage.getItem' not in html:
-        html = html.replace("</head>", security_auth_head + "\n</head>")
+    if '</head>' in html:
+        if 'sessionStorage.getItem' not in html:
+            html = html.replace("</head>", security_auth_head + "\n</head>")
+        elif 'light-theme-styles' not in html:
+            html = html.replace("</head>", '<style id="light-theme-styles">\n' + security_auth_head.split('<style id="light-theme-styles">')[1] + '\n</head>')
 
     # 2. Header: Período, Total, Atividades, Destinos & Logo ao lado do Título
     destinos_unicos = len(set(a["local"] for a in atividades))
@@ -283,6 +340,9 @@ def sync_prospeccao():
         </a>
       </div>
       <div class="flex items-center gap-2 ml-auto">
+        <button id="themeToggleBtn" onclick="toggleTheme()" class="theme-toggle-btn p-1.5 rounded-lg text-slate-500 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-white/10 border border-slate-300 dark:border-white/10 transition-colors flex items-center justify-center cursor-pointer shadow-sm" title="Alternar Modo Escuro / Claro">
+          <span class="material-symbols-outlined text-base theme-icon">light_mode</span>
+        </button>
         <a href="index.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 border border-white/10 transition-colors flex items-center gap-1.5 cursor-pointer">
           <span class="material-symbols-outlined text-sm">grid_view</span> Menu
         </a>
@@ -311,6 +371,42 @@ def sync_prospeccao():
 </nav>
 """
     html = re.sub(r'<nav.*?</nav>', standard_nav.strip(), html, flags=re.DOTALL)
+
+    # Injetar script de alternância de tema no final
+    theme_script = """
+<script>
+  function applyTheme(theme) {
+    const html = document.documentElement;
+    const icons = document.querySelectorAll('.theme-icon');
+    const buttons = document.querySelectorAll('.theme-toggle-btn');
+    if (theme === 'light') {
+      html.classList.remove('dark');
+      html.classList.add('light');
+      icons.forEach(ic => ic.textContent = 'dark_mode');
+      buttons.forEach(btn => btn.setAttribute('title', 'Alternar para Modo Escuro'));
+      localStorage.setItem('nnos_theme', 'light');
+    } else {
+      html.classList.remove('light');
+      html.classList.add('dark');
+      icons.forEach(ic => ic.textContent = 'light_mode');
+      buttons.forEach(btn => btn.setAttribute('title', 'Alternar para Modo Claro'));
+      localStorage.setItem('nnos_theme', 'dark');
+    }
+  }
+
+  function toggleTheme() {
+    const isLight = document.documentElement.classList.contains('light');
+    applyTheme(isLight ? 'dark' : 'light');
+  }
+
+  (function() {
+    const saved = localStorage.getItem('nnos_theme') || 'dark';
+    applyTheme(saved);
+  })();
+</script>
+"""
+    if '</body>' in html and 'theme-toggle-btn' in html and 'applyTheme' not in html:
+        html = html.replace('</body>', theme_script + '\n</body>')
 
     # Padronizar Rodapé (sem o texto duplicado da direita)
     standard_footer_prosp = """

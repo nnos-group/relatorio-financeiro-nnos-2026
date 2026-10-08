@@ -298,47 +298,47 @@ def sync_lider():
 
     # Função auxiliar para gerar item do ranking Top 20
     def render_top20_item(p, rank):
-        lider_nome = p.get("lider", "")
+        lider_nome = p.get("lider", "").strip()
         iniciais = leader_iniciais.get(lider_nome, "LP")
         av_class = leader_avatar_bg.get(lider_nome, "bg-slate-100 text-slate-700")
 
         if rank == 1:
             badge_pos = '<span class="flex-shrink-0 w-5 h-5 rounded bg-emerald-600 text-white font-extrabold text-[10px] flex items-center justify-center shadow-xs">#1</span>'
-            border_pos = "border-emerald-400/50 hover:border-emerald-500"
-            pct_badge = "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-500/30"
+            border_pos = "border-2 border-emerald-500/60 dark:border-emerald-500/40 hover:border-emerald-600"
+            pct_badge = "bg-emerald-100 text-emerald-950 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-400 dark:border-emerald-500/40 font-black"
         elif rank <= 3:
-            badge_pos = f'<span class="flex-shrink-0 w-5 h-5 rounded bg-blue-900 text-white font-bold text-[10px] flex items-center justify-center">#{rank}</span>'
-            border_pos = "border-slate-200/90 dark:border-white/10 hover:border-blue-400"
-            pct_badge = "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30"
+            badge_pos = f'<span class="flex-shrink-0 w-5 h-5 rounded bg-[#1b365d] text-white font-extrabold text-[10px] flex items-center justify-center">#{rank}</span>'
+            border_pos = "border border-slate-300 dark:border-white/10 hover:border-blue-500"
+            pct_badge = "bg-emerald-50 text-emerald-900 dark:bg-emerald-950/50 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-500/30 font-black"
         elif rank <= 10:
-            badge_pos = f'<span class="flex-shrink-0 w-5 h-5 rounded bg-slate-700 dark:bg-slate-700 text-white font-bold text-[10px] flex items-center justify-center">#{rank}</span>'
-            border_pos = "border-slate-200/90 dark:border-white/10 hover:border-blue-400"
-            pct_badge = "bg-teal-50 text-teal-800 dark:bg-teal-950/50 dark:text-teal-300 border border-teal-200 dark:border-teal-500/30"
+            badge_pos = f'<span class="flex-shrink-0 w-5 h-5 rounded bg-slate-700 text-white font-bold text-[10px] flex items-center justify-center">#{rank}</span>'
+            border_pos = "border border-slate-300 dark:border-white/10 hover:border-blue-500"
+            pct_badge = "bg-teal-50 text-teal-900 dark:bg-teal-950/50 dark:text-teal-300 border border-teal-300 dark:border-teal-500/30 font-black"
         else:
             badge_pos = f'<span class="flex-shrink-0 w-5 h-5 rounded bg-slate-500 text-white font-bold text-[10px] flex items-center justify-center">#{rank}</span>'
-            border_pos = "border-slate-200/90 dark:border-white/10 hover:border-blue-400"
-            pct_badge = "bg-amber-50 text-amber-800 dark:bg-amber-950/50 dark:text-amber-300 border border-amber-200 dark:border-amber-500/30"
+            border_pos = "border border-slate-300 dark:border-white/10 hover:border-blue-500"
+            pct_badge = "bg-amber-50 text-amber-900 dark:bg-amber-950/50 dark:text-amber-300 border border-amber-300 dark:border-amber-500/30 font-black"
 
         return f"""
-        <div class="bg-white dark:bg-slate-900 rounded-lg p-2 border {border_pos} shadow-sm hover:shadow transition-all">
+        <div class="ranking-item bg-white dark:bg-slate-900 rounded-lg p-2.5 {border_pos} shadow-sm hover:shadow transition-all" data-lider="{lider_nome.lower()}" data-rank="{rank}">
           <div class="flex items-center justify-between gap-1.5">
             <div class="flex items-center gap-1.5 min-w-0">
               {badge_pos}
-              <span class="font-bold text-slate-900 dark:text-white text-xs truncate" title="{p['projeto']}">{p['projeto']}</span>
+              <span class="font-bold text-slate-950 dark:text-white text-xs truncate" title="{p['projeto']}">{p['projeto']}</span>
             </div>
             <div class="flex items-center gap-1.5 flex-shrink-0 tabular-nums">
-              <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-gray-200 border border-slate-200 dark:border-white/10"><span class="text-slate-400 font-medium text-[9px]">Rec:</span> {fmt_k(p['receita'])}</span>
-              <span class="px-1.5 py-0.5 rounded text-[10px] font-extrabold {pct_badge}">{fmt_pct(p['margemPct'])}</span>
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-gray-200 border border-slate-300 dark:border-white/10"><span class="text-slate-500 dark:text-gray-400 font-medium text-[9px]">Rec:</span> {fmt_k(p['receita'])}</span>
+              <span class="px-1.5 py-0.5 rounded text-[10px] {pct_badge}">{fmt_pct(p['margemPct'])}</span>
             </div>
           </div>
-          <div class="flex items-center justify-between mt-1 pt-1 border-t border-slate-100 dark:border-white/5 text-[11px]">
-            <div class="flex items-center gap-1 text-slate-500 dark:text-gray-400 truncate">
+          <div class="flex items-center justify-between mt-1.5 pt-1.5 border-t border-slate-200 dark:border-white/5 text-[11px]">
+            <div class="flex items-center gap-1 text-slate-700 dark:text-gray-300 truncate">
               <span class="w-4 h-4 rounded-full {av_class} text-[8px] font-bold flex items-center justify-center flex-shrink-0">{iniciais}</span>
-              <span class="truncate">{lider_nome}</span>
+              <span class="truncate font-semibold">{lider_nome}</span>
             </div>
             <div class="text-right flex items-center gap-1 flex-shrink-0 tabular-nums">
-              <span class="text-[10px] text-slate-400 font-medium">Margem:</span>
-              <span class="font-extrabold text-emerald-600 dark:text-emerald-400 text-xs">{fmt_brl(p['margem'])}</span>
+              <span class="text-[10px] text-slate-500 dark:text-gray-400 font-medium">Margem:</span>
+              <span class="font-black text-emerald-700 dark:text-emerald-400 text-xs">{fmt_brl(p['margem'])}</span>
             </div>
           </div>
         </div>"""
@@ -353,43 +353,47 @@ def sync_lider():
     bottom10_html = ""
     for p in menos_rentaveis:
         rank = p["ranking"]
-        lider_nome = p.get("lider", "")
+        lider_nome = p.get("lider", "").strip()
         iniciais = leader_iniciais.get(lider_nome, "LP")
         av_class = leader_avatar_bg.get(lider_nome, "bg-slate-100 text-slate-700")
         is_neg = p.get("margem", 0) < 0
 
         if is_neg:
-            card_box = "bg-rose-50/70 dark:bg-rose-950/30 border border-rose-300 dark:border-rose-500/40 hover:border-rose-400"
+            card_box = "ranking-item-danger bg-rose-50/90 dark:bg-rose-950/40 border-2 border-rose-300 dark:border-rose-500/40 hover:border-rose-400"
             badge_pos = f'<span class="flex-shrink-0 w-5 h-5 rounded bg-rose-600 text-white font-extrabold text-[10px] flex items-center justify-center shadow-xs">#{rank}</span>'
             pct_badge = "bg-rose-600 text-white font-black"
             foot_label = "Prejuízo:"
             foot_val_class = "font-black text-rose-700 dark:text-rose-400"
+            rec_pill = "bg-white dark:bg-slate-800 text-slate-900 dark:text-gray-200 border border-rose-300 dark:border-rose-500/30"
+            border_bottom = "border-rose-200/90 dark:border-white/5"
         else:
-            card_box = "bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-white/10 hover:border-amber-400"
+            card_box = "bg-white dark:bg-slate-900 border border-slate-300 dark:border-white/10 hover:border-amber-400"
             badge_pos = f'<span class="flex-shrink-0 w-5 h-5 rounded bg-slate-500 text-white font-bold text-[10px] flex items-center justify-center">#{rank}</span>'
-            pct_badge = "bg-amber-50 dark:bg-amber-950/50 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-500/30 font-extrabold"
+            pct_badge = "bg-amber-50 dark:bg-amber-950/50 text-amber-900 dark:text-amber-300 border border-amber-300 dark:border-amber-500/30 font-black"
             foot_label = "Margem:"
-            foot_val_class = "font-bold text-slate-800 dark:text-gray-200"
+            foot_val_class = "font-black text-slate-900 dark:text-gray-200"
+            rec_pill = "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-gray-200 border border-slate-300 dark:border-white/10"
+            border_bottom = "border-slate-200 dark:border-white/5"
 
         bottom10_html += f"""
-        <div class="rounded-lg p-2 {card_box} shadow-sm hover:shadow transition-all">
+        <div class="ranking-item rounded-lg p-2.5 {card_box} shadow-sm hover:shadow transition-all" data-lider="{lider_nome.lower()}" data-rank="{rank}">
           <div class="flex items-center justify-between gap-1.5">
             <div class="flex items-center gap-1.5 min-w-0">
               {badge_pos}
-              <span class="font-bold text-slate-900 dark:text-white text-xs truncate" title="{p['projeto']}">{p['projeto']}</span>
+              <span class="font-bold text-slate-950 dark:text-white text-xs truncate" title="{p['projeto']}">{p['projeto']}</span>
             </div>
             <div class="flex items-center gap-1.5 flex-shrink-0 tabular-nums">
-              <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-white dark:bg-slate-800 text-slate-800 dark:text-gray-200 border border-slate-200 dark:border-white/10"><span class="text-slate-400 font-medium text-[9px]">Rec:</span> {fmt_k(p['receita'])}</span>
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-bold {rec_pill}"><span class="text-slate-500 dark:text-gray-400 font-medium text-[9px]">Rec:</span> {fmt_k(p['receita'])}</span>
               <span class="px-1.5 py-0.5 rounded text-[10px] {pct_badge}">{fmt_pct(p['margemPct'])}</span>
             </div>
           </div>
-          <div class="flex items-center justify-between mt-1 pt-1 border-t border-slate-200/60 dark:border-white/5 text-[11px]">
-            <div class="flex items-center gap-1 text-slate-500 dark:text-gray-400 truncate">
+          <div class="flex items-center justify-between mt-1.5 pt-1.5 border-t {border_bottom} text-[11px]">
+            <div class="flex items-center gap-1 text-slate-700 dark:text-gray-300 truncate">
               <span class="w-4 h-4 rounded-full {av_class} text-[8px] font-bold flex items-center justify-center flex-shrink-0">{iniciais}</span>
-              <span class="truncate">{lider_nome}</span>
+              <span class="truncate font-semibold">{lider_nome}</span>
             </div>
             <div class="text-right flex items-center gap-1 flex-shrink-0 tabular-nums">
-              <span class="text-[10px] text-slate-400 font-medium">{foot_label}</span>
+              <span class="text-[10px] text-slate-500 dark:text-gray-400 font-medium">{foot_label}</span>
               <span class="{foot_val_class} text-xs">{fmt_brl(p['margem'])}</span>
             </div>
           </div>
@@ -567,6 +571,16 @@ def sync_lider():
 
   <!-- Camada de Autenticação e Segurança -->
   <script>
+    (function() {{
+      const saved = localStorage.getItem('nnos_theme') || 'dark';
+      if (saved === 'light') {{
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+      }} else {{
+        document.documentElement.classList.remove('light');
+        document.documentElement.classList.add('dark');
+      }}
+    }})();
     if (sessionStorage.getItem('nnos_auth') !== 'true') {{
       window.location.href = 'index.html';
     }}
@@ -674,33 +688,6 @@ def sync_lider():
           <p class="text-xs text-slate-500 dark:text-gray-400 mt-0.5">Controle de rentabilidade, centros de custos e margem operacional por contrato corporativo</p>
         </div>
       </div>
-
-      <!-- Lado Direito: Toggle Modo Escuro / Claro -->
-      <div class="flex items-center gap-3">
-        <button id="themeToggleBtn" onclick="toggleTheme()" class="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-700 dark:text-amber-300 bg-slate-100 dark:bg-amber-500/20 hover:bg-slate-200 dark:hover:bg-amber-500/30 border border-slate-300 dark:border-amber-400/30 transition-all flex items-center gap-2 shadow-sm cursor-pointer" title="Alternar entre Modo Escuro e Claro">
-          <span class="material-symbols-outlined text-base" id="themeIcon">light_mode</span>
-          <span id="themeText">Modo Claro</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- Tags / Badges Rápidas -->
-    <div class="flex flex-wrap items-center gap-2.5 mt-4 text-xs font-medium">
-      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-slate-900 text-slate-700 dark:text-gray-300 border border-slate-200 dark:border-white/10 tabular-nums">
-        <span class="material-symbols-outlined text-brand-500 text-sm">calendar_month</span> YTD 2026
-      </span>
-      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-slate-900 text-slate-900 dark:text-white border border-slate-200 dark:border-white/10 font-bold tabular-nums">
-        <span class="material-symbols-outlined text-brand-500 text-sm">payments</span> Total: {fmt_brl(macro.get('receita', 0))}
-      </span>
-      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-slate-900 text-slate-700 dark:text-gray-300 border border-slate-200 dark:border-white/10 tabular-nums">
-        <span class="material-symbols-outlined text-brand-500 text-sm">groups</span> {macro.get('totalLideres', 7)} Líderes
-      </span>
-      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-slate-900 text-slate-700 dark:text-gray-300 border border-slate-200 dark:border-white/10 tabular-nums">
-        <span class="material-symbols-outlined text-brand-500 text-sm">assignment</span> {macro.get('totalProjetos', 44)} Projetos Ativos
-      </span>
-      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-slate-900 text-emerald-600 dark:text-emerald-400 border border-slate-200 dark:border-white/10 font-bold tabular-nums">
-        <span class="material-symbols-outlined text-emerald-500 text-sm">trending_up</span> Margem Geral: {fmt_pct(macro.get('margemPct', 0))}
-      </span>
     </div>
   </div>
 </header>
@@ -728,6 +715,9 @@ def sync_lider():
         </a>
       </div>
       <div class="flex items-center gap-2 ml-auto">
+        <button id="themeToggleBtn" onclick="toggleTheme()" class="theme-toggle-btn p-1.5 rounded-lg text-slate-500 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-white/10 border border-slate-300 dark:border-white/10 transition-colors flex items-center justify-center cursor-pointer shadow-sm" title="Alternar Modo Escuro / Claro">
+          <span class="material-symbols-outlined text-base theme-icon">light_mode</span>
+        </button>
         <a href="index.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-white/10 border border-slate-300 dark:border-white/10 transition-colors flex items-center gap-1.5 cursor-pointer">
           <span class="material-symbols-outlined text-sm">grid_view</span> Menu
         </a>
@@ -877,7 +867,7 @@ def sync_lider():
         </div>
       </div>
       <div class="inline-flex items-center gap-2">
-        <span class="px-3 py-1 rounded-lg text-xs font-bold bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-500/30">
+        <span id="rankingStatusBadge" class="px-3 py-1 rounded-lg text-xs font-bold bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-500/30">
           Top 20 Rentáveis &amp; Bottom 10
         </span>
       </div>
@@ -936,7 +926,7 @@ def sync_lider():
       <!-- ======================================================== -->
       <!-- COLUNA 1: TOP 20 MAIS RENTÁVEIS (POSIÇÕES #1 A #10)      -->
       <!-- ======================================================== -->
-      <div class="flex flex-col bg-white dark:bg-slate-900 rounded-xl border border-slate-200/90 dark:border-white/10 shadow-sm overflow-hidden">
+      <div class="flex flex-col bg-white dark:bg-slate-900 rounded-xl border border-slate-300 dark:border-white/10 shadow-sm overflow-hidden">
         <div class="bg-[#1b365d] px-3.5 py-2.5 flex items-center justify-between text-white border-b border-[#142948]">
           <div class="flex items-center gap-2">
             <span class="flex h-5 w-5 items-center justify-center rounded bg-emerald-500/20 text-[10px] font-extrabold text-emerald-300 border border-emerald-400/30">
@@ -948,7 +938,7 @@ def sync_lider():
             Top 1-10
           </span>
         </div>
-        <div class="p-2 space-y-1.5 flex-1 flex flex-col justify-between bg-slate-50/50 dark:bg-slate-950/40">
+        <div id="ranking-col-1" class="p-2.5 space-y-2 flex-1 flex flex-col justify-start bg-slate-100/90 dark:bg-slate-950/40">
           {top20_col1_html}
         </div>
       </div>
@@ -956,7 +946,7 @@ def sync_lider():
       <!-- ======================================================== -->
       <!-- COLUNA 2: TOP 20 MAIS RENTÁVEIS (POSIÇÕES #11 A #20)     -->
       <!-- ======================================================== -->
-      <div class="flex flex-col bg-white dark:bg-slate-900 rounded-xl border border-slate-200/90 dark:border-white/10 shadow-sm overflow-hidden">
+      <div class="flex flex-col bg-white dark:bg-slate-900 rounded-xl border border-slate-300 dark:border-white/10 shadow-sm overflow-hidden">
         <div class="bg-[#1b365d] px-3.5 py-2.5 flex items-center justify-between text-white border-b border-[#142948]">
           <div class="flex items-center gap-2">
             <span class="flex h-5 w-5 items-center justify-center rounded bg-emerald-500/20 text-[10px] font-extrabold text-emerald-300 border border-emerald-400/30">
@@ -968,7 +958,7 @@ def sync_lider():
             Top 11-20
           </span>
         </div>
-        <div class="p-2 space-y-1.5 flex-1 flex flex-col justify-between bg-slate-50/50 dark:bg-slate-950/40">
+        <div id="ranking-col-2" class="p-2.5 space-y-2 flex-1 flex flex-col justify-start bg-slate-100/90 dark:bg-slate-950/40">
           {top20_col2_html}
         </div>
       </div>
@@ -976,7 +966,7 @@ def sync_lider():
       <!-- ======================================================== -->
       <!-- COLUNA 3: 10 PROJETOS MENOS RENTÁVEIS (BOTTOM 10)         -->
       <!-- ======================================================== -->
-      <div class="flex flex-col bg-white dark:bg-slate-900 rounded-xl border border-slate-200/90 dark:border-white/10 shadow-sm overflow-hidden">
+      <div class="flex flex-col bg-white dark:bg-slate-900 rounded-xl border border-slate-300 dark:border-white/10 shadow-sm overflow-hidden">
         <div class="bg-[#c24141] px-3.5 py-2.5 flex items-center justify-between text-white border-b border-[#991b1b]">
           <div class="flex items-center gap-2">
             <span class="flex h-5 w-5 items-center justify-center rounded bg-white/20 text-[10px] font-extrabold text-white border border-white/20">
@@ -988,7 +978,7 @@ def sync_lider():
             Atenção Diretoria
           </span>
         </div>
-        <div class="p-2 space-y-1.5 flex-1 flex flex-col justify-between bg-slate-50/50 dark:bg-slate-950/40">
+        <div id="ranking-col-3" class="p-2.5 space-y-2 flex-1 flex flex-col justify-start bg-slate-100/90 dark:bg-slate-950/40">
           {bottom10_html}
         </div>
       </div>
@@ -1051,23 +1041,23 @@ def sync_lider():
 
 <!-- ═══════════ SCRIPTS INTERATIVOS ═══════════ -->
 <script>
-  // 🌓 Toggle Dark / Light Mode
+  // 🌓 Toggle Dark / Light Mode Global
   function applyTheme(theme) {{
     const html = document.documentElement;
-    const icon = document.getElementById('themeIcon');
-    const text = document.getElementById('themeText');
+    const icons = document.querySelectorAll('.theme-icon');
+    const buttons = document.querySelectorAll('.theme-toggle-btn');
     if (theme === 'light') {{
       html.classList.remove('dark');
       html.classList.add('light');
-      if (icon) icon.textContent = 'dark_mode';
-      if (text) text.textContent = 'Modo Escuro';
-      localStorage.setItem('nnos_lider_theme', 'light');
+      icons.forEach(ic => ic.textContent = 'dark_mode');
+      buttons.forEach(btn => btn.setAttribute('title', 'Alternar para Modo Escuro'));
+      localStorage.setItem('nnos_theme', 'light');
     }} else {{
       html.classList.remove('light');
       html.classList.add('dark');
-      if (icon) icon.textContent = 'light_mode';
-      if (text) text.textContent = 'Modo Claro';
-      localStorage.setItem('nnos_lider_theme', 'dark');
+      icons.forEach(ic => ic.textContent = 'light_mode');
+      buttons.forEach(btn => btn.setAttribute('title', 'Alternar para Modo Claro'));
+      localStorage.setItem('nnos_theme', 'dark');
     }}
   }}
 
@@ -1078,30 +1068,90 @@ def sync_lider():
 
   // Inicializar tema com base na preferência salva
   (function() {{
-    const saved = localStorage.getItem('nnos_lider_theme') || 'dark';
+    const saved = localStorage.getItem('nnos_theme') || 'dark';
     applyTheme(saved);
   }})();
 
-  // 🔍 Filtro por Líder
+  // 🔍 Filtro por Líder (Raias Kanban + Ranking de Rentabilidade)
   function filtrarLider(lider) {{
+    const isTodos = (lider === 'todos');
+
+    // 1. Atualizar visual dos botões de filtro
     document.querySelectorAll('.filter-btn').forEach(btn => {{
-      if (btn.getAttribute('data-filter') === lider) {{
-        btn.classList.add('bg-sky-500', 'text-white', 'border-sky-400');
+      const filterVal = btn.getAttribute('data-filter');
+      if (filterVal === lider) {{
+        btn.classList.add('bg-sky-500', 'text-white', 'border-sky-400', 'shadow-sm');
         btn.classList.remove('bg-slate-100', 'dark:bg-slate-800', 'text-slate-700', 'dark:text-gray-300');
       }} else {{
-        btn.classList.remove('bg-sky-500', 'text-white', 'border-sky-400');
+        btn.classList.remove('bg-sky-500', 'text-white', 'border-sky-400', 'shadow-sm');
         btn.classList.add('bg-slate-100', 'dark:bg-slate-800', 'text-slate-700', 'dark:text-gray-300');
       }}
     }});
 
+    // 2. Filtrar raias Kanban dos Líderes
     document.querySelectorAll('.leader-swimlane').forEach(lane => {{
       const laneName = lane.getAttribute('data-leader-name');
-      if (lider === 'todos' || laneName === lider) {{
+      if (isTodos || laneName === lider) {{
         lane.style.display = 'block';
       }} else {{
         lane.style.display = 'none';
       }}
     }});
+
+    // 3. Filtrar e Destacar no Painel de Ranking de Rentabilidade (3 Colunas)
+    let totalVisiveisRanking = 0;
+    const colunas = ['ranking-col-1', 'ranking-col-2', 'ranking-col-3'];
+
+    colunas.forEach(colId => {{
+      const colEl = document.getElementById(colId);
+      if (!colEl) return;
+      const items = colEl.querySelectorAll('.ranking-item');
+      let visiveisNaColuna = 0;
+
+      items.forEach(item => {{
+        const itemLider = (item.getAttribute('data-lider') || '').toLowerCase();
+        if (isTodos || itemLider === lider) {{
+          item.style.display = 'block';
+          visiveisNaColuna++;
+          totalVisiveisRanking++;
+          if (!isTodos) {{
+            item.classList.add('ring-2', 'ring-sky-500', 'shadow-md');
+          }} else {{
+            item.classList.remove('ring-2', 'ring-sky-500', 'shadow-md');
+          }}
+        }} else {{
+          item.style.display = 'none';
+          item.classList.remove('ring-2', 'ring-sky-500', 'shadow-md');
+        }}
+      }});
+
+      // Exibir aviso se este líder não tiver projetos nesta coluna
+      let emptyMsg = colEl.querySelector('.ranking-empty-msg');
+      if (visiveisNaColuna === 0 && !isTodos) {{
+        if (!emptyMsg) {{
+          emptyMsg = document.createElement('div');
+          emptyMsg.className = 'ranking-empty-msg p-4 text-center text-xs text-slate-500 dark:text-gray-400 bg-white/60 dark:bg-slate-900/50 rounded-xl border border-dashed border-slate-300 dark:border-white/10 my-auto flex flex-col items-center justify-center gap-1';
+          emptyMsg.innerHTML = '<span class="material-symbols-outlined text-lg opacity-60">info</span><span>Nenhum projeto deste líder nesta faixa</span>';
+          colEl.appendChild(emptyMsg);
+        }}
+        emptyMsg.style.display = 'flex';
+      }} else if (emptyMsg) {{
+        emptyMsg.style.display = 'none';
+      }}
+    }});
+
+    // 4. Atualizar badge de status do ranking
+    const rankingBadge = document.getElementById('rankingStatusBadge');
+    if (rankingBadge) {{
+      if (isTodos) {{
+        rankingBadge.textContent = 'Top 20 Rentáveis & Bottom 10';
+        rankingBadge.className = 'px-3 py-1 rounded-lg text-xs font-bold bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-500/30';
+      }} else {{
+        const nomeFormatado = lider.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+        rankingBadge.textContent = `Projetos de ${{nomeFormatado}} (${{totalVisiveisRanking}} no ranking)`;
+        rankingBadge.className = 'px-3 py-1 rounded-lg text-xs font-extrabold bg-sky-500 text-white border border-sky-400 shadow-sm';
+      }}
+    }}
   }}
 
   // 🔎 Busca de Contratos

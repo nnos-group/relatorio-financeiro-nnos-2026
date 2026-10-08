@@ -201,12 +201,15 @@ def build():
         if os.path.exists(lider_json):
             with open(lider_json, "r", encoding="utf-8") as f:
                 l_data = json.load(f)
-            l_summary = l_data.get("summary", {})
-            l_tot_rec = l_summary.get("total_receita", 0)
-            l_tot_proj = l_summary.get("total_projetos", 0)
-            l_tot_leaders = l_summary.get("total_leaders", 0)
+            l_macro = l_data.get("macro") or l_data.get("summary", {})
+            l_tot_rec = l_macro.get("receita") or l_macro.get("total_receita", 0)
+            l_tot_proj = l_macro.get("totalProjetos") or l_macro.get("total_projetos", 0)
+            l_tot_leaders = l_macro.get("totalLideres") or l_macro.get("total_leaders", 0)
             
             l_tot_rec_str = f"R$ {l_tot_rec/1e6:.2f}M".replace('.', ',')
+            
+            # Retirar 'em raias Kanban' se ainda presente
+            index_raw = index_raw.replace("Visão executiva em raias Kanban por gestor de projetos.", "Visão executiva por gestor de projetos.")
             
             card5_pattern = r'(<!-- Card 5: Painel por Líder.*?Líderes</div>\s*<div class="[^"]*">)[^<]+(</div>.*?Projetos</div>\s*<div class="[^"]*">)[^<]+(</div>.*?Receita Total</div>\s*<div class="[^"]*">)[^<]+(</div>)'
             def replace_card5(m):
