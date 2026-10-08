@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="dark" lang="pt-BR">
+<html class="light" lang="pt-BR">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -129,7 +129,7 @@
 <body class="antialiased selection:bg-brand-blue selection:text-white">
 
 <!-- ═══════════ SECURITY GATE / LOGIN OVERLAY ═══════════ -->
-<div id="login-overlay" class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/95 backdrop-blur-xl px-4">
+<div id="login-overlay" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/95 backdrop-blur-xl px-4">
   <div class="glass-card w-full max-w-md p-8 rounded-2xl border border-white/10 shadow-2xl relative overflow-hidden">
     <div class="absolute -top-24 -right-24 w-48 h-48 bg-brand-blue/10 rounded-full blur-3xl pointer-events-none"></div>
     <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -178,7 +178,7 @@
 </div>
 
 <!-- ═══════════ MAIN PORTAL CONTAINER ═══════════ -->
-<div id="portal-container" class="hidden min-h-screen flex flex-col justify-between py-4 px-4 sm:px-6 relative">
+<div id="portal-container" class=" min-h-screen flex flex-col justify-between py-4 px-4 sm:px-6 relative">
 
   <!-- Floating Global Actions: Theme Toggle + Logout -->
   <div class="absolute top-4 right-4 sm:top-5 sm:right-6 z-30 flex items-center gap-2">
@@ -537,7 +537,7 @@ function toggleTheme() {
 
 // Inicializar tema com base na preferência salva
 (function() {
-  const saved = localStorage.getItem('nnos_theme') || 'dark';
+  const saved = 'light';
   applyTheme(saved);
   if (sessionStorage.getItem('nnos_auth') === 'true') {
     unlockDashboard();
