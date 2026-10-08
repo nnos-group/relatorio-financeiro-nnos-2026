@@ -572,17 +572,17 @@ def sync_booking():
     # Padronizar Rodapé
     standard_footer_booking = """
 <!-- FOOTER -->
-<footer class="bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-white/10 py-6 px-6 text-center text-xs text-slate-500 dark:text-gray-400 transition-colors duration-200">
+<footer class="bg-slate-950 border-t border-white/10 py-6 px-6 text-center text-xs text-gray-400">
   <div class="max-w-[1720px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
     <div class="flex items-center gap-3">
-      <img alt="NNÓS" class="h-8 md:h-9 w-auto object-contain rounded" src="assets/logo-nnos-horizontal.png"/>
+      <img alt="NNÓS" class="h-11 md:h-12 w-auto object-contain" src="assets/logo-nnos-horizontal.png"/>
     </div>
     <div>Relatório Financeiro Gerencial • Período: Janeiro a Dezembro de 2026</div>
   </div>
 </footer>
 """
     html = re.sub(r'<footer class="footer">.*?</footer>', standard_footer_booking.strip(), html, flags=re.DOTALL)
-    html = re.sub(r'<footer class="bg-slate-950.*?</footer>', standard_footer_booking.strip(), html, flags=re.DOTALL)
+    html = re.sub(r'<footer class="bg-(?:white|slate-950).*?</footer>', standard_footer_booking.strip(), html, flags=re.DOTALL)
 
     # Padronizar largura lateral do Booking para 1720px (referência Painel por Líder)
     html = html.replace("width:min(1480px,calc(100% - 40px))", "width:min(1720px,calc(100% - 40px))")
