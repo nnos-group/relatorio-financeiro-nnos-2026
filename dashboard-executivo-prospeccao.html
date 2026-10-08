@@ -320,6 +320,61 @@
   html.light .scenario-tab-active * {
     color: #ffffff !important;
   }
+
+  /* ===== NNÓS · Identidade clara (padrão Matriz) =====
+     Regra: fundo escuro => texto claro | fundo claro => texto escuro */
+  html.light body {
+    background: linear-gradient(180deg, #eef4fa 0%, #f6f9fc 40%, #f4f7fb 100%) !important;
+  }
+  html.light header {
+    background: linear-gradient(135deg, #ffffff 0%, #eaf3fb 100%) !important;
+    border-bottom: 3px solid #0083ca !important;
+  }
+  html.light header h1 { color: #1b365d !important; }
+  html.light header .inline-flex {
+    background-color: #ffffff !important;
+    border-color: #bcd3e6 !important;
+    color: #1b365d !important;
+    box-shadow: 0 1px 3px rgba(27,54,93,.08) !important;
+  }
+  html.light nav {
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #dbe5ef !important;
+    box-shadow: 0 2px 8px rgba(27,54,93,.06) !important;
+  }
+  html.light nav > div:first-child {
+    background-color: #f1f6fb !important;
+    border-bottom: 1px solid #dbe5ef !important;
+  }
+  html.light nav a[href^="#"] { color: #1b365d !important; }
+  html.light nav a[href^="#"]:hover { background-color: #e0f2fe !important; color: #075985 !important; }
+  html.light h2 { color: #1b365d !important; }
+  html.light .glass-card, html.light .scenario-content,
+  html.light [class*="bg-surface-container-high"] {
+    border: 1px solid #dbe5ef !important;
+    box-shadow: 0 6px 18px -8px rgba(27,54,93,.18) !important;
+  }
+  /* Cabeçalho de tabela = barra escura => texto claro */
+  html.light table thead tr, html.light table thead th, html.light table th,
+  html.light .scenario-table thead tr, html.light .scenario-table th,
+  html.light .scenario-content tr[class*="bg-surface-container"] {
+    background-color: #1b365d !important;
+    color: #ffffff !important;
+    border-color: #1b365d !important;
+  }
+  html.light table tbody tr:nth-child(even) td { background-color: #f6f9fc !important; }
+  html.light table tr:hover td { background-color: #e8f2fa !important; }
+  html.light .scenario-tab-active { background-color: #0083ca !important; border-color: #0083ca !important; }
+  html.light .text-emerald-400, html.light .text-emerald-300 { color: #047857 !important; }
+  html.light .text-rose-400, html.light .text-rose-300 { color: #be123c !important; }
+  html.light .text-amber-400, html.light .text-amber-300 { color: #b45309 !important; }
+  html.light footer, html.light footer[class] {
+    background-color: #1b365d !important;
+    border-top: 3px solid #0083ca !important;
+  }
+  html.light footer, html.light footer * { color: #e2e8f0 !important; }
+  html.light ::-webkit-scrollbar-track { background: #e2e8f0; }
+  html.light ::-webkit-scrollbar-thumb { background: #94a3b8; }
 </style>
 
 </head>
