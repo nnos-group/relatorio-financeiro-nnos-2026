@@ -96,6 +96,12 @@
       background: rgba(148, 163, 184, 0.7);
     }
 
+    /* Logomarca dinâmica Dark/Light */
+    .logo-dark { display: block; }
+    .logo-light { display: none; }
+    html.light .logo-dark { display: none !important; }
+    html.light .logo-light { display: block !important; }
+
     /* Adaptações do Tema Claro */
     html.light body {
       background-color: #f1f5f9 !important;
@@ -193,7 +199,8 @@
     <div class="flex items-center justify-between gap-5 flex-wrap">
       <!-- Lado Esquerdo: Logo e Títulos -->
       <div class="flex items-center gap-5 flex-wrap">
-        <img alt="NNÓS Logo" class="h-12 sm:h-14 w-auto object-contain flex-shrink-0 opacity-95" src="assets/logo-nnos.png"/>
+        <img alt="NNÓS Logo" class="logo-dark h-12 sm:h-14 w-auto object-contain flex-shrink-0 opacity-95" src="assets/logo-nnos-white.png"/>
+        <img alt="NNÓS Logo" class="logo-light h-12 sm:h-14 w-auto object-contain flex-shrink-0 opacity-95" src="assets/logo-nnos.png"/>
         <div class="h-10 w-[1px] bg-slate-200 dark:bg-white/20 hidden sm:block"></div>
         <div>
           <div class="flex items-center gap-3">

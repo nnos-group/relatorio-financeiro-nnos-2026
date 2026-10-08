@@ -551,16 +551,24 @@ def sync_booking():
 .hero-code1:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 0% 0%,rgba(0,131,202,.20),transparent 30%),radial-gradient(circle at 100% 0%,rgba(59,130,246,.12),transparent 24%);pointer-events:none}
 .hero-code1-inner{position:relative;z-index:1}
 .hero-code1-copy{max-width:1200px;display:flex;align-items:center;gap:20px}
-.logo-code1{height:50px;margin-bottom:0;filter:brightness(0) invert(1);opacity:.95;display:block;flex-shrink:0}
+.logo-code1{height:50px;margin-bottom:0;opacity:.95;flex-shrink:0}
+.logo-dark{display:block;}
+.logo-light{display:none;}
+html.light .logo-dark{display:none!important;}
+html.light .logo-light{display:block!important;}
 .header-divider-code1{width:1px;height:44px;background:rgba(255,255,255,.2);flex-shrink:0}
 .title-code1{font-size:clamp(22px,2.6vw,32px);font-weight:800;line-height:1.15;margin:0 0 4px;letter-spacing:-.03em;color:#fff;font-family:Manrope,Inter,sans-serif}
 .subtitle-code1{color:#d7e3f3;font-size:13px;line-height:1.4;margin:0}
 @media(max-width:768px){.hero-code1-copy{flex-direction:column;align-items:flex-start;gap:12px}.header-divider-code1{display:none}.logo-code1{height:38px}}
 """
-    html = re.sub(r'\.hero-code1\{.*?@media\(max-width:620px\)\{\.subtitle-code1\{.*?\}\}', optimized_hero_css.strip(), html, flags=re.DOTALL)
+    if '.logo-dark{' not in html:
+        html = re.sub(r'\.hero-code1\{.*?@media\(max-width:(?:620|768)px\)\{.*?\}', optimized_hero_css.strip(), html, flags=re.DOTALL)
+        if '.logo-dark{' not in html and '</style>' in html:
+            html = html.replace('</style>', optimized_hero_css.strip() + '\n</style>', 1)
 
     optimized_hero_html = """<div class="hero-code1-copy">
-      <img alt="NNÓS Logo" class="logo-code1" src="assets/logo-nnos.png"/>
+      <img alt="NNÓS Logo" class="logo-code1 logo-dark" src="assets/logo-nnos-white.png"/>
+      <img alt="NNÓS Logo" class="logo-code1 logo-light" src="assets/logo-nnos.png"/>
       <div class="header-divider-code1"></div>
       <div>
         <h1 class="title-code1">Dashboard Executivo de Performance de Projetos</h1>

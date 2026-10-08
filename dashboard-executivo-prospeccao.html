@@ -321,6 +321,12 @@
     color: #ffffff !important;
   }
 
+  /* Logomarca dinâmica Dark/Light */
+  .logo-dark { display: block; }
+  .logo-light { display: none; }
+  html.light .logo-dark { display: none !important; }
+  html.light .logo-light { display: block !important; }
+
   /* ===== NNÓS · Identidade clara (padrão Matriz) =====
      Regra: fundo escuro => texto claro | fundo claro => texto escuro */
   html.light body {
@@ -389,7 +395,8 @@
   </div>
   <div class="max-w-[1720px] mx-auto px-6 py-8 relative z-10">
     <div class="flex items-center gap-5 mb-5">
-      <img alt="NNÓS Logo" class="h-14 sm:h-16 w-auto object-contain flex-shrink-0 opacity-95" src="assets/logo-nnos.png"/>
+      <img alt="NNÓS Logo" class="logo-dark h-14 sm:h-16 w-auto object-contain flex-shrink-0 opacity-95" src="assets/logo-nnos-white.png"/>
+      <img alt="NNÓS Logo" class="logo-light h-14 sm:h-16 w-auto object-contain flex-shrink-0 opacity-95" src="assets/logo-nnos.png"/>
       <div class="h-12 w-[1px] bg-white/20 hidden sm:block"></div>
       <div>
         <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold font-display text-text-primary tracking-tight">Dashboard Executivo de Despesas Operacionais</h1>
