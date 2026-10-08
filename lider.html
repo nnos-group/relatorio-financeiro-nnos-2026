@@ -98,19 +98,16 @@
 
     /* Adaptações do Tema Claro */
     html.light body {
-      background-color: #eef2f6 !important;
-      color: #1e293b !important;
+      background-color: #f1f5f9 !important;
+      color: #0f172a !important;
     }
     html.light .bg-slate-950,
     html.light .bg-slate-900 {
       background-color: #ffffff !important;
-      color: #1e293b !important;
+      color: #0f172a !important;
     }
     html.light [class*="border-white"] {
       border-color: rgba(226, 232, 240, 0.9) !important;
-    }
-    html.light .text-white {
-      color: #0f172a !important;
     }
     html.light .text-gray-300,
     html.light .text-gray-400 {
@@ -139,6 +136,48 @@
     }
     html.light .project-card:hover {
       box-shadow: 0 10px 25px -4px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    /* 🎯 Regra de Ouro de Contraste: Barra/Badge/Fundo escuro SEMPRE tem fonte clara (branca) */
+    html.light .bg-\[\#1b365d\],
+    html.light .bg-\[\#1b365d\] *,
+    html.light .bg-\[\#c24141\],
+    html.light .bg-\[\#c24141\] *,
+    html.light .bg-\[\#00223a\],
+    html.light .bg-\[\#00223a\] *,
+    html.light .bg-\[\#003865\],
+    html.light .bg-\[\#003865\] *,
+    html.light .bg-\[\#002b49\],
+    html.light .bg-\[\#002b49\] *,
+    html.light .bg-blue-600,
+    html.light .bg-blue-600 *,
+    html.light .bg-rose-600,
+    html.light .bg-rose-600 *,
+    html.light .bg-emerald-600,
+    html.light .bg-emerald-600 *,
+    html.light .bg-slate-700,
+    html.light .bg-slate-700 *,
+    html.light .bg-slate-500,
+    html.light .bg-slate-500 *,
+    html.light thead tr,
+    html.light thead tr * {
+      color: #ffffff !important;
+    }
+
+    /* Estilização dos cards do ranking no modo claro */
+    html.light .ranking-item {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+    }
+    html.light .ranking-item-danger {
+      background-color: #fff1f2 !important;
+      border-color: #fecdd3 !important;
+    }
+    html.light #ranking-col-1,
+    html.light #ranking-col-2,
+    html.light #ranking-col-3 {
+      background-color: #f8fafc !important;
     }
   </style>
 </head>
@@ -4497,8 +4536,8 @@
     <!-- Header da Seção de Rankings -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
       <div class="flex items-center gap-3">
-        <div class="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-md shadow-blue-500/20 flex-shrink-0">
-          <span class="material-symbols-outlined text-xl">leaderboard</span>
+        <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-md shadow-blue-500/20 flex-shrink-0">
+          <span class="material-symbols-outlined text-2xl">leaderboard</span>
         </div>
         <div>
           <h2 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">Painel Financeiro - Ranking de Rentabilidade</h2>
@@ -5289,8 +5328,8 @@
   <section id="metas" class="scroll-mt-28 space-y-4 pt-6 border-t border-slate-200 dark:border-white/10">
     <div class="flex items-center justify-between flex-wrap gap-3">
       <div class="flex items-center gap-3.5">
-        <div class="w-11 h-11 rounded-full bg-[#002b49] text-white flex items-center justify-center shadow-md shadow-blue-950/20 flex-shrink-0">
-          <span class="material-symbols-outlined text-2xl text-sky-400">bar_chart</span>
+        <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-md shadow-blue-500/20 flex-shrink-0">
+          <span class="material-symbols-outlined text-2xl">leaderboard</span>
         </div>
         <div>
           <h2 class="text-xl sm:text-2xl font-black tracking-tight text-slate-900 dark:text-white uppercase">

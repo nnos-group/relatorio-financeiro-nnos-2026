@@ -232,41 +232,106 @@ def sync_prospeccao():
   }
   html.light header {
     background: #ffffff !important;
-    border-bottom: 1px solid #cbd5e1 !important;
+    border-bottom: 1px solid #e2e8f0 !important;
   }
-  html.light .text-text-primary,
-  html.light .text-white {
+  html.light header h1 {
+    color: #0f172a !important;
+  }
+  html.light header p {
+    color: #475569 !important;
+  }
+  html.light header .inline-flex {
+    background-color: #f8fafc !important;
+    border-color: #cbd5e1 !important;
+    color: #0f172a !important;
+  }
+  html.light nav {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+  }
+  html.light nav > div:first-child {
+    background-color: #f8fafc !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+  }
+  html.light .bg-slate-950,
+  html.light .bg-slate-900 {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+  }
+  html.light .bg-surface,
+  html.light .bg-surface-container,
+  html.light .glass-card {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    color: #0f172a !important;
+    box-shadow: 0 4px 14px -2px rgba(0,0,0,0.05) !important;
+  }
+  html.light .glass-card .text-white,
+  html.light .data-number {
     color: #0f172a !important;
   }
   html.light .text-text-muted,
   html.light .text-gray-400,
   html.light .text-gray-300 {
-    color: #475569 !important;
-  }
-  html.light nav {
-    background-color: rgba(255, 255, 255, 0.95) !important;
-    border-bottom: 1px solid #cbd5e1 !important;
-  }
-  html.light .bg-slate-950,
-  html.light .bg-slate-900 {
-    background-color: #f8fafc !important;
-    border-color: #cbd5e1 !important;
-  }
-  html.light .bg-surface,
-  html.light .bg-surface-container,
-  html.light .bg-surface-container-high,
-  html.light .glass-card {
-    background-color: #ffffff !important;
-    border-color: #cbd5e1 !important;
-    color: #0f172a !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+    color: #64748b !important;
   }
   html.light [class*="border-surface-variant"],
   html.light [class*="border-white"] {
-    border-color: #cbd5e1 !important;
+    border-color: #e2e8f0 !important;
   }
   html.light .text-on-surface {
-    color: #1e293b !important;
+    color: #0f172a !important;
+  }
+
+  /* 🌟 CENÁRIOS ESTRATÉGICOS (Print 3: Seguir o mesmo padrão dos Indicadores Estratégicos) */
+  html.light [class*="bg-surface-container-high"] {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    color: #0f172a !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+  }
+  html.light .scenario-content {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.05) !important;
+  }
+  html.light .scenario-content .data-number {
+    color: #0f172a !important;
+  }
+  html.light .scenario-content tr[class*="bg-surface-container"],
+  html.light .scenario-table thead tr {
+    background-color: #f1f5f9 !important;
+    color: #475569 !important;
+    border-color: #e2e8f0 !important;
+  }
+  html.light .scenario-table th {
+    color: #475569 !important;
+    border-color: #e2e8f0 !important;
+  }
+  html.light .scenario-table td {
+    color: #0f172a !important;
+    border-color: #e2e8f0 !important;
+  }
+  html.light .scenario-tab-active {
+    background-color: #0284c7 !important;
+    color: #ffffff !important;
+    border-color: #0284c7 !important;
+    font-weight: 700 !important;
+  }
+  html.light [id="scenarioTabs"] button:not(.scenario-tab-active) {
+    background-color: #ffffff !important;
+    color: #475569 !important;
+    border-color: #cbd5e1 !important;
+  }
+  html.light [id="scenarioTabs"] button:not(.scenario-tab-active):hover {
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+  }
+
+  /* Regra de Ouro: Badges e botões ativos mantêm texto branco */
+  html.light .scenario-tab-active,
+  html.light .scenario-tab-active * {
+    color: #ffffff !important;
   }
 </style>
 """
@@ -318,24 +383,24 @@ def sync_prospeccao():
 
     # 3. Substituição da Navbar: Padronização em 2 Linhas (Outros Relatórios Acima)
     standard_nav = """
-<nav class="sticky top-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-white/10 shadow-xl">
+<nav class="sticky top-0 z-50 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md border-b border-slate-200 dark:border-white/10 shadow-md transition-colors duration-200">
   <!-- Linha 1: Outros Relatórios e Ações Globais -->
-  <div class="bg-slate-900/90 px-6 py-1.5 border-b border-white/10">
+  <div class="bg-slate-100/90 dark:bg-slate-900/90 px-6 py-1.5 border-b border-slate-200 dark:border-white/10">
     <div class="max-w-[1440px] mx-auto flex items-center justify-between gap-3 flex-wrap">
       <div class="flex items-center gap-2">
-        <span class="text-[11px] font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1.5 mr-1">
-          <span class="material-symbols-outlined text-sm text-sky-400">alt_route</span> Outros Relatórios:
+        <span class="text-[11px] font-bold text-slate-500 dark:text-gray-400 uppercase tracking-wider flex items-center gap-1.5 mr-1">
+          <span class="material-symbols-outlined text-sm text-sky-500">alt_route</span> Outros Relatórios:
         </span>
-        <a href="matriz.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-sky-300 bg-sky-500/20 hover:bg-sky-500/30 border border-sky-400/40 transition-all flex items-center gap-1.5 shadow-sm hover:scale-[1.02] cursor-pointer">
+        <a href="matriz.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-sky-700 dark:text-sky-300 bg-sky-100 dark:bg-sky-500/20 hover:bg-sky-200 dark:hover:bg-sky-500/30 border border-sky-300 dark:border-sky-400/40 transition-all flex items-center gap-1.5 shadow-sm hover:scale-[1.02] cursor-pointer">
           <span class="material-symbols-outlined text-sm">monitoring</span> Matriz 2026
         </a>
-        <a href="uva.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-amber-300 bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/40 transition-all flex items-center gap-1.5 shadow-sm hover:scale-[1.02] cursor-pointer">
+        <a href="uva.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-amber-700 dark:text-amber-300 bg-amber-100 dark:bg-amber-500/20 hover:bg-amber-200 dark:hover:bg-amber-500/30 border border-amber-300 dark:border-amber-400/40 transition-all flex items-center gap-1.5 shadow-sm hover:scale-[1.02] cursor-pointer">
           <span class="material-symbols-outlined text-sm">account_balance</span> Campus BH UVA
         </a>
-        <a href="booking.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-emerald-300 bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/40 transition-all flex items-center gap-1.5 shadow-sm hover:scale-[1.02] cursor-pointer">
+        <a href="booking.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-500/20 hover:bg-emerald-200 dark:hover:bg-emerald-500/30 border border-emerald-300 dark:border-emerald-400/40 transition-all flex items-center gap-1.5 shadow-sm hover:scale-[1.02] cursor-pointer">
           <span class="material-symbols-outlined text-sm">trending_up</span> Performance Projetos
         </a>
-        <a href="lider.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-blue-300 bg-blue-500/20 hover:bg-blue-500/30 border border-blue-400/40 transition-all flex items-center gap-1.5 shadow-sm hover:scale-[1.02] cursor-pointer">
+        <a href="lider.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-blue-700 dark:text-blue-300 bg-blue-100 dark:bg-blue-500/20 hover:bg-blue-200 dark:hover:bg-blue-500/30 border border-blue-300 dark:border-blue-400/40 transition-all flex items-center gap-1.5 shadow-sm hover:scale-[1.02] cursor-pointer">
           <span class="material-symbols-outlined text-sm">badge</span> Painel por Líder
         </a>
       </div>
@@ -343,10 +408,10 @@ def sync_prospeccao():
         <button id="themeToggleBtn" onclick="toggleTheme()" class="theme-toggle-btn p-1.5 rounded-lg text-slate-500 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-white/10 border border-slate-300 dark:border-white/10 transition-colors flex items-center justify-center cursor-pointer shadow-sm" title="Alternar Modo Escuro / Claro">
           <span class="material-symbols-outlined text-base theme-icon">light_mode</span>
         </button>
-        <a href="index.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 border border-white/10 transition-colors flex items-center gap-1.5 cursor-pointer">
+        <a href="index.html" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-white/10 border border-slate-300 dark:border-white/10 transition-colors flex items-center gap-1.5 cursor-pointer">
           <span class="material-symbols-outlined text-sm">grid_view</span> Menu
         </a>
-        <button onclick="logout()" class="px-3 py-1.5 rounded-lg text-xs font-bold text-rose-400 hover:bg-rose-500/20 border border-rose-500/30 transition-colors flex items-center gap-1 cursor-pointer" title="Encerrar Sessão">
+        <button onclick="logout()" class="px-3 py-1.5 rounded-lg text-xs font-bold text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-500/20 border border-rose-300 dark:border-rose-500/30 transition-colors flex items-center gap-1 cursor-pointer" title="Encerrar Sessão">
           <span class="material-symbols-outlined text-sm">logout</span> Sair
         </button>
       </div>
@@ -356,16 +421,16 @@ def sync_prospeccao():
   <!-- Linha 2: Seções do Relatório -->
   <div class="max-w-[1440px] mx-auto px-6 overflow-x-auto">
     <div class="flex items-center gap-1.5 py-2 min-w-max">
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#kpis"><span class="material-symbols-outlined text-sm text-purple-400">monitoring</span> KPIs</a>
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#mensal"><span class="material-symbols-outlined text-sm text-purple-400">show_chart</span> Gasto Mensal</a>
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#categorias"><span class="material-symbols-outlined text-sm text-purple-400">category</span> Categorias</a>
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#geografico"><span class="material-symbols-outlined text-sm text-purple-400">map</span> Geográfico</a>
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#top10"><span class="material-symbols-outlined text-sm text-purple-400">local_fire_department</span> Top 10</a>
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#atividades"><span class="material-symbols-outlined text-sm text-purple-400">list_alt</span> Atividades</a>
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#cenarios"><span class="material-symbols-outlined text-sm text-purple-400">explore</span> Cenários</a>
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#timeline"><span class="material-symbols-outlined text-sm text-purple-400">timeline</span> Timeline</a>
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#alertas"><span class="material-symbols-outlined text-sm text-purple-400">warning</span> Alertas</a>
-      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-gray-300 hover:text-white hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#recomendacoes"><span class="material-symbols-outlined text-sm text-purple-400">lightbulb</span> Recomendações</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#kpis"><span class="material-symbols-outlined text-sm text-purple-500">monitoring</span> KPIs</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#mensal"><span class="material-symbols-outlined text-sm text-purple-500">show_chart</span> Gasto Mensal</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#categorias"><span class="material-symbols-outlined text-sm text-purple-500">category</span> Categorias</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#geografico"><span class="material-symbols-outlined text-sm text-purple-500">map</span> Geográfico</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#top10"><span class="material-symbols-outlined text-sm text-purple-500">local_fire_department</span> Top 10</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#atividades"><span class="material-symbols-outlined text-sm text-purple-500">list_alt</span> Atividades</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#cenarios"><span class="material-symbols-outlined text-sm text-purple-500">explore</span> Cenários</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#timeline"><span class="material-symbols-outlined text-sm text-purple-500">timeline</span> Timeline</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#alertas"><span class="material-symbols-outlined text-sm text-purple-500">warning</span> Alertas</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#recomendacoes"><span class="material-symbols-outlined text-sm text-purple-500">lightbulb</span> Recomendações</a>
     </div>
   </div>
 </nav>
