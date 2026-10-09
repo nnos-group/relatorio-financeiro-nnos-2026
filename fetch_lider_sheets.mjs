@@ -404,8 +404,15 @@ async function run() {
 
       if (!rawProj || val <= 0) continue;
 
-      // REGRA: Não entra no cálculo de faturamento linhas com PERFIL LOGÍSTICA E MATERIAL
+      // REGRA 1: Não entra no cálculo de faturamento linhas com PERFIL LOGÍSTICA E MATERIAL
       if (perfil.includes('LOGÍSTICA') || perfil.includes('LOGISTICA') || perfil.includes('MATERIAL')) {
+        continue;
+      }
+
+      // REGRA 2: A denominação A FATURAR não entra no cálculo de Faturamento Realizado
+      const faturado = (r[1] || '').trim().toUpperCase();
+      const rowText = r.join(' ').toUpperCase();
+      if (faturado.includes('A FATURAR') || status.toUpperCase().includes('A FATURAR') || rowText.includes('A FATURAR')) {
         continue;
       }
 
