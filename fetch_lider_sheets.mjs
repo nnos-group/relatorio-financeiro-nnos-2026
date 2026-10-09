@@ -301,6 +301,115 @@ async function run() {
     });
   }
 
+  // 3. Faturamento por Projeto (Previsto cruzado com Realizado)
+  // Previsto: Detalhado - CONSOLIDADO (Coluna FATURAR e Mês da Data Inicial)
+  // Realizado: FATURAMENTO (Coluna VALOR e Coluna REALIZADO/Mês)
+  const MESES = [
+    'JANEIRO', 'FEVEREIRO', 'MARÇO', 'ABRIL', 'MAIO', 'JUNHO',
+    'JULHO', 'AGOSTO', 'SETEMBRO', 'OUTUBRO', 'NOVEMBRO', 'DEZEMBRO'
+  ];
+
+  const MESES_MAP = {
+    '01': 'JANEIRO', '1': 'JANEIRO', 'JAN': 'JANEIRO', 'JANEIRO': 'JANEIRO',
+    '02': 'FEVEREIRO', '2': 'FEVEREIRO', 'FEV': 'FEVEREIRO', 'FEVEREIRO': 'FEVEREIRO',
+    '03': 'MARÇO', '3': 'MARÇO', 'MAR': 'MARÇO', 'MARÇO': 'MARÇO', 'MARCO': 'MARÇO',
+    '04': 'ABRIL', '4': 'ABRIL', 'ABR': 'ABRIL', 'ABRIL': 'ABRIL',
+    '05': 'MAIO', '5': 'MAIO', 'MAI': 'MAIO', 'MAIO': 'MAIO',
+    '06': 'JUNHO', '6': 'JUNHO', 'JUN': 'JUNHO', 'JUNHO': 'JUNHO',
+    '07': 'JULHO', '7': 'JULHO', 'JUL': 'JULHO', 'JULHO': 'JULHO',
+    '08': 'AGOSTO', '8': 'AGOSTO', 'AGO': 'AGOSTO', 'AGOSTO': 'AGOSTO',
+    '09': 'SETEMBRO', '9': 'SETEMBRO', 'SET': 'SETEMBRO', 'SETEMBRO': 'SETEMBRO',
+    '10': 'OUTUBRO', 'OUT': 'OUTUBRO', 'OUTUBRO': 'OUTUBRO',
+    '11': 'NOVEMBRO', 'NOV': 'NOVEMBRO', 'NOVEMBRO': 'NOVEMBRO',
+    '12': 'DEZEMBRO', 'DEZ': 'DEZEMBRO', 'DEZEMBRO': 'DEZEMBRO',
+    'ADIANTAMENTO': 'JANEIRO'
+  };
+
+  function normStr(s) {
+    return (s || '').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().replace(/\s+/g, ' ');
+  }
+
+  const faturamentoProjetos = [];
+  const projNormMap = new Map();
+
+  leaders.forEach(l => {
+    l.projetos.forEach(p => {
+      const pObj = {
+        titulo: p.titulo,
+        lider: l.nome,
+        area: p.area,
+        previsto: { TOTAL: 0 },
+        realizado: { TOTAL: 0 }
+      };
+      MESES.forEach(m => {
+        pObj.previsto[m] = 0;
+        pObj.realizado[m] = 0;
+      });
+      faturamentoProjetos.push(pObj);
+      projNormMap.set(normStr(p.titulo), pObj);
+    });
+  });
+
+  // A. Buscar Previsto de Detalhado - CONSOLIDADO
+  try {
+    const urlCons = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/'Detalhado - CONSOLIDADO'!A1:AF1500`;
+    const resCons = await fetch(urlCons, { headers: { authorization: `Bearer ${t}` } });
+    const dCons = await resCons.json();
+    const rowsCons = dCons.values || [];
+
+    for (let i = 1; i < rowsCons.length; i++) {
+      const r = rowsCons[i];
+      const rawProj = (r[1] || '').trim();
+      const dtIni = (r[6] || '').trim();
+      const dtFim = (r[7] || '').trim();
+      const val = parseNum(r[12]);
+      if (!rawProj || val <= 0) continue;
+
+      let mesNum = '';
+      if (dtIni.includes('/')) mesNum = dtIni.split('/')[1];
+      else if (dtFim.includes('/')) mesNum = dtFim.split('/')[1];
+      const mesNome = MESES_MAP[mesNum] || 'JANEIRO';
+
+      const pObj = projNormMap.get(normStr(rawProj));
+      if (pObj) {
+        pObj.previsto[mesNome] = (pObj.previsto[mesNome] || 0) + val;
+        pObj.previsto.TOTAL += val;
+      }
+    }
+  } catch (errCons) {
+    console.warn('[AVISO] Falha ao extrair Detalhado - CONSOLIDADO:', errCons.message);
+  }
+
+  // B. Buscar Realizado de FATURAMENTO
+  try {
+    const urlFat = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/'FATURAMENTO'!A5:N713`;
+    const resFat = await fetch(urlFat, { headers: { authorization: `Bearer ${t}` } });
+    const dFat = await resFat.json();
+    const rowsFat = dFat.values || [];
+
+    for (let i = 1; i < rowsFat.length; i++) {
+      const r = rowsFat[i];
+      const mesRaw = (r[0] || '').trim().toUpperCase();
+      const rawProj = (r[2] || '').trim();
+      const val = parseNum(r[5]);
+      if (!rawProj || val <= 0) continue;
+
+      const mesNome = MESES_MAP[mesRaw];
+      if (!mesNome) continue;
+
+      const pObj = projNormMap.get(normStr(rawProj));
+      if (pObj) {
+        pObj.realizado[mesNome] = (pObj.realizado[mesNome] || 0) + val;
+        pObj.realizado.TOTAL += val;
+      }
+    }
+  } catch (errFat) {
+    console.warn('[AVISO] Falha ao extrair FATURAMENTO:', errFat.message);
+  }
+
+  // Ordenar por previsto decrescente
+  faturamentoProjetos.sort((a, b) => b.previsto.TOTAL - a.previsto.TOTAL);
+
   // Totais Globais
   const globalReceita = leaders.reduce((acc, l) => acc + (l.total ? l.total.receita : 0), 0);
   const globalCustos = leaders.reduce((acc, l) => acc + (l.total ? l.total.custos : 0), 0);
@@ -331,7 +440,8 @@ async function run() {
     leaders,
     maisRentaveis,
     menosRentaveis,
-    metasAreas
+    metasAreas,
+    faturamentoProjetos
   };
 
   const outPath = path.resolve(__dirname, 'lider_data.json');
@@ -340,6 +450,7 @@ async function run() {
   console.log(`[OK] 20 mais rentáveis: ${maisRentaveis.length} registros.`);
   console.log(`[OK] 10 menos rentáveis: ${menosRentaveis.length} registros.`);
   console.log(`[OK] Metas por Área: ${metasAreas.length} registros.`);
+  console.log(`[OK] Faturamento por Projeto: ${faturamentoProjetos.length} registros.`);
   console.log(`[OK] Receita Bruta Global: R$ ${globalReceita.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`);
   console.log(`[OK] Salvo em: ${outPath}`);
 }

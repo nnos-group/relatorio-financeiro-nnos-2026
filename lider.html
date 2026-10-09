@@ -267,6 +267,7 @@
       <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#resumo"><span class="material-symbols-outlined text-sm text-sky-500">monitoring</span> Resumo Geral</a>
       <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#lideres"><span class="material-symbols-outlined text-sm text-sky-500">groups</span> Painel dos Líderes</a>
       <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#ranking-rentabilidade"><span class="material-symbols-outlined text-sm text-emerald-500">stars</span> Ranking de Rentabilidade (Top 20 / Bottom 10)</a>
+      <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#faturamento-projetos"><span class="material-symbols-outlined text-sm text-indigo-500">payments</span> Faturamento por Projeto</a>
       <a class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors flex items-center gap-1.5" href="#metas"><span class="material-symbols-outlined text-sm text-amber-500">flag</span> Metas por Área</a>
     </div>
   </div>
@@ -5454,6 +5455,190 @@
     </div>
   </section>
 
+  <!-- ──────── PAINEL DE FATURAMENTO POR PROJETO (PREVISTO VS. REALIZADO) ──────── -->
+  <section id="faturamento-projetos" class="scroll-mt-28 space-y-5 pt-6 border-t border-slate-200 dark:border-white/10">
+    <!-- Header do Painel -->
+    <div class="flex items-center justify-between flex-wrap gap-4">
+      <div class="flex items-center gap-3.5">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#003865] to-sky-600 text-white flex items-center justify-center shadow-md shadow-sky-500/20 flex-shrink-0">
+          <span class="material-symbols-outlined text-2xl">payments</span>
+        </div>
+        <div>
+          <h2 class="text-xl sm:text-2xl font-black tracking-tight text-slate-900 dark:text-white uppercase flex items-center gap-2 flex-wrap">
+            FATURAMENTO POR PROJETO <span class="text-sky-600 dark:text-sky-400 font-black">| PREVISTO VS. REALIZADO</span>
+          </h2>
+          <p class="text-xs text-slate-500 dark:text-gray-400 mt-0.5">Cruzamento analítico entre a Previsão (Detalhado - CONSOLIDADO) e a Emissão Realizada (FATURAMENTO) por contrato corporativo.</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="px-3.5 py-1.5 rounded-full text-xs font-extrabold bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-500/30 flex items-center gap-1.5 shadow-xs">
+          <span class="material-symbols-outlined text-sm">calendar_month</span>
+          <span id="labelMesAtivo">Ano Todo (Consolidado)</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- Barra de Filtro por Mês (Janeiro a Dezembro + Ano Todo) -->
+    <div class="p-3 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-white/10 shadow-sm flex items-center gap-1.5 overflow-x-auto scrollbar-none">
+      <span class="text-xs font-bold text-slate-500 dark:text-gray-400 uppercase tracking-wider whitespace-nowrap mr-1 flex items-center gap-1">
+        <span class="material-symbols-outlined text-sm text-sky-500">date_range</span>
+        Mês:
+      </span>
+      <button onclick="filtrarMesFaturamento('TOTAL')" data-mes="TOTAL" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-[#1b365d] dark:bg-sky-500 text-white border border-[#142948] dark:border-sky-400 transition-all cursor-pointer shadow-xs whitespace-nowrap">
+        Ano Todo (12M)
+      </button>
+      <button onclick="filtrarMesFaturamento('JANEIRO')" data-mes="JANEIRO" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap">
+        Janeiro
+      </button>
+      <button onclick="filtrarMesFaturamento('FEVEREIRO')" data-mes="FEVEREIRO" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap">
+        Fevereiro
+      </button>
+      <button onclick="filtrarMesFaturamento('MARÇO')" data-mes="MARÇO" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap">
+        Março
+      </button>
+      <button onclick="filtrarMesFaturamento('ABRIL')" data-mes="ABRIL" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap">
+        Abril
+      </button>
+      <button onclick="filtrarMesFaturamento('MAIO')" data-mes="MAIO" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap">
+        Maio
+      </button>
+      <button onclick="filtrarMesFaturamento('JUNHO')" data-mes="JUNHO" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap">
+        Junho
+      </button>
+      <button onclick="filtrarMesFaturamento('JULHO')" data-mes="JULHO" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap">
+        Julho
+      </button>
+      <button onclick="filtrarMesFaturamento('AGOSTO')" data-mes="AGOSTO" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap">
+        Agosto
+      </button>
+      <button onclick="filtrarMesFaturamento('SETEMBRO')" data-mes="SETEMBRO" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap">
+        Setembro
+      </button>
+      <button onclick="filtrarMesFaturamento('OUTUBRO')" data-mes="OUTUBRO" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap">
+        Outubro
+      </button>
+      <button onclick="filtrarMesFaturamento('NOVEMBRO')" data-mes="NOVEMBRO" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap">
+        Novembro
+      </button>
+      <button onclick="filtrarMesFaturamento('DEZEMBRO')" data-mes="DEZEMBRO" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap">
+        Dezembro
+      </button>
+    </div>
+
+    <!-- Cards de KPI Resumo do Faturamento -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <!-- KPI 1: Previsto -->
+      <div class="bg-white dark:bg-slate-900/90 rounded-2xl p-4 border border-slate-200/90 dark:border-white/10 shadow-sm relative overflow-hidden group">
+        <div class="flex items-center justify-between text-slate-500 dark:text-gray-400 mb-1.5">
+          <span class="text-xs font-bold uppercase tracking-wider">Faturamento Previsto</span>
+          <div class="w-8 h-8 rounded-lg bg-sky-50 dark:bg-sky-500/20 text-sky-600 dark:text-sky-400 flex items-center justify-center">
+            <span class="material-symbols-outlined text-base">event_upcoming</span>
+          </div>
+        </div>
+        <div class="text-2xl font-black text-slate-900 dark:text-white tracking-tight tabular-nums" id="kpiFatPrevisto">
+          R$ 0,00
+        </div>
+        <p class="text-[11px] text-slate-400 dark:text-gray-400 mt-1">Previsão em contratos no filtro ativo</p>
+        <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-sky-500 to-transparent"></div>
+      </div>
+
+      <!-- KPI 2: Realizado -->
+      <div class="bg-white dark:bg-slate-900/90 rounded-2xl p-4 border border-slate-200/90 dark:border-white/10 shadow-sm relative overflow-hidden group">
+        <div class="flex items-center justify-between text-slate-500 dark:text-gray-400 mb-1.5">
+          <span class="text-xs font-bold uppercase tracking-wider">Faturamento Realizado</span>
+          <div class="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+            <span class="material-symbols-outlined text-base">verified</span>
+          </div>
+        </div>
+        <div class="text-2xl font-black text-emerald-600 dark:text-emerald-400 tracking-tight tabular-nums" id="kpiFatRealizado">
+          R$ 0,00
+        </div>
+        <p class="text-[11px] text-slate-400 dark:text-gray-400 mt-1">Notas e medições faturadas com sucesso</p>
+        <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-emerald-500 to-transparent"></div>
+      </div>
+
+      <!-- KPI 3: Desvio & Atingimento -->
+      <div class="bg-white dark:bg-slate-900/90 rounded-2xl p-4 border border-slate-200/90 dark:border-white/10 shadow-sm relative overflow-hidden group">
+        <div class="flex items-center justify-between text-slate-500 dark:text-gray-400 mb-1.5">
+          <span class="text-xs font-bold uppercase tracking-wider">Atingimento &amp; Desvio</span>
+          <div class="w-8 h-8 rounded-lg bg-indigo-50 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+            <span class="material-symbols-outlined text-base">trending_up</span>
+          </div>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span class="text-2xl font-black text-slate-900 dark:text-white tracking-tight tabular-nums" id="kpiFatPct">0,0%</span>
+          <span class="text-xs font-bold px-2 py-0.5 rounded-full tabular-nums border" id="kpiFatDesvioBadge">R$ 0,00</span>
+        </div>
+        <p class="text-[11px] text-slate-400 dark:text-gray-400 mt-1" id="kpiFatDesvioDesc">Desvio nominal vs previsão</p>
+        <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-indigo-500 to-transparent"></div>
+      </div>
+
+      <!-- KPI 4: Contratos Ativos -->
+      <div class="bg-white dark:bg-slate-900/90 rounded-2xl p-4 border border-slate-200/90 dark:border-white/10 shadow-sm relative overflow-hidden group">
+        <div class="flex items-center justify-between text-slate-500 dark:text-gray-400 mb-1.5">
+          <span class="text-xs font-bold uppercase tracking-wider">Contratos no Filtro</span>
+          <div class="w-8 h-8 rounded-lg bg-amber-50 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 flex items-center justify-center">
+            <span class="material-symbols-outlined text-base">folder_shared</span>
+          </div>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span class="text-2xl font-black text-slate-900 dark:text-white tracking-tight tabular-nums" id="kpiFatContratos">0</span>
+          <span class="text-xs font-semibold text-slate-500 dark:text-gray-400" id="kpiFatContratosTotal">de 44 contratos</span>
+        </div>
+        <p class="text-[11px] text-slate-400 dark:text-gray-400 mt-1">Conforme Líder, Área e Mês ativos</p>
+        <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-amber-500 to-transparent"></div>
+      </div>
+    </div>
+
+    <!-- Tabela Executiva de Faturamento por Projeto -->
+    <div class="overflow-x-auto rounded-2xl border border-slate-200/90 dark:border-white/10 bg-white dark:bg-slate-900 shadow-md">
+      <table class="w-full text-left border-collapse text-xs sm:text-sm">
+        <thead>
+          <tr class="bg-gradient-to-r from-[#00223a] via-[#003865] to-[#00223a] text-white font-black text-[11px] sm:text-xs uppercase tracking-wider">
+            <th class="py-3 px-4 text-left min-w-[220px]">PROJETO</th>
+            <th class="py-3 px-3 text-left">LÍDER</th>
+            <th class="py-3 px-3 text-left">ÁREA</th>
+            <th class="py-3 px-4 text-right min-w-[130px]">PREVISTO (R$)</th>
+            <th class="py-3 px-4 text-right min-w-[130px]">REALIZADO (R$)</th>
+            <th class="py-3 px-4 text-right min-w-[120px]">DESVIO (R$)</th>
+            <th class="py-3 px-4 text-left min-w-[170px]">ATINGIMENTO (%)</th>
+            <th class="py-3 px-3 text-center min-w-[120px]">SITUAÇÃO</th>
+          </tr>
+        </thead>
+        <tbody id="tabelaFaturamentoBody" class="divide-y divide-slate-100 dark:divide-white/5">
+        </tbody>
+        <tfoot>
+          <tr id="tabelaFaturamentoFooter" class="bg-slate-100 dark:bg-slate-800/90 border-t-2 border-slate-300 dark:border-white/10 font-black text-xs sm:text-sm">
+            <td class="py-3.5 px-4 text-slate-900 dark:text-white uppercase font-black" colspan="3">TOTAL CONSOLIDADO NO FILTRO</td>
+            <td class="py-3.5 px-4 text-right font-black text-slate-900 dark:text-white tabular-nums" id="fatTotPrevisto">R$ 0,00</td>
+            <td class="py-3.5 px-4 text-right font-black text-emerald-600 dark:text-emerald-400 tabular-nums" id="fatTotRealizado">R$ 0,00</td>
+            <td class="py-3.5 px-4 text-right font-black tabular-nums" id="fatTotDesvio">R$ 0,00</td>
+            <td class="py-3.5 px-4 text-left" id="fatTotPctCol">
+              <div class="flex items-center gap-2">
+                <span class="font-black tabular-nums text-slate-900 dark:text-white" id="fatTotPct">0,0%</span>
+                <div class="flex-1 max-w-[90px] h-2 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+                  <div id="fatTotBar" class="h-full bg-indigo-500 rounded-full" style="width: 0%"></div>
+                </div>
+              </div>
+            </td>
+            <td class="py-3.5 px-3 text-center" id="fatTotStatus">
+              <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-gray-300">
+                Consolidado
+              </span>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <!-- Mensagem quando nenhum projeto corresponder aos filtros -->
+      <div id="fatEmptyMsg" class="hidden p-8 text-center text-xs text-slate-500 dark:text-gray-400 flex flex-col items-center justify-center gap-2">
+        <span class="material-symbols-outlined text-3xl opacity-50">search_off</span>
+        <span class="font-bold text-sm text-slate-700 dark:text-gray-300">Nenhum projeto encontrado</span>
+        <span class="text-slate-400">Tente ajustar os filtros de Líder, Área, Mês ou termo de busca.</span>
+      </div>
+    </div>
+  </section>
+
   <!-- ──────── CONTROLE DE METAS POR ÁREA 2026 ──────── -->
   <section id="metas" class="scroll-mt-28 space-y-4 pt-6 border-t border-slate-200 dark:border-white/10">
     <div class="flex items-center justify-between flex-wrap gap-3">
@@ -5886,7 +6071,202 @@
         rankingBadge.className = 'px-3 py-1 rounded-lg text-xs font-extrabold bg-sky-500 text-white border border-sky-400 shadow-sm';
       }
     }
+
+    // 6. Atualizar Painel de Faturamento por Projeto com base nos filtros
+    atualizarPainelFaturamento();
   }
+
+  // ──────── LÓGICA DO PAINEL DE FATURAMENTO POR PROJETO ────────
+  const faturamentoProjetosData = [{"titulo": "Instrutores CNH", "lider": "Vinicius Souza", "area": "Outsourcing", "previsto": {"TOTAL": 2441866.89, "JANEIRO": 251573.78999999998, "FEVEREIRO": 243395.8, "MARÇO": 222923.05, "ABRIL": 222923.05, "MAIO": 202450.3, "JUNHO": 248460.5, "JULHO": 201251.97, "AGOSTO": 177761.12, "SETEMBRO": 175158.07, "OUTUBRO": 165323.08, "NOVEMBRO": 165323.08, "DEZEMBRO": 165323.08}, "realizado": {"TOTAL": 2406301.4700000007, "JANEIRO": 281877.36, "FEVEREIRO": 286245.72999999986, "MARÇO": 261138.46000000002, "ABRIL": 251637.02000000002, "MAIO": 255854.4499999999, "JUNHO": 267528.23, "JULHO": 216731.12, "AGOSTO": 205330.38999999998, "SETEMBRO": 207659.84999999998, "OUTUBRO": 172298.86, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Backoffice CNHI", "lider": "Vinicius Souza", "area": "Outsourcing", "previsto": {"TOTAL": 2354385.7600000002, "JANEIRO": 203208.47, "FEVEREIRO": 205754.40999999997, "MARÇO": 205754.40999999997, "ABRIL": 218117.91999999998, "MAIO": 197609.95, "JUNHO": 187868.53000000003, "JULHO": 174369.57, "AGOSTO": 200722.96999999997, "SETEMBRO": 200722.96999999997, "OUTUBRO": 202733.24, "NOVEMBRO": 178761.65999999997, "DEZEMBRO": 178761.65999999997}, "realizado": {"TOTAL": 2031913.2600000005, "JANEIRO": 207718.17999999996, "FEVEREIRO": 205754.40999999997, "MARÇO": 207988.65999999997, "ABRIL": 205963.32, "MAIO": 207523.85999999996, "JUNHO": 205546.58000000002, "JULHO": 181105.36, "AGOSTO": 206856.67999999996, "SETEMBRO": 200722.96999999997, "OUTUBRO": 202733.24, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Parts Academy", "lider": "Beatriz Picorelli", "area": "HRD", "previsto": {"TOTAL": 1079874.8800000013, "JANEIRO": 56119.380000000005, "FEVEREIRO": 41030.46, "MARÇO": 83907.96999999999, "ABRIL": 82993.48999999998, "MAIO": 96710.68999999996, "JUNHO": 111934, "JULHO": 73260.11, "AGOSTO": 91812.9, "SETEMBRO": 90372.09999999999, "OUTUBRO": 72082.5, "NOVEMBRO": 145769.75999999995, "DEZEMBRO": 133881.51999999996}, "realizado": {"TOTAL": 939685.32, "JANEIRO": 61340.909999999996, "FEVEREIRO": 40225.81, "MARÇO": 111913.40000000001, "ABRIL": 84870.69, "MAIO": 100073.16, "JUNHO": 142442.52, "JULHO": 73260.65, "AGOSTO": 123795.53000000001, "SETEMBRO": 120535.35, "OUTUBRO": 81227.3, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Tape Ruvicha", "lider": "Caroline Amieva", "area": "Business Solutions", "previsto": {"TOTAL": 416800.05999999994, "JANEIRO": 14729.45, "FEVEREIRO": 14325.93, "MARÇO": 13883.59, "ABRIL": 13638.88, "MAIO": 37015.2, "JUNHO": 36922.08, "JULHO": 37480.8, "AGOSTO": 39793.45, "SETEMBRO": 52252.67, "OUTUBRO": 52252.67, "NOVEMBRO": 52252.67, "DEZEMBRO": 52252.67}, "realizado": {"TOTAL": 322394.4799999999, "JANEIRO": 14908.77, "FEVEREIRO": 15480.470000000001, "MARÇO": 14666.77, "ABRIL": 14443.689999999999, "MAIO": 38682.329999999994, "JUNHO": 38760.76, "JULHO": 38272.61, "AGOSTO": 42027.18, "SETEMBRO": 52899.229999999996, "OUTUBRO": 52252.67, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Consultoria Pós-Vendas (POE) Porsche", "lider": "Fábio Canassa", "area": "Outsourcing", "previsto": {"TOTAL": 365400, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 40600, "MAIO": 40600, "JUNHO": 40600, "JULHO": 40600, "AGOSTO": 40600, "SETEMBRO": 40600, "OUTUBRO": 40600, "NOVEMBRO": 40600, "DEZEMBRO": 40600}, "realizado": {"TOTAL": 286959.54, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 40600, "MAIO": 40600, "JUNHO": 40600, "JULHO": 40600, "AGOSTO": 40600, "SETEMBRO": 40600, "OUTUBRO": 43359.54, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Backoffice CRM Case", "lider": "Vinicius Souza", "area": "Outsourcing", "previsto": {"TOTAL": 361293.72, "JANEIRO": 23551.79, "FEVEREIRO": 23560.31, "MARÇO": 23560.31, "ABRIL": 23560.31, "MAIO": 23560.31, "JUNHO": 23560.31, "JULHO": 36656.73, "AGOSTO": 36656.73, "SETEMBRO": 36656.73, "OUTUBRO": 36656.73, "NOVEMBRO": 36656.73, "DEZEMBRO": 36656.73}, "realizado": {"TOTAL": 311087.31, "JANEIRO": 24714.61, "FEVEREIRO": 26876.09, "MARÇO": 31310.800000000003, "ABRIL": 23560.31, "MAIO": 23560.31, "JUNHO": 27546.280000000002, "JULHO": 36656.73, "AGOSTO": 36656.73, "SETEMBRO": 43548.72, "OUTUBRO": 36656.73, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "DM - Back Office", "lider": "Jefferson Souza", "area": "Dealer Development", "previsto": {"TOTAL": 344053.8, "JANEIRO": 28671.6, "FEVEREIRO": 28671.6, "MARÇO": 28671.6, "ABRIL": 28671, "MAIO": 28671, "JUNHO": 28671, "JULHO": 28671, "AGOSTO": 28671, "SETEMBRO": 28671, "OUTUBRO": 28671, "NOVEMBRO": 28671, "DEZEMBRO": 28671}, "realizado": {"TOTAL": 286716, "JANEIRO": 28671.6, "FEVEREIRO": 28671.6, "MARÇO": 28671.6, "ABRIL": 28671.6, "MAIO": 28671.6, "JUNHO": 28671.6, "JULHO": 28671.6, "AGOSTO": 28671.6, "SETEMBRO": 28671.6, "OUTUBRO": 28671.6, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Instrutores Porsche", "lider": "Fábio Canassa", "area": "HRD", "previsto": {"TOTAL": 321600, "JANEIRO": 26800, "FEVEREIRO": 26800, "MARÇO": 26800, "ABRIL": 26800, "MAIO": 26800, "JUNHO": 26800, "JULHO": 26800, "AGOSTO": 26800, "SETEMBRO": 26800, "OUTUBRO": 26800, "NOVEMBRO": 26800, "DEZEMBRO": 26800}, "realizado": {"TOTAL": 271094.12, "JANEIRO": 26800, "FEVEREIRO": 26800, "MARÇO": 26800, "ABRIL": 26800, "MAIO": 29228.6, "JUNHO": 26800, "JULHO": 26800, "AGOSTO": 27465.52, "SETEMBRO": 26800, "OUTUBRO": 26800, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Serviços CNH", "lider": "Beatriz Picorelli", "area": "HRD", "previsto": {"TOTAL": 309551.48000000016, "JANEIRO": 5486.88, "FEVEREIRO": 19204.08, "MARÇO": 31092.319999999992, "ABRIL": 37493.68, "MAIO": 10059.279999999999, "JUNHO": 33835.759999999995, "JULHO": 20575.8, "AGOSTO": 58526.72, "SETEMBRO": 13717.2, "OUTUBRO": 39322.64, "NOVEMBRO": 23776.479999999996, "DEZEMBRO": 16460.64}, "realizado": {"TOTAL": 378618.85000000003, "JANEIRO": 8091.82, "FEVEREIRO": 27294.5, "MARÇO": 46953.82, "ABRIL": 59504.11, "MAIO": 23145.469999999998, "JUNHO": 36522.89, "JULHO": 31201.79, "AGOSTO": 80334.58, "SETEMBRO": 26247.230000000003, "OUTUBRO": 39322.64, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Treinamento Comercial", "lider": "Beatriz Picorelli", "area": "HRD", "previsto": {"TOTAL": 282972.61, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 13717.2, "ABRIL": 4572.4, "MAIO": 29617.550000000003, "JUNHO": 48996.3, "JULHO": 42594.94, "AGOSTO": 25219.82, "SETEMBRO": 26134.300000000003, "OUTUBRO": 30706.700000000004, "NOVEMBRO": 27048.780000000002, "DEZEMBRO": 34364.62}, "realizado": {"TOTAL": 249088.4, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 13717.5, "ABRIL": 4572.5, "MAIO": 32656.29, "JUNHO": 53893.34, "JULHO": 47249.450000000004, "AGOSTO": 39237.200000000004, "SETEMBRO": 31625.820000000003, "OUTUBRO": 26136.300000000003, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Dealer Standard Construcion", "lider": "Jefferson Souza", "area": "Dealer Development", "previsto": {"TOTAL": 279904, "JANEIRO": 21984, "FEVEREIRO": 21984, "MARÇO": 21984, "ABRIL": 21984, "MAIO": 21984, "JUNHO": 30984, "JULHO": 27000, "AGOSTO": 15000, "SETEMBRO": 22000, "OUTUBRO": 15000, "NOVEMBRO": 60000, "DEZEMBRO": 0}, "realizado": {"TOTAL": 219904, "JANEIRO": 21984, "FEVEREIRO": 21984, "MARÇO": 21984, "ABRIL": 21984, "MAIO": 21984, "JUNHO": 30984, "JULHO": 27000, "AGOSTO": 15000, "SETEMBRO": 22000, "OUTUBRO": 15000, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "IVECO Academy", "lider": "Beatriz Picorelli", "area": "HRD", "previsto": {"TOTAL": 278570.75, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 0, "JUNHO": 16990, "JULHO": 54245.54, "AGOSTO": 11827.76, "SETEMBRO": 116536.66, "OUTUBRO": 49990, "NOVEMBRO": 28980.79, "DEZEMBRO": 0}, "realizado": {"TOTAL": 257131.78, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 0, "JUNHO": 24151.74, "JULHO": 54245.54, "AGOSTO": 11827.76, "SETEMBRO": 116916.73999999999, "OUTUBRO": 49990, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "DDN - Business Assessment", "lider": "Jefferson Souza", "area": "Dealer Development", "previsto": {"TOTAL": 187000, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 0, "JUNHO": 0, "JULHO": 0, "AGOSTO": 137000, "SETEMBRO": 50000, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}, "realizado": {"TOTAL": 187000, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 0, "JUNHO": 0, "JULHO": 0, "AGOSTO": 137000, "SETEMBRO": 50000, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Backoffice Porsche", "lider": "Fábio Canassa", "area": "Outsourcing", "previsto": {"TOTAL": 165433.92, "JANEIRO": 13786.16, "FEVEREIRO": 13786.16, "MARÇO": 13786.16, "ABRIL": 13786.16, "MAIO": 13786.16, "JUNHO": 13786.16, "JULHO": 13786.16, "AGOSTO": 13786.16, "SETEMBRO": 13786.16, "OUTUBRO": 13786.16, "NOVEMBRO": 13786.16, "DEZEMBRO": 13786.16}, "realizado": {"TOTAL": 138071.04, "JANEIRO": 13786.16, "FEVEREIRO": 13786.16, "MARÇO": 13786.16, "ABRIL": 13786.16, "MAIO": 13786.16, "JUNHO": 13786.16, "JULHO": 13786.16, "AGOSTO": 13786.16, "SETEMBRO": 13786.16, "OUTUBRO": 13995.6, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Projeto Especial 01", "lider": "Beatriz Picorelli", "area": "HRD", "previsto": {"TOTAL": 155461.6, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 12802.72, "JUNHO": 14631.68, "JULHO": 18289.6, "AGOSTO": 21947.52, "SETEMBRO": 21947.52, "OUTUBRO": 21947.52, "NOVEMBRO": 21947.52, "DEZEMBRO": 21947.52}, "realizado": {"TOTAL": 111567.56000000001, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 12803, "JUNHO": 14632, "JULHO": 18290, "AGOSTO": 21947.52, "SETEMBRO": 21947.52, "OUTUBRO": 21947.52, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "DM - Negócios Br", "lider": "Jefferson Souza", "area": "Dealer Development", "previsto": {"TOTAL": 142128, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 0, "JUNHO": 0, "JULHO": 10944, "AGOSTO": 0, "SETEMBRO": 0, "OUTUBRO": 10944, "NOVEMBRO": 73440, "DEZEMBRO": 46800}, "realizado": {"TOTAL": 21888, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 0, "JUNHO": 0, "JULHO": 10944, "AGOSTO": 0, "SETEMBRO": 0, "OUTUBRO": 10944, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Fortrac | Gestão Organizacional", "lider": "Caroline Amieva", "area": "Business Solutions", "previsto": {"TOTAL": 117600, "JANEIRO": 9800, "FEVEREIRO": 9800, "MARÇO": 9800, "ABRIL": 9800, "MAIO": 9800, "JUNHO": 9800, "JULHO": 9800, "AGOSTO": 9800, "SETEMBRO": 9800, "OUTUBRO": 9800, "NOVEMBRO": 9800, "DEZEMBRO": 9800}, "realizado": {"TOTAL": 98000, "JANEIRO": 9800, "FEVEREIRO": 9800, "MARÇO": 9800, "ABRIL": 9800, "MAIO": 9800, "JUNHO": 9800, "JULHO": 9800, "AGOSTO": 9800, "SETEMBRO": 9800, "OUTUBRO": 9800, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Central Irrigação", "lider": "Caroline Amieva", "area": "Business Solutions", "previsto": {"TOTAL": 112000, "JANEIRO": 0, "FEVEREIRO": 16000, "MARÇO": 16000, "ABRIL": 16000, "MAIO": 16000, "JUNHO": 16000, "JULHO": 16000, "AGOSTO": 16000, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}, "realizado": {"TOTAL": 122181.57, "JANEIRO": 2719.57, "FEVEREIRO": 17462.67, "MARÇO": 17785.79, "ABRIL": 17463.42, "MAIO": 17313.02, "JUNHO": 17437.1, "JULHO": 16000, "AGOSTO": 16000, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Parecis | Gestão Organizacional", "lider": "Caroline Amieva", "area": "Business Solutions", "previsto": {"TOTAL": 112000, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 0, "JUNHO": 16000, "JULHO": 16000, "AGOSTO": 16000, "SETEMBRO": 16000, "OUTUBRO": 16000, "NOVEMBRO": 16000, "DEZEMBRO": 16000}, "realizado": {"TOTAL": 80000, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 0, "JUNHO": 16000, "JULHO": 16000, "AGOSTO": 16000, "SETEMBRO": 16000, "OUTUBRO": 16000, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Tratoron | Gestão Comercial", "lider": "Caroline Amieva", "area": "Business Solutions", "previsto": {"TOTAL": 96425, "JANEIRO": 10150, "FEVEREIRO": 10150, "MARÇO": 10150, "ABRIL": 10150, "MAIO": 10150, "JUNHO": 10150, "JULHO": 10150, "AGOSTO": 5075, "SETEMBRO": 5075, "OUTUBRO": 5075, "NOVEMBRO": 5075, "DEZEMBRO": 5075}, "realizado": {"TOTAL": 86275, "JANEIRO": 10150, "FEVEREIRO": 10150, "MARÇO": 10150, "ABRIL": 10150, "MAIO": 10150, "JUNHO": 10150, "JULHO": 10150, "AGOSTO": 5075, "SETEMBRO": 5075, "OUTUBRO": 5075, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Stellantis | Trainning", "lider": "Caroline Amieva", "area": "Business Solutions", "previsto": {"TOTAL": 75550, "JANEIRO": 4660, "FEVEREIRO": 4660, "MARÇO": 29660, "ABRIL": 4660, "MAIO": 4660, "JUNHO": 1562.5, "JULHO": 6875, "AGOSTO": 2625, "SETEMBRO": 625, "OUTUBRO": 9625, "NOVEMBRO": 5937.5, "DEZEMBRO": 0}, "realizado": {"TOTAL": 71179.43, "JANEIRO": 4660, "FEVEREIRO": 29660, "MARÇO": 5862.7, "ABRIL": 4660, "MAIO": 4660, "JUNHO": 1562.5, "JULHO": 6875, "AGOSTO": 2989.23, "SETEMBRO": 625, "OUTUBRO": 9625, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Quality Shymphony IVECO", "lider": "Beatriz Picorelli", "area": "HRD", "previsto": {"TOTAL": 63990, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 63990, "MAIO": 0, "JUNHO": 0, "JULHO": 0, "AGOSTO": 0, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}, "realizado": {"TOTAL": 69153.35, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 69153.35, "MAIO": 0, "JUNHO": 0, "JULHO": 0, "AGOSTO": 0, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Grupo Rio | Business Review", "lider": "Caroline Amieva", "area": "Business Solutions", "previsto": {"TOTAL": 63600, "JANEIRO": 15900, "FEVEREIRO": 15900, "MARÇO": 15900, "ABRIL": 15900, "MAIO": 0, "JUNHO": 0, "JULHO": 0, "AGOSTO": 0, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}, "realizado": {"TOTAL": 93769.51, "JANEIRO": 24422.72, "FEVEREIRO": 20395.98, "MARÇO": 25556.37, "ABRIL": 23394.44, "MAIO": 0, "JUNHO": 0, "JULHO": 0, "AGOSTO": 0, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "NH Comercial Construction", "lider": "Beatriz Picorelli", "area": "HRD", "previsto": {"TOTAL": 63306.08, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 0, "JUNHO": 0, "JULHO": 18316.08, "AGOSTO": 0, "SETEMBRO": 44990, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}, "realizado": {"TOTAL": 63775.67, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 0, "JUNHO": 0, "JULHO": 18785.670000000002, "AGOSTO": 0, "SETEMBRO": 44990, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Ditrasa | Governança NHCE", "lider": "Caroline Amieva", "area": "Business Solutions", "previsto": {"TOTAL": 62299.990000000005, "JANEIRO": 8960, "FEVEREIRO": 2500, "MARÇO": 8960, "ABRIL": 8959.99, "MAIO": 17920, "JUNHO": 0, "JULHO": 2500, "AGOSTO": 2500, "SETEMBRO": 2500, "OUTUBRO": 2500, "NOVEMBRO": 2500, "DEZEMBRO": 2500}, "realizado": {"TOTAL": 75476.35, "JANEIRO": 11272.67, "FEVEREIRO": 8500.21, "MARÇO": 8960, "ABRIL": 11443.43, "MAIO": 23307.059999999998, "JUNHO": 0, "JULHO": 2500, "AGOSTO": 4492.98, "SETEMBRO": 2500, "OUTUBRO": 2500, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Excelência em Peças IVECO", "lider": "Beatriz Picorelli", "area": "HRD", "previsto": {"TOTAL": 55957.06, "JANEIRO": 39453.31, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 3260, "JUNHO": 0, "JULHO": 0, "AGOSTO": 13243.75, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}, "realizado": {"TOTAL": 60901.759999999995, "JANEIRO": 39453.31, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 8204.7, "JUNHO": 0, "JULHO": 0, "AGOSTO": 13243.75, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Garantia CNH", "lider": "Beatriz Picorelli", "area": "HRD", "previsto": {"TOTAL": 43895.159999999996, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 14631.68, "ABRIL": 0, "MAIO": 21947.52, "JUNHO": 5487, "JULHO": 1828.96, "AGOSTO": 0, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}, "realizado": {"TOTAL": 43896, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 14632, "ABRIL": 0, "MAIO": 21948, "JUNHO": 5487, "JULHO": 1829, "AGOSTO": 0, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Dealernet Flow", "lider": "Caroline Amieva", "area": "Business Solutions", "previsto": {"TOTAL": 42500, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 0, "JUNHO": 0, "JULHO": 17000, "AGOSTO": 12750, "SETEMBRO": 12750, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}, "realizado": {"TOTAL": 42721.5, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 0, "JUNHO": 0, "JULHO": 17000, "AGOSTO": 12971.5, "SETEMBRO": 12750, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Palestra Paccar Parts", "lider": "Caroline Amieva", "area": "Business Solutions", "previsto": {"TOTAL": 39000, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 39000, "JUNHO": 0, "JULHO": 0, "AGOSTO": 0, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}, "realizado": {"TOTAL": 39000, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 39000, "JUNHO": 0, "JULHO": 0, "AGOSTO": 0, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "NNOS Academy", "lider": "Leonardo Campos", "area": "Innovation", "previsto": {"TOTAL": 36216.45, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 4726.5, "MAIO": 3044.5, "JUNHO": 6137, "JULHO": 7022.6, "AGOSTO": 4145.8, "SETEMBRO": 5575, "OUTUBRO": 5565.05, "NOVEMBRO": 0, "DEZEMBRO": 0}, "realizado": {"TOTAL": 37024.1, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 4726.5, "MAIO": 3044.5, "JUNHO": 6137, "JULHO": 7022.6, "AGOSTO": 4145.8, "SETEMBRO": 5575, "OUTUBRO": 6372.700000000001, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "CPSL IVECO LATAM", "lider": "Beatriz Picorelli", "area": "HRD", "previsto": {"TOTAL": 33980, "JANEIRO": 0, "FEVEREIRO": 33980, "MARÇO": 0, "ABRIL": 0, "MAIO": 0, "JUNHO": 0, "JULHO": 0, "AGOSTO": 0, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}, "realizado": {"TOTAL": 43868.95, "JANEIRO": 0, "FEVEREIRO": 33980, "MARÇO": 9888.95, "ABRIL": 0, "MAIO": 0, "JUNHO": 0, "JULHO": 0, "AGOSTO": 0, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Nocarvel | Auditoria Caixa Dagua", "lider": "Caroline Amieva", "area": "Business Solutions", "previsto": {"TOTAL": 31500, "JANEIRO": 0, "FEVEREIRO": 15500, "MARÇO": 0, "ABRIL": 16000, "MAIO": 0, "JUNHO": 0, "JULHO": 0, "AGOSTO": 0, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}, "realizado": {"TOTAL": 33368.38, "JANEIRO": 0, "FEVEREIRO": 15000, "MARÇO": 0, "ABRIL": 16000, "MAIO": 0, "JUNHO": 0, "JULHO": 0, "AGOSTO": 0, "SETEMBRO": 2368.38, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "CNHI Técnico Construction", "lider": "Beatriz Picorelli", "area": "HRD", "previsto": {"TOTAL": 24489, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 10884, "MAIO": 2721, "JUNHO": 0, "JULHO": 5442, "AGOSTO": 5442, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}, "realizado": {"TOTAL": 24489, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 10884, "MAIO": 2721, "JUNHO": 0, "JULHO": 5442, "AGOSTO": 5442, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Viamondo | Produtividade Oficina", "lider": "Caroline Amieva", "area": "Business Solutions", "previsto": {"TOTAL": 19000, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 0, "JUNHO": 0, "JULHO": 0, "AGOSTO": 11400, "SETEMBRO": 7600, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}, "realizado": {"TOTAL": 22379.5, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 0, "JUNHO": 0, "JULHO": 0, "AGOSTO": 14779.5, "SETEMBRO": 7600, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Case Comercial Construction", "lider": "Beatriz Picorelli", "area": "HRD", "previsto": {"TOTAL": 14789.699999999999, "JANEIRO": 5919.07, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 8870.63, "MAIO": 0, "JUNHO": 0, "JULHO": 0, "AGOSTO": 0, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}, "realizado": {"TOTAL": 14789.88, "JANEIRO": 5919.07, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 8870.81, "MAIO": 0, "JUNHO": 0, "JULHO": 0, "AGOSTO": 0, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Gestão do Momento", "lider": "Beatriz Picorelli", "area": "HRD", "previsto": {"TOTAL": 12450, "JANEIRO": 9960, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 2490, "JUNHO": 0, "JULHO": 0, "AGOSTO": 0, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}, "realizado": {"TOTAL": 12450, "JANEIRO": 9960, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 2490, "JUNHO": 0, "JULHO": 0, "AGOSTO": 0, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Excelência em ServiçOs IVECO", "lider": "Beatriz Picorelli", "area": "HRD", "previsto": {"TOTAL": 10442.57, "JANEIRO": 8150, "FEVEREIRO": 0, "MARÇO": 2292.57, "ABRIL": 0, "MAIO": 0, "JUNHO": 0, "JULHO": 0, "AGOSTO": 0, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}, "realizado": {"TOTAL": 10442.57, "JANEIRO": 8150, "FEVEREIRO": 0, "MARÇO": 2292.57, "ABRIL": 0, "MAIO": 0, "JUNHO": 0, "JULHO": 0, "AGOSTO": 0, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Workshop Curitiba", "lider": "Beatriz Picorelli", "area": "HRD", "previsto": {"TOTAL": 10000, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 10000, "MAIO": 0, "JUNHO": 0, "JULHO": 0, "AGOSTO": 0, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}, "realizado": {"TOTAL": 12984.83, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 12984.83, "MAIO": 0, "JUNHO": 0, "JULHO": 0, "AGOSTO": 0, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Auditoria Estoque - Dinauto", "lider": "Caroline Amieva", "area": "Business Solutions", "previsto": {"TOTAL": 9000, "JANEIRO": 3000, "FEVEREIRO": 0, "MARÇO": 3000, "ABRIL": 0, "MAIO": 0, "JUNHO": 0, "JULHO": 3000, "AGOSTO": 0, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}, "realizado": {"TOTAL": 9000, "JANEIRO": 0, "FEVEREIRO": 3000, "MARÇO": 3000, "ABRIL": 0, "MAIO": 0, "JUNHO": 0, "JULHO": 3000, "AGOSTO": 0, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Campus BH (Univ. Veiga de Almeida)", "lider": "Joice Lage", "area": "Educação", "previsto": {"TOTAL": 4888.48, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 759.97, "MAIO": 423.65, "JUNHO": 444.31, "JULHO": 595.92, "AGOSTO": 877.77, "SETEMBRO": 779.21, "OUTUBRO": 1007.65, "NOVEMBRO": 0, "DEZEMBRO": 0}, "realizado": {"TOTAL": 3883.2, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 759.97, "MAIO": 426.02, "JUNHO": 444.31, "JULHO": 595.92, "AGOSTO": 877.77, "SETEMBRO": 779.21, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Automação Essencialidade", "lider": "Caroline Amieva", "area": "Business Solutions", "previsto": {"TOTAL": 1998.8, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 0, "JUNHO": 0, "JULHO": 0, "AGOSTO": 0, "SETEMBRO": 1998.8, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}, "realizado": {"TOTAL": 1998.8, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 0, "JUNHO": 0, "JULHO": 0, "AGOSTO": 0, "SETEMBRO": 1998.8, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "CRM IVECO", "lider": "Beatriz Picorelli", "area": "HRD", "previsto": {"TOTAL": 0, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 0, "JUNHO": 0, "JULHO": 0, "AGOSTO": 0, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}, "realizado": {"TOTAL": 0, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 0, "JUNHO": 0, "JULHO": 0, "AGOSTO": 0, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Agro Divel | Gestão Organizacional", "lider": "Caroline Amieva", "area": "Business Solutions", "previsto": {"TOTAL": 0, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 0, "JUNHO": 0, "JULHO": 0, "AGOSTO": 0, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}, "realizado": {"TOTAL": 0, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 0, "JUNHO": 0, "JULHO": 0, "AGOSTO": 0, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}}, {"titulo": "Xingu | Gestão Organizacional", "lider": "Caroline Amieva", "area": "Business Solutions", "previsto": {"TOTAL": 0, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 0, "JUNHO": 0, "JULHO": 0, "AGOSTO": 0, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}, "realizado": {"TOTAL": 0, "JANEIRO": 0, "FEVEREIRO": 0, "MARÇO": 0, "ABRIL": 0, "MAIO": 0, "JUNHO": 0, "JULHO": 0, "AGOSTO": 0, "SETEMBRO": 0, "OUTUBRO": 0, "NOVEMBRO": 0, "DEZEMBRO": 0}}];
+  let currentMesFaturamento = 'TOTAL';
+
+  function formatBRL(val) {
+    if (val === null || val === undefined || isNaN(val)) return 'R$ 0,00';
+    const neg = val < 0;
+    const absVal = Math.abs(val);
+    const formatted = absVal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return (neg ? '-R$ ' : 'R$ ') + formatted;
+  }
+
+  function filtrarMesFaturamento(mes) {
+    currentMesFaturamento = mes;
+    document.querySelectorAll('.mes-filter-btn').forEach(btn => {
+      const m = btn.getAttribute('data-mes');
+      if (m === currentMesFaturamento) {
+        btn.className = 'mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-[#1b365d] dark:bg-sky-500 text-white border border-[#142948] dark:border-sky-400 transition-all cursor-pointer shadow-xs whitespace-nowrap';
+      } else {
+        btn.className = 'mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap';
+      }
+    });
+
+    const labelEl = document.getElementById('labelMesAtivo');
+    if (labelEl) {
+      labelEl.textContent = (mes === 'TOTAL') ? 'Ano Todo (Consolidado)' : (mes.charAt(0) + mes.slice(1).toLowerCase());
+    }
+
+    atualizarPainelFaturamento();
+  }
+
+  function atualizarPainelFaturamento() {
+    const q = (document.getElementById('searchProject')?.value || '').toLowerCase().trim();
+    const isTodosLider = (currentLider === 'todos');
+    const isTodasArea = (currentArea === 'todas');
+
+    const tbody = document.getElementById('tabelaFaturamentoBody');
+    const emptyMsg = document.getElementById('fatEmptyMsg');
+    const footerEl = document.getElementById('tabelaFaturamentoFooter');
+    if (!tbody) return;
+
+    let totPrev = 0;
+    let totReal = 0;
+    let visiveis = 0;
+    let rowsHtml = '';
+
+    const areaBadges = {
+      'hrd': 'bg-purple-100 dark:bg-purple-950/60 text-purple-800 dark:text-purple-300 border-purple-200 dark:border-purple-800/40',
+      'business solutions': 'bg-pink-100 dark:bg-pink-950/60 text-pink-800 dark:text-pink-300 border-pink-200 dark:border-pink-800/40',
+      'dealer development': 'bg-blue-100 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300 border-blue-200 dark:border-blue-800/40',
+      'outsourcing': 'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/40',
+      'innovation': 'bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800/40',
+      'educação': 'bg-rose-100 dark:bg-rose-950/60 text-rose-800 dark:text-rose-300 border-rose-200 dark:border-rose-800/40'
+    };
+
+    faturamentoProjetosData.forEach(p => {
+      const pLider = (p.lider || '').toLowerCase();
+      const pArea = (p.area || '').toLowerCase();
+      const pTitulo = (p.titulo || '').toLowerCase();
+
+      const matchLider = isTodosLider || (pLider === currentLider);
+      const matchArea = isTodasArea || (pArea === currentArea);
+      const matchSearch = !q || pTitulo.includes(q) || pLider.includes(q) || pArea.includes(q);
+
+      if (!matchLider || !matchArea || !matchSearch) return;
+
+      const prev = (p.previsto && p.previsto[currentMesFaturamento]) || 0;
+      const real = (p.realizado && p.realizado[currentMesFaturamento]) || 0;
+      const desvio = real - prev;
+      const pct = (prev > 0) ? (real / prev * 100) : ((real > 0) ? 100 : 0);
+
+      totPrev += prev;
+      totReal += real;
+      visiveis++;
+
+      let statusBadge = '';
+      if (prev === 0 && real === 0) {
+        statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-500 border border-slate-200 dark:border-slate-700">Sem Movimento</span>';
+      } else if (prev === 0 && real > 0) {
+        statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-sky-100 dark:bg-sky-950/60 text-sky-800 dark:text-sky-300 border border-sky-300">Faturado Extra</span>';
+      } else if (real === 0 && prev > 0) {
+        statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-300">Aguardando NF</span>';
+      } else if (pct >= 100) {
+        statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-300">Meta Superada</span>';
+      } else if (pct >= 85) {
+        statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300 border border-blue-300">Em Linha</span>';
+      } else {
+        statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 dark:bg-rose-950/60 text-rose-800 dark:text-rose-300 border border-rose-300">Abaixo Previsto</span>';
+      }
+
+      const badgeCls = areaBadges[pArea] || 'bg-slate-100 text-slate-700 border-slate-300';
+      const desvioCor = (desvio > 0.01) ? 'text-emerald-600 dark:text-emerald-400 font-bold' : ((desvio < -0.01) ? 'text-rose-600 dark:text-rose-400 font-bold' : 'text-slate-500 dark:text-gray-400 font-medium');
+      const barCor = (pct >= 100) ? 'bg-emerald-500' : ((pct >= 85) ? 'bg-sky-500' : 'bg-amber-500');
+
+      rowsHtml += `
+        <tr class="hover:bg-slate-50/80 dark:hover:bg-white/5 transition-colors">
+          <td class="py-3 px-4 font-bold text-slate-900 dark:text-white">
+            <span>${p.titulo}</span>
+          </td>
+          <td class="py-3 px-3 text-slate-700 dark:text-gray-300 font-medium whitespace-nowrap">
+            <span class="flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-sky-500"></span>
+              ${p.lider}
+            </span>
+          </td>
+          <td class="py-3 px-3 whitespace-nowrap">
+            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold border ${badgeCls}">
+              ${p.area}
+            </span>
+          </td>
+          <td class="py-3 px-4 text-right tabular-nums text-slate-700 dark:text-gray-300 font-semibold whitespace-nowrap">
+            ${formatBRL(prev)}
+          </td>
+          <td class="py-3 px-4 text-right tabular-nums font-bold text-emerald-600 dark:text-emerald-400 whitespace-nowrap">
+            ${formatBRL(real)}
+          </td>
+          <td class="py-3 px-4 text-right tabular-nums whitespace-nowrap ${desvioCor}">
+            ${desvio > 0 ? '+' : ''}${formatBRL(desvio)}
+          </td>
+          <td class="py-3 px-4 whitespace-nowrap">
+            <div class="flex items-center gap-2">
+              <span class="font-bold tabular-nums text-xs text-slate-900 dark:text-white w-12 text-right">
+                ${pct.toFixed(1).replace('.', ',')}%
+              </span>
+              <div class="w-20 h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden border border-slate-200 dark:border-white/10">
+                <div class="h-full rounded-full ${barCor}" style="width: ${Math.min(pct, 100)}%"></div>
+              </div>
+            </div>
+          </td>
+          <td class="py-3 px-3 text-center whitespace-nowrap">
+            ${statusBadge}
+          </td>
+        </tr>
+      `;
+    });
+
+    tbody.innerHTML = rowsHtml;
+
+    // Totais
+    const desvioGlobal = totReal - totPrev;
+    const pctGlobal = (totPrev > 0) ? (totReal / totPrev * 100) : ((totReal > 0) ? 100 : 0);
+
+    // Cards KPI
+    const kpiPrev = document.getElementById('kpiFatPrevisto');
+    const kpiReal = document.getElementById('kpiFatRealizado');
+    const kpiPct = document.getElementById('kpiFatPct');
+    const kpiDesvioBadge = document.getElementById('kpiFatDesvioBadge');
+    const kpiContratos = document.getElementById('kpiFatContratos');
+
+    if (kpiPrev) kpiPrev.textContent = formatBRL(totPrev);
+    if (kpiReal) kpiReal.textContent = formatBRL(totReal);
+    if (kpiPct) kpiPct.textContent = `${pctGlobal.toFixed(1).replace('.', ',')}%`;
+    if (kpiDesvioBadge) {
+      kpiDesvioBadge.textContent = `${desvioGlobal >= 0 ? '+' : ''}${formatBRL(desvioGlobal)}`;
+      if (desvioGlobal >= 0) {
+        kpiDesvioBadge.className = 'text-xs font-bold px-2 py-0.5 rounded-full tabular-nums border bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border-emerald-300';
+      } else {
+        kpiDesvioBadge.className = 'text-xs font-bold px-2 py-0.5 rounded-full tabular-nums border bg-rose-100 dark:bg-rose-950/60 text-rose-800 dark:text-rose-300 border-rose-300';
+      }
+    }
+    if (kpiContratos) kpiContratos.textContent = visiveis;
+
+    // Footer da Tabela
+    const fPrev = document.getElementById('fatTotPrevisto');
+    const fReal = document.getElementById('fatTotRealizado');
+    const fDesvio = document.getElementById('fatTotDesvio');
+    const fPct = document.getElementById('fatTotPct');
+    const fBar = document.getElementById('fatTotBar');
+
+    if (fPrev) fPrev.textContent = formatBRL(totPrev);
+    if (fReal) fReal.textContent = formatBRL(totReal);
+    if (fDesvio) {
+      fDesvio.textContent = `${desvioGlobal >= 0 ? '+' : ''}${formatBRL(desvioGlobal)}`;
+      fDesvio.className = `py-3.5 px-4 text-right font-black tabular-nums ${desvioGlobal >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`;
+    }
+    if (fPct) fPct.textContent = `${pctGlobal.toFixed(1).replace('.', ',')}%`;
+    if (fBar) {
+      fBar.style.width = `${Math.min(pctGlobal, 100)}%`;
+      fBar.className = `h-full rounded-full ${pctGlobal >= 100 ? 'bg-emerald-500' : (pctGlobal >= 85 ? 'bg-sky-500' : 'bg-amber-500')}`;
+    }
+
+    if (footerEl) {
+      footerEl.style.display = visiveis > 0 ? '' : 'none';
+    }
+    if (emptyMsg) {
+      emptyMsg.classList.toggle('hidden', visiveis > 0);
+    }
+  }
+
+  // Inicialização do painel de faturamento
+  atualizarPainelFaturamento();
 </script>
 
 </body>
