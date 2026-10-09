@@ -339,11 +339,15 @@ async function run() {
         lider: l.nome,
         area: p.area,
         previsto: { TOTAL: 0 },
-        realizado: { TOTAL: 0 }
+        realizado: { TOTAL: 0 },
+        aberto: { TOTAL: 0 },
+        atrasado: { TOTAL: 0 }
       };
       MESES.forEach(m => {
         pObj.previsto[m] = 0;
         pObj.realizado[m] = 0;
+        pObj.aberto[m] = 0;
+        pObj.atrasado[m] = 0;
       });
       faturamentoProjetos.push(pObj);
       projNormMap.set(normStr(p.titulo), pObj);
@@ -380,7 +384,7 @@ async function run() {
     console.warn('[AVISO] Falha ao extrair Detalhado - CONSOLIDADO:', errCons.message);
   }
 
-  // B. Buscar Realizado de FATURAMENTO
+  // B. Buscar Realizado de FATURAMENTO (Excluindo LOGÍSTICA e MATERIAL, calculando EM ABERTO e ATRASADO)
   try {
     const urlFat = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/'FATURAMENTO'!A5:N713`;
     const resFat = await fetch(urlFat, { headers: { authorization: `Bearer ${t}` } });
@@ -391,8 +395,19 @@ async function run() {
       const r = rowsFat[i];
       const mesRaw = (r[0] || '').trim().toUpperCase();
       const rawProj = (r[2] || '').trim();
+      const perfil = (r[3] || '').trim().toUpperCase();
       const val = parseNum(r[5]);
+      const status = (r[7] || '').trim();
+      const diasStr = (r[10] || '').trim();
+      const dias = parseInt(diasStr) || 0;
+      const pagtoStr = (r[11] || '').trim().toUpperCase();
+
       if (!rawProj || val <= 0) continue;
+
+      // REGRA: Não entra no cálculo de faturamento linhas com PERFIL LOGÍSTICA E MATERIAL
+      if (perfil.includes('LOGÍSTICA') || perfil.includes('LOGISTICA') || perfil.includes('MATERIAL')) {
+        continue;
+      }
 
       const mesNome = MESES_MAP[mesRaw];
       if (!mesNome) continue;
@@ -401,6 +416,19 @@ async function run() {
       if (pObj) {
         pObj.realizado[mesNome] = (pObj.realizado[mesNome] || 0) + val;
         pObj.realizado.TOTAL += val;
+
+        // Classificação: Em Aberto vs Atrasado
+        const isNaoPago = (status.toLowerCase() !== 'pago');
+        if (isNaoPago) {
+          const isAtrasado = dias > 0 || pagtoStr.includes('ATRASO');
+          if (isAtrasado) {
+            pObj.atrasado[mesNome] = (pObj.atrasado[mesNome] || 0) + val;
+            pObj.atrasado.TOTAL += val;
+          } else {
+            pObj.aberto[mesNome] = (pObj.aberto[mesNome] || 0) + val;
+            pObj.aberto.TOTAL += val;
+          }
+        }
       }
     }
   } catch (errFat) {

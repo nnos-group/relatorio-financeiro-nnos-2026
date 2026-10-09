@@ -1144,27 +1144,23 @@ def sync_lider():
           <h2 class="text-xl sm:text-2xl font-black tracking-tight text-slate-900 dark:text-white uppercase flex items-center gap-2 flex-wrap">
             FATURAMENTO POR PROJETO <span class="text-sky-600 dark:text-sky-400 font-black">| PREVISTO VS. REALIZADO</span>
           </h2>
-          <p class="text-xs text-slate-500 dark:text-gray-400 mt-0.5">Cruzamento analítico entre a Previsão (Detalhado - CONSOLIDADO) e a Emissão Realizada (FATURAMENTO) por contrato corporativo.</p>
         </div>
       </div>
       <div class="flex items-center gap-2">
         <span class="px-3.5 py-1.5 rounded-full text-xs font-extrabold bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-500/30 flex items-center gap-1.5 shadow-xs">
           <span class="material-symbols-outlined text-sm">calendar_month</span>
-          <span id="labelMesAtivo">Ano Todo (Consolidado)</span>
+          <span id="labelMesAtivo">Mês: Janeiro</span>
         </span>
       </div>
     </div>
 
-    <!-- Barra de Filtro por Mês (Janeiro a Dezembro + Ano Todo) -->
+    <!-- Barra de Filtro por Mês (Janeiro a Dezembro) -->
     <div class="p-3 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-white/10 shadow-sm flex items-center gap-1.5 overflow-x-auto scrollbar-none">
       <span class="text-xs font-bold text-slate-500 dark:text-gray-400 uppercase tracking-wider whitespace-nowrap mr-1 flex items-center gap-1">
         <span class="material-symbols-outlined text-sm text-sky-500">date_range</span>
         Mês:
       </span>
-      <button onclick="filtrarMesFaturamento('TOTAL')" data-mes="TOTAL" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-[#1b365d] dark:bg-sky-500 text-white border border-[#142948] dark:border-sky-400 transition-all cursor-pointer shadow-xs whitespace-nowrap">
-        Ano Todo (12M)
-      </button>
-      <button onclick="filtrarMesFaturamento('JANEIRO')" data-mes="JANEIRO" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap">
+      <button onclick="filtrarMesFaturamento('JANEIRO')" data-mes="JANEIRO" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-[#1b365d] dark:bg-sky-500 text-white border border-[#142948] dark:border-sky-400 transition-all cursor-pointer shadow-xs whitespace-nowrap">
         Janeiro
       </button>
       <button onclick="filtrarMesFaturamento('FEVEREIRO')" data-mes="FEVEREIRO" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap">
@@ -1234,10 +1230,10 @@ def sync_lider():
         <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-emerald-500 to-transparent"></div>
       </div>
 
-      <!-- KPI 3: Desvio & Atingimento -->
+      <!-- KPI 3: Atingimento & Diferença -->
       <div class="bg-white dark:bg-slate-900/90 rounded-2xl p-4 border border-slate-200/90 dark:border-white/10 shadow-sm relative overflow-hidden group">
         <div class="flex items-center justify-between text-slate-500 dark:text-gray-400 mb-1.5">
-          <span class="text-xs font-bold uppercase tracking-wider">Atingimento &amp; Desvio</span>
+          <span class="text-xs font-bold uppercase tracking-wider">Atingimento &amp; Diferença</span>
           <div class="w-8 h-8 rounded-lg bg-indigo-50 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
             <span class="material-symbols-outlined text-base">trending_up</span>
           </div>
@@ -1246,7 +1242,7 @@ def sync_lider():
           <span class="text-2xl font-black text-slate-900 dark:text-white tracking-tight tabular-nums" id="kpiFatPct">0,0%</span>
           <span class="text-xs font-bold px-2 py-0.5 rounded-full tabular-nums border" id="kpiFatDesvioBadge">R$ 0,00</span>
         </div>
-        <p class="text-[11px] text-slate-400 dark:text-gray-400 mt-1" id="kpiFatDesvioDesc">Desvio nominal vs previsão</p>
+        <p class="text-[11px] text-slate-400 dark:text-gray-400 mt-1" id="kpiFatDesvioDesc">Diferença nominal vs previsão</p>
         <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-indigo-500 to-transparent"></div>
       </div>
 
@@ -1277,32 +1273,21 @@ def sync_lider():
             <th class="py-3 px-3 text-left">ÁREA</th>
             <th class="py-3 px-4 text-right min-w-[130px]">PREVISTO (R$)</th>
             <th class="py-3 px-4 text-right min-w-[130px]">REALIZADO (R$)</th>
-            <th class="py-3 px-4 text-right min-w-[120px]">DESVIO (R$)</th>
-            <th class="py-3 px-4 text-left min-w-[170px]">ATINGIMENTO (%)</th>
-            <th class="py-3 px-3 text-center min-w-[120px]">SITUAÇÃO</th>
+            <th class="py-3 px-4 text-right min-w-[120px]">DIFERENÇA (R$)</th>
+            <th class="py-3 px-4 text-right min-w-[130px]">EM ABERTO (R$)</th>
+            <th class="py-3 px-4 text-right min-w-[130px]">ATRASADO (R$)</th>
           </tr>
         </thead>
         <tbody id="tabelaFaturamentoBody" class="divide-y divide-slate-100 dark:divide-white/5">
         </tbody>
         <tfoot>
           <tr id="tabelaFaturamentoFooter" class="bg-slate-100 dark:bg-slate-800/90 border-t-2 border-slate-300 dark:border-white/10 font-black text-xs sm:text-sm">
-            <td class="py-3.5 px-4 text-slate-900 dark:text-white uppercase font-black" colspan="3">TOTAL CONSOLIDADO NO FILTRO</td>
+            <td class="py-3.5 px-4 text-slate-900 dark:text-white uppercase font-black" colspan="3">TOTAL NO FILTRO</td>
             <td class="py-3.5 px-4 text-right font-black text-slate-900 dark:text-white tabular-nums" id="fatTotPrevisto">R$ 0,00</td>
             <td class="py-3.5 px-4 text-right font-black text-emerald-600 dark:text-emerald-400 tabular-nums" id="fatTotRealizado">R$ 0,00</td>
             <td class="py-3.5 px-4 text-right font-black tabular-nums" id="fatTotDesvio">R$ 0,00</td>
-            <td class="py-3.5 px-4 text-left" id="fatTotPctCol">
-              <div class="flex items-center gap-2">
-                <span class="font-black tabular-nums text-slate-900 dark:text-white" id="fatTotPct">0,0%</span>
-                <div class="flex-1 max-w-[90px] h-2 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
-                  <div id="fatTotBar" class="h-full bg-indigo-500 rounded-full" style="width: 0%"></div>
-                </div>
-              </div>
-            </td>
-            <td class="py-3.5 px-3 text-center" id="fatTotStatus">
-              <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-gray-300">
-                Consolidado
-              </span>
-            </td>
+            <td class="py-3.5 px-4 text-right font-black text-amber-600 dark:text-amber-400 tabular-nums" id="fatTotAberto">R$ 0,00</td>
+            <td class="py-3.5 px-4 text-right font-black tabular-nums" id="fatTotAtrasado">R$ 0,00</td>
           </tr>
         </tfoot>
       </table>
@@ -1551,7 +1536,7 @@ def sync_lider():
 
   // ──────── LÓGICA DO PAINEL DE FATURAMENTO POR PROJETO ────────
   const faturamentoProjetosData = {fat_proj_json};
-  let currentMesFaturamento = 'TOTAL';
+  let currentMesFaturamento = 'JANEIRO';
 
   function formatBRL(val) {{
     if (val === null || val === undefined || isNaN(val)) return 'R$ 0,00';
@@ -1574,7 +1559,7 @@ def sync_lider():
 
     const labelEl = document.getElementById('labelMesAtivo');
     if (labelEl) {{
-      labelEl.textContent = (mes === 'TOTAL') ? 'Ano Todo (Consolidado)' : (mes.charAt(0) + mes.slice(1).toLowerCase());
+      labelEl.textContent = 'Mês: ' + (mes.charAt(0) + mes.slice(1).toLowerCase());
     }}
 
     atualizarPainelFaturamento();
@@ -1592,6 +1577,8 @@ def sync_lider():
 
     let totPrev = 0;
     let totReal = 0;
+    let totAberto = 0;
+    let totAtrasado = 0;
     let visiveis = 0;
     let rowsHtml = '';
 
@@ -1617,31 +1604,26 @@ def sync_lider():
 
       const prev = (p.previsto && p.previsto[currentMesFaturamento]) || 0;
       const real = (p.realizado && p.realizado[currentMesFaturamento]) || 0;
+      const aberto = (p.aberto && p.aberto[currentMesFaturamento]) || 0;
+      const atrasado = (p.atrasado && p.atrasado[currentMesFaturamento]) || 0;
       const desvio = real - prev;
-      const pct = (prev > 0) ? (real / prev * 100) : ((real > 0) ? 100 : 0);
 
       totPrev += prev;
       totReal += real;
+      totAberto += aberto;
+      totAtrasado += atrasado;
       visiveis++;
-
-      let statusBadge = '';
-      if (prev === 0 && real === 0) {{
-        statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-500 border border-slate-200 dark:border-slate-700">Sem Movimento</span>';
-      }} else if (prev === 0 && real > 0) {{
-        statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-sky-100 dark:bg-sky-950/60 text-sky-800 dark:text-sky-300 border border-sky-300">Faturado Extra</span>';
-      }} else if (real === 0 && prev > 0) {{
-        statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-300">Aguardando NF</span>';
-      }} else if (pct >= 100) {{
-        statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-300">Meta Superada</span>';
-      }} else if (pct >= 85) {{
-        statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300 border border-blue-300">Em Linha</span>';
-      }} else {{
-        statusBadge = '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 dark:bg-rose-950/60 text-rose-800 dark:text-rose-300 border border-rose-300">Abaixo Previsto</span>';
-      }}
 
       const badgeCls = areaBadges[pArea] || 'bg-slate-100 text-slate-700 border-slate-300';
       const desvioCor = (desvio > 0.01) ? 'text-emerald-600 dark:text-emerald-400 font-bold' : ((desvio < -0.01) ? 'text-rose-600 dark:text-rose-400 font-bold' : 'text-slate-500 dark:text-gray-400 font-medium');
-      const barCor = (pct >= 100) ? 'bg-emerald-500' : ((pct >= 85) ? 'bg-sky-500' : 'bg-amber-500');
+
+      const abertoHtml = (aberto > 0)
+        ? `<span class="font-bold text-amber-600 dark:text-amber-400 tabular-nums">${{formatBRL(aberto)}}</span>`
+        : `<span class="text-slate-400 dark:text-gray-500 tabular-nums">${{formatBRL(0)}}</span>`;
+
+      const atrasadoHtml = (atrasado > 0)
+        ? `<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-extrabold bg-rose-100 dark:bg-rose-950/60 text-rose-700 dark:text-rose-400 border border-rose-300 dark:border-rose-500/40 tabular-nums">${{formatBRL(atrasado)}}</span>`
+        : `<span class="text-slate-400 dark:text-gray-500 tabular-nums">${{formatBRL(0)}}</span>`;
 
       rowsHtml += `
         <tr class="hover:bg-slate-50/80 dark:hover:bg-white/5 transition-colors">
@@ -1668,18 +1650,11 @@ def sync_lider():
           <td class="py-3 px-4 text-right tabular-nums whitespace-nowrap ${{desvioCor}}">
             ${{desvio > 0 ? '+' : ''}}${{formatBRL(desvio)}}
           </td>
-          <td class="py-3 px-4 whitespace-nowrap">
-            <div class="flex items-center gap-2">
-              <span class="font-bold tabular-nums text-xs text-slate-900 dark:text-white w-12 text-right">
-                ${{pct.toFixed(1).replace('.', ',')}}%
-              </span>
-              <div class="w-20 h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden border border-slate-200 dark:border-white/10">
-                <div class="h-full rounded-full ${{barCor}}" style="width: ${{Math.min(pct, 100)}}%"></div>
-              </div>
-            </div>
+          <td class="py-3 px-4 text-right whitespace-nowrap">
+            ${{abertoHtml}}
           </td>
-          <td class="py-3 px-3 text-center whitespace-nowrap">
-            ${{statusBadge}}
+          <td class="py-3 px-4 text-right whitespace-nowrap">
+            ${{atrasadoHtml}}
           </td>
         </tr>
       `;
@@ -1715,8 +1690,8 @@ def sync_lider():
     const fPrev = document.getElementById('fatTotPrevisto');
     const fReal = document.getElementById('fatTotRealizado');
     const fDesvio = document.getElementById('fatTotDesvio');
-    const fPct = document.getElementById('fatTotPct');
-    const fBar = document.getElementById('fatTotBar');
+    const fAberto = document.getElementById('fatTotAberto');
+    const fAtrasado = document.getElementById('fatTotAtrasado');
 
     if (fPrev) fPrev.textContent = formatBRL(totPrev);
     if (fReal) fReal.textContent = formatBRL(totReal);
@@ -1724,10 +1699,12 @@ def sync_lider():
       fDesvio.textContent = `${{desvioGlobal >= 0 ? '+' : ''}}${{formatBRL(desvioGlobal)}}`;
       fDesvio.className = `py-3.5 px-4 text-right font-black tabular-nums ${{desvioGlobal >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}}`;
     }}
-    if (fPct) fPct.textContent = `${{pctGlobal.toFixed(1).replace('.', ',')}}%`;
-    if (fBar) {{
-      fBar.style.width = `${{Math.min(pctGlobal, 100)}}%`;
-      fBar.className = `h-full rounded-full ${{pctGlobal >= 100 ? 'bg-emerald-500' : (pctGlobal >= 85 ? 'bg-sky-500' : 'bg-amber-500')}}`;
+    if (fAberto) {{
+      fAberto.textContent = formatBRL(totAberto);
+    }}
+    if (fAtrasado) {{
+      fAtrasado.textContent = formatBRL(totAtrasado);
+      fAtrasado.className = `py-3.5 px-4 text-right font-black tabular-nums ${{totAtrasado > 0 ? 'text-rose-600 dark:text-rose-400' : 'text-slate-500 dark:text-gray-400'}}`;
     }}
 
     if (footerEl) {{
