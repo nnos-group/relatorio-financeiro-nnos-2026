@@ -1,4 +1,4 @@
-﻿# 🏢 Portal de Relatórios Financeiros 2026 — NNÓS Group
+# 🏢 Portal de Relatórios Financeiros 2026 — NNÓS Group
 
 🔗 **Link Oficial:** [https://nnos-group.github.io/relatorio-financeiro-nnos-2026/](https://nnos-group.github.io/relatorio-financeiro-nnos-2026/)
 
@@ -34,9 +34,19 @@ O arquivo `index.html` atua como um **Portal Integrado de Relatórios** composto
    - Atualize o arquivo `NNÓS Group _ Contas a Pagar - Campus BH UVA.html` na pasta `../UVA/`.
    - Execute o script `build_portal.ps1` ou `build_portal.py`.
 
-3. **Automação Completa (Reconstrução + Git Push):**
+3. **Atualização Diária Automática (08:00 da manhã) — Planilha "2026 - Gestão Financeira Projetos":**
+   - Os relatórios conectados à planilha Google Sheets (`Booking`, `Painel por Líder` e `Despesas Operacionais & Prospecção`) são sincronizados e publicados automaticamente todos os dias às **08:00**:
+   ```powershell
+   # Execução manual avulsa:
+   .\atualizar_relatorios_planilha_projetos.ps1
+
+   # Reconfigurar ou registrar a tarefa agendada no Windows:
+   .\agendar_tarefa_diaria.ps1 -Horario "08:00"
+   ```
+
+4. **Automação Completa (Bases Locais + Planilha + Reconstrução + Git Push):**
    - Execute no terminal PowerShell:
    ```powershell
-   .\atualizar_todos_relatorios.ps1 -MensagemCommit "feat: atualizacao dados AGO-26"
+   .\atualizar_todos_relatorios.ps1 -MensagemCommit "feat: atualizacao dados mensais"
    ```
    Este script recompila o `index.html`, sincroniza as cópias e faz o deploy automático no GitHub Pages.
