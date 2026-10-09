@@ -1149,18 +1149,21 @@ def sync_lider():
       <div class="flex items-center gap-2">
         <span class="px-3.5 py-1.5 rounded-full text-xs font-extrabold bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-500/30 flex items-center gap-1.5 shadow-xs">
           <span class="material-symbols-outlined text-sm">calendar_month</span>
-          <span id="labelMesAtivo">Mês: Janeiro</span>
+          <span id="labelMesAtivo">Ano Todo (Consolidado)</span>
         </span>
       </div>
     </div>
 
-    <!-- Barra de Filtro por Mês (Janeiro a Dezembro) -->
+    <!-- Barra de Filtro por Mês (Ano Todo + Janeiro a Dezembro) -->
     <div class="p-3 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-white/10 shadow-sm flex items-center gap-1.5 overflow-x-auto scrollbar-none">
       <span class="text-xs font-bold text-slate-500 dark:text-gray-400 uppercase tracking-wider whitespace-nowrap mr-1 flex items-center gap-1">
         <span class="material-symbols-outlined text-sm text-sky-500">date_range</span>
         Mês:
       </span>
-      <button onclick="filtrarMesFaturamento('JANEIRO')" data-mes="JANEIRO" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-[#1b365d] dark:bg-sky-500 text-white border border-[#142948] dark:border-sky-400 transition-all cursor-pointer shadow-xs whitespace-nowrap">
+      <button onclick="filtrarMesFaturamento('TOTAL')" data-mes="TOTAL" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-[#1b365d] dark:bg-sky-500 text-white border border-[#142948] dark:border-sky-400 transition-all cursor-pointer shadow-xs whitespace-nowrap">
+        Ano Todo (Consolidado)
+      </button>
+      <button onclick="filtrarMesFaturamento('JANEIRO')" data-mes="JANEIRO" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap">
         Janeiro
       </button>
       <button onclick="filtrarMesFaturamento('FEVEREIRO')" data-mes="FEVEREIRO" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap">
@@ -1536,7 +1539,7 @@ def sync_lider():
 
   // ──────── LÓGICA DO PAINEL DE FATURAMENTO POR PROJETO ────────
   const faturamentoProjetosData = {fat_proj_json};
-  let currentMesFaturamento = 'JANEIRO';
+  let currentMesFaturamento = 'TOTAL';
 
   function formatBRL(val) {{
     if (val === null || val === undefined || isNaN(val)) return 'R$ 0,00';
@@ -1559,7 +1562,7 @@ def sync_lider():
 
     const labelEl = document.getElementById('labelMesAtivo');
     if (labelEl) {{
-      labelEl.textContent = 'Mês: ' + (mes.charAt(0) + mes.slice(1).toLowerCase());
+      labelEl.textContent = (mes === 'TOTAL') ? 'Ano Todo (Consolidado)' : ('Mês: ' + mes.charAt(0) + mes.slice(1).toLowerCase());
     }}
 
     atualizarPainelFaturamento();
