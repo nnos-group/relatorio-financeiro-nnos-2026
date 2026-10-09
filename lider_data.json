@@ -1,17 +1,17 @@
 {
-  "updatedAt": "2026-10-09T14:42:16.682Z",
+  "updatedAt": "2026-10-09T16:23:32.491Z",
   "macro": {
     "receita": 10643175.78,
-    "custos": 7658810.8,
-    "custosPct": 71.95982626155593,
+    "custos": 7659847.670000001,
+    "custosPct": 71.96956837257086,
     "impostos": 1303789.05,
     "impostosPct": 12.250000159256977,
     "logistica": 773492.6900000001,
     "logisticaPct": 7.267498968244984,
     "repasse": -695044.35,
     "repassePct": -6.530422538976426,
-    "margem": 1602127.5999999996,
-    "margemPct": 15.053097243875452,
+    "margem": 1601090.73,
+    "margemPct": 15.043355132860542,
     "totalLideres": 7,
     "totalProjetos": 44
   },
@@ -24,6 +24,7 @@
       "total": {
         "titulo": "Total - Beatriz Picorelli",
         "tituloRaw": "TOTAL - BEATRIZ PICORELLI",
+        "area": "HRD",
         "receita": 2439730.9,
         "receitaPct": 100,
         "impostos": 298867.04,
@@ -42,6 +43,7 @@
         {
           "titulo": "Case Comercial Construction",
           "tituloRaw": "CASE COMERCIAL CONSTRUCTION",
+          "area": "HRD",
           "receita": 14789.71,
           "receitaPct": 100,
           "impostos": 1811.74,
@@ -59,6 +61,7 @@
         {
           "titulo": "CNHI Técnico Construction",
           "tituloRaw": "CNHI TÉCNICO CONSTRUCTION",
+          "area": "HRD",
           "receita": 24489,
           "receitaPct": 100,
           "impostos": 2999.9,
@@ -76,6 +79,7 @@
         {
           "titulo": "CPSL IVECO LATAM",
           "tituloRaw": "CPSL IVECO LATAM",
+          "area": "HRD",
           "receita": 33980,
           "receitaPct": 100,
           "impostos": 4162.55,
@@ -93,6 +97,7 @@
         {
           "titulo": "CRM IVECO",
           "tituloRaw": "CRM IVECO",
+          "area": "HRD",
           "receita": 0,
           "receitaPct": 100,
           "impostos": 0,
@@ -110,6 +115,7 @@
         {
           "titulo": "Excelência em Peças IVECO",
           "tituloRaw": "EXCELÊNCIA EM PEÇAS IVECO",
+          "area": "HRD",
           "receita": 55957.06,
           "receitaPct": 100,
           "impostos": 6854.74,
@@ -127,6 +133,7 @@
         {
           "titulo": "Excelência em ServiçOs IVECO",
           "tituloRaw": "EXCELÊNCIA EM SERVIÇOS IVECO",
+          "area": "HRD",
           "receita": 10442.57,
           "receitaPct": 100,
           "impostos": 1279.22,
@@ -144,6 +151,7 @@
         {
           "titulo": "Garantia CNH",
           "tituloRaw": "GARANTIA CNH",
+          "area": "HRD",
           "receita": 43895.16,
           "receitaPct": 100,
           "impostos": 5377.16,
@@ -161,6 +169,7 @@
         {
           "titulo": "Gestão do Momento",
           "tituloRaw": "GESTÃO DO MOMENTO",
+          "area": "HRD",
           "receita": 12450,
           "receitaPct": 100,
           "impostos": 1525.13,
@@ -178,6 +187,7 @@
         {
           "titulo": "IVECO Academy",
           "tituloRaw": "IVECO ACADEMY",
+          "area": "HRD",
           "receita": 278570.75,
           "receitaPct": 100,
           "impostos": 34124.92,
@@ -195,6 +205,7 @@
         {
           "titulo": "NH Comercial Construction",
           "tituloRaw": "NH COMERCIAL CONSTRUCTION",
+          "area": "HRD",
           "receita": 63306.08,
           "receitaPct": 100,
           "impostos": 7754.99,
@@ -212,6 +223,7 @@
         {
           "titulo": "Parts Academy",
           "tituloRaw": "PARTS ACADEMY",
+          "area": "HRD",
           "receita": 1079874.88,
           "receitaPct": 100,
           "impostos": 132284.67,
@@ -229,6 +241,7 @@
         {
           "titulo": "Projeto Especial 01",
           "tituloRaw": "PROJETO ESPECIAL 01",
+          "area": "HRD",
           "receita": 155461.6,
           "receitaPct": 100,
           "impostos": 19044.05,
@@ -246,6 +259,7 @@
         {
           "titulo": "Quality Shymphony IVECO",
           "tituloRaw": "QUALITY SHYMPHONY IVECO",
+          "area": "HRD",
           "receita": 63990,
           "receitaPct": 100,
           "impostos": 7838.78,
@@ -263,6 +277,7 @@
         {
           "titulo": "Serviços CNH",
           "tituloRaw": "SERVIÇOS CNH",
+          "area": "HRD",
           "receita": 309551.48,
           "receitaPct": 100,
           "impostos": 37920.06,
@@ -280,6 +295,7 @@
         {
           "titulo": "Treinamento Comercial",
           "tituloRaw": "TREINAMENTO COMERCIAL",
+          "area": "HRD",
           "receita": 282972.61,
           "receitaPct": 100,
           "impostos": 34664.14,
@@ -297,6 +313,7 @@
         {
           "titulo": "Workshop Curitiba",
           "tituloRaw": "WORKSHOP CURITIBA",
+          "area": "HRD",
           "receita": 10000,
           "receitaPct": 100,
           "impostos": 1225,
@@ -321,24 +338,26 @@
       "total": {
         "titulo": "Total - Caroline Amieva",
         "tituloRaw": "TOTAL - CAROLINE AMIEVA",
+        "area": "Business Solutions",
         "receita": 1199273.86,
         "receitaPct": 100,
         "impostos": 146911.05,
         "impostosPct": 12.25,
-        "custos": 723513.47,
-        "custosPct": 60.33,
+        "custos": 724550.34,
+        "custosPct": 60.42,
         "logistica": 88124.95,
         "logisticaPct": 7.35,
         "repasse": -79727.43,
         "repassePct": -6.65,
-        "margem": 320451.82,
-        "margemPct": 26.72,
+        "margem": 319414.95,
+        "margemPct": 26.63,
         "statusCor": "sky"
       },
       "projetos": [
         {
           "titulo": "Agro Divel | Gestão Organizacional",
           "tituloRaw": "AGRO DIVEL | GESTÃO ORGANIZACIONAL",
+          "area": "Business Solutions",
           "receita": 0,
           "receitaPct": 100,
           "impostos": 0,
@@ -356,6 +375,7 @@
         {
           "titulo": "Auditoria Estoque - Dinauto",
           "tituloRaw": "AUDITORIA ESTOQUE - DINAUTO",
+          "area": "Business Solutions",
           "receita": 9000,
           "receitaPct": 100,
           "impostos": 1102.5,
@@ -373,6 +393,7 @@
         {
           "titulo": "Central Irrigação",
           "tituloRaw": "CENTRAL IRRIGAÇÃO",
+          "area": "Business Solutions",
           "receita": 112000,
           "receitaPct": 100,
           "impostos": 13720,
@@ -390,6 +411,7 @@
         {
           "titulo": "Dealernet Flow",
           "tituloRaw": "DEALERNET FLOW",
+          "area": "Business Solutions",
           "receita": 42500,
           "receitaPct": 100,
           "impostos": 5206.25,
@@ -407,6 +429,7 @@
         {
           "titulo": "Ditrasa | Governança NHCE",
           "tituloRaw": "DITRASA | GOVERNANÇA NHCE",
+          "area": "Business Solutions",
           "receita": 62300,
           "receitaPct": 100,
           "impostos": 7631.75,
@@ -424,6 +447,7 @@
         {
           "titulo": "Fortrac | Gestão Organizacional",
           "tituloRaw": "FORTRAC | GESTÃO ORGANIZACIONAL",
+          "area": "Business Solutions",
           "receita": 117600,
           "receitaPct": 100,
           "impostos": 14406,
@@ -441,6 +465,7 @@
         {
           "titulo": "Grupo Rio | Business Review",
           "tituloRaw": "GRUPO RIO | BUSINESS REVIEW",
+          "area": "Business Solutions",
           "receita": 63600,
           "receitaPct": 100,
           "impostos": 7791,
@@ -458,6 +483,7 @@
         {
           "titulo": "Nocarvel | Auditoria Caixa Dagua",
           "tituloRaw": "NOCARVEL | AUDITORIA CAIXA DAGUA",
+          "area": "Business Solutions",
           "receita": 31500,
           "receitaPct": 100,
           "impostos": 3858.75,
@@ -475,6 +501,7 @@
         {
           "titulo": "Palestra Paccar Parts",
           "tituloRaw": "PALESTRA PACCAR PARTS",
+          "area": "Business Solutions",
           "receita": 39000,
           "receitaPct": 100,
           "impostos": 4777.5,
@@ -492,6 +519,7 @@
         {
           "titulo": "Parecis | Gestão Organizacional",
           "tituloRaw": "PARECIS | GESTÃO ORGANIZACIONAL",
+          "area": "Business Solutions",
           "receita": 112000,
           "receitaPct": 100,
           "impostos": 13720,
@@ -509,6 +537,7 @@
         {
           "titulo": "Stellantis | Trainning",
           "tituloRaw": "STELLANTIS | TRAINNING",
+          "area": "Business Solutions",
           "receita": 75550,
           "receitaPct": 100,
           "impostos": 9254.88,
@@ -526,23 +555,25 @@
         {
           "titulo": "Tape Ruvicha",
           "tituloRaw": "TAPE RUVICHA",
+          "area": "Business Solutions",
           "receita": 416800.06,
           "receitaPct": 100,
           "impostos": 51058.01,
           "impostosPct": 12.25,
-          "custos": 221777.69,
-          "custosPct": 53.21,
+          "custos": 222814.56,
+          "custosPct": 53.46,
           "logistica": 12362.68,
           "logisticaPct": 2.97,
           "repasse": -11790.02,
           "repassePct": -2.83,
-          "margem": 143391.7,
-          "margemPct": 34.4,
+          "margem": 142354.83,
+          "margemPct": 34.15,
           "statusCor": "emerald"
         },
         {
           "titulo": "Tratoron | Gestão Comercial",
           "tituloRaw": "TRATORON | GESTÃO COMERCIAL",
+          "area": "Business Solutions",
           "receita": 96425,
           "receitaPct": 100,
           "impostos": 11812.06,
@@ -560,6 +591,7 @@
         {
           "titulo": "Xingu | Gestão Organizacional",
           "tituloRaw": "XINGU | GESTÃO ORGANIZACIONAL",
+          "area": "Business Solutions",
           "receita": 0,
           "receitaPct": 100,
           "impostos": 0,
@@ -577,6 +609,7 @@
         {
           "titulo": "Viamondo | Produtividade Oficina",
           "tituloRaw": "VIAMONDO | PRODUTIVIDADE OFICINA",
+          "area": "Business Solutions",
           "receita": 19000,
           "receitaPct": 100,
           "impostos": 2327.5,
@@ -594,6 +627,7 @@
         {
           "titulo": "Automação Essencialidade",
           "tituloRaw": "AUTOMAÇÃO ESSENCIALIDADE",
+          "area": "Business Solutions",
           "receita": 1998.8,
           "receitaPct": 100,
           "impostos": 244.85,
@@ -618,6 +652,7 @@
       "total": {
         "titulo": "Total - Jefferson Souza",
         "tituloRaw": "TOTAL - JEFFERSON SOUZA",
+        "area": "Dealer Development",
         "receita": 953085.8,
         "receitaPct": 100,
         "impostos": 116753.01,
@@ -636,6 +671,7 @@
         {
           "titulo": "Dealer Standard Construcion",
           "tituloRaw": "DEALER STANDARD CONSTRUCION",
+          "area": "Dealer Development",
           "receita": 279904,
           "receitaPct": 100,
           "impostos": 34288.24,
@@ -653,6 +689,7 @@
         {
           "titulo": "DM - Back Office",
           "tituloRaw": "DM - BACK OFFICE",
+          "area": "Dealer Development",
           "receita": 344053.8,
           "receitaPct": 100,
           "impostos": 42146.59,
@@ -670,6 +707,7 @@
         {
           "titulo": "DM - Negócios Br",
           "tituloRaw": "DM - NEGÓCIOS BR",
+          "area": "Dealer Development",
           "receita": 142128,
           "receitaPct": 100,
           "impostos": 17410.68,
@@ -687,6 +725,7 @@
         {
           "titulo": "DDN - Business Assessment",
           "tituloRaw": "DDN - BUSINESS ASSESSMENT",
+          "area": "Dealer Development",
           "receita": 187000,
           "receitaPct": 100,
           "impostos": 22907.5,
@@ -711,6 +750,7 @@
       "total": {
         "titulo": "Total - Joice Lage",
         "tituloRaw": "TOTAL - JOICE LAGE",
+        "area": "Educação",
         "receita": 4888.48,
         "receitaPct": 100,
         "impostos": 598.84,
@@ -729,6 +769,7 @@
         {
           "titulo": "Campus BH (Univ. Veiga de Almeida)",
           "tituloRaw": "CAMPUS BH (UNIV. VEIGA DE ALMEIDA)",
+          "area": "Educação",
           "receita": 4888.48,
           "receitaPct": 100,
           "impostos": 598.84,
@@ -753,6 +794,7 @@
       "total": {
         "titulo": "Total - Leonardo Campos",
         "tituloRaw": "TOTAL - LEONARDO CAMPOS",
+        "area": "Innovation",
         "receita": 36216.45,
         "receitaPct": 100,
         "impostos": 4436.52,
@@ -771,6 +813,7 @@
         {
           "titulo": "NNOS Academy",
           "tituloRaw": "NNOS ACADEMY",
+          "area": "Innovation",
           "receita": 36216.45,
           "receitaPct": 100,
           "impostos": 4436.52,
@@ -795,6 +838,7 @@
       "total": {
         "titulo": "Total - Vinicius Souza",
         "tituloRaw": "TOTAL - VINICIUS SOUZA",
+        "area": "Outsourcing",
         "receita": 5157546.37,
         "receitaPct": 100,
         "impostos": 631799.43,
@@ -813,6 +857,7 @@
         {
           "titulo": "Backoffice CNHI",
           "tituloRaw": "BACKOFFICE CNHI",
+          "area": "Outsourcing",
           "receita": 2354385.76,
           "receitaPct": 100,
           "impostos": 288412.26,
@@ -830,6 +875,7 @@
         {
           "titulo": "Backoffice CRM Case",
           "tituloRaw": "BACKOFFICE CRM CASE",
+          "area": "Outsourcing",
           "receita": 361293.72,
           "receitaPct": 100,
           "impostos": 44258.48,
@@ -847,6 +893,7 @@
         {
           "titulo": "Instrutores CNH",
           "tituloRaw": "INSTRUTORES CNH",
+          "area": "Outsourcing",
           "receita": 2441866.89,
           "receitaPct": 100,
           "impostos": 299128.69,
@@ -871,6 +918,7 @@
       "total": {
         "titulo": "Total - Fábio Canassa",
         "tituloRaw": "TOTAL - FÁBIO CANASSA",
+        "area": "Outsourcing",
         "receita": 852433.92,
         "receitaPct": 100,
         "impostos": 104423.16,
@@ -889,6 +937,7 @@
         {
           "titulo": "Backoffice Porsche",
           "tituloRaw": "BACKOFFICE PORSCHE",
+          "area": "Outsourcing",
           "receita": 165433.92,
           "receitaPct": 100,
           "impostos": 20265.66,
@@ -906,6 +955,7 @@
         {
           "titulo": "Consultoria Pós-Vendas (POE) Porsche",
           "tituloRaw": "CONSULTORIA PÓS-VENDAS (POE) PORSCHE",
+          "area": "Outsourcing",
           "receita": 365400,
           "receitaPct": 100,
           "impostos": 44761.5,
@@ -923,6 +973,7 @@
         {
           "titulo": "Instrutores Porsche",
           "tituloRaw": "INSTRUTORES PORSCHE",
+          "area": "HRD",
           "receita": 321600,
           "receitaPct": 100,
           "impostos": 39396,
@@ -945,6 +996,7 @@
       "ranking": 1,
       "projeto": "Instrutores CNH",
       "lider": "Vinicius Souza",
+      "area": "Outsourcing",
       "receita": 2441866.89,
       "margem": 437801.51,
       "margemPct": 17.93
@@ -953,6 +1005,7 @@
       "ranking": 2,
       "projeto": "Backoffice CNHI",
       "lider": "Vinicius Souza",
+      "area": "Outsourcing",
       "receita": 2354385.76,
       "margem": 283186.56,
       "margemPct": 12.03
@@ -961,6 +1014,7 @@
       "ranking": 3,
       "projeto": "Parts Academy",
       "lider": "Beatriz Picorelli",
+      "area": "HRD",
       "receita": 1079874.88,
       "margem": 239480.88,
       "margemPct": 22.18
@@ -969,6 +1023,7 @@
       "ranking": 4,
       "projeto": "Dealer Standard Construcion",
       "lider": "Jefferson Souza",
+      "area": "Dealer Development",
       "receita": 279904,
       "margem": 204854.46,
       "margemPct": 73.19
@@ -977,14 +1032,16 @@
       "ranking": 5,
       "projeto": "Tape Ruvicha",
       "lider": "Caroline Amieva",
+      "area": "Business Solutions",
       "receita": 416800.06,
-      "margem": 143391.7,
-      "margemPct": 34.4
+      "margem": 142354.83,
+      "margemPct": 34.15
     },
     {
       "ranking": 6,
       "projeto": "Serviços CNH",
       "lider": "Beatriz Picorelli",
+      "area": "HRD",
       "receita": 309551.48,
       "margem": 118310.28,
       "margemPct": 38.22
@@ -993,6 +1050,7 @@
       "ranking": 7,
       "projeto": "DM - Negócios Br",
       "lider": "Jefferson Souza",
+      "area": "Dealer Development",
       "receita": 142128,
       "margem": 112506.27,
       "margemPct": 79.16
@@ -1001,6 +1059,7 @@
       "ranking": 8,
       "projeto": "Instrutores Porsche",
       "lider": "Fábio Canassa",
+      "area": "HRD",
       "receita": 321600,
       "margem": 73081.29,
       "margemPct": 22.72
@@ -1009,6 +1068,7 @@
       "ranking": 9,
       "projeto": "Treinamento Comercial",
       "lider": "Beatriz Picorelli",
+      "area": "HRD",
       "receita": 282972.61,
       "margem": 57676.84,
       "margemPct": 20.38
@@ -1017,6 +1077,7 @@
       "ranking": 10,
       "projeto": "DDN - Business Assessment",
       "lider": "Jefferson Souza",
+      "area": "Dealer Development",
       "receita": 187000,
       "margem": 57230.45,
       "margemPct": 30.6
@@ -1025,6 +1086,7 @@
       "ranking": 11,
       "projeto": "Consultoria Pós-Vendas (POE) Porsche",
       "lider": "Fábio Canassa",
+      "area": "Outsourcing",
       "receita": 365400,
       "margem": 55889.14,
       "margemPct": 15.3
@@ -1033,6 +1095,7 @@
       "ranking": 12,
       "projeto": "IVECO Academy",
       "lider": "Beatriz Picorelli",
+      "area": "HRD",
       "receita": 278570.75,
       "margem": 53016.86,
       "margemPct": 19.03
@@ -1041,6 +1104,7 @@
       "ranking": 13,
       "projeto": "DM - Back Office",
       "lider": "Jefferson Souza",
+      "area": "Dealer Development",
       "receita": 344053.8,
       "margem": 51441.17,
       "margemPct": 14.95
@@ -1049,6 +1113,7 @@
       "ranking": 14,
       "projeto": "Backoffice CRM Case",
       "lider": "Vinicius Souza",
+      "area": "Outsourcing",
       "receita": 361293.72,
       "margem": 46486.94,
       "margemPct": 12.87
@@ -1057,6 +1122,7 @@
       "ranking": 15,
       "projeto": "Projeto Especial 01",
       "lider": "Beatriz Picorelli",
+      "area": "HRD",
       "receita": 155461.6,
       "margem": 43644.3,
       "margemPct": 28.07
@@ -1065,6 +1131,7 @@
       "ranking": 16,
       "projeto": "Fortrac | Gestão Organizacional",
       "lider": "Caroline Amieva",
+      "area": "Business Solutions",
       "receita": 117600,
       "margem": 37159,
       "margemPct": 31.6
@@ -1073,6 +1140,7 @@
       "ranking": 17,
       "projeto": "Parecis | Gestão Organizacional",
       "lider": "Caroline Amieva",
+      "area": "Business Solutions",
       "receita": 112000,
       "margem": 33298.2,
       "margemPct": 29.73
@@ -1081,6 +1149,7 @@
       "ranking": 18,
       "projeto": "NH Comercial Construction",
       "lider": "Beatriz Picorelli",
+      "area": "HRD",
       "receita": 63306.08,
       "margem": 28286.69,
       "margemPct": 44.68
@@ -1089,6 +1158,7 @@
       "ranking": 19,
       "projeto": "Quality Shymphony IVECO",
       "lider": "Beatriz Picorelli",
+      "area": "HRD",
       "receita": 63990,
       "margem": 26552.23,
       "margemPct": 41.49
@@ -1097,6 +1167,7 @@
       "ranking": 20,
       "projeto": "Backoffice Porsche",
       "lider": "Fábio Canassa",
+      "area": "Outsourcing",
       "receita": 165433.92,
       "margem": 25462.98,
       "margemPct": 15.39
@@ -1107,6 +1178,7 @@
       "ranking": 1,
       "projeto": "NNOS Academy",
       "lider": "Leonardo Campos",
+      "area": "Innovation",
       "receita": 36216.45,
       "margem": -396579.84,
       "margemPct": -1095.03
@@ -1115,6 +1187,7 @@
       "ranking": 2,
       "projeto": "Campus BH (Univ. Veiga de Almeida)",
       "lider": "Joice Lage",
+      "area": "Educação",
       "receita": 4888.48,
       "margem": -165810.8,
       "margemPct": -3391.87
@@ -1123,6 +1196,7 @@
       "ranking": 3,
       "projeto": "Excelência em Peças IVECO",
       "lider": "Beatriz Picorelli",
+      "area": "HRD",
       "receita": 55957.06,
       "margem": -118429.8,
       "margemPct": -211.64
@@ -1131,6 +1205,7 @@
       "ranking": 4,
       "projeto": "Nocarvel | Auditoria Caixa Dagua",
       "lider": "Caroline Amieva",
+      "area": "Business Solutions",
       "receita": 31500,
       "margem": -30158.75,
       "margemPct": -95.74
@@ -1139,6 +1214,7 @@
       "ranking": 5,
       "projeto": "Automação Essencialidade",
       "lider": "Caroline Amieva",
+      "area": "Business Solutions",
       "receita": 1998.8,
       "margem": 119.93,
       "margemPct": 6
@@ -1147,6 +1223,7 @@
       "ranking": 6,
       "projeto": "Excelência em ServiçOs IVECO",
       "lider": "Beatriz Picorelli",
+      "area": "HRD",
       "receita": 10442.57,
       "margem": 1182.9,
       "margemPct": 11.33
@@ -1155,6 +1232,7 @@
       "ranking": 7,
       "projeto": "Case Comercial Construction",
       "lider": "Beatriz Picorelli",
+      "area": "HRD",
       "receita": 14789.71,
       "margem": 2994.75,
       "margemPct": 20.25
@@ -1163,6 +1241,7 @@
       "ranking": 8,
       "projeto": "Workshop Curitiba",
       "lider": "Beatriz Picorelli",
+      "area": "HRD",
       "receita": 10000,
       "margem": 6435,
       "margemPct": 64.35
@@ -1171,6 +1250,7 @@
       "ranking": 9,
       "projeto": "CNHI Técnico Construction",
       "lider": "Beatriz Picorelli",
+      "area": "HRD",
       "receita": 24489,
       "margem": 6680.59,
       "margemPct": 27.28
@@ -1179,6 +1259,7 @@
       "ranking": 10,
       "projeto": "Auditoria Estoque - Dinauto",
       "lider": "Caroline Amieva",
+      "area": "Business Solutions",
       "receita": 9000,
       "margem": 7297.5,
       "margemPct": 81.08

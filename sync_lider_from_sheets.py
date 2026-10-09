@@ -83,6 +83,45 @@ def sync_lider():
         "Fábio Canassa": {"from": "from-blue-600", "to": "to-cyan-500", "accent": "blue", "cargo": "Líder de Consultoria Automotiva"}
     }
 
+    # Mapeamento Oficial de Projetos e Líderes por Área (Unidade de Negócio)
+    def get_project_area(titulo, lider=""):
+        t = (titulo or "").upper()
+        l = (lider or "").upper()
+        if "CAMPUS BH" in t or "VEIGA DE ALMEIDA" in t:
+            return "Educação"
+        if "NNOS ACADEMY" in t or "INNOVATION" in t:
+            return "Innovation"
+        if "DEALER STANDARD" in t or t.startswith("DM -") or "DDN" in t or "DEALER DEVELOPMENT" in t:
+            return "Dealer Development"
+        if "INSTRUTORES PORSCHE" in t:
+            return "HRD"
+        if "BACKOFFICE" in t or "CONSULTORIA PÓS-VENDAS" in t or "POE" in t or "INSTRUTORES CNH" in t:
+            return "Outsourcing"
+        if "BEATRIZ" in l:
+            return "HRD"
+        if "CAROLINE" in l:
+            return "Business Solutions"
+        if "JEFFERSON" in l:
+            return "Dealer Development"
+        if "VINICIUS" in l:
+            return "Outsourcing"
+        if "JOICE" in l:
+            return "Educação"
+        if "LEONARDO" in l:
+            return "Innovation"
+        if "FÁBIO" in l or "FABIO" in l:
+            return "Outsourcing"
+        return "Outsourcing"
+
+    area_badge_styles = {
+        "Outsourcing": "bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-500/30",
+        "HRD": "bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30",
+        "Business Solutions": "bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-500/30",
+        "Dealer Development": "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30",
+        "Innovation": "bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30",
+        "Educação": "bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30"
+    }
+
     # Gerar Swimlanes dos Líderes
     swimlanes_html = ""
     for l in leaders:
@@ -115,6 +154,8 @@ def sync_lider():
         # Cards de projetos
         cards_html = ""
         for p in projetos:
+            p_area = p.get("area") or get_project_area(p['titulo'], nome)
+            area_badge_class = area_badge_styles.get(p_area, "bg-slate-100 text-slate-700")
             p_rec = p.get("receita", 0)
             p_imp = p.get("impostos", 0)
             p_imp_pct = p.get("impostosPct", 12.25)
@@ -152,11 +193,12 @@ def sync_lider():
                 card_border = "border-slate-200/90 dark:border-white/10 hover:border-amber-500/50"
 
             cards_html += f"""
-        <article class="project-card group relative bg-white dark:bg-slate-900/80 rounded-2xl p-5 border {card_border} shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between" data-titulo="{p['titulo'].lower()}" data-lider="{nome.lower()}">
+        <article class="project-card group relative bg-white dark:bg-slate-900/80 rounded-2xl p-5 border {card_border} shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between" data-titulo="{p['titulo'].lower()}" data-lider="{nome.lower()}" data-area="{p_area.lower()}">
           <div class="space-y-4">
             <!-- Header do Card -->
             <div class="flex items-start justify-between gap-2 min-h-[44px]">
-              <h4 class="font-bold text-slate-900 dark:text-white text-sm leading-snug group-hover:text-sky-600 dark:group-hover:text-sky-300 transition-colors">{p['titulo']}</h4>
+              <h4 class="font-bold text-slate-900 dark:text-white text-sm leading-snug group-hover:text-sky-600 dark:group-hover:text-sky-300 transition-colors flex-1">{p['titulo']}</h4>
+              <span class="px-2 py-0.5 rounded-lg text-[10px] font-bold {area_badge_class} whitespace-nowrap flex-shrink-0">{p_area}</span>
             </div>
 
             <!-- Destaque de Receita -->
@@ -301,6 +343,8 @@ def sync_lider():
         lider_nome = p.get("lider", "").strip()
         iniciais = leader_iniciais.get(lider_nome, "LP")
         av_class = leader_avatar_bg.get(lider_nome, "bg-slate-100 text-slate-700")
+        p_area = p.get("area") or get_project_area(p["projeto"], lider_nome)
+        area_badge_class = area_badge_styles.get(p_area, "bg-slate-100 text-slate-700")
 
         if rank == 1:
             badge_pos = '<span class="flex-shrink-0 w-5 h-5 rounded bg-emerald-600 text-white font-extrabold text-[10px] flex items-center justify-center shadow-xs">1</span>'
@@ -320,11 +364,12 @@ def sync_lider():
             pct_badge = "bg-amber-50 text-amber-900 dark:bg-amber-950/50 dark:text-amber-300 border border-amber-300 dark:border-amber-500/30 font-black"
 
         return f"""
-        <div class="ranking-item bg-white dark:bg-slate-900 rounded-lg p-2.5 {border_pos} shadow-sm hover:shadow transition-all" data-lider="{lider_nome.lower()}" data-rank="{rank}">
+        <div class="ranking-item bg-white dark:bg-slate-900 rounded-lg p-2.5 {border_pos} shadow-sm hover:shadow transition-all" data-lider="{lider_nome.lower()}" data-area="{p_area.lower()}" data-titulo="{p['projeto'].lower()}" data-rank="{rank}">
           <div class="flex items-center justify-between gap-1.5">
             <div class="flex items-center gap-1.5 min-w-0">
               {badge_pos}
               <span class="font-bold text-slate-950 dark:text-white text-xs truncate" title="{p['projeto']}">{p['projeto']}</span>
+              <span class="px-1.5 py-0.2 rounded text-[9px] font-bold {area_badge_class} flex-shrink-0">{p_area}</span>
             </div>
             <div class="flex items-center gap-1.5 flex-shrink-0 tabular-nums">
               <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-gray-200 border border-slate-300 dark:border-white/10"><span class="text-slate-500 dark:text-gray-400 font-medium text-[9px]">Rec:</span> {fmt_k(p['receita'])}</span>
@@ -357,6 +402,8 @@ def sync_lider():
         iniciais = leader_iniciais.get(lider_nome, "LP")
         av_class = leader_avatar_bg.get(lider_nome, "bg-slate-100 text-slate-700")
         is_neg = p.get("margem", 0) < 0
+        p_area = p.get("area") or get_project_area(p["projeto"], lider_nome)
+        area_badge_class = area_badge_styles.get(p_area, "bg-slate-100 text-slate-700")
 
         if is_neg:
             card_box = "ranking-item-danger bg-rose-50/90 dark:bg-rose-950/40 border-2 border-rose-300 dark:border-rose-500/40 hover:border-rose-400"
@@ -376,11 +423,12 @@ def sync_lider():
             border_bottom = "border-slate-200 dark:border-white/5"
 
         bottom10_html += f"""
-        <div class="ranking-item rounded-lg p-2.5 {card_box} shadow-sm hover:shadow transition-all" data-lider="{lider_nome.lower()}" data-rank="{rank}">
+        <div class="ranking-item rounded-lg p-2.5 {card_box} shadow-sm hover:shadow transition-all" data-lider="{lider_nome.lower()}" data-area="{p_area.lower()}" data-titulo="{p['projeto'].lower()}" data-rank="{rank}">
           <div class="flex items-center justify-between gap-1.5">
             <div class="flex items-center gap-1.5 min-w-0">
               {badge_pos}
               <span class="font-bold text-slate-950 dark:text-white text-xs truncate" title="{p['projeto']}">{p['projeto']}</span>
+              <span class="px-1.5 py-0.2 rounded text-[9px] font-bold {area_badge_class} flex-shrink-0">{p_area}</span>
             </div>
             <div class="flex items-center gap-1.5 flex-shrink-0 tabular-nums">
               <span class="px-1.5 py-0.5 rounded text-[10px] font-bold {rec_pill}"><span class="text-slate-500 dark:text-gray-400 font-medium text-[9px]">Rec:</span> {fmt_k(p['receita'])}</span>
@@ -676,16 +724,16 @@ def sync_lider():
     }}
 
     /* 🎯 Regra de Ouro de Contraste: Barra/Badge/Fundo escuro SEMPRE tem fonte clara (branca) */
-    html.light .bg-\[\#1b365d\],
-    html.light .bg-\[\#1b365d\] *,
-    html.light .bg-\[\#c24141\],
-    html.light .bg-\[\#c24141\] *,
-    html.light .bg-\[\#00223a\],
-    html.light .bg-\[\#00223a\] *,
-    html.light .bg-\[\#003865\],
-    html.light .bg-\[\#003865\] *,
-    html.light .bg-\[\#002b49\],
-    html.light .bg-\[\#002b49\] *,
+    html.light .bg-\\[\\#1b365d\\],
+    html.light .bg-\\[\\#1b365d\\] *,
+    html.light .bg-\\[\\#c24141\\],
+    html.light .bg-\\[\\#c24141\\] *,
+    html.light .bg-\\[\\#00223a\\],
+    html.light .bg-\\[\\#00223a\\] *,
+    html.light .bg-\\[\\#003865\\],
+    html.light .bg-\\[\\#003865\\] *,
+    html.light .bg-\\[\\#002b49\\],
+    html.light .bg-\\[\\#002b49\\] *,
     html.light .bg-blue-600,
     html.light .bg-blue-600 *,
     html.light .bg-rose-600,
@@ -864,41 +912,78 @@ def sync_lider():
     </div>
   </section>
 
-  <!-- ──────── FILTROS POR LÍDER E BUSCA ──────── -->
-  <section class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 p-4 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-white/10 shadow-sm dark:shadow-lg">
-    <!-- Filtros de Líderes -->
-    <div class="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
-      <span class="text-xs font-bold text-slate-500 dark:text-gray-400 uppercase tracking-wider whitespace-nowrap mr-1">Filtrar Líder:</span>
-      <button onclick="filtrarLider('todos')" data-filter="todos" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-sky-500 text-white border border-sky-400 transition-all cursor-pointer">
-        Todos (7)
-      </button>
-      <button onclick="filtrarLider('beatriz picorelli')" data-filter="beatriz picorelli" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
-        Beatriz
-      </button>
-      <button onclick="filtrarLider('caroline amieva')" data-filter="caroline amieva" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
-        Caroline
-      </button>
-      <button onclick="filtrarLider('jefferson souza')" data-filter="jefferson souza" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
-        Jefferson
-      </button>
-      <button onclick="filtrarLider('joice lage')" data-filter="joice lage" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
-        Joice
-      </button>
-      <button onclick="filtrarLider('leonardo campos')" data-filter="leonardo campos" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
-        Leonardo
-      </button>
-      <button onclick="filtrarLider('vinicius souza')" data-filter="vinicius souza" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
-        Vinicius
-      </button>
-      <button onclick="filtrarLider('fábio canassa')" data-filter="fábio canassa" class="filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
-        Fábio
-      </button>
+  <!-- ──────── FILTROS POR LÍDER, ÁREA E BUSCA ──────── -->
+  <section class="flex flex-col gap-3 p-4 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-white/10 shadow-sm dark:shadow-lg">
+    <!-- Linha 1: Filtro de Líder + Busca Textual -->
+    <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
+      <div class="flex items-center gap-1.5 overflow-x-auto pb-1 lg:pb-0 scrollbar-none flex-wrap sm:flex-nowrap">
+        <span class="text-xs font-bold text-slate-500 dark:text-gray-400 uppercase tracking-wider whitespace-nowrap mr-1 flex items-center gap-1">
+          <span class="material-symbols-outlined text-sm text-sky-500">person</span>
+          Filtrar Líder:
+        </span>
+        <button onclick="filtrarLider('todos')" data-filter-lider="todos" class="filter-lider-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-sky-500 text-white border border-sky-400 transition-all cursor-pointer shadow-xs">
+          Todos (7)
+        </button>
+        <button onclick="filtrarLider('beatriz picorelli')" data-filter-lider="beatriz picorelli" class="filter-lider-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
+          Beatriz
+        </button>
+        <button onclick="filtrarLider('caroline amieva')" data-filter-lider="caroline amieva" class="filter-lider-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
+          Caroline
+        </button>
+        <button onclick="filtrarLider('jefferson souza')" data-filter-lider="jefferson souza" class="filter-lider-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
+          Jefferson
+        </button>
+        <button onclick="filtrarLider('joice lage')" data-filter-lider="joice lage" class="filter-lider-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
+          Joice
+        </button>
+        <button onclick="filtrarLider('leonardo campos')" data-filter-lider="leonardo campos" class="filter-lider-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
+          Leonardo
+        </button>
+        <button onclick="filtrarLider('vinicius souza')" data-filter-lider="vinicius souza" class="filter-lider-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
+          Vinicius
+        </button>
+        <button onclick="filtrarLider('fábio canassa')" data-filter-lider="fábio canassa" class="filter-lider-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
+          Fábio
+        </button>
+      </div>
+
+      <!-- Campo de Busca de Projetos -->
+      <div class="relative min-w-[260px]">
+        <span class="material-symbols-outlined text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 text-sm">search</span>
+        <input id="searchProject" oninput="buscarProjetos()" type="text" placeholder="Filtrar contrato, líder ou área..." class="w-full pl-9 pr-3 py-2 text-xs bg-slate-100 dark:bg-slate-950/70 border border-slate-200 dark:border-white/10 rounded-xl text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500/30 transition-all"/>
+      </div>
     </div>
 
-    <!-- Campo de Busca de Projetos -->
-    <div class="relative min-w-[240px]">
-      <span class="material-symbols-outlined text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 text-sm">search</span>
-      <input id="searchProject" oninput="buscarProjetos()" type="text" placeholder="Filtrar contrato ou líder..." class="w-full pl-9 pr-3 py-2 text-xs bg-slate-100 dark:bg-slate-950/70 border border-slate-200 dark:border-white/10 rounded-xl text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500/30 transition-all"/>
+    <!-- Divisória sutil -->
+    <div class="h-px w-full bg-slate-200/80 dark:bg-white/5"></div>
+
+    <!-- Linha 2: Filtro de Área -->
+    <div class="flex items-center gap-1.5 overflow-x-auto pb-1 lg:pb-0 scrollbar-none flex-wrap sm:flex-nowrap">
+      <span class="text-xs font-bold text-slate-500 dark:text-gray-400 uppercase tracking-wider whitespace-nowrap mr-1 flex items-center gap-1">
+        <span class="material-symbols-outlined text-sm text-indigo-500">category</span>
+        Filtrar Área:
+      </span>
+      <button onclick="filtrarArea('todas')" data-filter-area="todas" class="filter-area-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white border border-indigo-500 transition-all cursor-pointer shadow-xs">
+        Todas (6)
+      </button>
+      <button onclick="filtrarArea('outsourcing')" data-filter-area="outsourcing" class="filter-area-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
+        Outsourcing
+      </button>
+      <button onclick="filtrarArea('hrd')" data-filter-area="hrd" class="filter-area-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
+        HRD
+      </button>
+      <button onclick="filtrarArea('business solutions')" data-filter-area="business solutions" class="filter-area-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
+        Business Solutions
+      </button>
+      <button onclick="filtrarArea('dealer development')" data-filter-area="dealer development" class="filter-area-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
+        Dealer Development
+      </button>
+      <button onclick="filtrarArea('innovation')" data-filter-area="innovation" class="filter-area-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
+        Innovation
+      </button>
+      <button onclick="filtrarArea('educação')" data-filter-area="educação" class="filter-area-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer">
+        Educação
+      </button>
     </div>
   </section>
 
@@ -1129,33 +1214,80 @@ def sync_lider():
     applyTheme(saved);
   }})();
 
-  // 🔍 Filtro por Líder (Raias Kanban + Ranking de Rentabilidade)
-  function filtrarLider(lider) {{
-    const isTodos = (lider === 'todos');
+  // 🔍 Filtro Combinado: Líder, Área e Busca Textual
+  let currentLider = 'todos';
+  let currentArea = 'todas';
 
-    // 1. Atualizar visual dos botões de filtro
-    document.querySelectorAll('.filter-btn').forEach(btn => {{
-      const filterVal = btn.getAttribute('data-filter');
-      if (filterVal === lider) {{
-        btn.classList.add('bg-sky-500', 'text-white', 'border-sky-400', 'shadow-sm');
-        btn.classList.remove('bg-slate-100', 'dark:bg-slate-800', 'text-slate-700', 'dark:text-gray-300');
+  function filtrarLider(lider) {{
+    currentLider = (lider || 'todos').toLowerCase();
+    aplicarFiltros();
+  }}
+
+  function filtrarArea(area) {{
+    currentArea = (area || 'todas').toLowerCase();
+    aplicarFiltros();
+  }}
+
+  function buscarProjetos() {{
+    aplicarFiltros();
+  }}
+
+  function aplicarFiltros() {{
+    const q = (document.getElementById('searchProject')?.value || '').toLowerCase().trim();
+    const isTodosLider = (currentLider === 'todos');
+    const isTodasArea = (currentArea === 'todas');
+
+    // 1. Atualizar visual dos botões de Líder
+    document.querySelectorAll('.filter-lider-btn').forEach(btn => {{
+      const f = (btn.getAttribute('data-filter-lider') || '').toLowerCase();
+      if (f === currentLider) {{
+        btn.className = 'filter-lider-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-sky-500 text-white border border-sky-400 transition-all cursor-pointer shadow-xs';
       }} else {{
-        btn.classList.remove('bg-sky-500', 'text-white', 'border-sky-400', 'shadow-sm');
-        btn.classList.add('bg-slate-100', 'dark:bg-slate-800', 'text-slate-700', 'dark:text-gray-300');
+        btn.className = 'filter-lider-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer';
       }}
     }});
 
-    // 2. Filtrar raias Kanban dos Líderes
+    // 2. Atualizar visual dos botões de Área
+    document.querySelectorAll('.filter-area-btn').forEach(btn => {{
+      const f = (btn.getAttribute('data-filter-area') || '').toLowerCase();
+      if (f === currentArea) {{
+        btn.className = 'filter-area-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white border border-indigo-500 transition-all cursor-pointer shadow-xs';
+      }} else {{
+        btn.className = 'filter-area-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer';
+      }}
+    }});
+
+    // 3. Filtrar raias Kanban dos Líderes e Cards de Projetos
     document.querySelectorAll('.leader-swimlane').forEach(lane => {{
-      const laneName = lane.getAttribute('data-leader-name');
-      if (isTodos || laneName === lider) {{
+      const laneLeader = (lane.getAttribute('data-leader-name') || '').toLowerCase();
+      const leaderMatch = isTodosLider || (laneLeader === currentLider);
+
+      let cardsVisiveisNaRaia = 0;
+      lane.querySelectorAll('.project-card').forEach(card => {{
+        const cardTitulo = (card.getAttribute('data-titulo') || '').toLowerCase();
+        const cardLider = (card.getAttribute('data-lider') || '').toLowerCase();
+        const cardArea = (card.getAttribute('data-area') || '').toLowerCase();
+
+        const matchArea = isTodasArea || (cardArea === currentArea);
+        const matchSearch = !q || cardTitulo.includes(q) || cardLider.includes(q) || cardArea.includes(q);
+
+        if (leaderMatch && matchArea && matchSearch) {{
+          card.style.display = 'flex';
+          cardsVisiveisNaRaia++;
+        }} else {{
+          card.style.display = 'none';
+        }}
+      }});
+
+      // A raia só é visível se o líder atender ao filtro E tiver projetos correspondentes à área/busca
+      if (leaderMatch && cardsVisiveisNaRaia > 0) {{
         lane.style.display = 'block';
       }} else {{
         lane.style.display = 'none';
       }}
     }});
 
-    // 3. Filtrar e Destacar no Painel de Ranking de Rentabilidade (3 Colunas)
+    // 4. Filtrar e Destacar no Painel de Ranking de Rentabilidade (3 Colunas)
     let totalVisiveisRanking = 0;
     const colunas = ['ranking-col-1', 'ranking-col-2', 'ranking-col-3'];
 
@@ -1167,11 +1299,18 @@ def sync_lider():
 
       items.forEach(item => {{
         const itemLider = (item.getAttribute('data-lider') || '').toLowerCase();
-        if (isTodos || itemLider === lider) {{
+        const itemTitulo = (item.getAttribute('data-titulo') || '').toLowerCase();
+        const itemArea = (item.getAttribute('data-area') || '').toLowerCase();
+
+        const matchLider = isTodosLider || (itemLider === currentLider);
+        const matchArea = isTodasArea || (itemArea === currentArea);
+        const matchSearch = !q || itemTitulo.includes(q) || itemLider.includes(q) || itemArea.includes(q);
+
+        if (matchLider && matchArea && matchSearch) {{
           item.style.display = 'block';
           visiveisNaColuna++;
           totalVisiveisRanking++;
-          if (!isTodos) {{
+          if (!isTodosLider || !isTodasArea || q) {{
             item.classList.add('ring-2', 'ring-sky-500', 'shadow-md');
           }} else {{
             item.classList.remove('ring-2', 'ring-sky-500', 'shadow-md');
@@ -1182,13 +1321,13 @@ def sync_lider():
         }}
       }});
 
-      // Exibir aviso se este líder não tiver projetos nesta coluna
+      // Exibir aviso se não houver projetos nesta coluna
       let emptyMsg = colEl.querySelector('.ranking-empty-msg');
-      if (visiveisNaColuna === 0 && !isTodos) {{
+      if (visiveisNaColuna === 0) {{
         if (!emptyMsg) {{
           emptyMsg = document.createElement('div');
           emptyMsg.className = 'ranking-empty-msg p-4 text-center text-xs text-slate-500 dark:text-gray-400 bg-white/60 dark:bg-slate-900/50 rounded-xl border border-dashed border-slate-300 dark:border-white/10 my-auto flex flex-col items-center justify-center gap-1';
-          emptyMsg.innerHTML = '<span class="material-symbols-outlined text-lg opacity-60">info</span><span>Nenhum projeto deste líder nesta faixa</span>';
+          emptyMsg.innerHTML = '<span class="material-symbols-outlined text-lg opacity-60">info</span><span>Nenhum projeto encontrado nesta faixa</span>';
           colEl.appendChild(emptyMsg);
         }}
         emptyMsg.style.display = 'flex';
@@ -1197,32 +1336,27 @@ def sync_lider():
       }}
     }});
 
-    // 4. Atualizar badge de status do ranking
+    // 5. Atualizar badge de status do ranking
     const rankingBadge = document.getElementById('rankingStatusBadge');
     if (rankingBadge) {{
-      if (isTodos) {{
+      if (isTodosLider && isTodasArea && !q) {{
         rankingBadge.textContent = 'Top 20 Rentáveis & Bottom 10';
         rankingBadge.className = 'px-3 py-1 rounded-lg text-xs font-bold bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-500/30';
       }} else {{
-        const nomeFormatado = lider.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-        rankingBadge.textContent = `Projetos de ${{nomeFormatado}} (${{totalVisiveisRanking}} no ranking)`;
+        let labels = [];
+        if (!isTodosLider) {{
+          const nomeFmt = currentLider.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+          labels.push(nomeFmt);
+        }}
+        if (!isTodasArea) {{
+          const areaFmt = currentArea.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+          labels.push(areaFmt);
+        }}
+        if (q) labels.push(`"${{q}}"`);
+        rankingBadge.textContent = `${{labels.join(' • ')}} (${{totalVisiveisRanking}} no ranking)`;
         rankingBadge.className = 'px-3 py-1 rounded-lg text-xs font-extrabold bg-sky-500 text-white border border-sky-400 shadow-sm';
       }}
     }}
-  }}
-
-  // 🔎 Busca de Contratos
-  function buscarProjetos() {{
-    const q = document.getElementById('searchProject').value.toLowerCase().trim();
-    document.querySelectorAll('.project-card').forEach(card => {{
-      const titulo = card.getAttribute('data-titulo') || '';
-      const lider = card.getAttribute('data-lider') || '';
-      if (!q || titulo.includes(q) || lider.includes(q)) {{
-        card.style.display = 'flex';
-      }} else {{
-        card.style.display = 'none';
-      }}
-    }});
   }}
 </script>
 

@@ -101,6 +101,27 @@ function cleanTitleCase(text) {
   return resParts.join('');
 }
 
+function getProjectArea(titulo, lider = '') {
+  const t = (titulo || '').toUpperCase();
+  const l = (lider || '').toUpperCase();
+
+  if (t.includes('CAMPUS BH') || t.includes('VEIGA DE ALMEIDA')) return 'Educação';
+  if (t.includes('NNOS ACADEMY') || t.includes('INNOVATION')) return 'Innovation';
+  if (t.includes('DEALER STANDARD') || t.startsWith('DM -') || t.includes('DDN') || t.includes('DEALER DEVELOPMENT')) return 'Dealer Development';
+  if (t.includes('INSTRUTORES PORSCHE')) return 'HRD';
+  if (t.includes('BACKOFFICE') || t.includes('CONSULTORIA PÓS-VENDAS') || t.includes('POE') || t.includes('INSTRUTORES CNH')) return 'Outsourcing';
+
+  if (l.includes('BEATRIZ')) return 'HRD';
+  if (l.includes('CAROLINE')) return 'Business Solutions';
+  if (l.includes('JEFFERSON')) return 'Dealer Development';
+  if (l.includes('VINICIUS')) return 'Outsourcing';
+  if (l.includes('JOICE')) return 'Educação';
+  if (l.includes('LEONARDO')) return 'Innovation';
+  if (l.includes('FÁBIO') || l.includes('FABIO')) return 'Outsourcing';
+
+  return 'Outsourcing';
+}
+
 async function run() {
   const t = await token();
   const sheetId = '1oyOo2Y5HXTEN_8LhW9ekMNRBssCxZ5uyCFFQnB9Z1PM';
@@ -181,9 +202,11 @@ async function run() {
           else if (margemPct < 22) statusCor = 'amber';
           else if (margemPct <= 30) statusCor = 'sky';
 
+          const pArea = getProjectArea(rawTitle, currentLeader.nomeRaw);
           const card = {
             titulo: cleanTitleCase(rawTitle),
             tituloRaw: rawTitle,
+            area: pArea,
             receita,
             receitaPct,
             impostos,
@@ -224,6 +247,7 @@ async function run() {
         ranking: rank,
         projeto: cleanTitleCase(proj),
         lider: cleanTitleCase(lider),
+        area: getProjectArea(proj, lider),
         receita,
         margem,
         margemPct
@@ -246,6 +270,7 @@ async function run() {
         ranking: rank,
         projeto: cleanTitleCase(proj),
         lider: cleanTitleCase(lider),
+        area: getProjectArea(proj, lider),
         receita,
         margem,
         margemPct
