@@ -26,10 +26,12 @@ $trigger = New-ScheduledTaskTrigger -Daily -At $Horario
 $settings = New-ScheduledTaskSettingsSet `
     -AllowStartIfOnBatteries `
     -DontStopIfGoingOnBatteries `
-    -StartWhenAvailable
+    -StartWhenAvailable `
+    -WakeToRun
 
 try {
-    # Remove tarefa anterior se já existir
+    # Remove tarefa anterior e tarefa legada em duplicidade se existirem
+    Unregister-ScheduledTask -TaskName "NNOS_Sync_Planilha_Diaria" -Confirm:$false -ErrorAction SilentlyContinue
     Unregister-ScheduledTask -TaskName $TaskName -Confirm:$false -ErrorAction SilentlyContinue
 
     Register-ScheduledTask `
