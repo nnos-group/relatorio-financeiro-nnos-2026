@@ -650,6 +650,18 @@
   {
     "id": 55,
     "projeto": "",
+    "nome": "Workshop Insight Sales Lai",
+    "local": "Buenos Aires - Arg",
+    "mes": "Out",
+    "tipo": "nac",
+    "valor": 0,
+    "categoria": "Treinamentos",
+    "dtIni": "26/10/2026",
+    "dtFim": "30/10/2026"
+  },
+  {
+    "id": 56,
+    "projeto": "",
     "nome": "Workshop Plano de Manutenção Interativo",
     "local": "CT - Sorocaba - SP",
     "mes": "Fev",
