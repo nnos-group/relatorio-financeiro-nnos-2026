@@ -422,18 +422,6 @@
   {
     "id": 36,
     "projeto": "",
-    "nome": "Prospecção P. Alegre",
-    "local": "Pouso Alegre - MG",
-    "mes": "Out",
-    "tipo": "nac",
-    "valor": 1340.34,
-    "categoria": "Prospecção",
-    "dtIni": "01/10/2026",
-    "dtFim": "02/10/2026"
-  },
-  {
-    "id": 37,
-    "projeto": "",
     "nome": "Prospecção Porsche",
     "local": "São Paulo - SP",
     "mes": "Mar",
@@ -444,7 +432,7 @@
     "dtFim": "09/03/2026"
   },
   {
-    "id": 38,
+    "id": 37,
     "projeto": "",
     "nome": "Prospecção Porsche",
     "local": "São Paulo",
@@ -456,7 +444,7 @@
     "dtFim": "23/01/2026"
   },
   {
-    "id": 39,
+    "id": 38,
     "projeto": "",
     "nome": "Prospecção Pouso Alegre",
     "local": "Pouso Alegre - MG",
@@ -466,6 +454,18 @@
     "categoria": "Prospecção",
     "dtIni": "18/06/2026",
     "dtFim": "19/06/2026"
+  },
+  {
+    "id": 39,
+    "projeto": "",
+    "nome": "Prospecção Viamondo",
+    "local": "Pouso Alegre - MG",
+    "mes": "Out",
+    "tipo": "nac",
+    "valor": 1340.34,
+    "categoria": "Prospecção",
+    "dtIni": "01/10/2026",
+    "dtFim": "02/10/2026"
   },
   {
     "id": 40,
@@ -625,18 +625,6 @@
   },
   {
     "id": 53,
-    "projeto": "",
-    "nome": "Workshop Insight Sales Lai",
-    "local": "Buenos Aires - Arg",
-    "mes": "Out",
-    "tipo": "nac",
-    "valor": 0,
-    "categoria": "Treinamentos",
-    "dtIni": "26/10/2026",
-    "dtFim": "30/10/2026"
-  },
-  {
-    "id": 54,
     "projeto": "",
     "nome": "Workshop Plano de Manutenção Interativo",
     "local": "CT - Sorocaba - SP",
