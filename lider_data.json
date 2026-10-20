@@ -1,17 +1,17 @@
 {
-  "updatedAt": "2026-10-19T11:00:09.431Z",
+  "updatedAt": "2026-10-20T11:00:17.326Z",
   "macro": {
-    "receita": 10644159.85,
+    "receita": 10644409.85,
     "custos": 7656976.19,
-    "custosPct": 71.93593762122993,
-    "impostos": 1303909.5899999999,
-    "impostosPct": 12.250000078681643,
-    "logistica": 796452.1900000001,
-    "logisticaPct": 7.482527519539271,
-    "repasse": -713236.51,
-    "repassePct": -6.700730917715409,
-    "margem": 1600058.3900000001,
-    "margemPct": 15.032265698264577,
+    "custosPct": 71.93424809737104,
+    "impostos": 1303940.22,
+    "impostosPct": 12.250000125652809,
+    "logistica": 799355.1300000001,
+    "logisticaPct": 7.509623748657143,
+    "repasse": -716139.45,
+    "repassePct": -6.727845508504165,
+    "margem": 1600277.76,
+    "margemPct": 15.033973536823181,
     "totalLideres": 7,
     "totalProjetos": 44
   },
@@ -31,10 +31,10 @@
         "impostosPct": 12.25,
         "custos": 1621932.42,
         "custosPct": 66.5,
-        "logistica": 298035.75,
-        "logisticaPct": 12.22,
-        "repasse": -274188.58,
-        "repassePct": -11.24,
+        "logistica": 300938.69,
+        "logisticaPct": 12.34,
+        "repasse": -277091.52,
+        "repassePct": -11.36,
         "margem": 494281.82,
         "margemPct": 20.27,
         "statusCor": "amber"
@@ -302,10 +302,10 @@
           "impostosPct": 12.25,
           "custos": 191358.63,
           "custosPct": 67.84,
-          "logistica": 35545.8,
-          "logisticaPct": 12.6,
-          "repasse": -35572.8,
-          "repassePct": -12.61,
+          "logistica": 38448.74,
+          "logisticaPct": 13.63,
+          "repasse": -38475.74,
+          "repassePct": -13.64,
           "margem": 56174.38,
           "margemPct": 19.92,
           "statusCor": "amber"
@@ -795,18 +795,18 @@
         "titulo": "Total - Leonardo Campos",
         "tituloRaw": "TOTAL - LEONARDO CAMPOS",
         "area": "Innovation",
-        "receita": 37686.45,
+        "receita": 37936.45,
         "receitaPct": 100,
-        "impostos": 4616.59,
+        "impostos": 4647.22,
         "impostosPct": 12.25,
         "custos": 428359.77,
-        "custosPct": 1136.64,
+        "custosPct": 1129.15,
         "logistica": 0,
         "logisticaPct": 0,
         "repasse": 0,
         "repassePct": 0,
-        "margem": -395289.91,
-        "margemPct": -1048.89,
+        "margem": -395070.54,
+        "margemPct": -1041.4,
         "statusCor": "rose"
       },
       "projetos": [
@@ -814,18 +814,18 @@
           "titulo": "NNOS Academy",
           "tituloRaw": "NNOS ACADEMY",
           "area": "Innovation",
-          "receita": 37686.45,
+          "receita": 37936.45,
           "receitaPct": 100,
-          "impostos": 4616.59,
+          "impostos": 4647.22,
           "impostosPct": 12.25,
           "custos": 428359.77,
-          "custosPct": 1136.64,
+          "custosPct": 1129.15,
           "logistica": 0,
           "logisticaPct": 0,
           "repasse": 0,
           "repassePct": 0,
-          "margem": -395289.91,
-          "margemPct": -1048.89,
+          "margem": -395070.54,
+          "margemPct": -1041.4,
           "statusCor": "rose"
         }
       ]
@@ -1179,9 +1179,9 @@
       "projeto": "NNOS Academy",
       "lider": "Leonardo Campos",
       "area": "Innovation",
-      "receita": 37686.45,
-      "margem": -395289.91,
-      "margemPct": -1048.89
+      "receita": 37936.45,
+      "margem": -395070.54,
+      "margemPct": -1041.4
     },
     {
       "ranking": 2,
@@ -1269,10 +1269,10 @@
     {
       "area": "Innovation",
       "meta": 300000,
-      "realizado": 37686.45,
-      "atingidoPct": "12,56%",
-      "falta": 262313.55,
-      "faltaPct": "87,44%",
+      "realizado": 37936.45,
+      "atingidoPct": "12,65%",
+      "falta": 262063.55,
+      "faltaPct": "87,35%",
       "isTotal": false
     },
     {
@@ -1323,9 +1323,9 @@
     {
       "area": "Meta Geral 2026",
       "meta": 15000000,
-      "realizado": 10644159.85,
+      "realizado": 10644409.85,
       "atingidoPct": "70,96%",
-      "falta": 4355840.15,
+      "falta": 4355590.15,
       "faltaPct": "29,04%",
       "isTotal": true
     }
@@ -2666,7 +2666,7 @@
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 13875,
+        "TOTAL": 0,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -2675,8 +2675,8 @@
         "JUNHO": 0,
         "JULHO": 0,
         "AGOSTO": 0,
-        "SETEMBRO": 1875,
-        "OUTUBRO": 12000,
+        "SETEMBRO": 0,
+        "OUTUBRO": 0,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
       },
@@ -3221,7 +3221,7 @@
       "lider": "Leonardo Campos",
       "area": "Innovation",
       "previsto": {
-        "TOTAL": 37686.45,
+        "TOTAL": 37936.45,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -3232,7 +3232,7 @@
         "AGOSTO": 4145.8,
         "SETEMBRO": 5575,
         "OUTUBRO": 7035.05,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 250,
         "DEZEMBRO": 0
       },
       "realizado": {
