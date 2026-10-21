@@ -50,8 +50,10 @@ def sync_lider():
 
     def fmt_pct(val):
         if val is None:
-            return "0,0%"
-        return f"{val:,.2f}%".replace(".", ",")
+            return "0,00%"
+        neg = val < 0
+        s = f"{abs(val):,.2f}%".replace(",", "X").replace(".", ",").replace("X", ".")
+        return f"-{s}" if neg else s
 
     # Iniciais dos líderes para avatar no ranking
     leader_iniciais = {
@@ -264,10 +266,10 @@ def sync_lider():
                 <span class="{'text-rose-600 dark:text-rose-400 font-bold' if p_marg < 0 else 'text-emerald-700 dark:text-emerald-400 font-bold'}">Margem {fmt_pct(p_marg_pct)}</span>
               </div>
               <div class="w-full h-2 bg-slate-100 dark:bg-slate-950 rounded-full overflow-hidden flex border border-slate-200 dark:border-white/5">
-                <div class="bg-slate-400 h-full" style="width: {w_imp}%" title="Impostos: {p_imp_pct:.1f}%"></div>
-                <div class="{'bg-rose-500' if p_cust_pct > 70 else 'bg-amber-400'} h-full" style="width: {w_cust}%" title="Custos: {p_cust_pct:.1f}%"></div>
-                <div class="bg-sky-400 h-full" style="width: {w_log}%" title="Logística: {p_log_pct:.1f}%"></div>
-                <div class="{'bg-rose-600' if p_marg < 0 else 'bg-emerald-500'} h-full" style="width: {w_marg}%" title="Margem: {p_marg_pct:.1f}%"></div>
+                <div class="bg-slate-400 h-full" style="width: {w_imp}%" title="Impostos: {fmt_pct(p_imp_pct)}"></div>
+                <div class="{'bg-rose-500' if p_cust_pct > 70 else 'bg-amber-400'} h-full" style="width: {w_cust}%" title="Custos: {fmt_pct(p_cust_pct)}"></div>
+                <div class="bg-sky-400 h-full" style="width: {w_log}%" title="Logística: {fmt_pct(p_log_pct)}"></div>
+                <div class="{'bg-rose-600' if p_marg < 0 else 'bg-emerald-500'} h-full" style="width: {w_marg}%" title="Margem: {fmt_pct(p_marg_pct)}"></div>
               </div>
             </div>
           </div>
@@ -465,7 +467,7 @@ def sync_lider():
             s = f"{abs_v / 1e3:.1f}" if (abs_v / 1e3) % 1 != 0 else f"{abs_v / 1e3:.0f}"
             return f"{s}K".replace(".", ",")
         else:
-            return f"{abs_v:,.0f}".replace(".", ",")
+            return f"{abs_v:,.0f}".replace(",", ".")
 
     def get_pct_float(pct_str):
         if not pct_str or pct_str == "—":
@@ -915,9 +917,69 @@ def sync_lider():
     </div>
   </section>
 
-  <!-- ──────── FILTROS POR LÍDER, ÁREA E BUSCA ──────── -->
+  <!-- ──────── FILTROS POR COMPETÊNCIA, LÍDER, ÁREA E BUSCA ──────── -->
   <section class="flex flex-col gap-3 p-4 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-white/10 shadow-sm dark:shadow-lg">
-    <!-- Linha 1: Filtro de Líder + Busca Textual -->
+    <!-- Linha 1: Competência / Mês (Conforme Modelo Executivo Print 3) -->
+    <div class="flex items-center gap-2 overflow-x-auto pb-1 lg:pb-0 scrollbar-none flex-nowrap">
+      <span class="text-xs font-black text-slate-700 dark:text-gray-300 uppercase tracking-wider whitespace-nowrap mr-1 flex items-center gap-1.5">
+        <span class="material-symbols-outlined text-base text-[#1b365d] dark:text-sky-400">calendar_month</span>
+        COMPETÊNCIA:
+      </span>
+
+      <!-- Dropdown / Pill do Ano -->
+      <div class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-[#0f2444] dark:text-sky-300 border border-slate-200 dark:border-white/10 text-xs font-black shadow-xs whitespace-nowrap cursor-default mr-1">
+        <span>2026</span>
+        <span class="material-symbols-outlined text-sm text-slate-500 dark:text-gray-400">expand_more</span>
+      </div>
+
+      <!-- Botões de Meses (Todos + Jan a Dez) -->
+      <div class="flex items-center gap-1 overflow-x-auto scrollbar-none flex-nowrap">
+        <button onclick="filtrarMesFaturamento('TOTAL')" data-mes="TOTAL" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-black bg-[#0f2444] dark:bg-sky-500 text-white border border-[#0f2444] dark:border-sky-400 transition-all cursor-pointer shadow-xs whitespace-nowrap">
+          Todos
+        </button>
+        <button onclick="filtrarMesFaturamento('JANEIRO')" data-mes="JANEIRO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
+          Jan
+        </button>
+        <button onclick="filtrarMesFaturamento('FEVEREIRO')" data-mes="FEVEREIRO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
+          Fev
+        </button>
+        <button onclick="filtrarMesFaturamento('MARÇO')" data-mes="MARÇO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
+          Mar
+        </button>
+        <button onclick="filtrarMesFaturamento('ABRIL')" data-mes="ABRIL" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
+          Abr
+        </button>
+        <button onclick="filtrarMesFaturamento('MAIO')" data-mes="MAIO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
+          Mai
+        </button>
+        <button onclick="filtrarMesFaturamento('JUNHO')" data-mes="JUNHO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
+          Jun
+        </button>
+        <button onclick="filtrarMesFaturamento('JULHO')" data-mes="JULHO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
+          Jul
+        </button>
+        <button onclick="filtrarMesFaturamento('AGOSTO')" data-mes="AGOSTO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
+          Ago
+        </button>
+        <button onclick="filtrarMesFaturamento('SETEMBRO')" data-mes="SETEMBRO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
+          Set
+        </button>
+        <button onclick="filtrarMesFaturamento('OUTUBRO')" data-mes="OUTUBRO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
+          Out
+        </button>
+        <button onclick="filtrarMesFaturamento('NOVEMBRO')" data-mes="NOVEMBRO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
+          Nov
+        </button>
+        <button onclick="filtrarMesFaturamento('DEZEMBRO')" data-mes="DEZEMBRO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
+          Dez
+        </button>
+      </div>
+    </div>
+
+    <!-- Divisória sutil -->
+    <div class="h-px w-full bg-slate-200/80 dark:bg-white/5"></div>
+
+    <!-- Linha 2: Filtro de Líder + Busca Textual -->
     <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
       <div class="flex items-center gap-1.5 overflow-x-auto pb-1 lg:pb-0 scrollbar-none flex-wrap sm:flex-nowrap">
         <span class="text-xs font-bold text-slate-500 dark:text-gray-400 uppercase tracking-wider whitespace-nowrap mr-1 flex items-center gap-1">
@@ -1154,50 +1216,50 @@ def sync_lider():
       </div>
     </div>
 
-    <!-- Barra de Filtro por Mês (Ano + Janeiro a Dezembro) -->
+    <!-- Barra de Filtro por Mês (Todos + Jan a Dez) -->
     <div class="p-3 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-white/10 shadow-sm flex items-center gap-1.5 overflow-x-auto scrollbar-none">
       <span class="text-xs font-bold text-slate-500 dark:text-gray-400 uppercase tracking-wider whitespace-nowrap mr-1 flex items-center gap-1">
         <span class="material-symbols-outlined text-sm text-sky-500">date_range</span>
         Mês:
       </span>
-      <button onclick="filtrarMesFaturamento('TOTAL')" data-mes="TOTAL" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-[#1b365d] dark:bg-sky-500 text-white border border-[#142948] dark:border-sky-400 transition-all cursor-pointer shadow-xs whitespace-nowrap">
-        Ano
+      <button onclick="filtrarMesFaturamento('TOTAL')" data-mes="TOTAL" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-black bg-[#0f2444] dark:bg-sky-500 text-white border border-[#0f2444] dark:border-sky-400 transition-all cursor-pointer shadow-xs whitespace-nowrap">
+        Todos
       </button>
-      <button onclick="filtrarMesFaturamento('JANEIRO')" data-mes="JANEIRO" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap">
-        Janeiro
+      <button onclick="filtrarMesFaturamento('JANEIRO')" data-mes="JANEIRO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
+        Jan
       </button>
-      <button onclick="filtrarMesFaturamento('FEVEREIRO')" data-mes="FEVEREIRO" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap">
-        Fevereiro
+      <button onclick="filtrarMesFaturamento('FEVEREIRO')" data-mes="FEVEREIRO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
+        Fev
       </button>
-      <button onclick="filtrarMesFaturamento('MARÇO')" data-mes="MARÇO" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap">
-        Março
+      <button onclick="filtrarMesFaturamento('MARÇO')" data-mes="MARÇO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
+        Mar
       </button>
-      <button onclick="filtrarMesFaturamento('ABRIL')" data-mes="ABRIL" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap">
-        Abril
+      <button onclick="filtrarMesFaturamento('ABRIL')" data-mes="ABRIL" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
+        Abr
       </button>
-      <button onclick="filtrarMesFaturamento('MAIO')" data-mes="MAIO" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap">
-        Maio
+      <button onclick="filtrarMesFaturamento('MAIO')" data-mes="MAIO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
+        Mai
       </button>
-      <button onclick="filtrarMesFaturamento('JUNHO')" data-mes="JUNHO" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap">
-        Junho
+      <button onclick="filtrarMesFaturamento('JUNHO')" data-mes="JUNHO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
+        Jun
       </button>
-      <button onclick="filtrarMesFaturamento('JULHO')" data-mes="JULHO" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap">
-        Julho
+      <button onclick="filtrarMesFaturamento('JULHO')" data-mes="JULHO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
+        Jul
       </button>
-      <button onclick="filtrarMesFaturamento('AGOSTO')" data-mes="AGOSTO" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap">
-        Agosto
+      <button onclick="filtrarMesFaturamento('AGOSTO')" data-mes="AGOSTO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
+        Ago
       </button>
-      <button onclick="filtrarMesFaturamento('SETEMBRO')" data-mes="SETEMBRO" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap">
-        Setembro
+      <button onclick="filtrarMesFaturamento('SETEMBRO')" data-mes="SETEMBRO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
+        Set
       </button>
-      <button onclick="filtrarMesFaturamento('OUTUBRO')" data-mes="OUTUBRO" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap">
-        Outubro
+      <button onclick="filtrarMesFaturamento('OUTUBRO')" data-mes="OUTUBRO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
+        Out
       </button>
-      <button onclick="filtrarMesFaturamento('NOVEMBRO')" data-mes="NOVEMBRO" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap">
-        Novembro
+      <button onclick="filtrarMesFaturamento('NOVEMBRO')" data-mes="NOVEMBRO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
+        Nov
       </button>
-      <button onclick="filtrarMesFaturamento('DEZEMBRO')" data-mes="DEZEMBRO" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap">
-        Dezembro
+      <button onclick="filtrarMesFaturamento('DEZEMBRO')" data-mes="DEZEMBRO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
+        Dez
       </button>
     </div>
 
@@ -1554,15 +1616,22 @@ def sync_lider():
     document.querySelectorAll('.mes-filter-btn').forEach(btn => {{
       const m = btn.getAttribute('data-mes');
       if (m === currentMesFaturamento) {{
-        btn.className = 'mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-[#1b365d] dark:bg-sky-500 text-white border border-[#142948] dark:border-sky-400 transition-all cursor-pointer shadow-xs whitespace-nowrap';
+        btn.className = 'mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-black bg-[#0f2444] dark:bg-sky-500 text-white border border-[#0f2444] dark:border-sky-400 transition-all cursor-pointer shadow-xs whitespace-nowrap';
       }} else {{
-        btn.className = 'mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer whitespace-nowrap';
+        btn.className = 'mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap';
       }}
     }});
 
     const labelEl = document.getElementById('labelMesAtivo');
     if (labelEl) {{
-      labelEl.textContent = (mes === 'TOTAL') ? 'Ano' : ('Mês: ' + mes.charAt(0) + mes.slice(1).toLowerCase());
+      const nomes = {{
+        'TOTAL': 'Ano',
+        'JANEIRO': 'Janeiro', 'FEVEREIRO': 'Fevereiro', 'MARÇO': 'Março',
+        'ABRIL': 'Abril', 'MAIO': 'Maio', 'JUNHO': 'Junho',
+        'JULHO': 'Julho', 'AGOSTO': 'Agosto', 'SETEMBRO': 'Setembro',
+        'OUTUBRO': 'Outubro', 'NOVEMBRO': 'Novembro', 'DEZEMBRO': 'Dezembro'
+      }};
+      labelEl.textContent = nomes[mes] || mes;
     }}
 
     atualizarPainelFaturamento();
@@ -1678,7 +1747,7 @@ def sync_lider():
 
     if (kpiPrev) kpiPrev.textContent = formatBRL(totPrev);
     if (kpiReal) kpiReal.textContent = formatBRL(totReal);
-    if (kpiPct) kpiPct.textContent = `${{pctGlobal.toFixed(1).replace('.', ',')}}%`;
+    if (kpiPct) kpiPct.textContent = Number(pctGlobal).toLocaleString('pt-BR', {{ minimumFractionDigits: 1, maximumFractionDigits: 1 }}) + '%';
     if (kpiDesvioBadge) {{
       kpiDesvioBadge.textContent = `${{desvioGlobal >= 0 ? '+' : ''}}${{formatBRL(desvioGlobal)}}`;
       if (desvioGlobal >= 0) {{
