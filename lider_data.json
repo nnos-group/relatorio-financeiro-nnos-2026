@@ -1,17 +1,17 @@
 {
-  "updatedAt": "2026-10-23T11:13:21.432Z",
+  "updatedAt": "2026-10-24T11:00:12.323Z",
   "macro": {
-    "receita": 10554911.860000001,
-    "custos": 7672753.2,
-    "custosPct": 72.69367382476653,
-    "impostos": 1292976.72,
-    "impostosPct": 12.250000162483591,
+    "receita": 10558569.78,
+    "custos": 7682224.57,
+    "custosPct": 72.75819291881406,
+    "impostos": 1293424.8099999998,
+    "impostosPct": 12.250000113178206,
     "logistica": 842297.55,
-    "logisticaPct": 7.980147642843509,
-    "repasse": -725431.98,
-    "repassePct": -6.872932617743337,
-    "margem": 1472316.3699999999,
-    "margemPct": 13.949110987649686,
+    "logisticaPct": 7.977382993627383,
+    "repasse": -731746.74,
+    "repassePct": -6.9303585167952555,
+    "margem": 1472369.59,
+    "margemPct": 13.94478249117562,
     "totalLideres": 7,
     "totalProjetos": 44
   },
@@ -25,17 +25,17 @@
         "titulo": "Total - Beatriz Picorelli",
         "tituloRaw": "TOTAL - BEATRIZ PICORELLI",
         "area": "HRD",
-        "receita": 2396118.43,
+        "receita": 2399776.35,
         "receitaPct": 100,
-        "impostos": 293524.51,
+        "impostos": 293972.6,
         "impostosPct": 12.25,
-        "custos": 1609091.25,
-        "custosPct": 67.15,
+        "custos": 1611744.44,
+        "custosPct": 67.16,
         "logistica": 304920.72,
-        "logisticaPct": 12.73,
+        "logisticaPct": 12.71,
         "repasse": -277091.52,
-        "repassePct": -11.56,
-        "margem": 465673.47,
+        "repassePct": -11.55,
+        "margem": 466230.11,
         "margemPct": 19.43,
         "statusCor": "amber"
       },
@@ -228,14 +228,14 @@
           "receitaPct": 100,
           "impostos": 131164.43,
           "impostosPct": 12.25,
-          "custos": 706175.84,
-          "custosPct": 65.95,
+          "custos": 706360.95,
+          "custosPct": 65.97,
           "logistica": 97089.62,
           "logisticaPct": 9.07,
           "repasse": -99813.16,
           "repassePct": -9.32,
-          "margem": 236113.34,
-          "margemPct": 22.05,
+          "margem": 235928.23,
+          "margemPct": 22.03,
           "statusCor": "sky"
         },
         {
@@ -278,18 +278,18 @@
           "titulo": "Serviços CNH",
           "tituloRaw": "SERVIÇOS CNH",
           "area": "HRD",
-          "receita": 304979.08,
+          "receita": 308637,
           "receitaPct": 100,
-          "impostos": 37359.94,
+          "impostos": 37808.03,
           "impostosPct": 12.25,
-          "custos": 157436.83,
-          "custosPct": 51.62,
+          "custos": 159904.91,
+          "custosPct": 51.81,
           "logistica": 123413.7,
-          "logisticaPct": 40.47,
+          "logisticaPct": 39.99,
           "repasse": -118079.91,
-          "repassePct": -38.72,
-          "margem": 104848.52,
-          "margemPct": 34.38,
+          "repassePct": -38.26,
+          "margem": 105590.26,
+          "margemPct": 34.21,
           "statusCor": "emerald"
         },
         {
@@ -657,14 +657,14 @@
         "receitaPct": 100,
         "impostos": 111020.01,
         "impostosPct": 12.25,
-        "custos": 440506.57,
-        "custosPct": 48.61,
+        "custos": 447324.75,
+        "custosPct": 49.36,
         "logistica": 20901.34,
         "logisticaPct": 2.31,
         "repasse": 0,
         "repassePct": 0,
-        "margem": 333857.88,
-        "margemPct": 36.84,
+        "margem": 327039.7,
+        "margemPct": 36.09,
         "statusCor": "emerald"
       },
       "projetos": [
@@ -730,14 +730,14 @@
           "receitaPct": 100,
           "impostos": 22907.5,
           "impostosPct": 12.25,
-          "custos": 133886.36,
-          "custosPct": 71.6,
+          "custos": 140704.55,
+          "custosPct": 75.24,
           "logistica": 20901.34,
           "logisticaPct": 11.18,
           "repasse": 0,
           "repassePct": 0,
-          "margem": 9304.8,
-          "margemPct": 4.98,
+          "margem": 2486.61,
+          "margemPct": 1.33,
           "statusCor": "amber"
         }
       ]
@@ -847,10 +847,10 @@
         "custosPct": 72.55,
         "logistica": 391967.64,
         "logisticaPct": 7.6,
-        "repasse": -358741.93,
-        "repassePct": -6.96,
-        "margem": 750535.58,
-        "margemPct": 14.55,
+        "repasse": -365056.69,
+        "repassePct": -7.08,
+        "margem": 756850.34,
+        "margemPct": 14.67,
         "statusCor": "amber"
       },
       "projetos": [
@@ -902,10 +902,10 @@
           "custosPct": 69.64,
           "logistica": 332358.99,
           "logisticaPct": 13.61,
-          "repasse": -315729.23,
-          "repassePct": -12.93,
-          "margem": 425596.35,
-          "margemPct": 17.43,
+          "repasse": -322043.99,
+          "repassePct": -13.19,
+          "margem": 431911.11,
+          "margemPct": 17.69,
           "statusCor": "amber"
         }
       ]
@@ -998,8 +998,8 @@
       "lider": "Vinicius Souza",
       "area": "Outsourcing",
       "receita": 2441866.89,
-      "margem": 425596.35,
-      "margemPct": 17.43
+      "margem": 431911.11,
+      "margemPct": 17.69
     },
     {
       "ranking": 2,
@@ -1016,8 +1016,8 @@
       "lider": "Beatriz Picorelli",
       "area": "HRD",
       "receita": 1070730.08,
-      "margem": 236113.34,
-      "margemPct": 22.05
+      "margem": 235928.23,
+      "margemPct": 22.03
     },
     {
       "ranking": 4,
@@ -1042,9 +1042,9 @@
       "projeto": "Serviços CNH",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
-      "receita": 304979.08,
-      "margem": 104848.52,
-      "margemPct": 34.38
+      "receita": 308637,
+      "margem": 105590.26,
+      "margemPct": 34.21
     },
     {
       "ranking": 7,
@@ -1230,6 +1230,15 @@
     },
     {
       "ranking": 7,
+      "projeto": "DDN - Business Assessment",
+      "lider": "Jefferson Souza",
+      "area": "Dealer Development",
+      "receita": 187000,
+      "margem": 2486.61,
+      "margemPct": 1.33
+    },
+    {
+      "ranking": 8,
       "projeto": "Case Comercial Construction",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
@@ -1238,7 +1247,7 @@
       "margemPct": 20.25
     },
     {
-      "ranking": 8,
+      "ranking": 9,
       "projeto": "Workshop Curitiba",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
@@ -1247,22 +1256,13 @@
       "margemPct": 64.35
     },
     {
-      "ranking": 9,
+      "ranking": 10,
       "projeto": "CNHI Técnico Construction",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
       "receita": 24489,
       "margem": 6680.59,
       "margemPct": 27.28
-    },
-    {
-      "ranking": 10,
-      "projeto": "Auditoria Estoque - Dinauto",
-      "lider": "Caroline Amieva",
-      "area": "Business Solutions",
-      "receita": 9000,
-      "margem": 7297.5,
-      "margemPct": 81.08
     }
   ],
   "metasAreas": [
@@ -1296,10 +1296,10 @@
     {
       "area": "Hrd - Human Resource Development",
       "meta": 3500000,
-      "realizado": 2707718.43,
-      "atingidoPct": "77,36%",
-      "falta": 792281.57,
-      "faltaPct": "22,64%",
+      "realizado": 2711376.35,
+      "atingidoPct": "77,47%",
+      "falta": 788623.65,
+      "faltaPct": "22,53%",
       "isTotal": false
     },
     {
@@ -1323,10 +1323,10 @@
     {
       "area": "Meta Geral 2026",
       "meta": 15000000,
-      "realizado": 10554911.87,
-      "atingidoPct": "70,37%",
-      "falta": 4445088.13,
-      "faltaPct": "29,63%",
+      "realizado": 10558569.79,
+      "atingidoPct": "70,39%",
+      "falta": 4441430.21,
+      "faltaPct": "29,61%",
       "isTotal": true
     }
   ],
@@ -1496,22 +1496,7 @@
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 26358.5,
-        "JANEIRO": 0,
-        "FEVEREIRO": 0,
-        "MARÇO": 0,
-        "ABRIL": 0,
-        "MAIO": 0,
-        "JUNHO": 0,
-        "JULHO": 0,
-        "AGOSTO": 0,
-        "SETEMBRO": 0,
-        "OUTUBRO": 26358.5,
-        "NOVEMBRO": 0,
-        "DEZEMBRO": 0
-      },
-      "atrasado": {
-        "TOTAL": 64013.6,
+        "TOTAL": 90372.1,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -1521,6 +1506,21 @@
         "JULHO": 0,
         "AGOSTO": 0,
         "SETEMBRO": 64013.6,
+        "OUTUBRO": 26358.5,
+        "NOVEMBRO": 0,
+        "DEZEMBRO": 0
+      },
+      "atrasado": {
+        "TOTAL": 0,
+        "JANEIRO": 0,
+        "FEVEREIRO": 0,
+        "MARÇO": 0,
+        "ABRIL": 0,
+        "MAIO": 0,
+        "JUNHO": 0,
+        "JULHO": 0,
+        "AGOSTO": 0,
+        "SETEMBRO": 0,
         "OUTUBRO": 0,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
@@ -1856,7 +1856,7 @@
       "lider": "Beatriz Picorelli",
       "area": "HRD",
       "previsto": {
-        "TOTAL": 304979.08000000013,
+        "TOTAL": 308637.0000000001,
         "JANEIRO": 5486.88,
         "FEVEREIRO": 19204.08,
         "MARÇO": 31092.319999999992,
@@ -1868,7 +1868,7 @@
         "SETEMBRO": 13717.2,
         "OUTUBRO": 34750.240000000005,
         "NOVEMBRO": 23776.479999999996,
-        "DEZEMBRO": 16460.64
+        "DEZEMBRO": 20118.559999999998
       },
       "realizado": {
         "TOTAL": 226915.42,
@@ -1886,21 +1886,6 @@
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 0,
-        "JANEIRO": 0,
-        "FEVEREIRO": 0,
-        "MARÇO": 0,
-        "ABRIL": 0,
-        "MAIO": 0,
-        "JUNHO": 0,
-        "JULHO": 0,
-        "AGOSTO": 0,
-        "SETEMBRO": 0,
-        "OUTUBRO": 0,
-        "NOVEMBRO": 0,
-        "DEZEMBRO": 0
-      },
-      "atrasado": {
         "TOTAL": 13717.2,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
@@ -1911,6 +1896,21 @@
         "JULHO": 0,
         "AGOSTO": 0,
         "SETEMBRO": 13717.2,
+        "OUTUBRO": 0,
+        "NOVEMBRO": 0,
+        "DEZEMBRO": 0
+      },
+      "atrasado": {
+        "TOTAL": 0,
+        "JANEIRO": 0,
+        "FEVEREIRO": 0,
+        "MARÇO": 0,
+        "ABRIL": 0,
+        "MAIO": 0,
+        "JUNHO": 0,
+        "JULHO": 0,
+        "AGOSTO": 0,
+        "SETEMBRO": 0,
         "OUTUBRO": 0,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
@@ -1951,22 +1951,7 @@
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 21561.9,
-        "JANEIRO": 0,
-        "FEVEREIRO": 0,
-        "MARÇO": 0,
-        "ABRIL": 0,
-        "MAIO": 0,
-        "JUNHO": 0,
-        "JULHO": 0,
-        "AGOSTO": 0,
-        "SETEMBRO": 0,
-        "OUTUBRO": 21561.9,
-        "NOVEMBRO": 0,
-        "DEZEMBRO": 0
-      },
-      "atrasado": {
-        "TOTAL": 4572.4,
+        "TOTAL": 26134.300000000003,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -1976,6 +1961,21 @@
         "JULHO": 0,
         "AGOSTO": 0,
         "SETEMBRO": 4572.4,
+        "OUTUBRO": 21561.9,
+        "NOVEMBRO": 0,
+        "DEZEMBRO": 0
+      },
+      "atrasado": {
+        "TOTAL": 0,
+        "JANEIRO": 0,
+        "FEVEREIRO": 0,
+        "MARÇO": 0,
+        "ABRIL": 0,
+        "MAIO": 0,
+        "JUNHO": 0,
+        "JULHO": 0,
+        "AGOSTO": 0,
+        "SETEMBRO": 0,
         "OUTUBRO": 0,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
@@ -2066,7 +2066,7 @@
         "DEZEMBRO": 0
       },
       "realizado": {
-        "TOTAL": 216549.96000000002,
+        "TOTAL": 246549.96000000002,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -2076,12 +2076,12 @@
         "JULHO": 54245.54,
         "AGOSTO": 11827.76,
         "SETEMBRO": 116536.66,
-        "OUTUBRO": 16950,
+        "OUTUBRO": 46950,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 133486.66,
+        "TOTAL": 163486.66,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -2091,7 +2091,7 @@
         "JULHO": 0,
         "AGOSTO": 0,
         "SETEMBRO": 116536.66,
-        "OUTUBRO": 16950,
+        "OUTUBRO": 46950,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
       },
@@ -2276,21 +2276,6 @@
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 0,
-        "JANEIRO": 0,
-        "FEVEREIRO": 0,
-        "MARÇO": 0,
-        "ABRIL": 0,
-        "MAIO": 0,
-        "JUNHO": 0,
-        "JULHO": 0,
-        "AGOSTO": 0,
-        "SETEMBRO": 0,
-        "OUTUBRO": 0,
-        "NOVEMBRO": 0,
-        "DEZEMBRO": 0
-      },
-      "atrasado": {
         "TOTAL": 21947.52,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
@@ -2301,6 +2286,21 @@
         "JULHO": 0,
         "AGOSTO": 0,
         "SETEMBRO": 21947.52,
+        "OUTUBRO": 0,
+        "NOVEMBRO": 0,
+        "DEZEMBRO": 0
+      },
+      "atrasado": {
+        "TOTAL": 0,
+        "JANEIRO": 0,
+        "FEVEREIRO": 0,
+        "MARÇO": 0,
+        "ABRIL": 0,
+        "MAIO": 0,
+        "JUNHO": 0,
+        "JULHO": 0,
+        "AGOSTO": 0,
+        "SETEMBRO": 0,
         "OUTUBRO": 0,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
@@ -3901,7 +3901,7 @@
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 1007.65,
+        "TOTAL": 0,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -3911,7 +3911,7 @@
         "JULHO": 0,
         "AGOSTO": 0,
         "SETEMBRO": 0,
-        "OUTUBRO": 1007.65,
+        "OUTUBRO": 0,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
       },
