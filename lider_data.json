@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-24T11:00:12.323Z",
+  "updatedAt": "2026-10-25T11:00:09.663Z",
   "macro": {
     "receita": 10558569.78,
     "custos": 7682224.57,
@@ -2081,7 +2081,7 @@
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 163486.66,
+        "TOTAL": 140940.24,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -2090,13 +2090,13 @@
         "JUNHO": 0,
         "JULHO": 0,
         "AGOSTO": 0,
-        "SETEMBRO": 116536.66,
+        "SETEMBRO": 93990.23999999999,
         "OUTUBRO": 46950,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
       },
       "atrasado": {
-        "TOTAL": 0,
+        "TOTAL": 22546.42,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -2105,7 +2105,7 @@
         "JUNHO": 0,
         "JULHO": 0,
         "AGOSTO": 0,
-        "SETEMBRO": 0,
+        "SETEMBRO": 22546.42,
         "OUTUBRO": 0,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
