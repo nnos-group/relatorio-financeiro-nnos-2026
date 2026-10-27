@@ -1,17 +1,17 @@
 {
-  "updatedAt": "2026-10-27T11:00:11.122Z",
+  "updatedAt": "2026-10-27T19:18:29.326Z",
   "macro": {
-    "receita": 10558569.78,
-    "custos": 7682224.57,
-    "custosPct": 72.75819291881406,
-    "impostos": 1293424.8099999998,
-    "impostosPct": 12.250000113178206,
-    "logistica": 847590.2,
-    "logisticaPct": 8.02750957431282,
-    "repasse": -737335.3900000001,
-    "repassePct": -6.983288507470566,
-    "margem": 1472665.59,
-    "margemPct": 13.94758590116549,
+    "receita": 10552168.42,
+    "custos": 7680126.7,
+    "custosPct": 72.78244996017605,
+    "impostos": 1292640.65,
+    "impostosPct": 12.25000017579325,
+    "logistica": 854519.71,
+    "logisticaPct": 8.098048438844003,
+    "repasse": -745463.9500000001,
+    "repassePct": -7.064556973778855,
+    "margem": 1470345.3099999998,
+    "margemPct": 13.934058398965545,
     "totalLideres": 7,
     "totalProjetos": 44
   },
@@ -25,18 +25,18 @@
         "titulo": "Total - Beatriz Picorelli",
         "tituloRaw": "TOTAL - BEATRIZ PICORELLI",
         "area": "HRD",
-        "receita": 2399776.35,
+        "receita": 2393374.99,
         "receitaPct": 100,
-        "impostos": 293972.6,
+        "impostos": 293188.44,
         "impostosPct": 12.25,
-        "custos": 1611744.44,
-        "custosPct": 67.16,
-        "logistica": 304920.72,
-        "logisticaPct": 12.71,
-        "repasse": -277091.52,
-        "repassePct": -11.55,
-        "margem": 466230.11,
-        "margemPct": 19.43,
+        "custos": 1609646.57,
+        "custosPct": 67.25,
+        "logistica": 305943.8,
+        "logisticaPct": 12.78,
+        "repasse": -285220.08,
+        "repassePct": -11.92,
+        "margem": 469816.26,
+        "margemPct": 19.63,
         "statusCor": "amber"
       },
       "projetos": [
@@ -194,12 +194,12 @@
           "impostosPct": 12.25,
           "custos": 164845.43,
           "custosPct": 66.05,
-          "logistica": 15783.23,
-          "logisticaPct": 6.32,
-          "repasse": -2509.91,
-          "repassePct": -1.01,
-          "margem": 40896.44,
-          "margemPct": 16.39,
+          "logistica": 16806.31,
+          "logisticaPct": 6.73,
+          "repasse": -10638.47,
+          "repassePct": -4.26,
+          "margem": 48001.92,
+          "margemPct": 19.23,
           "statusCor": "amber"
         },
         {
@@ -224,18 +224,18 @@
           "titulo": "Parts Academy",
           "tituloRaw": "PARTS ACADEMY",
           "area": "HRD",
-          "receita": 1070730.08,
+          "receita": 1064328.72,
           "receitaPct": 100,
-          "impostos": 131164.43,
+          "impostos": 130380.27,
           "impostosPct": 12.25,
-          "custos": 706360.95,
-          "custosPct": 65.97,
+          "custos": 700560.95,
+          "custosPct": 65.82,
           "logistica": 97089.62,
-          "logisticaPct": 9.07,
+          "logisticaPct": 9.12,
           "repasse": -99813.16,
-          "repassePct": -9.32,
-          "margem": 235928.23,
-          "margemPct": 22.03,
+          "repassePct": -9.38,
+          "margem": 236111.04,
+          "margemPct": 22.18,
           "statusCor": "sky"
         },
         {
@@ -282,14 +282,14 @@
           "receitaPct": 100,
           "impostos": 37808.03,
           "impostosPct": 12.25,
-          "custos": 159904.91,
-          "custosPct": 51.81,
+          "custos": 163607.04,
+          "custosPct": 53.01,
           "logistica": 123413.7,
           "logisticaPct": 39.99,
           "repasse": -118079.91,
           "repassePct": -38.26,
-          "margem": 105590.26,
-          "margemPct": 34.21,
+          "margem": 101888.13,
+          "margemPct": 33.01,
           "statusCor": "emerald"
         },
         {
@@ -659,12 +659,12 @@
         "impostosPct": 12.25,
         "custos": 447324.75,
         "custosPct": 49.36,
-        "logistica": 20901.34,
-        "logisticaPct": 2.31,
+        "logistica": 25767.14,
+        "logisticaPct": 2.84,
         "repasse": 0,
         "repassePct": 0,
-        "margem": 327039.7,
-        "margemPct": 36.09,
+        "margem": 322173.9,
+        "margemPct": 35.55,
         "statusCor": "emerald"
       },
       "projetos": [
@@ -732,13 +732,13 @@
           "impostosPct": 12.25,
           "custos": 140704.55,
           "custosPct": 75.24,
-          "logistica": 20901.34,
-          "logisticaPct": 11.18,
+          "logistica": 25767.14,
+          "logisticaPct": 13.78,
           "repasse": 0,
           "repassePct": 0,
-          "margem": 2486.61,
-          "margemPct": 1.33,
-          "statusCor": "amber"
+          "margem": -2379.19,
+          "margemPct": -1.27,
+          "statusCor": "rose"
         }
       ]
     },
@@ -757,12 +757,12 @@
         "impostosPct": 12.25,
         "custos": 149709.1,
         "custosPct": 3062.49,
-        "logistica": 11739.73,
-        "logisticaPct": 240.15,
+        "logistica": 12780.36,
+        "logisticaPct": 261.44,
         "repasse": 0,
         "repassePct": 0,
-        "margem": -157159.19,
-        "margemPct": -3214.89,
+        "margem": -158199.82,
+        "margemPct": -3236.18,
         "statusCor": "rose"
       },
       "projetos": [
@@ -776,12 +776,12 @@
           "impostosPct": 12.25,
           "custos": 149709.1,
           "custosPct": 3062.49,
-          "logistica": 11739.73,
-          "logisticaPct": 240.15,
+          "logistica": 12780.36,
+          "logisticaPct": 261.44,
           "repasse": 0,
           "repassePct": 0,
-          "margem": -157159.19,
-          "margemPct": -3214.89,
+          "margem": -158199.82,
+          "margemPct": -3236.18,
           "statusCor": "rose"
         }
       ]
@@ -1015,9 +1015,9 @@
       "projeto": "Parts Academy",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
-      "receita": 1070730.08,
-      "margem": 235928.23,
-      "margemPct": 22.03
+      "receita": 1064328.72,
+      "margem": 236111.04,
+      "margemPct": 22.18
     },
     {
       "ranking": 4,
@@ -1043,8 +1043,8 @@
       "lider": "Beatriz Picorelli",
       "area": "HRD",
       "receita": 308637,
-      "margem": 105590.26,
-      "margemPct": 34.21
+      "margem": 101888.13,
+      "margemPct": 33.01
     },
     {
       "ranking": 7,
@@ -1093,6 +1093,15 @@
     },
     {
       "ranking": 12,
+      "projeto": "IVECO Academy",
+      "lider": "Beatriz Picorelli",
+      "area": "HRD",
+      "receita": 249589.96,
+      "margem": 48001.92,
+      "margemPct": 19.23
+    },
+    {
+      "ranking": 13,
       "projeto": "Projeto Especial 01",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
@@ -1101,22 +1110,13 @@
       "margemPct": 28.07
     },
     {
-      "ranking": 13,
+      "ranking": 14,
       "projeto": "Backoffice CRM Case",
       "lider": "Vinicius Souza",
       "area": "Outsourcing",
       "receita": 361293.72,
       "margem": 41752.67,
       "margemPct": 11.56
-    },
-    {
-      "ranking": 14,
-      "projeto": "IVECO Academy",
-      "lider": "Beatriz Picorelli",
-      "area": "HRD",
-      "receita": 249589.96,
-      "margem": 40896.44,
-      "margemPct": 16.39
     },
     {
       "ranking": 15,
@@ -1189,8 +1189,8 @@
       "lider": "Joice Lage",
       "area": "Educação",
       "receita": 4888.48,
-      "margem": -157159.19,
-      "margemPct": -3214.89
+      "margem": -158199.82,
+      "margemPct": -3236.18
     },
     {
       "ranking": 3,
@@ -1212,6 +1212,15 @@
     },
     {
       "ranking": 5,
+      "projeto": "DDN - Business Assessment",
+      "lider": "Jefferson Souza",
+      "area": "Dealer Development",
+      "receita": 187000,
+      "margem": -2379.19,
+      "margemPct": -1.27
+    },
+    {
+      "ranking": 6,
       "projeto": "Automação Essencialidade",
       "lider": "Caroline Amieva",
       "area": "Business Solutions",
@@ -1220,22 +1229,13 @@
       "margemPct": 6
     },
     {
-      "ranking": 6,
+      "ranking": 7,
       "projeto": "Excelência em ServiçOs IVECO",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
       "receita": 10442.57,
       "margem": 1182.9,
       "margemPct": 11.33
-    },
-    {
-      "ranking": 7,
-      "projeto": "DDN - Business Assessment",
-      "lider": "Jefferson Souza",
-      "area": "Dealer Development",
-      "receita": 187000,
-      "margem": 2486.61,
-      "margemPct": 1.33
     },
     {
       "ranking": 8,
@@ -1296,10 +1296,10 @@
     {
       "area": "Hrd - Human Resource Development",
       "meta": 3500000,
-      "realizado": 2711376.35,
-      "atingidoPct": "77,47%",
-      "falta": 788623.65,
-      "faltaPct": "22,53%",
+      "realizado": 2704974.99,
+      "atingidoPct": "77,28%",
+      "falta": 795025.01,
+      "faltaPct": "22,72%",
       "isTotal": false
     },
     {
@@ -1323,10 +1323,10 @@
     {
       "area": "Meta Geral 2026",
       "meta": 15000000,
-      "realizado": 10558569.79,
-      "atingidoPct": "70,39%",
-      "falta": 4441430.21,
-      "faltaPct": "29,61%",
+      "realizado": 10552168.43,
+      "atingidoPct": "70,35%",
+      "falta": 4447831.57,
+      "faltaPct": "29,65%",
       "isTotal": true
     }
   ],
@@ -1466,7 +1466,7 @@
       "lider": "Beatriz Picorelli",
       "area": "HRD",
       "previsto": {
-        "TOTAL": 1070730.0800000015,
+        "TOTAL": 1064328.7200000014,
         "JANEIRO": 56119.380000000005,
         "FEVEREIRO": 41030.46,
         "MARÇO": 83907.96999999999,
@@ -1477,8 +1477,8 @@
         "AGOSTO": 91812.9,
         "SETEMBRO": 90372.09999999999,
         "OUTUBRO": 72082.5,
-        "NOVEMBRO": 136624.95999999996,
-        "DEZEMBRO": 133881.51999999996
+        "NOVEMBRO": 127480.15999999995,
+        "DEZEMBRO": 136624.95999999996
       },
       "realizado": {
         "TOTAL": 780962.08,
@@ -1867,8 +1867,8 @@
         "AGOSTO": 58526.72,
         "SETEMBRO": 13717.2,
         "OUTUBRO": 34750.240000000005,
-        "NOVEMBRO": 23776.479999999996,
-        "DEZEMBRO": 20118.559999999998
+        "NOVEMBRO": 20118.559999999998,
+        "DEZEMBRO": 23776.479999999996
       },
       "realizado": {
         "TOTAL": 226915.42,

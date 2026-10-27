@@ -917,69 +917,9 @@ def sync_lider():
     </div>
   </section>
 
-  <!-- ──────── FILTROS POR COMPETÊNCIA, LÍDER, ÁREA E BUSCA ──────── -->
+  <!-- ──────── FILTROS POR LÍDER, ÁREA E BUSCA ──────── -->
   <section class="flex flex-col gap-3 p-4 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-white/10 shadow-sm dark:shadow-lg">
-    <!-- Linha 1: Competência / Mês (Conforme Modelo Executivo Print 3) -->
-    <div class="flex items-center gap-2 overflow-x-auto pb-1 lg:pb-0 scrollbar-none flex-nowrap">
-      <span class="text-xs font-black text-slate-700 dark:text-gray-300 uppercase tracking-wider whitespace-nowrap mr-1 flex items-center gap-1.5">
-        <span class="material-symbols-outlined text-base text-[#1b365d] dark:text-sky-400">calendar_month</span>
-        COMPETÊNCIA:
-      </span>
-
-      <!-- Dropdown / Pill do Ano -->
-      <div class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-[#0f2444] dark:text-sky-300 border border-slate-200 dark:border-white/10 text-xs font-black shadow-xs whitespace-nowrap cursor-default mr-1">
-        <span>2026</span>
-        <span class="material-symbols-outlined text-sm text-slate-500 dark:text-gray-400">expand_more</span>
-      </div>
-
-      <!-- Botões de Meses (Todos + Jan a Dez) -->
-      <div class="flex items-center gap-1 overflow-x-auto scrollbar-none flex-nowrap">
-        <button onclick="filtrarMesFaturamento('TOTAL')" data-mes="TOTAL" class="mes-filter-btn px-3 py-1.5 rounded-xl text-xs font-black bg-[#0f2444] dark:bg-sky-500 text-white border border-[#0f2444] dark:border-sky-400 transition-all cursor-pointer shadow-xs whitespace-nowrap">
-          Todos
-        </button>
-        <button onclick="filtrarMesFaturamento('JANEIRO')" data-mes="JANEIRO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
-          Jan
-        </button>
-        <button onclick="filtrarMesFaturamento('FEVEREIRO')" data-mes="FEVEREIRO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
-          Fev
-        </button>
-        <button onclick="filtrarMesFaturamento('MARÇO')" data-mes="MARÇO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
-          Mar
-        </button>
-        <button onclick="filtrarMesFaturamento('ABRIL')" data-mes="ABRIL" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
-          Abr
-        </button>
-        <button onclick="filtrarMesFaturamento('MAIO')" data-mes="MAIO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
-          Mai
-        </button>
-        <button onclick="filtrarMesFaturamento('JUNHO')" data-mes="JUNHO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
-          Jun
-        </button>
-        <button onclick="filtrarMesFaturamento('JULHO')" data-mes="JULHO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
-          Jul
-        </button>
-        <button onclick="filtrarMesFaturamento('AGOSTO')" data-mes="AGOSTO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
-          Ago
-        </button>
-        <button onclick="filtrarMesFaturamento('SETEMBRO')" data-mes="SETEMBRO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
-          Set
-        </button>
-        <button onclick="filtrarMesFaturamento('OUTUBRO')" data-mes="OUTUBRO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
-          Out
-        </button>
-        <button onclick="filtrarMesFaturamento('NOVEMBRO')" data-mes="NOVEMBRO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
-          Nov
-        </button>
-        <button onclick="filtrarMesFaturamento('DEZEMBRO')" data-mes="DEZEMBRO" class="mes-filter-btn px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-all cursor-pointer whitespace-nowrap">
-          Dez
-        </button>
-      </div>
-    </div>
-
-    <!-- Divisória sutil -->
-    <div class="h-px w-full bg-slate-200/80 dark:bg-white/5"></div>
-
-    <!-- Linha 2: Filtro de Líder + Busca Textual -->
+    <!-- Linha 1: Filtro de Líder + Busca Textual -->
     <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
       <div class="flex items-center gap-1.5 overflow-x-auto pb-1 lg:pb-0 scrollbar-none flex-wrap sm:flex-nowrap">
         <span class="text-xs font-bold text-slate-500 dark:text-gray-400 uppercase tracking-wider whitespace-nowrap mr-1 flex items-center gap-1">
