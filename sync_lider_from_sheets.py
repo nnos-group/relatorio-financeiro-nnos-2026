@@ -855,64 +855,103 @@ def sync_lider():
 
   <!-- ──────── MACRO METRICS OVERVIEW ──────── -->
   <section id="resumo" class="scroll-mt-28 space-y-4">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
       <!-- Métrica 1: Receita Bruta -->
-      <div class="bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-white/10 rounded-2xl p-5 shadow-sm dark:shadow-lg relative overflow-hidden group">
-        <div class="flex items-center justify-between text-slate-500 dark:text-gray-400 mb-2">
-          <span class="text-xs font-bold uppercase tracking-wider">Receita Bruta Consolidada</span>
-          <div class="w-8 h-8 rounded-lg bg-sky-50 dark:bg-sky-500/20 text-sky-600 dark:text-sky-400 flex items-center justify-center font-bold text-sm">$</div>
+      <div class="bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-white/10 rounded-2xl p-5 shadow-sm dark:shadow-lg relative overflow-hidden group flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between text-slate-500 dark:text-gray-400 mb-2">
+            <span class="text-xs font-bold uppercase tracking-wider">Receita Bruta Consolidada</span>
+            <div class="w-8 h-8 rounded-lg bg-sky-50 dark:bg-sky-500/20 text-sky-600 dark:text-sky-400 flex items-center justify-center font-bold text-sm">$</div>
+          </div>
+          <div class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white tabular-nums">
+            {fmt_brl(macro.get('receita', 0))}
+          </div>
         </div>
-        <div class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white tabular-nums">
-          {fmt_brl(macro.get('receita', 0))}
-        </div>
-        <p class="text-xs text-slate-400 dark:text-gray-400 mt-1.5">Soma de todos os 44 contratos sob gestão</p>
+        <p class="text-xs text-slate-400 dark:text-gray-400 mt-2">Soma de todos os 44 contratos sob gestão</p>
         <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-sky-500 to-transparent"></div>
       </div>
 
       <!-- Métrica 2: Custos Operacionais -->
-      <div class="bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-white/10 rounded-2xl p-5 shadow-sm dark:shadow-lg relative overflow-hidden group">
-        <div class="flex items-center justify-between text-slate-500 dark:text-gray-400 mb-2">
-          <span class="text-xs font-bold uppercase tracking-wider">Custos Operacionais</span>
-          <div class="w-8 h-8 rounded-lg bg-rose-50 dark:bg-rose-500/20 text-rose-600 dark:text-rose-400 flex items-center justify-center font-bold text-sm">
-            <span class="material-symbols-outlined text-base">trending_down</span>
+      <div class="bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-white/10 rounded-2xl p-5 shadow-sm dark:shadow-lg relative overflow-hidden group flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between text-slate-500 dark:text-gray-400 mb-2">
+            <span class="text-xs font-bold uppercase tracking-wider">Custos Operacionais</span>
+            <div class="w-8 h-8 rounded-lg bg-rose-50 dark:bg-rose-500/20 text-rose-600 dark:text-rose-400 flex items-center justify-center font-bold text-sm">
+              <span class="material-symbols-outlined text-base">trending_down</span>
+            </div>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <span class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white tabular-nums">{fmt_brl(macro.get('custos', 0))}</span>
+            <span class="text-xs font-bold text-rose-600 dark:text-rose-400 tabular-nums">{fmt_pct(macro.get('custosPct', 0))}</span>
           </div>
         </div>
-        <div class="flex items-baseline gap-2">
-          <span class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white tabular-nums">{fmt_brl(macro.get('custos', 0))}</span>
-          <span class="text-xs font-bold text-rose-600 dark:text-rose-400 tabular-nums">{fmt_pct(macro.get('custosPct', 0))}</span>
-        </div>
-        <p class="text-xs text-slate-400 dark:text-gray-400 mt-1.5">Custos diretos e contratações executadas</p>
+        <p class="text-xs text-slate-400 dark:text-gray-400 mt-2">Custos diretos e contratações executadas</p>
         <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-rose-500 to-transparent"></div>
       </div>
 
       <!-- Métrica 3: Margem Líquida Realizada -->
-      <div class="bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-white/10 rounded-2xl p-5 shadow-sm dark:shadow-lg relative overflow-hidden group">
-        <div class="flex items-center justify-between text-slate-500 dark:text-gray-400 mb-2">
-          <span class="text-xs font-bold uppercase tracking-wider">Margem Líquida Realizada</span>
-          <div class="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-sm">%</div>
+      <div class="bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-white/10 rounded-2xl p-5 shadow-sm dark:shadow-lg relative overflow-hidden group flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between text-slate-500 dark:text-gray-400 mb-2">
+            <span class="text-xs font-bold uppercase tracking-wider">Margem Líquida Realizada</span>
+            <div class="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-sm">%</div>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <span class="text-2xl font-bold tracking-tight text-emerald-600 dark:text-emerald-400 tabular-nums">{fmt_brl(macro.get('margem', 0))}</span>
+            <span class="text-xs font-bold text-emerald-800 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-500/20 px-2 py-0.5 rounded-full border border-emerald-300 dark:border-emerald-500/30 tabular-nums">{fmt_pct(macro.get('margemPct', 0))}</span>
+          </div>
         </div>
-        <div class="flex items-baseline gap-2">
-          <span class="text-2xl font-bold tracking-tight text-emerald-600 dark:text-emerald-400 tabular-nums">{fmt_brl(macro.get('margem', 0))}</span>
-          <span class="text-xs font-bold text-emerald-800 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-500/20 px-2 py-0.5 rounded-full border border-emerald-300 dark:border-emerald-500/30 tabular-nums">{fmt_pct(macro.get('margemPct', 0))}</span>
-        </div>
-        <p class="text-xs text-slate-400 dark:text-gray-400 mt-1.5">Resultado operacional livre após despesas e impostos</p>
+        <p class="text-xs text-slate-400 dark:text-gray-400 mt-2">Resultado operacional livre após despesas e impostos</p>
         <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-emerald-500 to-transparent"></div>
       </div>
 
-      <!-- Métrica 4: Impostos & Logística -->
-      <div class="bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-white/10 rounded-2xl p-5 shadow-sm dark:shadow-lg relative overflow-hidden group">
-        <div class="flex items-center justify-between text-slate-500 dark:text-gray-400 mb-2">
-          <span class="text-xs font-bold uppercase tracking-wider">Impostos &amp; Logística</span>
-          <div class="w-8 h-8 rounded-lg bg-indigo-50 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-sm">
-            <span class="material-symbols-outlined text-base">receipt_long</span>
+      <!-- Métrica 4: Impostos Tributários -->
+      <div class="bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-white/10 rounded-2xl p-5 shadow-sm dark:shadow-lg relative overflow-hidden group flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between text-slate-500 dark:text-gray-400 mb-2">
+            <span class="text-xs font-bold uppercase tracking-wider">Impostos Tributários</span>
+            <div class="w-8 h-8 rounded-lg bg-indigo-50 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-sm">
+              <span class="material-symbols-outlined text-base">receipt_long</span>
+            </div>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <span class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white tabular-nums">{fmt_brl(macro.get('impostos', 0))}</span>
+            <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400 tabular-nums">{fmt_pct(macro.get('impostosPct', 12.25))}</span>
           </div>
         </div>
-        <div class="flex items-baseline gap-2">
-          <span class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white tabular-nums">{fmt_brl(macro.get('impostos', 0) + macro.get('logistica', 0))}</span>
-          <span class="text-xs font-bold text-slate-500 dark:text-gray-400 tabular-nums">{fmt_pct(macro.get('impostosPct', 12.25) + macro.get('logisticaPct', 0))}</span>
-        </div>
-        <p class="text-xs text-slate-400 dark:text-gray-400 mt-1.5">Impostos: {fmt_pct(macro.get('impostosPct', 12.25))} | Logística: {fmt_pct(macro.get('logisticaPct', 0))}</p>
+        <p class="text-xs text-slate-400 dark:text-gray-400 mt-2">Alíquota estimada de 12,25% s/ faturamento bruto</p>
         <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-indigo-500 to-transparent"></div>
+      </div>
+
+      <!-- Métrica 5: Logística -->
+      <div class="bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-white/10 rounded-2xl p-5 shadow-sm dark:shadow-lg relative overflow-hidden group flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between text-slate-500 dark:text-gray-400 mb-2">
+            <span class="text-xs font-bold uppercase tracking-wider">Logística &amp; Viagens</span>
+            <div class="w-8 h-8 rounded-lg bg-cyan-50 dark:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 flex items-center justify-center font-bold text-sm">
+              <span class="material-symbols-outlined text-base">flight_takeoff</span>
+            </div>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <span class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white tabular-nums">{fmt_brl(macro.get('logistica', 0))}</span>
+            <span class="text-xs font-bold text-cyan-600 dark:text-cyan-400 tabular-nums">{fmt_pct(macro.get('logisticaPct', 0))}</span>
+          </div>
+        </div>
+        <div class="mt-2.5 pt-2 border-t border-slate-100 dark:border-white/5 space-y-1 text-xs">
+          <div class="flex items-center justify-between">
+            <span class="text-slate-500 dark:text-gray-400 flex items-center gap-1.5 truncate">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0"></span> Repassado:
+            </span>
+            <span class="font-bold text-emerald-600 dark:text-emerald-400 tabular-nums">{fmt_brl(abs(macro.get('repasse', 0)))}</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-slate-500 dark:text-gray-400 flex items-center gap-1.5 truncate">
+              <span class="w-1.5 h-1.5 rounded-full bg-purple-500 flex-shrink-0"></span> Prospecção:
+            </span>
+            <span class="font-bold text-purple-600 dark:text-purple-400 tabular-nums">{fmt_brl(macro.get('prospeccao', 162878.45))}</span>
+          </div>
+        </div>
+        <div class="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-cyan-500 via-emerald-500 to-purple-500"></div>
       </div>
     </div>
   </section>

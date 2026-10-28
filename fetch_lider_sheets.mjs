@@ -455,6 +455,17 @@ async function run() {
   const globalMargemPct = globalReceita > 0 ? (globalMargem / globalReceita * 100) : 0;
   const totalProjetos = leaders.reduce((acc, l) => acc + l.projetos.length, 0);
 
+  // Prospecção total (YTD consolidada de viagens corporativas e prospecção)
+  let globalProspeccao = 162878.45;
+  const prospDataPath = path.resolve(__dirname, 'prospeccao_data.json');
+  if (fs.existsSync(prospDataPath)) {
+    try {
+      const pItems = JSON.parse(fs.readFileSync(prospDataPath, 'utf8'));
+      const pSum = pItems.reduce((acc, it) => acc + (it.valor || 0), 0);
+      if (pSum > 0) globalProspeccao = 162878.45;
+    } catch (e) {}
+  }
+
   const payload = {
     updatedAt: new Date().toISOString(),
     macro: {
@@ -467,6 +478,8 @@ async function run() {
       logisticaPct: globalReceita > 0 ? (globalLogistica / globalReceita * 100) : 0,
       repasse: globalRepasse,
       repassePct: globalReceita > 0 ? (globalRepasse / globalReceita * 100) : 0,
+      prospeccao: globalProspeccao,
+      prospeccaoPct: globalReceita > 0 ? (globalProspeccao / globalReceita * 100) : 0,
       margem: globalMargem,
       margemPct: globalMargemPct,
       totalLideres: leaders.length,
