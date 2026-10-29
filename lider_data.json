@@ -1,19 +1,19 @@
 {
-  "updatedAt": "2026-10-28T16:47:05.663Z",
+  "updatedAt": "2026-10-29T11:00:12.353Z",
   "macro": {
     "receita": 10544228.37,
-    "custos": 7676086.7,
-    "custosPct": 72.79894204339963,
+    "custos": 7682086.7,
+    "custosPct": 72.85584521155435,
     "impostos": 1291667.9799999997,
     "impostosPct": 12.25000004433705,
-    "logistica": 861981.1900000001,
-    "logisticaPct": 8.174910100130923,
-    "repasse": -745463.9500000001,
-    "repassePct": -7.069876750023389,
+    "logistica": 863296.82,
+    "logisticaPct": 8.187387352650823,
+    "repasse": -753407.3700000001,
+    "repassePct": -7.145211044020665,
     "prospeccao": 162878.45,
     "prospeccaoPct": 1.5447166381886703,
-    "margem": 1459956.45,
-    "margemPct": 13.846024562155797,
+    "margem": 1460584.24,
+    "margemPct": 13.851978435478443,
     "totalLideres": 7,
     "totalProjetos": 44
   },
@@ -345,14 +345,14 @@
         "receitaPct": 100,
         "impostos": 146663.03,
         "impostosPct": 12.25,
-        "custos": 729895.58,
-        "custosPct": 60.96,
+        "custos": 735895.58,
+        "custosPct": 61.47,
         "logistica": 90231.06,
         "logisticaPct": 7.54,
         "repasse": -81833.54,
         "repassePct": -6.84,
-        "margem": 312293.11,
-        "margemPct": 26.08,
+        "margem": 306293.11,
+        "margemPct": 25.58,
         "statusCor": "sky"
       },
       "projetos": [
@@ -616,14 +616,14 @@
           "receitaPct": 100,
           "impostos": 2327.5,
           "impostosPct": 12.25,
-          "custos": 1840,
-          "custosPct": 9.68,
+          "custos": 7840,
+          "custosPct": 41.26,
           "logistica": 3379.5,
           "logisticaPct": 17.79,
           "repasse": -3379.5,
           "repassePct": -17.79,
-          "margem": 14832.5,
-          "margemPct": 78.07,
+          "margem": 8832.5,
+          "margemPct": 46.49,
           "statusCor": "emerald"
         },
         {
@@ -847,12 +847,12 @@
         "impostosPct": 12.25,
         "custos": 3741985.65,
         "custosPct": 72.55,
-        "logistica": 393719.23,
-        "logisticaPct": 7.63,
-        "repasse": -367104.28,
-        "repassePct": -7.12,
-        "margem": 757146.34,
-        "margemPct": 14.68,
+        "logistica": 395034.86,
+        "logisticaPct": 7.66,
+        "repasse": -375047.7,
+        "repassePct": -7.27,
+        "margem": 763774.13,
+        "margemPct": 14.81,
         "statusCor": "amber"
       },
       "projetos": [
@@ -902,12 +902,12 @@
           "impostosPct": 12.25,
           "custos": 1700512.09,
           "custosPct": 69.64,
-          "logistica": 333502.42,
-          "logisticaPct": 13.66,
-          "repasse": -323483.42,
-          "repassePct": -13.25,
-          "margem": 432207.11,
-          "margemPct": 17.7,
+          "logistica": 334818.05,
+          "logisticaPct": 13.71,
+          "repasse": -331426.84,
+          "repassePct": -13.57,
+          "margem": 438834.9,
+          "margemPct": 17.97,
           "statusCor": "amber"
         }
       ]
@@ -1000,8 +1000,8 @@
       "lider": "Vinicius Souza",
       "area": "Outsourcing",
       "receita": 2441866.89,
-      "margem": 432207.11,
-      "margemPct": 17.7
+      "margem": 438834.9,
+      "margemPct": 17.97
     },
     {
       "ranking": 2,
@@ -1823,7 +1823,7 @@
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 26800,
+        "TOTAL": 13400,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -1833,7 +1833,7 @@
         "JULHO": 0,
         "AGOSTO": 0,
         "SETEMBRO": 0,
-        "OUTUBRO": 26800,
+        "OUTUBRO": 13400,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
       },
@@ -2213,7 +2213,7 @@
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 13786.16,
+        "TOTAL": 0,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -2223,7 +2223,7 @@
         "JULHO": 0,
         "AGOSTO": 0,
         "SETEMBRO": 0,
-        "OUTUBRO": 13786.16,
+        "OUTUBRO": 0,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
       },
