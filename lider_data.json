@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-31T11:00:09.611Z",
+  "updatedAt": "2026-11-01T11:00:09.764Z",
   "macro": {
     "receita": 10553819.19,
     "custos": 7688404.100000001,
@@ -1353,7 +1353,7 @@
         "DEZEMBRO": 165323.08
       },
       "realizado": {
-        "TOTAL": 2081480.8699999999,
+        "TOTAL": 2246803.9499999997,
         "JANEIRO": 243395.8,
         "FEVEREIRO": 243395.8,
         "MARÇO": 222923.05,
@@ -1364,7 +1364,7 @@
         "AGOSTO": 177761.12,
         "SETEMBRO": 153596.18,
         "OUTUBRO": 165323.08,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 165323.08,
         "DEZEMBRO": 0
       },
       "aberto": {
@@ -1378,12 +1378,12 @@
         "JULHO": 0,
         "AGOSTO": 0,
         "SETEMBRO": 0,
-        "OUTUBRO": 165323.08,
-        "NOVEMBRO": 0,
+        "OUTUBRO": 0,
+        "NOVEMBRO": 165323.08,
         "DEZEMBRO": 0
       },
       "atrasado": {
-        "TOTAL": 0,
+        "TOTAL": 165323.08,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -1393,7 +1393,7 @@
         "JULHO": 0,
         "AGOSTO": 0,
         "SETEMBRO": 0,
-        "OUTUBRO": 0,
+        "OUTUBRO": 165323.08,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
       }
@@ -1418,7 +1418,7 @@
         "DEZEMBRO": 180771.91999999998
       },
       "realizado": {
-        "TOTAL": 2009054.8800000006,
+        "TOTAL": 2146777.6900000004,
         "JANEIRO": 203208.46999999997,
         "FEVEREIRO": 205754.40999999997,
         "MARÇO": 205754.40999999997,
@@ -1429,10 +1429,25 @@
         "AGOSTO": 200722.96999999997,
         "SETEMBRO": 200722.96999999997,
         "OUTUBRO": 202733.24,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 137722.81,
         "DEZEMBRO": 0
       },
       "aberto": {
+        "TOTAL": 137722.81,
+        "JANEIRO": 0,
+        "FEVEREIRO": 0,
+        "MARÇO": 0,
+        "ABRIL": 0,
+        "MAIO": 0,
+        "JUNHO": 0,
+        "JULHO": 0,
+        "AGOSTO": 0,
+        "SETEMBRO": 0,
+        "OUTUBRO": 0,
+        "NOVEMBRO": 137722.81,
+        "DEZEMBRO": 0
+      },
+      "atrasado": {
         "TOTAL": 43049.11,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
@@ -1444,21 +1459,6 @@
         "AGOSTO": 0,
         "SETEMBRO": 0,
         "OUTUBRO": 43049.11,
-        "NOVEMBRO": 0,
-        "DEZEMBRO": 0
-      },
-      "atrasado": {
-        "TOTAL": 0,
-        "JANEIRO": 0,
-        "FEVEREIRO": 0,
-        "MARÇO": 0,
-        "ABRIL": 0,
-        "MAIO": 0,
-        "JUNHO": 0,
-        "JULHO": 0,
-        "AGOSTO": 0,
-        "SETEMBRO": 0,
-        "OUTUBRO": 0,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
       }
@@ -1483,7 +1483,7 @@
         "DEZEMBRO": 136624.95999999996
       },
       "realizado": {
-        "TOTAL": 780962.08,
+        "TOTAL": 807320.58,
         "JANEIRO": 54556.06,
         "FEVEREIRO": 40225.81,
         "MARÇO": 87516.67,
@@ -1494,10 +1494,25 @@
         "AGOSTO": 91810.87,
         "SETEMBRO": 111934,
         "OUTUBRO": 26358.5,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 26358.5,
         "DEZEMBRO": 0
       },
       "aberto": {
+        "TOTAL": 26358.5,
+        "JANEIRO": 0,
+        "FEVEREIRO": 0,
+        "MARÇO": 0,
+        "ABRIL": 0,
+        "MAIO": 0,
+        "JUNHO": 0,
+        "JULHO": 0,
+        "AGOSTO": 0,
+        "SETEMBRO": 0,
+        "OUTUBRO": 0,
+        "NOVEMBRO": 26358.5,
+        "DEZEMBRO": 0
+      },
+      "atrasado": {
         "TOTAL": 90372.1,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
@@ -1509,21 +1524,6 @@
         "AGOSTO": 0,
         "SETEMBRO": 64013.6,
         "OUTUBRO": 26358.5,
-        "NOVEMBRO": 0,
-        "DEZEMBRO": 0
-      },
-      "atrasado": {
-        "TOTAL": 0,
-        "JANEIRO": 0,
-        "FEVEREIRO": 0,
-        "MARÇO": 0,
-        "ABRIL": 0,
-        "MAIO": 0,
-        "JUNHO": 0,
-        "JULHO": 0,
-        "AGOSTO": 0,
-        "SETEMBRO": 0,
-        "OUTUBRO": 0,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
       }
@@ -1613,7 +1613,7 @@
         "DEZEMBRO": 40600
       },
       "realizado": {
-        "TOTAL": 284200,
+        "TOTAL": 324800,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -1624,11 +1624,11 @@
         "AGOSTO": 40600,
         "SETEMBRO": 40600,
         "OUTUBRO": 40600,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 40600,
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 0,
+        "TOTAL": 40600,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -1639,7 +1639,7 @@
         "AGOSTO": 0,
         "SETEMBRO": 0,
         "OUTUBRO": 0,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 40600,
         "DEZEMBRO": 0
       },
       "atrasado": {
@@ -1693,21 +1693,6 @@
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 36656.73,
-        "JANEIRO": 0,
-        "FEVEREIRO": 0,
-        "MARÇO": 0,
-        "ABRIL": 0,
-        "MAIO": 0,
-        "JUNHO": 0,
-        "JULHO": 0,
-        "AGOSTO": 0,
-        "SETEMBRO": 0,
-        "OUTUBRO": 36656.73,
-        "NOVEMBRO": 0,
-        "DEZEMBRO": 0
-      },
-      "atrasado": {
         "TOTAL": 0,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
@@ -1719,6 +1704,21 @@
         "AGOSTO": 0,
         "SETEMBRO": 0,
         "OUTUBRO": 0,
+        "NOVEMBRO": 0,
+        "DEZEMBRO": 0
+      },
+      "atrasado": {
+        "TOTAL": 36656.73,
+        "JANEIRO": 0,
+        "FEVEREIRO": 0,
+        "MARÇO": 0,
+        "ABRIL": 0,
+        "MAIO": 0,
+        "JUNHO": 0,
+        "JULHO": 0,
+        "AGOSTO": 0,
+        "SETEMBRO": 0,
+        "OUTUBRO": 36656.73,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
       }
@@ -1758,21 +1758,6 @@
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 28671.6,
-        "JANEIRO": 0,
-        "FEVEREIRO": 0,
-        "MARÇO": 0,
-        "ABRIL": 0,
-        "MAIO": 0,
-        "JUNHO": 0,
-        "JULHO": 0,
-        "AGOSTO": 0,
-        "SETEMBRO": 0,
-        "OUTUBRO": 28671.6,
-        "NOVEMBRO": 0,
-        "DEZEMBRO": 0
-      },
-      "atrasado": {
         "TOTAL": 0,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
@@ -1784,6 +1769,21 @@
         "AGOSTO": 0,
         "SETEMBRO": 0,
         "OUTUBRO": 0,
+        "NOVEMBRO": 0,
+        "DEZEMBRO": 0
+      },
+      "atrasado": {
+        "TOTAL": 28671.6,
+        "JANEIRO": 0,
+        "FEVEREIRO": 0,
+        "MARÇO": 0,
+        "ABRIL": 0,
+        "MAIO": 0,
+        "JUNHO": 0,
+        "JULHO": 0,
+        "AGOSTO": 0,
+        "SETEMBRO": 0,
+        "OUTUBRO": 28671.6,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
       }
@@ -1808,7 +1808,7 @@
         "DEZEMBRO": 26800
       },
       "realizado": {
-        "TOTAL": 268000,
+        "TOTAL": 294800,
         "JANEIRO": 26800,
         "FEVEREIRO": 26800,
         "MARÇO": 26800,
@@ -1819,11 +1819,11 @@
         "AGOSTO": 26800,
         "SETEMBRO": 26800,
         "OUTUBRO": 26800,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 26800,
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 0,
+        "TOTAL": 26800,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -1834,7 +1834,7 @@
         "AGOSTO": 0,
         "SETEMBRO": 0,
         "OUTUBRO": 0,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 26800,
         "DEZEMBRO": 0
       },
       "atrasado": {
@@ -1888,21 +1888,6 @@
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 13717.2,
-        "JANEIRO": 0,
-        "FEVEREIRO": 0,
-        "MARÇO": 0,
-        "ABRIL": 0,
-        "MAIO": 0,
-        "JUNHO": 0,
-        "JULHO": 0,
-        "AGOSTO": 0,
-        "SETEMBRO": 13717.2,
-        "OUTUBRO": 0,
-        "NOVEMBRO": 0,
-        "DEZEMBRO": 0
-      },
-      "atrasado": {
         "TOTAL": 0,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
@@ -1913,6 +1898,21 @@
         "JULHO": 0,
         "AGOSTO": 0,
         "SETEMBRO": 0,
+        "OUTUBRO": 0,
+        "NOVEMBRO": 0,
+        "DEZEMBRO": 0
+      },
+      "atrasado": {
+        "TOTAL": 13717.2,
+        "JANEIRO": 0,
+        "FEVEREIRO": 0,
+        "MARÇO": 0,
+        "ABRIL": 0,
+        "MAIO": 0,
+        "JUNHO": 0,
+        "JULHO": 0,
+        "AGOSTO": 0,
+        "SETEMBRO": 13717.2,
         "OUTUBRO": 0,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
@@ -1938,7 +1938,7 @@
         "DEZEMBRO": 38022.54
       },
       "realizado": {
-        "TOTAL": 210587.06999999998,
+        "TOTAL": 232148.96999999997,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 13717.5,
@@ -1949,10 +1949,25 @@
         "AGOSTO": 25219.82,
         "SETEMBRO": 26134.300000000003,
         "OUTUBRO": 21561.9,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 21561.9,
         "DEZEMBRO": 0
       },
       "aberto": {
+        "TOTAL": 21561.9,
+        "JANEIRO": 0,
+        "FEVEREIRO": 0,
+        "MARÇO": 0,
+        "ABRIL": 0,
+        "MAIO": 0,
+        "JUNHO": 0,
+        "JULHO": 0,
+        "AGOSTO": 0,
+        "SETEMBRO": 0,
+        "OUTUBRO": 0,
+        "NOVEMBRO": 21561.9,
+        "DEZEMBRO": 0
+      },
+      "atrasado": {
         "TOTAL": 26134.300000000003,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
@@ -1964,21 +1979,6 @@
         "AGOSTO": 0,
         "SETEMBRO": 4572.4,
         "OUTUBRO": 21561.9,
-        "NOVEMBRO": 0,
-        "DEZEMBRO": 0
-      },
-      "atrasado": {
-        "TOTAL": 0,
-        "JANEIRO": 0,
-        "FEVEREIRO": 0,
-        "MARÇO": 0,
-        "ABRIL": 0,
-        "MAIO": 0,
-        "JUNHO": 0,
-        "JULHO": 0,
-        "AGOSTO": 0,
-        "SETEMBRO": 0,
-        "OUTUBRO": 0,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
       }
@@ -2018,21 +2018,6 @@
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 15000,
-        "JANEIRO": 0,
-        "FEVEREIRO": 0,
-        "MARÇO": 0,
-        "ABRIL": 0,
-        "MAIO": 0,
-        "JUNHO": 0,
-        "JULHO": 0,
-        "AGOSTO": 0,
-        "SETEMBRO": 0,
-        "OUTUBRO": 15000,
-        "NOVEMBRO": 0,
-        "DEZEMBRO": 0
-      },
-      "atrasado": {
         "TOTAL": 0,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
@@ -2044,6 +2029,21 @@
         "AGOSTO": 0,
         "SETEMBRO": 0,
         "OUTUBRO": 0,
+        "NOVEMBRO": 0,
+        "DEZEMBRO": 0
+      },
+      "atrasado": {
+        "TOTAL": 15000,
+        "JANEIRO": 0,
+        "FEVEREIRO": 0,
+        "MARÇO": 0,
+        "ABRIL": 0,
+        "MAIO": 0,
+        "JUNHO": 0,
+        "JULHO": 0,
+        "AGOSTO": 0,
+        "SETEMBRO": 0,
+        "OUTUBRO": 15000,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
       }
@@ -2148,7 +2148,7 @@
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 46950,
+        "TOTAL": 30000,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -2158,12 +2158,12 @@
         "JULHO": 0,
         "AGOSTO": 0,
         "SETEMBRO": 0,
-        "OUTUBRO": 46950,
+        "OUTUBRO": 30000,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
       },
       "atrasado": {
-        "TOTAL": 6990.24,
+        "TOTAL": 23940.239999999998,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -2173,7 +2173,7 @@
         "JULHO": 0,
         "AGOSTO": 0,
         "SETEMBRO": 6990.24,
-        "OUTUBRO": 0,
+        "OUTUBRO": 16950,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
       }
@@ -2198,7 +2198,7 @@
         "DEZEMBRO": 13786.16
       },
       "realizado": {
-        "TOTAL": 137861.6,
+        "TOTAL": 151647.76,
         "JANEIRO": 13786.16,
         "FEVEREIRO": 13786.16,
         "MARÇO": 13786.16,
@@ -2209,11 +2209,11 @@
         "AGOSTO": 13786.16,
         "SETEMBRO": 13786.16,
         "OUTUBRO": 13786.16,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 13786.16,
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 0,
+        "TOTAL": 13786.16,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -2224,7 +2224,7 @@
         "AGOSTO": 0,
         "SETEMBRO": 0,
         "OUTUBRO": 0,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 13786.16,
         "DEZEMBRO": 0
       },
       "atrasado": {
@@ -2278,21 +2278,6 @@
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 21947.52,
-        "JANEIRO": 0,
-        "FEVEREIRO": 0,
-        "MARÇO": 0,
-        "ABRIL": 0,
-        "MAIO": 0,
-        "JUNHO": 0,
-        "JULHO": 0,
-        "AGOSTO": 0,
-        "SETEMBRO": 21947.52,
-        "OUTUBRO": 0,
-        "NOVEMBRO": 0,
-        "DEZEMBRO": 0
-      },
-      "atrasado": {
         "TOTAL": 0,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
@@ -2303,6 +2288,21 @@
         "JULHO": 0,
         "AGOSTO": 0,
         "SETEMBRO": 0,
+        "OUTUBRO": 0,
+        "NOVEMBRO": 0,
+        "DEZEMBRO": 0
+      },
+      "atrasado": {
+        "TOTAL": 21947.52,
+        "JANEIRO": 0,
+        "FEVEREIRO": 0,
+        "MARÇO": 0,
+        "ABRIL": 0,
+        "MAIO": 0,
+        "JUNHO": 0,
+        "JULHO": 0,
+        "AGOSTO": 0,
+        "SETEMBRO": 21947.52,
         "OUTUBRO": 0,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
