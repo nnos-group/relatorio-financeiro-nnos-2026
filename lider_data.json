@@ -1,19 +1,19 @@
 {
-  "updatedAt": "2026-11-01T11:00:09.764Z",
+  "updatedAt": "2026-11-02T11:00:13.033Z",
   "macro": {
-    "receita": 10553819.19,
-    "custos": 7688404.100000001,
-    "custosPct": 72.84949610738974,
-    "impostos": 1292842.8499999999,
-    "impostosPct": 12.249999992656686,
-    "logistica": 864765.57,
-    "logisticaPct": 8.19386379879794,
+    "receita": 10571105.000000002,
+    "custos": 7703635.08,
+    "custosPct": 72.87445427890461,
+    "impostos": 1294960.3699999999,
+    "impostosPct": 12.250000070948113,
+    "logistica": 868298.0399999999,
+    "logisticaPct": 8.213881519481642,
     "repasse": -764324.23,
-    "repassePct": -7.242157708407737,
+    "repassePct": -7.230315373842185,
     "prospeccao": 162878.45,
-    "prospeccaoPct": 1.5433128715558373,
-    "margem": 1472130.8799999997,
-    "margemPct": 13.948797620058523,
+    "prospeccaoPct": 1.5407892552386906,
+    "margem": 1468535.7399999998,
+    "margemPct": 13.891979504507802,
     "totalLideres": 7,
     "totalProjetos": 44
   },
@@ -33,12 +33,12 @@
         "impostosPct": 12.25,
         "custos": 1610134.66,
         "custosPct": 67.27,
-        "logistica": 313804.03,
-        "logisticaPct": 13.11,
+        "logistica": 316302.55,
+        "logisticaPct": 13.22,
         "repasse": -295066.94,
         "repassePct": -12.33,
-        "margem": 471388,
-        "margemPct": 19.69,
+        "margem": 468889.48,
+        "margemPct": 19.59,
         "statusCor": "amber"
       },
       "projetos": [
@@ -232,12 +232,12 @@
           "impostosPct": 12.25,
           "custos": 699129.04,
           "custosPct": 65.97,
-          "logistica": 98184.04,
-          "logisticaPct": 9.26,
+          "logistica": 100682.56,
+          "logisticaPct": 9.5,
           "repasse": -99813.16,
           "repassePct": -9.42,
-          "margem": 232436.25,
-          "margemPct": 21.93,
+          "margem": 229937.73,
+          "margemPct": 21.7,
           "statusCor": "amber"
         },
         {
@@ -759,12 +759,12 @@
         "impostosPct": 12.25,
         "custos": 149709.1,
         "custosPct": 3062.49,
-        "logistica": 12780.36,
-        "logisticaPct": 261.44,
+        "logistica": 13814.31,
+        "logisticaPct": 282.59,
         "repasse": 0,
         "repassePct": 0,
-        "margem": -158199.82,
-        "margemPct": -3236.18,
+        "margem": -159233.77,
+        "margemPct": -3257.33,
         "statusCor": "rose"
       },
       "projetos": [
@@ -778,12 +778,12 @@
           "impostosPct": 12.25,
           "custos": 149709.1,
           "custosPct": 3062.49,
-          "logistica": 12780.36,
-          "logisticaPct": 261.44,
+          "logistica": 13814.31,
+          "logisticaPct": 282.59,
           "repasse": 0,
           "repassePct": 0,
-          "margem": -158199.82,
-          "margemPct": -3236.18,
+          "margem": -159233.77,
+          "margemPct": -3257.33,
           "statusCor": "rose"
         }
       ]
@@ -841,18 +841,18 @@
         "titulo": "Total - Vinicius Souza",
         "tituloRaw": "TOTAL - VINICIUS SOUZA",
         "area": "Outsourcing",
-        "receita": 5161566.89,
+        "receita": 5178852.7,
         "receitaPct": 100,
-        "impostos": 632291.94,
+        "impostos": 634409.46,
         "impostosPct": 12.25,
-        "custos": 3744584.81,
-        "custosPct": 72.55,
+        "custos": 3759815.79,
+        "custosPct": 72.6,
         "logistica": 395034.86,
-        "logisticaPct": 7.65,
+        "logisticaPct": 7.63,
         "repasse": -375047.7,
-        "repassePct": -7.27,
-        "margem": 764702.97,
-        "margemPct": 14.82,
+        "repassePct": -7.24,
+        "margem": 764640.3,
+        "margemPct": 14.76,
         "statusCor": "amber"
       },
       "projetos": [
@@ -860,18 +860,18 @@
           "titulo": "Backoffice CNHI",
           "tituloRaw": "BACKOFFICE CNHI",
           "area": "Outsourcing",
-          "receita": 2358406.28,
+          "receita": 2375692.09,
           "receitaPct": 100,
-          "impostos": 288904.77,
+          "impostos": 291022.28,
           "impostosPct": 12.25,
-          "custos": 1773524.42,
-          "custosPct": 75.2,
+          "custos": 1788755.4,
+          "custosPct": 75.29,
           "logistica": 32375.49,
-          "logisticaPct": 1.37,
+          "logisticaPct": 1.36,
           "repasse": -20513.81,
-          "repassePct": -0.87,
-          "margem": 284115.41,
-          "margemPct": 12.05,
+          "repassePct": -0.86,
+          "margem": 284052.73,
+          "margemPct": 11.96,
           "statusCor": "amber"
         },
         {
@@ -1008,9 +1008,9 @@
       "projeto": "Backoffice CNHI",
       "lider": "Vinicius Souza",
       "area": "Outsourcing",
-      "receita": 2358406.28,
-      "margem": 284115.41,
-      "margemPct": 12.05
+      "receita": 2375692.09,
+      "margem": 284052.73,
+      "margemPct": 11.96
     },
     {
       "ranking": 3,
@@ -1018,8 +1018,8 @@
       "lider": "Beatriz Picorelli",
       "area": "HRD",
       "receita": 1059756.32,
-      "margem": 232436.25,
-      "margemPct": 21.93
+      "margem": 229937.73,
+      "margemPct": 21.7
     },
     {
       "ranking": 4,
@@ -1191,8 +1191,8 @@
       "lider": "Joice Lage",
       "area": "Educação",
       "receita": 4888.48,
-      "margem": -158199.82,
-      "margemPct": -3236.18
+      "margem": -159233.77,
+      "margemPct": -3257.33
     },
     {
       "ranking": 3,
@@ -1289,10 +1289,10 @@
     {
       "area": "Outsourcing",
       "meta": 8000000,
-      "realizado": 5692400.81,
-      "atingidoPct": "71,16%",
-      "falta": 2307599.19,
-      "faltaPct": "28,84%",
+      "realizado": 5709686.62,
+      "atingidoPct": "71,37%",
+      "falta": 2290313.38,
+      "faltaPct": "28,63%",
       "isTotal": false
     },
     {
@@ -1325,10 +1325,10 @@
     {
       "area": "Meta Geral 2026",
       "meta": 15000000,
-      "realizado": 10553819.19,
-      "atingidoPct": "70,36%",
-      "falta": 4446180.81,
-      "faltaPct": "29,64%",
+      "realizado": 10571105,
+      "atingidoPct": "70,47%",
+      "falta": 4428895,
+      "faltaPct": "29,53%",
       "isTotal": true
     }
   ],
@@ -1403,7 +1403,7 @@
       "lider": "Vinicius Souza",
       "area": "Outsourcing",
       "previsto": {
-        "TOTAL": 2358406.2800000003,
+        "TOTAL": 2375692.0900000003,
         "JANEIRO": 203208.47,
         "FEVEREIRO": 205754.40999999997,
         "MARÇO": 205754.40999999997,
@@ -1415,10 +1415,10 @@
         "SETEMBRO": 200722.96999999997,
         "OUTUBRO": 202733.24,
         "NOVEMBRO": 180771.91999999998,
-        "DEZEMBRO": 180771.91999999998
+        "DEZEMBRO": 198057.72999999998
       },
       "realizado": {
-        "TOTAL": 2146777.6900000004,
+        "TOTAL": 2189826.8000000003,
         "JANEIRO": 203208.46999999997,
         "FEVEREIRO": 205754.40999999997,
         "MARÇO": 205754.40999999997,
@@ -1429,11 +1429,11 @@
         "AGOSTO": 200722.96999999997,
         "SETEMBRO": 200722.96999999997,
         "OUTUBRO": 202733.24,
-        "NOVEMBRO": 137722.81,
+        "NOVEMBRO": 180771.91999999998,
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 137722.81,
+        "TOTAL": 180771.91999999998,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -1444,7 +1444,7 @@
         "AGOSTO": 0,
         "SETEMBRO": 0,
         "OUTUBRO": 0,
-        "NOVEMBRO": 137722.81,
+        "NOVEMBRO": 180771.91999999998,
         "DEZEMBRO": 0
       },
       "atrasado": {
@@ -1483,7 +1483,7 @@
         "DEZEMBRO": 136624.95999999996
       },
       "realizado": {
-        "TOTAL": 807320.58,
+        "TOTAL": 853044.58,
         "JANEIRO": 54556.06,
         "FEVEREIRO": 40225.81,
         "MARÇO": 87516.67,
@@ -1493,12 +1493,12 @@
         "JULHO": 73260.65,
         "AGOSTO": 91810.87,
         "SETEMBRO": 111934,
-        "OUTUBRO": 26358.5,
+        "OUTUBRO": 72082.5,
         "NOVEMBRO": 26358.5,
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 26358.5,
+        "TOTAL": 72082.5,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -1508,7 +1508,7 @@
         "JULHO": 0,
         "AGOSTO": 0,
         "SETEMBRO": 0,
-        "OUTUBRO": 0,
+        "OUTUBRO": 45724,
         "NOVEMBRO": 26358.5,
         "DEZEMBRO": 0
       },
@@ -1548,7 +1548,7 @@
         "DEZEMBRO": 52252.67
       },
       "realizado": {
-        "TOTAL": 306122.39999999997,
+        "TOTAL": 358375.06999999995,
         "JANEIRO": 14331.75,
         "FEVEREIRO": 14325.93,
         "MARÇO": 13883.59,
@@ -1559,11 +1559,11 @@
         "AGOSTO": 36472,
         "SETEMBRO": 49799.5,
         "OUTUBRO": 52252.67,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 52252.67,
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 52252.67,
+        "TOTAL": 104505.34,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -1574,7 +1574,7 @@
         "AGOSTO": 0,
         "SETEMBRO": 0,
         "OUTUBRO": 52252.67,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 52252.67,
         "DEZEMBRO": 0
       },
       "atrasado": {
@@ -1678,7 +1678,7 @@
         "DEZEMBRO": 36656.73
       },
       "realizado": {
-        "TOTAL": 287980.26,
+        "TOTAL": 324636.99,
         "JANEIRO": 23551.79,
         "FEVEREIRO": 23560.31,
         "MARÇO": 23560.31,
@@ -1689,11 +1689,11 @@
         "AGOSTO": 36656.73,
         "SETEMBRO": 36656.73,
         "OUTUBRO": 36656.73,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 36656.73,
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 0,
+        "TOTAL": 36656.73,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -1704,7 +1704,7 @@
         "AGOSTO": 0,
         "SETEMBRO": 0,
         "OUTUBRO": 0,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 36656.73,
         "DEZEMBRO": 0
       },
       "atrasado": {
@@ -1743,7 +1743,7 @@
         "DEZEMBRO": 28671
       },
       "realizado": {
-        "TOTAL": 286716,
+        "TOTAL": 315387.6,
         "JANEIRO": 28671.6,
         "FEVEREIRO": 28671.6,
         "MARÇO": 28671.6,
@@ -1754,11 +1754,11 @@
         "AGOSTO": 28671.6,
         "SETEMBRO": 28671.6,
         "OUTUBRO": 28671.6,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 28671.6,
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 0,
+        "TOTAL": 28671.6,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -1769,7 +1769,7 @@
         "AGOSTO": 0,
         "SETEMBRO": 0,
         "OUTUBRO": 0,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 28671.6,
         "DEZEMBRO": 0
       },
       "atrasado": {
@@ -1873,7 +1873,7 @@
         "DEZEMBRO": 23776.479999999996
       },
       "realizado": {
-        "TOTAL": 226915.42,
+        "TOTAL": 261665.66,
         "JANEIRO": 5211,
         "FEVEREIRO": 18238.5,
         "MARÇO": 31093,
@@ -1883,12 +1883,12 @@
         "JULHO": 20576.25,
         "AGOSTO": 58517.97,
         "SETEMBRO": 13717.2,
-        "OUTUBRO": 0,
+        "OUTUBRO": 34750.24,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 0,
+        "TOTAL": 34750.24,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -1898,7 +1898,7 @@
         "JULHO": 0,
         "AGOSTO": 0,
         "SETEMBRO": 0,
-        "OUTUBRO": 0,
+        "OUTUBRO": 34750.24,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
       },
@@ -1938,7 +1938,7 @@
         "DEZEMBRO": 38022.54
       },
       "realizado": {
-        "TOTAL": 232148.96999999997,
+        "TOTAL": 240379.28999999998,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 13717.5,
@@ -1948,12 +1948,12 @@
         "JULHO": 42595.4,
         "AGOSTO": 25219.82,
         "SETEMBRO": 26134.300000000003,
-        "OUTUBRO": 21561.9,
+        "OUTUBRO": 29792.22,
         "NOVEMBRO": 21561.9,
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 21561.9,
+        "TOTAL": 29792.22,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -1963,7 +1963,7 @@
         "JULHO": 0,
         "AGOSTO": 0,
         "SETEMBRO": 0,
-        "OUTUBRO": 0,
+        "OUTUBRO": 8230.32,
         "NOVEMBRO": 21561.9,
         "DEZEMBRO": 0
       },
@@ -2003,7 +2003,7 @@
         "DEZEMBRO": 0
       },
       "realizado": {
-        "TOTAL": 219904,
+        "TOTAL": 249904,
         "JANEIRO": 21984,
         "FEVEREIRO": 21984,
         "MARÇO": 21984,
@@ -2014,11 +2014,11 @@
         "AGOSTO": 15000,
         "SETEMBRO": 22000,
         "OUTUBRO": 15000,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 30000,
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 0,
+        "TOTAL": 30000,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -2029,7 +2029,7 @@
         "AGOSTO": 0,
         "SETEMBRO": 0,
         "OUTUBRO": 0,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 30000,
         "DEZEMBRO": 0
       },
       "atrasado": {
@@ -2063,8 +2063,8 @@
         "JULHO": 0,
         "AGOSTO": 137000,
         "SETEMBRO": 50000,
-        "OUTUBRO": 73440,
-        "NOVEMBRO": 0,
+        "OUTUBRO": 0,
+        "NOVEMBRO": 73440,
         "DEZEMBRO": 0
       },
       "realizado": {
@@ -2263,7 +2263,7 @@
         "DEZEMBRO": 21947.52
       },
       "realizado": {
-        "TOTAL": 89620.04000000001,
+        "TOTAL": 111567.56000000001,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -2273,12 +2273,12 @@
         "JULHO": 18290,
         "AGOSTO": 21947.52,
         "SETEMBRO": 21947.52,
-        "OUTUBRO": 0,
+        "OUTUBRO": 21947.52,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 0,
+        "TOTAL": 21947.52,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -2288,7 +2288,7 @@
         "JULHO": 0,
         "AGOSTO": 0,
         "SETEMBRO": 0,
-        "OUTUBRO": 0,
+        "OUTUBRO": 21947.52,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
       },
@@ -2328,7 +2328,7 @@
         "DEZEMBRO": 9800
       },
       "realizado": {
-        "TOTAL": 98000,
+        "TOTAL": 107800,
         "JANEIRO": 9800,
         "FEVEREIRO": 9800,
         "MARÇO": 9800,
@@ -2339,11 +2339,11 @@
         "AGOSTO": 9800,
         "SETEMBRO": 9800,
         "OUTUBRO": 9800,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 9800,
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 0,
+        "TOTAL": 9800,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -2354,7 +2354,7 @@
         "AGOSTO": 0,
         "SETEMBRO": 0,
         "OUTUBRO": 0,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 9800,
         "DEZEMBRO": 0
       },
       "atrasado": {
@@ -2458,7 +2458,7 @@
         "DEZEMBRO": 16000
       },
       "realizado": {
-        "TOTAL": 80000,
+        "TOTAL": 96000,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -2469,11 +2469,11 @@
         "AGOSTO": 16000,
         "SETEMBRO": 16000,
         "OUTUBRO": 16000,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 16000,
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 0,
+        "TOTAL": 16000,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -2484,7 +2484,7 @@
         "AGOSTO": 0,
         "SETEMBRO": 0,
         "OUTUBRO": 0,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 16000,
         "DEZEMBRO": 0
       },
       "atrasado": {
@@ -2523,7 +2523,7 @@
         "DEZEMBRO": 5075
       },
       "realizado": {
-        "TOTAL": 86275,
+        "TOTAL": 91350,
         "JANEIRO": 10150,
         "FEVEREIRO": 10150,
         "MARÇO": 10150,
@@ -2534,11 +2534,11 @@
         "AGOSTO": 5075,
         "SETEMBRO": 5075,
         "OUTUBRO": 5075,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 5075,
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 0,
+        "TOTAL": 5075,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -2549,7 +2549,7 @@
         "AGOSTO": 0,
         "SETEMBRO": 0,
         "OUTUBRO": 0,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 5075,
         "DEZEMBRO": 0
       },
       "atrasado": {
@@ -2584,8 +2584,8 @@
         "AGOSTO": 2625,
         "SETEMBRO": 1875,
         "OUTUBRO": 12625,
-        "NOVEMBRO": 5937.5,
-        "DEZEMBRO": 0
+        "NOVEMBRO": 0,
+        "DEZEMBRO": 5937.5
       },
       "realizado": {
         "TOTAL": 73237.5,
@@ -2848,7 +2848,7 @@
         "DEZEMBRO": 2500
       },
       "realizado": {
-        "TOTAL": 57300,
+        "TOTAL": 59800,
         "JANEIRO": 8960,
         "FEVEREIRO": 2500,
         "MARÇO": 8960,
@@ -2859,11 +2859,11 @@
         "AGOSTO": 2500,
         "SETEMBRO": 2500,
         "OUTUBRO": 2500,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 2500,
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 0,
+        "TOTAL": 2500,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -2874,7 +2874,7 @@
         "AGOSTO": 0,
         "SETEMBRO": 0,
         "OUTUBRO": 0,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 2500,
         "DEZEMBRO": 0
       },
       "atrasado": {
