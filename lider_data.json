@@ -1,19 +1,19 @@
 {
-  "updatedAt": "2026-11-04T11:00:15.146Z",
+  "updatedAt": "2026-11-05T11:00:16.628Z",
   "macro": {
-    "receita": 10621532.6,
-    "custos": 7715485.08,
-    "custosPct": 72.64003577035578,
-    "impostos": 1301137.7599999998,
-    "impostosPct": 12.250000155344813,
-    "logistica": 868298.0399999999,
-    "logisticaPct": 8.174884667773838,
-    "repasse": -764324.23,
-    "repassePct": -7.195988175943649,
+    "receita": 10608132.6,
+    "custos": 7732893.41,
+    "custosPct": 72.89589696493802,
+    "impostos": 1299496.2599999998,
+    "impostosPct": 12.250000155541041,
+    "logistica": 879646.47,
+    "logisticaPct": 8.292189616860558,
+    "repasse": -776253.14,
+    "repassePct": -7.3175286289313535,
     "prospeccao": 162878.45,
-    "prospeccaoPct": 1.5334740864044425,
-    "margem": 1500935.96,
-    "margemPct": 14.131067676617592,
+    "prospeccaoPct": 1.5354111429564898,
+    "margem": 1472349.6099999999,
+    "margemPct": 13.879441985859037,
     "totalLideres": 7,
     "totalProjetos": 44
   },
@@ -33,12 +33,12 @@
         "impostosPct": 12.25,
         "custos": 1608034.66,
         "custosPct": 67.31,
-        "logistica": 316302.55,
-        "logisticaPct": 13.24,
-        "repasse": -295066.94,
-        "repassePct": -12.35,
-        "margem": 466977.2,
-        "margemPct": 19.55,
+        "logistica": 327650.98,
+        "logisticaPct": 13.72,
+        "repasse": -306995.85,
+        "repassePct": -12.85,
+        "margem": 467557.68,
+        "margemPct": 19.57,
         "statusCor": "amber"
       },
       "projetos": [
@@ -232,12 +232,12 @@
           "impostosPct": 12.25,
           "custos": 697029.04,
           "custosPct": 66.06,
-          "logistica": 100682.56,
-          "logisticaPct": 9.54,
-          "repasse": -99813.16,
-          "repassePct": -9.46,
-          "margem": 228025.45,
-          "margemPct": 21.61,
+          "logistica": 111570.71,
+          "logisticaPct": 10.57,
+          "repasse": -108195,
+          "repassePct": -10.25,
+          "margem": 225519.14,
+          "margemPct": 21.37,
           "statusCor": "amber"
         },
         {
@@ -304,12 +304,12 @@
           "impostosPct": 12.25,
           "custos": 189078.63,
           "custosPct": 67.25,
-          "logistica": 46011.57,
-          "logisticaPct": 16.37,
-          "repasse": -42951.78,
-          "repassePct": -15.28,
-          "margem": 54565.13,
-          "margemPct": 19.41,
+          "logistica": 46471.85,
+          "logisticaPct": 16.53,
+          "repasse": -46498.85,
+          "repassePct": -16.54,
+          "margem": 57651.92,
+          "margemPct": 20.51,
           "statusCor": "amber"
         },
         {
@@ -345,14 +345,14 @@
         "receitaPct": 100,
         "impostos": 146663.03,
         "impostosPct": 12.25,
-        "custos": 746285.73,
-        "custosPct": 62.33,
+        "custos": 749694.06,
+        "custosPct": 62.62,
         "logistica": 91301.06,
         "logisticaPct": 7.63,
         "repasse": -82903.54,
         "repassePct": -6.92,
-        "margem": 295902.96,
-        "margemPct": 24.72,
+        "margem": 292494.63,
+        "margemPct": 24.43,
         "statusCor": "sky"
       },
       "projetos": [
@@ -436,14 +436,14 @@
           "receitaPct": 100,
           "impostos": 7631.75,
           "impostosPct": 12.25,
-          "custos": 30408.73,
-          "custosPct": 48.81,
+          "custos": 33136,
+          "custosPct": 53.19,
           "logistica": 20742.39,
           "logisticaPct": 33.29,
           "repasse": -20742.39,
           "repassePct": -33.29,
-          "margem": 24259.52,
-          "margemPct": 38.94,
+          "margem": 21532.25,
+          "margemPct": 34.56,
           "statusCor": "emerald"
         },
         {
@@ -562,14 +562,14 @@
           "receitaPct": 100,
           "impostos": 50350.62,
           "impostosPct": 12.25,
-          "custos": 222004.71,
-          "custosPct": 54.01,
+          "custos": 222685.77,
+          "custosPct": 54.18,
           "logistica": 13999.97,
           "logisticaPct": 3.41,
           "repasse": -13427.31,
           "repassePct": -3.27,
-          "margem": 138097.45,
-          "margemPct": 33.6,
+          "margem": 137416.39,
+          "margemPct": 33.43,
           "statusCor": "emerald"
         },
         {
@@ -659,14 +659,14 @@
         "receitaPct": 100,
         "impostos": 111020.01,
         "impostosPct": 12.25,
-        "custos": 447324.75,
-        "custosPct": 49.36,
+        "custos": 469824.75,
+        "custosPct": 51.84,
         "logistica": 25767.14,
         "logisticaPct": 2.84,
         "repasse": 0,
         "repassePct": 0,
-        "margem": 322173.9,
-        "margemPct": 35.55,
+        "margem": 299673.9,
+        "margemPct": 33.07,
         "statusCor": "emerald"
       },
       "projetos": [
@@ -732,15 +732,15 @@
           "receitaPct": 100,
           "impostos": 31903.9,
           "impostosPct": 12.25,
-          "custos": 140704.55,
-          "custosPct": 54.03,
+          "custos": 163204.55,
+          "custosPct": 62.66,
           "logistica": 25767.14,
           "logisticaPct": 9.89,
           "repasse": 0,
           "repassePct": 0,
-          "margem": 62064.41,
-          "margemPct": 23.83,
-          "statusCor": "sky"
+          "margem": 39564.41,
+          "margemPct": 15.19,
+          "statusCor": "amber"
         }
       ]
     },
@@ -921,18 +921,18 @@
         "titulo": "Total - Fábio Canassa",
         "tituloRaw": "TOTAL - FÁBIO CANASSA",
         "area": "Outsourcing",
-        "receita": 852433.92,
+        "receita": 839033.92,
         "receitaPct": 100,
-        "impostos": 104423.16,
+        "impostos": 102781.66,
         "impostosPct": 12.25,
-        "custos": 578805.28,
-        "custosPct": 67.9,
+        "custos": 570305.28,
+        "custosPct": 67.97,
         "logistica": 26078.12,
-        "logisticaPct": 3.06,
+        "logisticaPct": 3.11,
         "repasse": -11306.05,
-        "repassePct": -1.33,
-        "margem": 154433.41,
-        "margemPct": 18.12,
+        "repassePct": -1.35,
+        "margem": 151174.91,
+        "margemPct": 18.02,
         "statusCor": "amber"
       },
       "projetos": [
@@ -976,18 +976,18 @@
           "titulo": "Instrutores Porsche",
           "tituloRaw": "INSTRUTORES PORSCHE",
           "area": "HRD",
-          "receita": 321600,
+          "receita": 308200,
           "receitaPct": 100,
-          "impostos": 39396,
+          "impostos": 37754.5,
           "impostosPct": 12.25,
-          "custos": 204000,
+          "custos": 195500,
           "custosPct": 63.43,
           "logistica": 8216.83,
-          "logisticaPct": 2.55,
+          "logisticaPct": 2.67,
           "repasse": -3094.12,
-          "repassePct": -0.96,
-          "margem": 73081.29,
-          "margemPct": 22.72,
+          "repassePct": -1,
+          "margem": 69822.79,
+          "margemPct": 22.66,
           "statusCor": "sky"
         }
       ]
@@ -1018,8 +1018,8 @@
       "lider": "Beatriz Picorelli",
       "area": "HRD",
       "receita": 1055183.92,
-      "margem": 228025.45,
-      "margemPct": 21.61
+      "margem": 225519.14,
+      "margemPct": 21.37
     },
     {
       "ranking": 4,
@@ -1036,8 +1036,8 @@
       "lider": "Caroline Amieva",
       "area": "Business Solutions",
       "receita": 411025.44,
-      "margem": 138097.45,
-      "margemPct": 33.6
+      "margem": 137416.39,
+      "margemPct": 33.43
     },
     {
       "ranking": 6,
@@ -1053,18 +1053,18 @@
       "projeto": "Instrutores Porsche",
       "lider": "Fábio Canassa",
       "area": "HRD",
-      "receita": 321600,
-      "margem": 73081.29,
-      "margemPct": 22.72
+      "receita": 308200,
+      "margem": 69822.79,
+      "margemPct": 22.66
     },
     {
       "ranking": 8,
-      "projeto": "DDN - Business Assessment",
-      "lider": "Jefferson Souza",
-      "area": "Dealer Development",
-      "receita": 260440,
-      "margem": 62064.41,
-      "margemPct": 23.83
+      "projeto": "Treinamento Comercial",
+      "lider": "Beatriz Picorelli",
+      "area": "HRD",
+      "receita": 281143.65,
+      "margem": 57651.92,
+      "margemPct": 20.51
     },
     {
       "ranking": 9,
@@ -1086,15 +1086,6 @@
     },
     {
       "ranking": 11,
-      "projeto": "Treinamento Comercial",
-      "lider": "Beatriz Picorelli",
-      "area": "HRD",
-      "receita": 281143.65,
-      "margem": 54565.13,
-      "margemPct": 19.41
-    },
-    {
-      "ranking": 12,
       "projeto": "DM - Back Office",
       "lider": "Jefferson Souza",
       "area": "Dealer Development",
@@ -1103,7 +1094,7 @@
       "margemPct": 14.95
     },
     {
-      "ranking": 13,
+      "ranking": 12,
       "projeto": "Projeto Especial 01",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
@@ -1112,13 +1103,22 @@
       "margemPct": 28.07
     },
     {
-      "ranking": 14,
+      "ranking": 13,
       "projeto": "Backoffice CRM Case",
       "lider": "Vinicius Souza",
       "area": "Outsourcing",
       "receita": 361293.72,
       "margem": 41752.67,
       "margemPct": 11.56
+    },
+    {
+      "ranking": 14,
+      "projeto": "DDN - Business Assessment",
+      "lider": "Jefferson Souza",
+      "area": "Dealer Development",
+      "receita": 260440,
+      "margem": 39564.41,
+      "margemPct": 15.19
     },
     {
       "ranking": 15,
@@ -1171,8 +1171,8 @@
       "lider": "Caroline Amieva",
       "area": "Business Solutions",
       "receita": 62300,
-      "margem": 24259.52,
-      "margemPct": 38.94
+      "margem": 21532.25,
+      "margemPct": 34.56
     }
   ],
   "menosRentaveis": [
@@ -1298,10 +1298,10 @@
     {
       "area": "Hrd - Human Resource Development",
       "meta": 3500000,
-      "realizado": 2700486.01,
-      "atingidoPct": "77,16%",
-      "falta": 799513.99,
-      "faltaPct": "22,84%",
+      "realizado": 2687086.01,
+      "atingidoPct": "76,77%",
+      "falta": 812913.99,
+      "faltaPct": "23,23%",
       "isTotal": false
     },
     {
@@ -1325,10 +1325,10 @@
     {
       "area": "Meta Geral 2026",
       "meta": 15000000,
-      "realizado": 10621532.6,
-      "atingidoPct": "70,81%",
-      "falta": 4378467.4,
-      "faltaPct": "29,19%",
+      "realizado": 10608132.6,
+      "atingidoPct": "70,72%",
+      "falta": 4391867.4,
+      "faltaPct": "29,28%",
       "isTotal": true
     }
   ],
@@ -1789,71 +1789,6 @@
       }
     },
     {
-      "titulo": "Instrutores Porsche",
-      "lider": "Fábio Canassa",
-      "area": "HRD",
-      "previsto": {
-        "TOTAL": 321600,
-        "JANEIRO": 26800,
-        "FEVEREIRO": 26800,
-        "MARÇO": 26800,
-        "ABRIL": 26800,
-        "MAIO": 26800,
-        "JUNHO": 26800,
-        "JULHO": 26800,
-        "AGOSTO": 26800,
-        "SETEMBRO": 26800,
-        "OUTUBRO": 26800,
-        "NOVEMBRO": 26800,
-        "DEZEMBRO": 26800
-      },
-      "realizado": {
-        "TOTAL": 294800,
-        "JANEIRO": 26800,
-        "FEVEREIRO": 26800,
-        "MARÇO": 26800,
-        "ABRIL": 26800,
-        "MAIO": 26800,
-        "JUNHO": 26800,
-        "JULHO": 26800,
-        "AGOSTO": 26800,
-        "SETEMBRO": 26800,
-        "OUTUBRO": 26800,
-        "NOVEMBRO": 26800,
-        "DEZEMBRO": 0
-      },
-      "aberto": {
-        "TOTAL": 26800,
-        "JANEIRO": 0,
-        "FEVEREIRO": 0,
-        "MARÇO": 0,
-        "ABRIL": 0,
-        "MAIO": 0,
-        "JUNHO": 0,
-        "JULHO": 0,
-        "AGOSTO": 0,
-        "SETEMBRO": 0,
-        "OUTUBRO": 0,
-        "NOVEMBRO": 26800,
-        "DEZEMBRO": 0
-      },
-      "atrasado": {
-        "TOTAL": 0,
-        "JANEIRO": 0,
-        "FEVEREIRO": 0,
-        "MARÇO": 0,
-        "ABRIL": 0,
-        "MAIO": 0,
-        "JUNHO": 0,
-        "JULHO": 0,
-        "AGOSTO": 0,
-        "SETEMBRO": 0,
-        "OUTUBRO": 0,
-        "NOVEMBRO": 0,
-        "DEZEMBRO": 0
-      }
-    },
-    {
       "titulo": "Serviços CNH",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
@@ -1913,6 +1848,71 @@
         "JULHO": 0,
         "AGOSTO": 0,
         "SETEMBRO": 13717.2,
+        "OUTUBRO": 0,
+        "NOVEMBRO": 0,
+        "DEZEMBRO": 0
+      }
+    },
+    {
+      "titulo": "Instrutores Porsche",
+      "lider": "Fábio Canassa",
+      "area": "HRD",
+      "previsto": {
+        "TOTAL": 308200,
+        "JANEIRO": 26800,
+        "FEVEREIRO": 26800,
+        "MARÇO": 26800,
+        "ABRIL": 26800,
+        "MAIO": 26800,
+        "JUNHO": 26800,
+        "JULHO": 26800,
+        "AGOSTO": 26800,
+        "SETEMBRO": 26800,
+        "OUTUBRO": 26800,
+        "NOVEMBRO": 26800,
+        "DEZEMBRO": 13400
+      },
+      "realizado": {
+        "TOTAL": 294800,
+        "JANEIRO": 26800,
+        "FEVEREIRO": 26800,
+        "MARÇO": 26800,
+        "ABRIL": 26800,
+        "MAIO": 26800,
+        "JUNHO": 26800,
+        "JULHO": 26800,
+        "AGOSTO": 26800,
+        "SETEMBRO": 26800,
+        "OUTUBRO": 26800,
+        "NOVEMBRO": 26800,
+        "DEZEMBRO": 0
+      },
+      "aberto": {
+        "TOTAL": 26800,
+        "JANEIRO": 0,
+        "FEVEREIRO": 0,
+        "MARÇO": 0,
+        "ABRIL": 0,
+        "MAIO": 0,
+        "JUNHO": 0,
+        "JULHO": 0,
+        "AGOSTO": 0,
+        "SETEMBRO": 0,
+        "OUTUBRO": 0,
+        "NOVEMBRO": 26800,
+        "DEZEMBRO": 0
+      },
+      "atrasado": {
+        "TOTAL": 0,
+        "JANEIRO": 0,
+        "FEVEREIRO": 0,
+        "MARÇO": 0,
+        "ABRIL": 0,
+        "MAIO": 0,
+        "JUNHO": 0,
+        "JULHO": 0,
+        "AGOSTO": 0,
+        "SETEMBRO": 0,
         "OUTUBRO": 0,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
@@ -2128,12 +2128,12 @@
         "JULHO": 54245.54,
         "AGOSTO": 11827.76,
         "SETEMBRO": 116536.66,
-        "OUTUBRO": 55560.29,
-        "NOVEMBRO": 0,
+        "OUTUBRO": 49990,
+        "NOVEMBRO": 5570.29,
         "DEZEMBRO": 0
       },
       "realizado": {
-        "TOTAL": 246549.96000000002,
+        "TOTAL": 252120.25000000003,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -2144,11 +2144,11 @@
         "AGOSTO": 11827.76,
         "SETEMBRO": 116536.66,
         "OUTUBRO": 46950,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 5570.29,
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 30000,
+        "TOTAL": 35570.29,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -2159,7 +2159,7 @@
         "AGOSTO": 0,
         "SETEMBRO": 0,
         "OUTUBRO": 30000,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 5570.29,
         "DEZEMBRO": 0
       },
       "atrasado": {
