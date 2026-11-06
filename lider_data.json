@@ -1,19 +1,19 @@
 {
-  "updatedAt": "2026-11-05T11:00:16.628Z",
+  "updatedAt": "2026-11-06T11:00:11.898Z",
   "macro": {
-    "receita": 10608132.6,
+    "receita": 10608953.42,
     "custos": 7732893.41,
-    "custosPct": 72.89589696493802,
-    "impostos": 1299496.2599999998,
-    "impostosPct": 12.250000155541041,
-    "logistica": 879646.47,
-    "logisticaPct": 8.292189616860558,
+    "custosPct": 72.89025697315202,
+    "impostos": 1299596.8099999998,
+    "impostosPct": 12.250000151287306,
+    "logistica": 885366.5299999999,
+    "logisticaPct": 8.345465334317586,
     "repasse": -776253.14,
-    "repassePct": -7.3175286289313535,
+    "repassePct": -7.316962468103664,
     "prospeccao": 162878.45,
-    "prospeccaoPct": 1.5354111429564898,
-    "margem": 1472349.6099999999,
-    "margemPct": 13.879441985859037,
+    "prospeccaoPct": 1.53529234743308,
+    "margem": 1467349.8199999998,
+    "margemPct": 13.831240103606751,
     "totalLideres": 7,
     "totalProjetos": 44
   },
@@ -753,18 +753,18 @@
         "titulo": "Total - Joice Lage",
         "tituloRaw": "TOTAL - JOICE LAGE",
         "area": "Educação",
-        "receita": 4888.48,
+        "receita": 5709.3,
         "receitaPct": 100,
-        "impostos": 598.84,
+        "impostos": 699.39,
         "impostosPct": 12.25,
         "custos": 149709.1,
-        "custosPct": 3062.49,
+        "custosPct": 2622.2,
         "logistica": 13814.31,
-        "logisticaPct": 282.59,
+        "logisticaPct": 241.96,
         "repasse": 0,
         "repassePct": 0,
-        "margem": -159233.77,
-        "margemPct": -3257.33,
+        "margem": -158513.5,
+        "margemPct": -2776.41,
         "statusCor": "rose"
       },
       "projetos": [
@@ -772,18 +772,18 @@
           "titulo": "Campus BH (Univ. Veiga de Almeida)",
           "tituloRaw": "CAMPUS BH (UNIV. VEIGA DE ALMEIDA)",
           "area": "Educação",
-          "receita": 4888.48,
+          "receita": 5709.3,
           "receitaPct": 100,
-          "impostos": 598.84,
+          "impostos": 699.39,
           "impostosPct": 12.25,
           "custos": 149709.1,
-          "custosPct": 3062.49,
+          "custosPct": 2622.2,
           "logistica": 13814.31,
-          "logisticaPct": 282.59,
+          "logisticaPct": 241.96,
           "repasse": 0,
           "repassePct": 0,
-          "margem": -159233.77,
-          "margemPct": -3257.33,
+          "margem": -158513.5,
+          "margemPct": -2776.41,
           "statusCor": "rose"
         }
       ]
@@ -847,12 +847,12 @@
         "impostosPct": 12.25,
         "custos": 3759815.79,
         "custosPct": 72.6,
-        "logistica": 395034.86,
-        "logisticaPct": 7.63,
+        "logistica": 400754.92,
+        "logisticaPct": 7.74,
         "repasse": -375047.7,
         "repassePct": -7.24,
-        "margem": 764640.3,
-        "margemPct": 14.76,
+        "margem": 758920.24,
+        "margemPct": 14.65,
         "statusCor": "amber"
       },
       "projetos": [
@@ -884,12 +884,12 @@
           "impostosPct": 12.25,
           "custos": 270548.3,
           "custosPct": 74.88,
-          "logistica": 27841.32,
-          "logisticaPct": 7.71,
+          "logistica": 31549.1,
+          "logisticaPct": 8.73,
           "repasse": -23107.05,
           "repassePct": -6.4,
-          "margem": 41752.67,
-          "margemPct": 11.56,
+          "margem": 38044.89,
+          "margemPct": 10.53,
           "statusCor": "amber"
         },
         {
@@ -902,12 +902,12 @@
           "impostosPct": 12.25,
           "custos": 1700512.09,
           "custosPct": 69.64,
-          "logistica": 334818.05,
-          "logisticaPct": 13.71,
+          "logistica": 336830.33,
+          "logisticaPct": 13.79,
           "repasse": -331426.84,
           "repassePct": -13.57,
-          "margem": 438834.9,
-          "margemPct": 17.97,
+          "margem": 436822.62,
+          "margemPct": 17.89,
           "statusCor": "amber"
         }
       ]
@@ -1000,8 +1000,8 @@
       "lider": "Vinicius Souza",
       "area": "Outsourcing",
       "receita": 2441866.89,
-      "margem": 438834.9,
-      "margemPct": 17.97
+      "margem": 436822.62,
+      "margemPct": 17.89
     },
     {
       "ranking": 2,
@@ -1104,21 +1104,21 @@
     },
     {
       "ranking": 13,
-      "projeto": "Backoffice CRM Case",
-      "lider": "Vinicius Souza",
-      "area": "Outsourcing",
-      "receita": 361293.72,
-      "margem": 41752.67,
-      "margemPct": 11.56
-    },
-    {
-      "ranking": 14,
       "projeto": "DDN - Business Assessment",
       "lider": "Jefferson Souza",
       "area": "Dealer Development",
       "receita": 260440,
       "margem": 39564.41,
       "margemPct": 15.19
+    },
+    {
+      "ranking": 14,
+      "projeto": "Backoffice CRM Case",
+      "lider": "Vinicius Souza",
+      "area": "Outsourcing",
+      "receita": 361293.72,
+      "margem": 38044.89,
+      "margemPct": 10.53
     },
     {
       "ranking": 15,
@@ -1190,9 +1190,9 @@
       "projeto": "Campus BH (Univ. Veiga de Almeida)",
       "lider": "Joice Lage",
       "area": "Educação",
-      "receita": 4888.48,
-      "margem": -159233.77,
-      "margemPct": -3257.33
+      "receita": 5709.3,
+      "margem": -158513.5,
+      "margemPct": -2776.41
     },
     {
       "ranking": 3,
@@ -1316,7 +1316,7 @@
     {
       "area": "Educação",
       "meta": 0,
-      "realizado": 4888.48,
+      "realizado": 5709.3,
       "atingidoPct": "—",
       "falta": 0,
       "faltaPct": "—",
@@ -1325,10 +1325,10 @@
     {
       "area": "Meta Geral 2026",
       "meta": 15000000,
-      "realizado": 10608132.6,
-      "atingidoPct": "70,72%",
-      "falta": 4391867.4,
-      "faltaPct": "29,28%",
+      "realizado": 10608953.42,
+      "atingidoPct": "70,73%",
+      "falta": 4391046.58,
+      "faltaPct": "29,27%",
       "isTotal": true
     }
   ],
@@ -1468,7 +1468,7 @@
       "lider": "Beatriz Picorelli",
       "area": "HRD",
       "previsto": {
-        "TOTAL": 1055183.9200000016,
+        "TOTAL": 1003973.0400000016,
         "JANEIRO": 56119.380000000005,
         "FEVEREIRO": 41030.46,
         "MARÇO": 83907.96999999999,
@@ -1480,7 +1480,7 @@
         "SETEMBRO": 90372.09999999999,
         "OUTUBRO": 72082.5,
         "NOVEMBRO": 118335.35999999996,
-        "DEZEMBRO": 136624.95999999996
+        "DEZEMBRO": 85414.07999999999
       },
       "realizado": {
         "TOTAL": 853044.58,
@@ -1988,7 +1988,7 @@
       "lider": "Beatriz Picorelli",
       "area": "HRD",
       "previsto": {
-        "TOTAL": 268340.93,
+        "TOTAL": 264683.01,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 13717.2,
@@ -2000,7 +2000,7 @@
         "SETEMBRO": 26134.300000000003,
         "OUTUBRO": 29792.22,
         "NOVEMBRO": 22476.38,
-        "DEZEMBRO": 25219.82
+        "DEZEMBRO": 21561.9
       },
       "realizado": {
         "TOTAL": 240379.28999999998,
@@ -3873,7 +3873,7 @@
       "lider": "Joice Lage",
       "area": "Educação",
       "previsto": {
-        "TOTAL": 4888.48,
+        "TOTAL": 5709.299999999999,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -3884,7 +3884,7 @@
         "AGOSTO": 877.77,
         "SETEMBRO": 779.21,
         "OUTUBRO": 1007.65,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 820.82,
         "DEZEMBRO": 0
       },
       "realizado": {
