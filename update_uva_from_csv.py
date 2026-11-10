@@ -21,22 +21,26 @@ def run():
         print("Aviso: Nenhum arquivo CSV/XLS do UVA encontrado.")
         return
 
-    # Ordenar por data de modificação decrescente
-    candidates.sort(key=os.path.getmtime, reverse=True)
+    # Ordenar por mês mais recente e depois por data de modificação
+    uva_meses_ordem = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"]
+    def get_uva_month_rank(filepath):
+        fname = os.path.basename(filepath).upper()
+        for idx, m in enumerate(uva_meses_ordem):
+            if m in fname:
+                return idx
+        return -1
+
+    candidates.sort(key=lambda f: (get_uva_month_rank(f), os.path.getmtime(f)), reverse=True)
     uva_file_src = candidates[0]
     print(f"Processando base UVA: {os.path.basename(uva_file_src)}")
     
-    # Detectar o mês de referência do nome do arquivo (ex: SET-26 ou AGO-26)
-    mes_ref = "SET/2026"
+    # Detectar o mês de referência do nome do arquivo (ex: OUT-26 ou SET-26)
+    mes_ref = "OUT/2026"
     fname_upper = os.path.basename(uva_file_src).upper()
-    if "SET" in fname_upper:
-        mes_ref = "SET/2026"
-    elif "AGO" in fname_upper:
-        mes_ref = "AGO/2026"
-    elif "OUT" in fname_upper:
-        mes_ref = "OUT/2026"
-    elif "JUL" in fname_upper:
-        mes_ref = "JUL/2026"
+    for m in reversed(uva_meses_ordem):
+        if m in fname_upper:
+            mes_ref = f"{m}/2026"
+            break
 
     # 2. Ler e agregar dados do arquivo
     lancamentos = []

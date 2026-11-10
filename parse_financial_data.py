@@ -40,10 +40,19 @@ def run():
     repo_dir = os.path.dirname(os.path.abspath(__file__))
     
     # 1. Encontrar os arquivos CSV mais recentes
-    # Preferência explícita por Setembro se existir, ou o mais recente modificado
-    desp_files = sorted(glob.glob(os.path.join(repo_dir, "*Base Despesas*.csv")), key=os.path.getmtime, reverse=True)
-    rec_files = sorted(glob.glob(os.path.join(repo_dir, "*Receita*.csv")), key=os.path.getmtime, reverse=True)
-    reemb_files = sorted(glob.glob(os.path.join(repo_dir, "*Reembolso*.csv")), key=os.path.getmtime, reverse=True)
+    # Ordenar por mês (mês mais avançado tem prioridade) e depois por data de modificação
+    def get_file_month_rank(filepath):
+        fname = os.path.basename(filepath).lower()
+        for idx, (m_full, m_short, m_col) in enumerate(MONTH_ORDER):
+            if m_full.lower() in fname or m_short.lower() in fname:
+                return idx
+        return -1
+
+    file_sort_key = lambda f: (get_file_month_rank(f), os.path.getmtime(f))
+
+    desp_files = sorted(glob.glob(os.path.join(repo_dir, "*Base Despesas*.csv")), key=file_sort_key, reverse=True)
+    rec_files = sorted(glob.glob(os.path.join(repo_dir, "*Receita*.csv")), key=file_sort_key, reverse=True)
+    reemb_files = sorted(glob.glob(os.path.join(repo_dir, "*Reembolso*.csv")), key=file_sort_key, reverse=True)
     
     if not desp_files or not rec_files or not reemb_files:
         raise FileNotFoundError("Não foi possível localizar os arquivos CSV de Despesas, Receita e Reembolso.")
@@ -171,15 +180,16 @@ def run():
         reader = csv.reader(f, delimiter=';')
         next(reader)
         for row in reader:
-            if len(row) >= 5 + num_months:
+            if len(row) >= 5:
                 dash_n = norm(row[0])
                 orig_n = norm(row[4])
-                vals = [parse_num(row[i]) for i in range(5, 5 + num_months)]
-                for i in range(num_months):
+                cols_to_read = min(num_months, len(row) - 5)
+                vals = [parse_num(row[i]) for i in range(5, 5 + cols_to_read)]
+                for i in range(cols_to_read):
                     v = vals[i]
                     if dash_n == 'reembolso':
                         reembolso_viagens[i] += v
-                    elif 'rendimentos' in orig_n or dash_n == 'resultado financeiro':
+                    elif 'rendimentos' in orig_n or 'aplicac' in orig_n or (dash_n == 'resultado financeiro' and 'despesa' not in orig_n and 'emprestimo' not in orig_n):
                         receita_financeira[i] += v
                     elif ('despesa financeira' in dash_n or 'financeir' in dash_n) and ('juros' in orig_n or 'tarifa' in orig_n):
                         juros_tarifas[i] += v
