@@ -1,19 +1,19 @@
 {
-  "updatedAt": "2026-11-12T11:00:13.563Z",
+  "updatedAt": "2026-11-13T11:00:10.008Z",
   "macro": {
     "receita": 10608971.959999999,
     "custos": 7724715.72,
     "custosPct": 72.81304681664933,
     "impostos": 1299599.0799999998,
     "impostosPct": 12.250000140447161,
-    "logistica": 939641.1499999999,
-    "logisticaPct": 8.857042449945357,
-    "repasse": -781763.61,
-    "repassePct": -7.368891283222885,
+    "logistica": 955699.32,
+    "logisticaPct": 9.008406503508187,
+    "repasse": -789183.86,
+    "repassePct": -7.438834441032871,
     "prospeccao": 162878.45,
     "prospeccaoPct": 1.5352896643908183,
-    "margem": 1426779.6300000001,
-    "margemPct": 13.448801970440877,
+    "margem": 1418141.71,
+    "margemPct": 13.367381074688033,
     "totalLideres": 7,
     "totalProjetos": 44
   },
@@ -33,12 +33,12 @@
         "impostosPct": 12.25,
         "custos": 1602307.42,
         "custosPct": 67.28,
-        "logistica": 327715.62,
-        "logisticaPct": 13.76,
-        "repasse": -306995.85,
-        "repassePct": -12.89,
-        "margem": 466800.63,
-        "margemPct": 19.6,
+        "logistica": 335037.14,
+        "logisticaPct": 14.07,
+        "repasse": -310022.4,
+        "repassePct": -13.02,
+        "margem": 462505.66,
+        "margemPct": 19.42,
         "statusCor": "amber"
       },
       "projetos": [
@@ -232,12 +232,12 @@
           "impostosPct": 12.25,
           "custos": 691301.8,
           "custosPct": 65.97,
-          "logistica": 111570.71,
-          "logisticaPct": 10.65,
+          "logistica": 115538.53,
+          "logisticaPct": 11.03,
           "repasse": -108195,
           "repassePct": -10.33,
-          "margem": 224826.73,
-          "margemPct": 21.46,
+          "margem": 220858.91,
+          "margemPct": 21.08,
           "statusCor": "amber"
         },
         {
@@ -286,12 +286,12 @@
           "impostosPct": 12.25,
           "custos": 163607.04,
           "custosPct": 53.01,
-          "logistica": 123478.34,
-          "logisticaPct": 40.01,
-          "repasse": -118079.91,
-          "repassePct": -38.26,
-          "margem": 101823.49,
-          "margemPct": 32.99,
+          "logistica": 123929.1,
+          "logisticaPct": 40.15,
+          "repasse": -118203.52,
+          "repassePct": -38.3,
+          "margem": 101496.34,
+          "margemPct": 32.89,
           "statusCor": "emerald"
         },
         {
@@ -304,10 +304,10 @@
           "impostosPct": 12.25,
           "custos": 189078.63,
           "custosPct": 67.25,
-          "logistica": 43568.91,
-          "logisticaPct": 15.5,
-          "repasse": -43595.91,
-          "repassePct": -15.51,
+          "logistica": 46471.85,
+          "logisticaPct": 16.53,
+          "repasse": -46498.85,
+          "repassePct": -16.54,
           "margem": 57651.92,
           "margemPct": 20.51,
           "statusCor": "amber"
@@ -661,12 +661,12 @@
         "impostosPct": 12.25,
         "custos": 463284.71,
         "custosPct": 51.12,
-        "logistica": 71537.28,
-        "logisticaPct": 7.89,
+        "logistica": 73842.57,
+        "logisticaPct": 8.15,
         "repasse": 0,
         "repassePct": 0,
-        "margem": 260443.8,
-        "margemPct": 28.74,
+        "margem": 258138.51,
+        "margemPct": 28.48,
         "statusCor": "sky"
       },
       "projetos": [
@@ -734,13 +734,13 @@
           "impostosPct": 12.25,
           "custos": 156664.51,
           "custosPct": 60.15,
-          "logistica": 71537.28,
-          "logisticaPct": 27.47,
+          "logistica": 73842.57,
+          "logisticaPct": 28.35,
           "repasse": 0,
           "repassePct": 0,
-          "margem": 334.31,
-          "margemPct": 0.13,
-          "statusCor": "amber"
+          "margem": -1970.98,
+          "margemPct": -0.76,
+          "statusCor": "rose"
         }
       ]
     },
@@ -847,12 +847,12 @@
         "impostosPct": 12.25,
         "custos": 3759815.79,
         "custosPct": 72.6,
-        "logistica": 406301.99,
-        "logisticaPct": 7.85,
-        "repasse": -377665.4,
-        "repassePct": -7.29,
-        "margem": 755990.87,
-        "margemPct": 14.6,
+        "logistica": 412733.35,
+        "logisticaPct": 7.97,
+        "repasse": -382059.1,
+        "repassePct": -7.38,
+        "margem": 753953.21,
+        "margemPct": 14.56,
         "statusCor": "amber"
       },
       "projetos": [
@@ -884,12 +884,12 @@
           "impostosPct": 12.25,
           "custos": 270548.3,
           "custosPct": 74.88,
-          "logistica": 31549.1,
-          "logisticaPct": 8.73,
-          "repasse": -23107.05,
-          "repassePct": -6.4,
-          "margem": 38044.89,
-          "margemPct": 10.53,
+          "logistica": 31208.53,
+          "logisticaPct": 8.64,
+          "repasse": -27500.75,
+          "repassePct": -7.61,
+          "margem": 42779.16,
+          "margemPct": 11.84,
           "statusCor": "amber"
         },
         {
@@ -902,12 +902,12 @@
           "impostosPct": 12.25,
           "custos": 1700512.09,
           "custosPct": 69.64,
-          "logistica": 340998.02,
-          "logisticaPct": 13.96,
+          "logistica": 347769.95,
+          "logisticaPct": 14.24,
           "repasse": -334044.54,
           "repassePct": -13.68,
-          "margem": 435272.63,
-          "margemPct": 17.83,
+          "margem": 428500.7,
+          "margemPct": 17.55,
           "statusCor": "amber"
         }
       ]
@@ -1000,8 +1000,8 @@
       "lider": "Vinicius Souza",
       "area": "Outsourcing",
       "receita": 2441866.89,
-      "margem": 435272.63,
-      "margemPct": 17.83
+      "margem": 428500.7,
+      "margemPct": 17.55
     },
     {
       "ranking": 2,
@@ -1018,8 +1018,8 @@
       "lider": "Beatriz Picorelli",
       "area": "HRD",
       "receita": 1047868.08,
-      "margem": 224826.73,
-      "margemPct": 21.46
+      "margem": 220858.91,
+      "margemPct": 21.08
     },
     {
       "ranking": 4,
@@ -1045,8 +1045,8 @@
       "lider": "Beatriz Picorelli",
       "area": "HRD",
       "receita": 308637,
-      "margem": 101823.49,
-      "margemPct": 32.99
+      "margem": 101496.34,
+      "margemPct": 32.89
     },
     {
       "ranking": 7,
@@ -1108,8 +1108,8 @@
       "lider": "Vinicius Souza",
       "area": "Outsourcing",
       "receita": 361293.72,
-      "margem": 38044.89,
-      "margemPct": 10.53
+      "margem": 42779.16,
+      "margemPct": 11.84
     },
     {
       "ranking": 14,
@@ -1214,21 +1214,21 @@
     },
     {
       "ranking": 5,
+      "projeto": "DDN - Business Assessment",
+      "lider": "Jefferson Souza",
+      "area": "Dealer Development",
+      "receita": 260440,
+      "margem": -1970.98,
+      "margemPct": -0.76
+    },
+    {
+      "ranking": 6,
       "projeto": "Automação Essencialidade",
       "lider": "Caroline Amieva",
       "area": "Business Solutions",
       "receita": 1998.8,
       "margem": 119.93,
       "margemPct": 6
-    },
-    {
-      "ranking": 6,
-      "projeto": "DDN - Business Assessment",
-      "lider": "Jefferson Souza",
-      "area": "Dealer Development",
-      "receita": 260440,
-      "margem": 334.31,
-      "margemPct": 0.13
     },
     {
       "ranking": 7,
@@ -1858,7 +1858,7 @@
       "lider": "Beatriz Picorelli",
       "area": "HRD",
       "previsto": {
-        "TOTAL": 301321.16000000015,
+        "TOTAL": 284860.52000000014,
         "JANEIRO": 5486.88,
         "FEVEREIRO": 19204.08,
         "MARÇO": 31092.319999999992,
@@ -1870,7 +1870,7 @@
         "SETEMBRO": 13717.2,
         "OUTUBRO": 34750.240000000005,
         "NOVEMBRO": 20118.559999999998,
-        "DEZEMBRO": 16460.64
+        "DEZEMBRO": 0
       },
       "realizado": {
         "TOTAL": 261665.66,
