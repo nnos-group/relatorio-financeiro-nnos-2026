@@ -1,19 +1,19 @@
 {
-  "updatedAt": "2026-11-13T11:00:10.008Z",
+  "updatedAt": "2026-11-14T11:00:13.971Z",
   "macro": {
-    "receita": 10608971.959999999,
-    "custos": 7724715.72,
-    "custosPct": 72.81304681664933,
-    "impostos": 1299599.0799999998,
-    "impostosPct": 12.250000140447161,
-    "logistica": 955699.32,
-    "logisticaPct": 9.008406503508187,
-    "repasse": -789183.86,
-    "repassePct": -7.438834441032871,
+    "receita": 10610846.959999999,
+    "custos": 7725738.45,
+    "custosPct": 72.80981884974807,
+    "impostos": 1299828.7699999998,
+    "impostosPct": 12.25000016398314,
+    "logistica": 961013.3099999998,
+    "logisticaPct": 9.056895397914587,
+    "repasse": -789986.0099999999,
+    "repassePct": -7.445079671566575,
     "prospeccao": 162878.45,
-    "prospeccaoPct": 1.5352896643908183,
-    "margem": 1418141.71,
-    "margemPct": 13.367381074688033,
+    "prospeccaoPct": 1.5350183695421051,
+    "margem": 1414252.45,
+    "margemPct": 13.328365354163962,
     "totalLideres": 7,
     "totalProjetos": 44
   },
@@ -33,10 +33,10 @@
         "impostosPct": 12.25,
         "custos": 1602307.42,
         "custosPct": 67.28,
-        "logistica": 335037.14,
-        "logisticaPct": 14.07,
-        "repasse": -310022.4,
-        "repassePct": -13.02,
+        "logistica": 335839.29,
+        "logisticaPct": 14.1,
+        "repasse": -310824.55,
+        "repassePct": -13.05,
         "margem": 462505.66,
         "margemPct": 19.42,
         "statusCor": "amber"
@@ -304,10 +304,10 @@
           "impostosPct": 12.25,
           "custos": 189078.63,
           "custosPct": 67.25,
-          "logistica": 46471.85,
-          "logisticaPct": 16.53,
-          "repasse": -46498.85,
-          "repassePct": -16.54,
+          "logistica": 47274,
+          "logisticaPct": 16.81,
+          "repasse": -47301,
+          "repassePct": -16.82,
           "margem": 57651.92,
           "margemPct": 20.51,
           "statusCor": "amber"
@@ -341,18 +341,18 @@
         "titulo": "Total - Caroline Amieva",
         "tituloRaw": "TOTAL - CAROLINE AMIEVA",
         "area": "Business Solutions",
-        "receita": 1203483.62,
+        "receita": 1205358.62,
         "receitaPct": 100,
-        "impostos": 147426.74,
+        "impostos": 147656.43,
         "impostosPct": 12.25,
-        "custos": 753783.65,
-        "custosPct": 62.63,
+        "custos": 754806.38,
+        "custosPct": 62.62,
         "logistica": 92155.5,
-        "logisticaPct": 7.66,
+        "logisticaPct": 7.65,
         "repasse": -83757.98,
-        "repassePct": -6.96,
-        "margem": 293875.71,
-        "margemPct": 24.42,
+        "repassePct": -6.95,
+        "margem": 294498.29,
+        "margemPct": 24.43,
         "statusCor": "sky"
       },
       "projetos": [
@@ -540,18 +540,18 @@
           "titulo": "Stellantis | Trainning",
           "tituloRaw": "STELLANTIS | TRAINNING",
           "area": "Business Solutions",
-          "receita": 81800,
+          "receita": 83675,
           "receitaPct": 100,
-          "impostos": 10020.5,
+          "impostos": 10250.19,
           "impostosPct": 12.25,
-          "custos": 51846.45,
-          "custosPct": 63.38,
+          "custos": 52869.18,
+          "custosPct": 63.18,
           "logistica": 2561.84,
-          "logisticaPct": 3.13,
+          "logisticaPct": 3.06,
           "repasse": -2561.84,
-          "repassePct": -3.13,
-          "margem": 19933.05,
-          "margemPct": 24.37,
+          "repassePct": -3.06,
+          "margem": 20555.63,
+          "margemPct": 24.57,
           "statusCor": "sky"
         },
         {
@@ -661,12 +661,12 @@
         "impostosPct": 12.25,
         "custos": 463284.71,
         "custosPct": 51.12,
-        "logistica": 73842.57,
-        "logisticaPct": 8.15,
+        "logistica": 78354.41,
+        "logisticaPct": 8.65,
         "repasse": 0,
         "repassePct": 0,
-        "margem": 258138.51,
-        "margemPct": 28.48,
+        "margem": 253626.67,
+        "margemPct": 27.99,
         "statusCor": "sky"
       },
       "projetos": [
@@ -734,12 +734,12 @@
           "impostosPct": 12.25,
           "custos": 156664.51,
           "custosPct": 60.15,
-          "logistica": 73842.57,
-          "logisticaPct": 28.35,
+          "logistica": 78354.41,
+          "logisticaPct": 30.09,
           "repasse": 0,
           "repassePct": 0,
-          "margem": -1970.98,
-          "margemPct": -0.76,
+          "margem": -6482.82,
+          "margemPct": -2.49,
           "statusCor": "rose"
         }
       ]
@@ -1170,9 +1170,9 @@
       "projeto": "Stellantis | Trainning",
       "lider": "Caroline Amieva",
       "area": "Business Solutions",
-      "receita": 81800,
-      "margem": 19933.05,
-      "margemPct": 24.37
+      "receita": 83675,
+      "margem": 20555.63,
+      "margemPct": 24.57
     }
   ],
   "menosRentaveis": [
@@ -1218,8 +1218,8 @@
       "lider": "Jefferson Souza",
       "area": "Dealer Development",
       "receita": 260440,
-      "margem": -1970.98,
-      "margemPct": -0.76
+      "margem": -6482.82,
+      "margemPct": -2.49
     },
     {
       "ranking": 6,
@@ -1307,10 +1307,10 @@
     {
       "area": "Business Solutions",
       "meta": 1700000,
-      "realizado": 1203483.62,
-      "atingidoPct": "70,79%",
-      "falta": 496516.38,
-      "faltaPct": "29,21%",
+      "realizado": 1205358.62,
+      "atingidoPct": "70,90%",
+      "falta": 494641.38,
+      "faltaPct": "29,10%",
       "isTotal": false
     },
     {
@@ -1325,10 +1325,10 @@
     {
       "area": "Meta Geral 2026",
       "meta": 15000000,
-      "realizado": 10608971.96,
-      "atingidoPct": "70,73%",
-      "falta": 4391028.04,
-      "faltaPct": "29,27%",
+      "realizado": 10610846.96,
+      "atingidoPct": "70,74%",
+      "falta": 4389153.04,
+      "faltaPct": "29,26%",
       "isTotal": true
     }
   ],
@@ -1938,7 +1938,7 @@
         "DEZEMBRO": 0
       },
       "realizado": {
-        "TOTAL": 249904,
+        "TOTAL": 279904,
         "JANEIRO": 21984,
         "FEVEREIRO": 21984,
         "MARÇO": 21984,
@@ -1949,11 +1949,11 @@
         "AGOSTO": 15000,
         "SETEMBRO": 22000,
         "OUTUBRO": 15000,
-        "NOVEMBRO": 30000,
+        "NOVEMBRO": 60000,
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 30000,
+        "TOTAL": 60000,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -1964,7 +1964,7 @@
         "AGOSTO": 0,
         "SETEMBRO": 0,
         "OUTUBRO": 0,
-        "NOVEMBRO": 30000,
+        "NOVEMBRO": 60000,
         "DEZEMBRO": 0
       },
       "atrasado": {
@@ -2248,7 +2248,7 @@
       "lider": "Beatriz Picorelli",
       "area": "HRD",
       "previsto": {
-        "TOTAL": 155461.6,
+        "TOTAL": 133514.08000000002,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -2260,7 +2260,7 @@
         "SETEMBRO": 21947.52,
         "OUTUBRO": 21947.52,
         "NOVEMBRO": 21947.52,
-        "DEZEMBRO": 21947.52
+        "DEZEMBRO": 0
       },
       "realizado": {
         "TOTAL": 111567.56000000001,
@@ -2488,7 +2488,7 @@
         "DEZEMBRO": 0
       },
       "atrasado": {
-        "TOTAL": 16000,
+        "TOTAL": 0,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -2499,7 +2499,7 @@
         "AGOSTO": 0,
         "SETEMBRO": 0,
         "OUTUBRO": 0,
-        "NOVEMBRO": 16000,
+        "NOVEMBRO": 0,
         "DEZEMBRO": 0
       }
     },
@@ -2573,7 +2573,7 @@
       "lider": "Caroline Amieva",
       "area": "Business Solutions",
       "previsto": {
-        "TOTAL": 81800,
+        "TOTAL": 83675,
         "JANEIRO": 4660,
         "FEVEREIRO": 4660,
         "MARÇO": 29660,
@@ -2584,11 +2584,11 @@
         "AGOSTO": 2625,
         "SETEMBRO": 1875,
         "OUTUBRO": 12625,
-        "NOVEMBRO": 2000,
+        "NOVEMBRO": 3875,
         "DEZEMBRO": 5937.5
       },
       "realizado": {
-        "TOTAL": 73237.5,
+        "TOTAL": 75112.5,
         "JANEIRO": 4660,
         "FEVEREIRO": 29660,
         "MARÇO": 4660,
@@ -2599,11 +2599,11 @@
         "AGOSTO": 2625,
         "SETEMBRO": 1875,
         "OUTUBRO": 12000,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 1875,
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 0,
+        "TOTAL": 1875,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -2614,7 +2614,7 @@
         "AGOSTO": 0,
         "SETEMBRO": 0,
         "OUTUBRO": 0,
-        "NOVEMBRO": 0,
+        "NOVEMBRO": 1875,
         "DEZEMBRO": 0
       },
       "atrasado": {
@@ -3123,7 +3123,7 @@
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 4046.05,
+        "TOTAL": 1470,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -3133,7 +3133,7 @@
         "JULHO": 0,
         "AGOSTO": 0,
         "SETEMBRO": 0,
-        "OUTUBRO": 2576.05,
+        "OUTUBRO": 0,
         "NOVEMBRO": 1470,
         "DEZEMBRO": 0
       },
