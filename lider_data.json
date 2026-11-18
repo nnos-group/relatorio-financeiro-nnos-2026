@@ -1,19 +1,19 @@
 {
-  "updatedAt": "2026-11-17T11:00:20.976Z",
+  "updatedAt": "2026-11-18T11:00:19.511Z",
   "macro": {
-    "receita": 10621193.36,
-    "custos": 7739720.48,
-    "custosPct": 72.87053551956049,
-    "impostos": 1301096.2,
-    "impostosPct": 12.250000126162847,
-    "logistica": 980102.83,
-    "logisticaPct": 9.227803287068676,
-    "repasse": -798841.3099999999,
-    "repassePct": -7.521201082813166,
+    "receita": 10639913.36,
+    "custos": 7742378.12,
+    "custosPct": 72.76730418789802,
+    "impostos": 1303389.4,
+    "impostosPct": 12.250000125940876,
+    "logistica": 1012241.1099999999,
+    "logisticaPct": 9.513621734979992,
+    "repasse": -813357.2,
+    "repassePct": -7.644396833697526,
     "prospeccao": 162878.45,
-    "prospeccaoPct": 1.533523065434523,
-    "margem": 1399115.16,
-    "margemPct": 13.172862150021153,
+    "prospeccaoPct": 1.5308249652890034,
+    "margem": 1395261.93,
+    "margemPct": 13.113470784878647,
     "totalLideres": 7,
     "totalProjetos": 44
   },
@@ -341,18 +341,18 @@
         "titulo": "Total - Caroline Amieva",
         "tituloRaw": "TOTAL - CAROLINE AMIEVA",
         "area": "Business Solutions",
-        "receita": 1203483.62,
+        "receita": 1221483.62,
         "receitaPct": 100,
-        "impostos": 147426.74,
+        "impostos": 149631.74,
         "impostosPct": 12.25,
         "custos": 754806.38,
-        "custosPct": 62.72,
+        "custosPct": 61.79,
         "logistica": 93067.69,
-        "logisticaPct": 7.73,
+        "logisticaPct": 7.62,
         "repasse": -84670.17,
-        "repassePct": -7.04,
-        "margem": 292852.98,
-        "margemPct": 24.33,
+        "repassePct": -6.93,
+        "margem": 308647.98,
+        "margemPct": 25.27,
         "statusCor": "sky"
       },
       "projetos": [
@@ -432,18 +432,18 @@
           "titulo": "Ditrasa | Governança NHCE",
           "tituloRaw": "DITRASA | GOVERNANÇA NHCE",
           "area": "Business Solutions",
-          "receita": 62300,
+          "receita": 80300,
           "receitaPct": 100,
-          "impostos": 7631.75,
+          "impostos": 9836.75,
           "impostosPct": 12.25,
           "custos": 33136,
-          "custosPct": 53.19,
+          "custosPct": 41.27,
           "logistica": 21654.58,
-          "logisticaPct": 34.76,
+          "logisticaPct": 26.97,
           "repasse": -21654.58,
-          "repassePct": -34.76,
-          "margem": 21532.25,
-          "margemPct": 34.56,
+          "repassePct": -26.97,
+          "margem": 37327.25,
+          "margemPct": 46.48,
           "statusCor": "emerald"
         },
         {
@@ -659,14 +659,14 @@
         "receitaPct": 100,
         "impostos": 111020.01,
         "impostosPct": 12.25,
-        "custos": 468178.33,
-        "custosPct": 51.66,
-        "logistica": 86325.73,
-        "logisticaPct": 9.53,
-        "repasse": 0,
-        "repassePct": 0,
-        "margem": 240761.73,
-        "margemPct": 26.57,
+        "custos": 443335.97,
+        "custosPct": 48.92,
+        "logistica": 114221.43,
+        "logisticaPct": 12.6,
+        "repasse": -8879.72,
+        "repassePct": -0.98,
+        "margem": 246588.11,
+        "margemPct": 27.21,
         "statusCor": "sky"
       },
       "projetos": [
@@ -732,14 +732,14 @@
           "receitaPct": 100,
           "impostos": 31903.9,
           "impostosPct": 12.25,
-          "custos": 161558.12,
-          "custosPct": 62.03,
-          "logistica": 86325.73,
-          "logisticaPct": 33.15,
-          "repasse": 0,
-          "repassePct": 0,
-          "margem": -19347.75,
-          "margemPct": -7.43,
+          "custos": 136715.76,
+          "custosPct": 52.49,
+          "logistica": 114221.43,
+          "logisticaPct": 43.86,
+          "repasse": -8879.72,
+          "repassePct": -3.41,
+          "margem": -13521.37,
+          "margemPct": -5.19,
           "statusCor": "rose"
         }
       ]
@@ -797,18 +797,18 @@
         "titulo": "Total - Leonardo Campos",
         "tituloRaw": "TOTAL - LEONARDO CAMPOS",
         "area": "Innovation",
-        "receita": 94036.45,
+        "receita": 94756.45,
         "receitaPct": 100,
-        "impostos": 11519.47,
+        "impostos": 11607.67,
         "impostosPct": 12.25,
-        "custos": 425315.77,
-        "custosPct": 452.29,
+        "custos": 452815.77,
+        "custosPct": 477.87,
         "logistica": 0,
         "logisticaPct": 0,
         "repasse": 0,
         "repassePct": 0,
-        "margem": -342798.79,
-        "margemPct": -364.54,
+        "margem": -369666.99,
+        "margemPct": -390.12,
         "statusCor": "rose"
       },
       "projetos": [
@@ -816,18 +816,18 @@
           "titulo": "NNOS Academy",
           "tituloRaw": "NNOS ACADEMY",
           "area": "Innovation",
-          "receita": 39036.45,
+          "receita": 39756.45,
           "receitaPct": 100,
-          "impostos": 4781.97,
+          "impostos": 4870.17,
           "impostosPct": 12.25,
           "custos": 422565.77,
-          "custosPct": 1082.49,
+          "custosPct": 1062.89,
           "logistica": 0,
           "logisticaPct": 0,
           "repasse": 0,
           "repassePct": 0,
-          "margem": -388311.29,
-          "margemPct": -994.74,
+          "margem": -387679.49,
+          "margemPct": -975.14,
           "statusCor": "rose"
         }
       ]
@@ -847,12 +847,12 @@
         "impostosPct": 12.25,
         "custos": 3769098.2,
         "custosPct": 72.61,
-        "logistica": 412733.35,
-        "logisticaPct": 7.95,
-        "repasse": -382059.1,
-        "repassePct": -7.36,
-        "margem": 755395.07,
-        "margemPct": 14.55,
+        "logistica": 416975.93,
+        "logisticaPct": 8.03,
+        "repasse": -387695.27,
+        "repassePct": -7.47,
+        "margem": 756788.66,
+        "margemPct": 14.58,
         "statusCor": "amber"
       },
       "projetos": [
@@ -902,12 +902,12 @@
           "impostosPct": 12.25,
           "custos": 1700512.09,
           "custosPct": 69.64,
-          "logistica": 347769.95,
-          "logisticaPct": 14.24,
-          "repasse": -334044.54,
-          "repassePct": -13.68,
-          "margem": 428500.7,
-          "margemPct": 17.55,
+          "logistica": 352012.53,
+          "logisticaPct": 14.42,
+          "repasse": -339680.71,
+          "repassePct": -13.91,
+          "margem": 429894.29,
+          "margemPct": 17.61,
           "statusCor": "amber"
         }
       ]
@@ -1000,8 +1000,8 @@
       "lider": "Vinicius Souza",
       "area": "Outsourcing",
       "receita": 2441866.89,
-      "margem": 428500.7,
-      "margemPct": 17.55
+      "margem": 429894.29,
+      "margemPct": 17.61
     },
     {
       "ranking": 2,
@@ -1113,6 +1113,15 @@
     },
     {
       "ranking": 14,
+      "projeto": "Ditrasa | Governança NHCE",
+      "lider": "Caroline Amieva",
+      "area": "Business Solutions",
+      "receita": 80300,
+      "margem": 37327.25,
+      "margemPct": 46.48
+    },
+    {
+      "ranking": 15,
       "projeto": "Fortrac | Gestão Organizacional",
       "lider": "Caroline Amieva",
       "area": "Business Solutions",
@@ -1121,7 +1130,7 @@
       "margemPct": 31.6
     },
     {
-      "ranking": 15,
+      "ranking": 16,
       "projeto": "Parecis | Gestão Organizacional",
       "lider": "Caroline Amieva",
       "area": "Business Solutions",
@@ -1130,7 +1139,7 @@
       "margemPct": 29.73
     },
     {
-      "ranking": 16,
+      "ranking": 17,
       "projeto": "NH Comercial Construction",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
@@ -1139,7 +1148,7 @@
       "margemPct": 44.68
     },
     {
-      "ranking": 17,
+      "ranking": 18,
       "projeto": "Quality Shymphony IVECO",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
@@ -1148,22 +1157,13 @@
       "margemPct": 41.49
     },
     {
-      "ranking": 18,
+      "ranking": 19,
       "projeto": "Backoffice Porsche",
       "lider": "Fábio Canassa",
       "area": "Outsourcing",
       "receita": 165433.92,
       "margem": 25462.98,
       "margemPct": 15.39
-    },
-    {
-      "ranking": 19,
-      "projeto": "Ditrasa | Governança NHCE",
-      "lider": "Caroline Amieva",
-      "area": "Business Solutions",
-      "receita": 62300,
-      "margem": 21532.25,
-      "margemPct": 34.56
     },
     {
       "ranking": 20,
@@ -1181,9 +1181,9 @@
       "projeto": "NNOS Academy",
       "lider": "Leonardo Campos",
       "area": "Innovation",
-      "receita": 39036.45,
-      "margem": -388311.29,
-      "margemPct": -994.74
+      "receita": 39756.45,
+      "margem": -387679.49,
+      "margemPct": -975.14
     },
     {
       "ranking": 2,
@@ -1218,8 +1218,8 @@
       "lider": "Jefferson Souza",
       "area": "Dealer Development",
       "receita": 260440,
-      "margem": -19347.75,
-      "margemPct": -7.43
+      "margem": -13521.37,
+      "margemPct": -5.19
     },
     {
       "ranking": 6,
@@ -1271,10 +1271,10 @@
     {
       "area": "Innovation",
       "meta": 300000,
-      "realizado": 39036.45,
-      "atingidoPct": "13,01%",
-      "falta": 260963.55,
-      "faltaPct": "86,99%",
+      "realizado": 39756.45,
+      "atingidoPct": "13,25%",
+      "falta": 260243.55,
+      "faltaPct": "86,75%",
       "isTotal": false
     },
     {
@@ -1307,10 +1307,10 @@
     {
       "area": "Business Solutions",
       "meta": 1700000,
-      "realizado": 1203483.62,
-      "atingidoPct": "70,79%",
-      "falta": 496516.38,
-      "faltaPct": "29,21%",
+      "realizado": 1221483.62,
+      "atingidoPct": "71,85%",
+      "falta": 478516.38,
+      "faltaPct": "28,15%",
       "isTotal": false
     },
     {
@@ -1325,10 +1325,10 @@
     {
       "area": "Meta Geral 2026",
       "meta": 15000000,
-      "realizado": 10621193.36,
-      "atingidoPct": "70,81%",
-      "falta": 4378806.64,
-      "faltaPct": "29,19%",
+      "realizado": 10639913.36,
+      "atingidoPct": "70,93%",
+      "falta": 4360086.64,
+      "faltaPct": "29,07%",
       "isTotal": true
     }
   ],
@@ -1533,7 +1533,7 @@
       "lider": "Caroline Amieva",
       "area": "Business Solutions",
       "previsto": {
-        "TOTAL": 415259.81999999995,
+        "TOTAL": 402800.6,
         "JANEIRO": 14729.45,
         "FEVEREIRO": 14325.93,
         "MARÇO": 13883.59,
@@ -1545,7 +1545,7 @@
         "SETEMBRO": 49799.5,
         "OUTUBRO": 52252.67,
         "NOVEMBRO": 52252.67,
-        "DEZEMBRO": 56487.05
+        "DEZEMBRO": 44027.83
       },
       "realizado": {
         "TOTAL": 358375.06999999995,
@@ -2634,6 +2634,71 @@
       }
     },
     {
+      "titulo": "Ditrasa | Governança NHCE",
+      "lider": "Caroline Amieva",
+      "area": "Business Solutions",
+      "previsto": {
+        "TOTAL": 68799.99,
+        "JANEIRO": 8960,
+        "FEVEREIRO": 2500,
+        "MARÇO": 8960,
+        "ABRIL": 8959.99,
+        "MAIO": 17920,
+        "JUNHO": 0,
+        "JULHO": 2500,
+        "AGOSTO": 2500,
+        "SETEMBRO": 2500,
+        "OUTUBRO": 2500,
+        "NOVEMBRO": 11500,
+        "DEZEMBRO": 0
+      },
+      "realizado": {
+        "TOTAL": 68800,
+        "JANEIRO": 8960,
+        "FEVEREIRO": 2500,
+        "MARÇO": 8960,
+        "ABRIL": 8960,
+        "MAIO": 17920,
+        "JUNHO": 0,
+        "JULHO": 2500,
+        "AGOSTO": 2500,
+        "SETEMBRO": 2500,
+        "OUTUBRO": 2500,
+        "NOVEMBRO": 11500,
+        "DEZEMBRO": 0
+      },
+      "aberto": {
+        "TOTAL": 0,
+        "JANEIRO": 0,
+        "FEVEREIRO": 0,
+        "MARÇO": 0,
+        "ABRIL": 0,
+        "MAIO": 0,
+        "JUNHO": 0,
+        "JULHO": 0,
+        "AGOSTO": 0,
+        "SETEMBRO": 0,
+        "OUTUBRO": 0,
+        "NOVEMBRO": 0,
+        "DEZEMBRO": 0
+      },
+      "atrasado": {
+        "TOTAL": 9000,
+        "JANEIRO": 0,
+        "FEVEREIRO": 0,
+        "MARÇO": 0,
+        "ABRIL": 0,
+        "MAIO": 0,
+        "JUNHO": 0,
+        "JULHO": 0,
+        "AGOSTO": 0,
+        "SETEMBRO": 0,
+        "OUTUBRO": 0,
+        "NOVEMBRO": 9000,
+        "DEZEMBRO": 0
+      }
+    },
+    {
       "titulo": "Quality Shymphony IVECO",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
@@ -2825,71 +2890,6 @@
         "SETEMBRO": 44990,
         "OUTUBRO": 0,
         "NOVEMBRO": 0,
-        "DEZEMBRO": 0
-      }
-    },
-    {
-      "titulo": "Ditrasa | Governança NHCE",
-      "lider": "Caroline Amieva",
-      "area": "Business Solutions",
-      "previsto": {
-        "TOTAL": 62299.990000000005,
-        "JANEIRO": 8960,
-        "FEVEREIRO": 2500,
-        "MARÇO": 8960,
-        "ABRIL": 8959.99,
-        "MAIO": 17920,
-        "JUNHO": 0,
-        "JULHO": 2500,
-        "AGOSTO": 2500,
-        "SETEMBRO": 2500,
-        "OUTUBRO": 2500,
-        "NOVEMBRO": 2500,
-        "DEZEMBRO": 2500
-      },
-      "realizado": {
-        "TOTAL": 68800,
-        "JANEIRO": 8960,
-        "FEVEREIRO": 2500,
-        "MARÇO": 8960,
-        "ABRIL": 8960,
-        "MAIO": 17920,
-        "JUNHO": 0,
-        "JULHO": 2500,
-        "AGOSTO": 2500,
-        "SETEMBRO": 2500,
-        "OUTUBRO": 2500,
-        "NOVEMBRO": 11500,
-        "DEZEMBRO": 0
-      },
-      "aberto": {
-        "TOTAL": 0,
-        "JANEIRO": 0,
-        "FEVEREIRO": 0,
-        "MARÇO": 0,
-        "ABRIL": 0,
-        "MAIO": 0,
-        "JUNHO": 0,
-        "JULHO": 0,
-        "AGOSTO": 0,
-        "SETEMBRO": 0,
-        "OUTUBRO": 0,
-        "NOVEMBRO": 0,
-        "DEZEMBRO": 0
-      },
-      "atrasado": {
-        "TOTAL": 9000,
-        "JANEIRO": 0,
-        "FEVEREIRO": 0,
-        "MARÇO": 0,
-        "ABRIL": 0,
-        "MAIO": 0,
-        "JUNHO": 0,
-        "JULHO": 0,
-        "AGOSTO": 0,
-        "SETEMBRO": 0,
-        "OUTUBRO": 0,
-        "NOVEMBRO": 9000,
         "DEZEMBRO": 0
       }
     },
@@ -3093,7 +3093,7 @@
       "lider": "Leonardo Campos",
       "area": "Innovation",
       "previsto": {
-        "TOTAL": 39036.45,
+        "TOTAL": 39756.45,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -3104,7 +3104,7 @@
         "AGOSTO": 4145.8,
         "SETEMBRO": 5250,
         "OUTUBRO": 5640.05,
-        "NOVEMBRO": 3070,
+        "NOVEMBRO": 3790,
         "DEZEMBRO": 0
       },
       "realizado": {
@@ -3983,7 +3983,7 @@
         "DEZEMBRO": 0
       },
       "atrasado": {
-        "TOTAL": 999.4,
+        "TOTAL": 0,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -3992,7 +3992,7 @@
         "JUNHO": 0,
         "JULHO": 0,
         "AGOSTO": 0,
-        "SETEMBRO": 999.4,
+        "SETEMBRO": 0,
         "OUTUBRO": 0,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
