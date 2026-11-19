@@ -1,19 +1,19 @@
 {
-  "updatedAt": "2026-11-18T11:00:19.511Z",
+  "updatedAt": "2026-11-19T11:00:14.363Z",
   "macro": {
     "receita": 10639913.36,
     "custos": 7742378.12,
     "custosPct": 72.76730418789802,
     "impostos": 1303389.4,
     "impostosPct": 12.250000125940876,
-    "logistica": 1012241.1099999999,
-    "logisticaPct": 9.513621734979992,
-    "repasse": -813357.2,
-    "repassePct": -7.644396833697526,
+    "logistica": 1023632.77,
+    "logisticaPct": 9.620687080482018,
+    "repasse": -820856.24,
+    "repassePct": -7.714877106856442,
     "prospeccao": 162878.45,
     "prospeccaoPct": 1.5308249652890034,
-    "margem": 1395261.93,
-    "margemPct": 13.113470784878647,
+    "margem": 1391369.3099999998,
+    "margemPct": 13.076885712535539,
     "totalLideres": 7,
     "totalProjetos": 44
   },
@@ -33,12 +33,12 @@
         "impostosPct": 12.25,
         "custos": 1602307.42,
         "custosPct": 67.28,
-        "logistica": 346045.3,
-        "logisticaPct": 14.53,
+        "logistica": 348833.08,
+        "logisticaPct": 14.65,
         "repasse": -318767.66,
         "repassePct": -13.38,
-        "margem": 460242.76,
-        "margemPct": 19.33,
+        "margem": 457454.98,
+        "margemPct": 19.21,
         "statusCor": "amber"
       },
       "projetos": [
@@ -304,12 +304,12 @@
           "impostosPct": 12.25,
           "custos": 189078.63,
           "custosPct": 67.25,
-          "logistica": 49661.13,
-          "logisticaPct": 17.66,
+          "logistica": 52448.91,
+          "logisticaPct": 18.66,
           "repasse": -47301,
           "repassePct": -16.82,
-          "margem": 55264.79,
-          "margemPct": 19.66,
+          "margem": 52477.01,
+          "margemPct": 18.67,
           "statusCor": "amber"
         },
         {
@@ -847,12 +847,12 @@
         "impostosPct": 12.25,
         "custos": 3769098.2,
         "custosPct": 72.61,
-        "logistica": 416975.93,
-        "logisticaPct": 8.03,
-        "repasse": -387695.27,
-        "repassePct": -7.47,
-        "margem": 756788.66,
-        "margemPct": 14.58,
+        "logistica": 423029.53,
+        "logisticaPct": 8.15,
+        "repasse": -392644.03,
+        "repassePct": -7.56,
+        "margem": 755683.82,
+        "margemPct": 14.56,
         "statusCor": "amber"
       },
       "projetos": [
@@ -884,12 +884,12 @@
           "impostosPct": 12.25,
           "custos": 279830.71,
           "custosPct": 74.92,
-          "logistica": 31208.53,
-          "logisticaPct": 8.36,
-          "repasse": -27500.75,
-          "repassePct": -7.36,
-          "margem": 44221.03,
-          "margemPct": 11.84,
+          "logistica": 32449.51,
+          "logisticaPct": 8.69,
+          "repasse": -32449.51,
+          "repassePct": -8.69,
+          "margem": 47928.81,
+          "margemPct": 12.83,
           "statusCor": "amber"
         },
         {
@@ -902,12 +902,12 @@
           "impostosPct": 12.25,
           "custos": 1700512.09,
           "custosPct": 69.64,
-          "logistica": 352012.53,
-          "logisticaPct": 14.42,
+          "logistica": 356825.15,
+          "logisticaPct": 14.61,
           "repasse": -339680.71,
           "repassePct": -13.91,
-          "margem": 429894.29,
-          "margemPct": 17.61,
+          "margem": 425081.67,
+          "margemPct": 17.41,
           "statusCor": "amber"
         }
       ]
@@ -927,10 +927,10 @@
         "impostosPct": 12.25,
         "custos": 570305.28,
         "custosPct": 67.97,
-        "logistica": 28116.45,
-        "logisticaPct": 3.35,
-        "repasse": -13344.38,
-        "repassePct": -1.59,
+        "logistica": 30666.73,
+        "logisticaPct": 3.66,
+        "repasse": -15894.66,
+        "repassePct": -1.89,
         "margem": 151174.91,
         "margemPct": 18.02,
         "statusCor": "amber"
@@ -964,10 +964,10 @@
           "impostosPct": 12.25,
           "custos": 255100,
           "custosPct": 69.81,
-          "logistica": 19690.18,
-          "logisticaPct": 5.39,
-          "repasse": -10040.82,
-          "repassePct": -2.75,
+          "logistica": 22240.46,
+          "logisticaPct": 6.09,
+          "repasse": -12591.1,
+          "repassePct": -3.45,
           "margem": 55889.14,
           "margemPct": 15.3,
           "statusCor": "amber"
@@ -1000,8 +1000,8 @@
       "lider": "Vinicius Souza",
       "area": "Outsourcing",
       "receita": 2441866.89,
-      "margem": 429894.29,
-      "margemPct": 17.61
+      "margem": 425081.67,
+      "margemPct": 17.41
     },
     {
       "ranking": 2,
@@ -1068,21 +1068,21 @@
     },
     {
       "ranking": 9,
-      "projeto": "Treinamento Comercial",
-      "lider": "Beatriz Picorelli",
-      "area": "HRD",
-      "receita": 281143.65,
-      "margem": 55264.79,
-      "margemPct": 19.66
-    },
-    {
-      "ranking": 10,
       "projeto": "IVECO Academy",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
       "receita": 255160.25,
       "margem": 54857.69,
       "margemPct": 21.5
+    },
+    {
+      "ranking": 10,
+      "projeto": "Treinamento Comercial",
+      "lider": "Beatriz Picorelli",
+      "area": "HRD",
+      "receita": 281143.65,
+      "margem": 52477.01,
+      "margemPct": 18.67
     },
     {
       "ranking": 11,
@@ -1099,8 +1099,8 @@
       "lider": "Vinicius Souza",
       "area": "Outsourcing",
       "receita": 373515.12,
-      "margem": 44221.03,
-      "margemPct": 11.84
+      "margem": 47928.81,
+      "margemPct": 12.83
     },
     {
       "ranking": 13,
@@ -1823,7 +1823,7 @@
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 26800,
+        "TOTAL": 13400,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -1834,7 +1834,7 @@
         "AGOSTO": 0,
         "SETEMBRO": 0,
         "OUTUBRO": 0,
-        "NOVEMBRO": 26800,
+        "NOVEMBRO": 13400,
         "DEZEMBRO": 0
       },
       "atrasado": {
@@ -2213,7 +2213,7 @@
         "DEZEMBRO": 0
       },
       "aberto": {
-        "TOTAL": 13786.16,
+        "TOTAL": 0,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -2224,7 +2224,7 @@
         "AGOSTO": 0,
         "SETEMBRO": 0,
         "OUTUBRO": 0,
-        "NOVEMBRO": 13786.16,
+        "NOVEMBRO": 0,
         "DEZEMBRO": 0
       },
       "atrasado": {
@@ -2878,7 +2878,7 @@
         "DEZEMBRO": 0
       },
       "atrasado": {
-        "TOTAL": 44990,
+        "TOTAL": 0,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -2887,7 +2887,7 @@
         "JUNHO": 0,
         "JULHO": 0,
         "AGOSTO": 0,
-        "SETEMBRO": 44990,
+        "SETEMBRO": 0,
         "OUTUBRO": 0,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
