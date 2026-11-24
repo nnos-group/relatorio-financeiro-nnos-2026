@@ -2,18 +2,6 @@
   {
     "id": 1,
     "projeto": "Prospecção",
-    "nome": "Jantar de Atualização Estratégica com Paulo Máximo Vp Cnh",
-    "local": "Curitiba - PR",
-    "mes": "Set",
-    "tipo": "nac",
-    "valor": 225.15,
-    "categoria": "Refeições de Negócio",
-    "dtIni": "30/09/2026",
-    "dtFim": "30/09/2026"
-  },
-  {
-    "id": 2,
-    "projeto": "",
     "nome": "Jantar NH Construction",
     "local": "Belo Horizonte - MG",
     "mes": "Jul",
@@ -24,7 +12,7 @@
     "dtFim": "07/07/2026"
   },
   {
-    "id": 3,
+    "id": 2,
     "projeto": "",
     "nome": "Accelera TRP",
     "local": "Curitiba - PR",
@@ -36,7 +24,7 @@
     "dtFim": "23/05/2026"
   },
   {
-    "id": 4,
+    "id": 3,
     "projeto": "",
     "nome": "Agrishow 2026",
     "local": "Ribeirão Preto - SP",
@@ -48,7 +36,7 @@
     "dtFim": "30/04/2026"
   },
   {
-    "id": 5,
+    "id": 4,
     "projeto": "",
     "nome": "Almoço Comercial UVA",
     "local": "Belo Horizonte - MG",
@@ -60,31 +48,7 @@
     "dtFim": "24/08/2026"
   },
   {
-    "id": 6,
-    "projeto": "",
-    "nome": "Almoço Comercial UVA",
-    "local": "Belo Horizonte - MG",
-    "mes": "Set",
-    "tipo": "nac",
-    "valor": 170.04,
-    "categoria": "Refeições de Negócio",
-    "dtIni": "09/09/2026",
-    "dtFim": "09/09/2026"
-  },
-  {
-    "id": 7,
-    "projeto": "",
-    "nome": "Almoço em SP com Stellantis",
-    "local": "São Paulo - SP",
-    "mes": "Set",
-    "tipo": "nac",
-    "valor": 209.08,
-    "categoria": "Refeições de Negócio",
-    "dtIni": "17/09/2026",
-    "dtFim": "17/09/2026"
-  },
-  {
-    "id": 8,
+    "id": 5,
     "projeto": "",
     "nome": "Almoço Reunião Diretoria NNÓS",
     "local": "Nova Lima - MG",
@@ -96,7 +60,7 @@
     "dtFim": "06/01/2026"
   },
   {
-    "id": 9,
+    "id": 6,
     "projeto": "",
     "nome": "Almoço Tiago Viana Diretor Tecar",
     "local": "Belo Horizonte - MG",
@@ -108,7 +72,7 @@
     "dtFim": "21/08/2026"
   },
   {
-    "id": 10,
+    "id": 7,
     "projeto": "",
     "nome": "Assunção Paraguai - Reunião Estratégica NNÓS Business Solution LATAM",
     "local": "Assunção - PAR",
@@ -120,7 +84,7 @@
     "dtFim": "13/01/2026"
   },
   {
-    "id": 11,
+    "id": 8,
     "projeto": "",
     "nome": "Back Office BI Área Manutenção",
     "local": "Curitiba - PR",
@@ -132,7 +96,7 @@
     "dtFim": "21/01/2026"
   },
   {
-    "id": 12,
+    "id": 9,
     "projeto": "",
     "nome": "Café com Cliente",
     "local": "Belo Horizonte - MG",
@@ -144,7 +108,7 @@
     "dtFim": "17/03/2026"
   },
   {
-    "id": 13,
+    "id": 10,
     "projeto": "",
     "nome": "Café da Manhã Campus Faculdade NNÓS",
     "local": "Belo Horizonte - MG",
@@ -156,7 +120,19 @@
     "dtFim": "24/01/2026"
   },
   {
-    "id": 14,
+    "id": 11,
+    "projeto": "",
+    "nome": "Captação NNÓS",
+    "local": "Belo Horizonte - MG",
+    "mes": "Nov",
+    "tipo": "nac",
+    "valor": 234.5,
+    "categoria": "Outros",
+    "dtIni": "06/11/2026",
+    "dtFim": "06/11/2026"
+  },
+  {
+    "id": 12,
     "projeto": "",
     "nome": "Clientes SODECIA Sriko",
     "local": "Sete Lagoas - MG",
@@ -168,7 +144,7 @@
     "dtFim": "18/05/2026"
   },
   {
-    "id": 15,
+    "id": 13,
     "projeto": "",
     "nome": "Conexpo 2026",
     "local": "Las Vegas - EUA",
@@ -180,7 +156,19 @@
     "dtFim": "10/03/2026"
   },
   {
-    "id": 16,
+    "id": 14,
+    "projeto": "",
+    "nome": "Divulgacao Vaga Vendedor",
+    "local": "Pará de Minas - MG",
+    "mes": "Nov",
+    "tipo": "intl",
+    "valor": 156,
+    "categoria": "Viagens Internacionais",
+    "dtIni": "02/11/2026",
+    "dtFim": "02/11/2026"
+  },
+  {
+    "id": 15,
     "projeto": "",
     "nome": "Evento Conexpo 2026",
     "local": "Las Vegas - EUA",
@@ -192,7 +180,7 @@
     "dtFim": "14/01/2026"
   },
   {
-    "id": 17,
+    "id": 16,
     "projeto": "",
     "nome": "Google ADS Vinicius Dieguez",
     "local": "Belo Horizonte - MG",
@@ -204,7 +192,7 @@
     "dtFim": "07/05/2026"
   },
   {
-    "id": 18,
+    "id": 17,
     "projeto": "",
     "nome": "Jantar com Cliente - Rogelio Cervantes",
     "local": "Curitiba - PR",
@@ -216,7 +204,7 @@
     "dtFim": "14/04/2026"
   },
   {
-    "id": 19,
+    "id": 18,
     "projeto": "",
     "nome": "Jantar Dealer + Giovanna Parts em Toledo",
     "local": "Toledo - PR",
@@ -226,6 +214,18 @@
     "categoria": "Refeições de Negócio",
     "dtIni": "22/06/2026",
     "dtFim": "22/06/2026"
+  },
+  {
+    "id": 19,
+    "projeto": "",
+    "nome": "Jantar Paulo Máximo",
+    "local": "São Paulo - SP",
+    "mes": "Nov",
+    "tipo": "nac",
+    "valor": 248.27,
+    "categoria": "Refeições de Negócio",
+    "dtIni": "09/11/2026",
+    "dtFim": "09/11/2026"
   },
   {
     "id": 20,
@@ -446,6 +446,18 @@
   {
     "id": 38,
     "projeto": "",
+    "nome": "Prospecção Porsche/SP",
+    "local": "São Paulo - SP",
+    "mes": "Nov",
+    "tipo": "nac",
+    "valor": 6477.84,
+    "categoria": "Prospecção",
+    "dtIni": "05/11/2026",
+    "dtFim": "06/11/2026"
+  },
+  {
+    "id": 39,
+    "projeto": "",
     "nome": "Prospecção Pouso Alegre",
     "local": "Pouso Alegre - MG",
     "mes": "Jun",
@@ -456,7 +468,19 @@
     "dtFim": "19/06/2026"
   },
   {
-    "id": 39,
+    "id": 40,
+    "projeto": "",
+    "nome": "Prospecção Rio de Janeiro",
+    "local": "Rio de Janeiro - RJ",
+    "mes": "Nov",
+    "tipo": "nac",
+    "valor": 759.28,
+    "categoria": "Prospecção",
+    "dtIni": "16/11/2026",
+    "dtFim": "17/11/2026"
+  },
+  {
+    "id": 41,
     "projeto": "",
     "nome": "Reunião Diretoria NNÓS",
     "local": "Nova Lima - MG",
@@ -468,7 +492,7 @@
     "dtFim": "06/01/2026"
   },
   {
-    "id": 40,
+    "id": 42,
     "projeto": "",
     "nome": "Reunião Diretoria NNÓS",
     "local": "Nova Lima - MG",
@@ -480,7 +504,7 @@
     "dtFim": "24/01/2026"
   },
   {
-    "id": 41,
+    "id": 43,
     "projeto": "",
     "nome": "RH Leadership Xperience 2026 - Ingresso Explorer",
     "local": "Belo Horizonte - MG",
@@ -492,7 +516,7 @@
     "dtFim": "19/01/2026"
   },
   {
-    "id": 42,
+    "id": 44,
     "projeto": "",
     "nome": "Service Game - Visita ao Cliente",
     "local": "CT- Sorocaba-SP e Sao Paulo",
@@ -504,7 +528,7 @@
     "dtFim": "21/01/2026"
   },
   {
-    "id": 43,
+    "id": 45,
     "projeto": "",
     "nome": "Summit VOA NY",
     "local": "Nova Iorque - EUA",
@@ -516,7 +540,7 @@
     "dtFim": "25/05/2026"
   },
   {
-    "id": 44,
+    "id": 46,
     "projeto": "",
     "nome": "Viagem Tape Ruvicha",
     "local": "Tape - Assuncion - Paraguay",
@@ -528,19 +552,7 @@
     "dtFim": "27/02/2026"
   },
   {
-    "id": 45,
-    "projeto": "",
-    "nome": "Visita a Volvo",
-    "local": "Volvo - Curitiba - PR",
-    "mes": "Set",
-    "tipo": "nac",
-    "valor": 3436.15,
-    "categoria": "Visitas Técnicas",
-    "dtIni": "09/09/2026",
-    "dtFim": "10/09/2026"
-  },
-  {
-    "id": 46,
+    "id": 47,
     "projeto": "",
     "nome": "Visita Curitiba",
     "local": "Curitiba - PR",
@@ -552,7 +564,7 @@
     "dtFim": "24/03/2026"
   },
   {
-    "id": 47,
+    "id": 48,
     "projeto": "",
     "nome": "Visita Diretoria UVA",
     "local": "Campus UVA - Belo Horizonte",
@@ -564,7 +576,7 @@
     "dtFim": "09/02/2026"
   },
   {
-    "id": 48,
+    "id": 49,
     "projeto": "",
     "nome": "Visita JAECCO",
     "local": "São Paulo",
@@ -576,7 +588,7 @@
     "dtFim": "04/03/2026"
   },
   {
-    "id": 49,
+    "id": 50,
     "projeto": "",
     "nome": "Visita Progress Rail e SODECIA",
     "local": "Sete Lagoas - MG",
@@ -588,7 +600,7 @@
     "dtFim": "08/05/2026"
   },
   {
-    "id": 50,
+    "id": 51,
     "projeto": "",
     "nome": "Visita São Paulo",
     "local": "São Paulo",
@@ -600,7 +612,7 @@
     "dtFim": "06/03/2026"
   },
   {
-    "id": 51,
+    "id": 52,
     "projeto": "",
     "nome": "Visita Terceiros CT",
     "local": "Sorocaba - SP",
@@ -612,7 +624,7 @@
     "dtFim": "20/08/2026"
   },
   {
-    "id": 52,
+    "id": 53,
     "projeto": "",
     "nome": "Workshop Plano de Manutenção Interativo",
     "local": "CT - Sorocaba - SP",
