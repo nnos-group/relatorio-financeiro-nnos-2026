@@ -1,19 +1,19 @@
 {
-  "updatedAt": "2026-11-26T11:00:16.177Z",
+  "updatedAt": "2026-11-27T11:00:12.384Z",
   "macro": {
     "receita": 10600035.6,
-    "custos": 7747901.29,
-    "custosPct": 73.09316291352833,
+    "custos": 7273983.7,
+    "custosPct": 68.6222572686454,
     "impostos": 1298504.3699999999,
     "impostosPct": 12.250000084905373,
-    "logistica": 1032379.68,
-    "logisticaPct": 9.73939823371914,
-    "repasse": -840841.07,
-    "repassePct": -7.932436283515878,
+    "logistica": 1033522.51,
+    "logisticaPct": 9.75017961260432,
+    "repasse": -841964.9600000001,
+    "repassePct": -7.943038983755867,
     "prospeccao": 162878.45,
     "prospeccaoPct": 1.536583990340561,
-    "margem": 1362091.33,
-    "margemPct": 12.849875051363036,
+    "margem": 1835989.9799999997,
+    "margemPct": 17.32060201760077,
     "totalLideres": 7,
     "totalProjetos": 44
   },
@@ -347,12 +347,12 @@
         "impostosPct": 12.25,
         "custos": 771577.74,
         "custosPct": 62.8,
-        "logistica": 94408.03,
-        "logisticaPct": 7.68,
-        "repasse": -84670.17,
-        "repassePct": -6.89,
-        "margem": 296825.39,
-        "margemPct": 24.16,
+        "logistica": 94191.58,
+        "logisticaPct": 7.67,
+        "repasse": -85794.06,
+        "repassePct": -6.98,
+        "margem": 298165.73,
+        "margemPct": 24.27,
         "statusCor": "sky"
       },
       "projetos": [
@@ -564,10 +564,10 @@
           "impostosPct": 12.25,
           "custos": 226752.47,
           "custosPct": 53.68,
-          "logistica": 14854.41,
-          "logisticaPct": 3.52,
-          "repasse": -14281.75,
-          "repassePct": -3.38,
+          "logistica": 15978.3,
+          "logisticaPct": 3.78,
+          "repasse": -15405.64,
+          "repassePct": -3.65,
           "margem": 143354.48,
           "margemPct": 33.94,
           "statusCor": "emerald"
@@ -618,12 +618,12 @@
           "impostosPct": 12.25,
           "custos": 7840,
           "custosPct": 41.26,
-          "logistica": 4719.84,
-          "logisticaPct": 24.84,
+          "logistica": 3379.5,
+          "logisticaPct": 17.79,
           "repasse": -3379.5,
           "repassePct": -17.79,
-          "margem": 7492.16,
-          "margemPct": 39.43,
+          "margem": 8832.5,
+          "margemPct": 46.49,
           "statusCor": "emerald"
         },
         {
@@ -659,15 +659,15 @@
         "receitaPct": 100,
         "impostos": 111020.01,
         "impostosPct": 12.25,
-        "custos": 473917.59,
-        "custosPct": 52.29,
+        "custos": 0,
+        "custosPct": 0,
         "logistica": 120320.91,
         "logisticaPct": 13.28,
         "repasse": -8879.72,
         "repassePct": -0.98,
-        "margem": 209907.01,
-        "margemPct": 23.16,
-        "statusCor": "sky"
+        "margem": 683824.6,
+        "margemPct": 75.45,
+        "statusCor": "emerald"
       },
       "projetos": [
         {
@@ -732,15 +732,15 @@
           "receitaPct": 100,
           "impostos": 31903.9,
           "impostosPct": 12.25,
-          "custos": 161842.84,
-          "custosPct": 62.14,
+          "custos": 0,
+          "custosPct": 0,
           "logistica": 120320.91,
           "logisticaPct": 46.2,
           "repasse": -8879.72,
           "repassePct": -3.41,
-          "margem": -44747.93,
-          "margemPct": -17.18,
-          "statusCor": "rose"
+          "margem": 117094.91,
+          "margemPct": 44.96,
+          "statusCor": "emerald"
         }
       ]
     },
@@ -759,12 +759,12 @@
         "impostosPct": 12.25,
         "custos": 149709.1,
         "custosPct": 2622.2,
-        "logistica": 13814.31,
-        "logisticaPct": 241.96,
+        "logistica": 15173.59,
+        "logisticaPct": 265.77,
         "repasse": 0,
         "repassePct": 0,
-        "margem": -158513.5,
-        "margemPct": -2776.41,
+        "margem": -159872.78,
+        "margemPct": -2800.22,
         "statusCor": "rose"
       },
       "projetos": [
@@ -778,12 +778,12 @@
           "impostosPct": 12.25,
           "custos": 149709.1,
           "custosPct": 2622.2,
-          "logistica": 13814.31,
-          "logisticaPct": 241.96,
+          "logistica": 15173.59,
+          "logisticaPct": 265.77,
           "repasse": 0,
           "repassePct": 0,
-          "margem": -158513.5,
-          "margemPct": -2776.41,
+          "margem": -159872.78,
+          "margemPct": -2800.22,
           "statusCor": "rose"
         }
       ]
@@ -1041,6 +1041,15 @@
     },
     {
       "ranking": 6,
+      "projeto": "DDN - Business Assessment",
+      "lider": "Jefferson Souza",
+      "area": "Dealer Development",
+      "receita": 260440,
+      "margem": 117094.91,
+      "margemPct": 44.96
+    },
+    {
+      "ranking": 7,
       "projeto": "Serviços CNH",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
@@ -1049,7 +1058,7 @@
       "margemPct": 32.93
     },
     {
-      "ranking": 7,
+      "ranking": 8,
       "projeto": "Instrutores Porsche",
       "lider": "Fábio Canassa",
       "area": "HRD",
@@ -1058,7 +1067,7 @@
       "margemPct": 22.66
     },
     {
-      "ranking": 8,
+      "ranking": 9,
       "projeto": "Consultoria Pós-Vendas (POE) Porsche",
       "lider": "Fábio Canassa",
       "area": "Outsourcing",
@@ -1067,7 +1076,7 @@
       "margemPct": 16.1
     },
     {
-      "ranking": 9,
+      "ranking": 10,
       "projeto": "IVECO Academy",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
@@ -1076,7 +1085,7 @@
       "margemPct": 21.5
     },
     {
-      "ranking": 10,
+      "ranking": 11,
       "projeto": "Treinamento Comercial",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
@@ -1085,7 +1094,7 @@
       "margemPct": 19.18
     },
     {
-      "ranking": 11,
+      "ranking": 12,
       "projeto": "DM - Back Office",
       "lider": "Jefferson Souza",
       "area": "Dealer Development",
@@ -1094,7 +1103,7 @@
       "margemPct": 14.95
     },
     {
-      "ranking": 12,
+      "ranking": 13,
       "projeto": "Backoffice CRM Case",
       "lider": "Vinicius Souza",
       "area": "Outsourcing",
@@ -1103,7 +1112,7 @@
       "margemPct": 12.83
     },
     {
-      "ranking": 13,
+      "ranking": 14,
       "projeto": "Projeto Especial 01",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
@@ -1112,7 +1121,7 @@
       "margemPct": 28.07
     },
     {
-      "ranking": 14,
+      "ranking": 15,
       "projeto": "Fortrac | Gestão Organizacional",
       "lider": "Caroline Amieva",
       "area": "Business Solutions",
@@ -1121,7 +1130,7 @@
       "margemPct": 31.6
     },
     {
-      "ranking": 15,
+      "ranking": 16,
       "projeto": "Parecis | Gestão Organizacional",
       "lider": "Caroline Amieva",
       "area": "Business Solutions",
@@ -1130,7 +1139,7 @@
       "margemPct": 29.73
     },
     {
-      "ranking": 16,
+      "ranking": 17,
       "projeto": "NH Comercial Construction",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
@@ -1139,7 +1148,7 @@
       "margemPct": 44.68
     },
     {
-      "ranking": 17,
+      "ranking": 18,
       "projeto": "Quality Shymphony IVECO",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
@@ -1148,7 +1157,7 @@
       "margemPct": 41.49
     },
     {
-      "ranking": 18,
+      "ranking": 19,
       "projeto": "Backoffice Porsche",
       "lider": "Fábio Canassa",
       "area": "Outsourcing",
@@ -1157,22 +1166,13 @@
       "margemPct": 15.39
     },
     {
-      "ranking": 19,
+      "ranking": 20,
       "projeto": "Ditrasa | Governança NHCE",
       "lider": "Caroline Amieva",
       "area": "Business Solutions",
       "receita": 80300,
       "margem": 23690.89,
       "margemPct": 29.5
-    },
-    {
-      "ranking": 20,
-      "projeto": "Central Irrigação",
-      "lider": "Caroline Amieva",
-      "area": "Business Solutions",
-      "receita": 112000,
-      "margem": 19063.18,
-      "margemPct": 17.02
     }
   ],
   "menosRentaveis": [
@@ -1191,8 +1191,8 @@
       "lider": "Joice Lage",
       "area": "Educação",
       "receita": 5709.3,
-      "margem": -158513.5,
-      "margemPct": -2776.41
+      "margem": -159872.78,
+      "margemPct": -2800.22
     },
     {
       "ranking": 3,
@@ -1205,15 +1205,6 @@
     },
     {
       "ranking": 4,
-      "projeto": "DDN - Business Assessment",
-      "lider": "Jefferson Souza",
-      "area": "Dealer Development",
-      "receita": 260440,
-      "margem": -44747.93,
-      "margemPct": -17.18
-    },
-    {
-      "ranking": 5,
       "projeto": "Nocarvel | Auditoria Caixa Dagua",
       "lider": "Caroline Amieva",
       "area": "Business Solutions",
@@ -1222,7 +1213,7 @@
       "margemPct": -130.96
     },
     {
-      "ranking": 6,
+      "ranking": 5,
       "projeto": "DM - Negócios Br",
       "lider": "Jefferson Souza",
       "area": "Dealer Development",
@@ -1231,7 +1222,7 @@
       "margemPct": -7.5
     },
     {
-      "ranking": 7,
+      "ranking": 6,
       "projeto": "Automação Essencialidade",
       "lider": "Caroline Amieva",
       "area": "Business Solutions",
@@ -1240,7 +1231,7 @@
       "margemPct": 6
     },
     {
-      "ranking": 8,
+      "ranking": 7,
       "projeto": "Excelência em ServiçOs IVECO",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
@@ -1249,7 +1240,7 @@
       "margemPct": 11.33
     },
     {
-      "ranking": 9,
+      "ranking": 8,
       "projeto": "Case Comercial Construction",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
@@ -1258,13 +1249,22 @@
       "margemPct": 20.25
     },
     {
-      "ranking": 10,
+      "ranking": 9,
       "projeto": "Workshop Curitiba",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
       "receita": 10000,
       "margem": 6435,
       "margemPct": 64.35
+    },
+    {
+      "ranking": 10,
+      "projeto": "CNHI Técnico Construction",
+      "lider": "Beatriz Picorelli",
+      "area": "HRD",
+      "receita": 24489,
+      "margem": 6680.59,
+      "margemPct": 27.28
     }
   ],
   "metasAreas": [
@@ -1403,7 +1403,7 @@
       "lider": "Vinicius Souza",
       "area": "Outsourcing",
       "previsto": {
-        "TOTAL": 2375692.09,
+        "TOTAL": 2375692.0900000003,
         "JANEIRO": 203208.47,
         "FEVEREIRO": 205754.40999999997,
         "MARÇO": 205754.40999999997,
@@ -1468,7 +1468,7 @@
       "lider": "Beatriz Picorelli",
       "area": "HRD",
       "previsto": {
-        "TOTAL": 951142.6500000012,
+        "TOTAL": 914859.5100000013,
         "JANEIRO": 56768.130000000005,
         "FEVEREIRO": 41030.46,
         "MARÇO": 83907.96999999999,
@@ -1478,9 +1478,9 @@
         "JULHO": 73260.11,
         "AGOSTO": 91812.9,
         "SETEMBRO": 90372.09999999999,
-        "OUTUBRO": 26358.5,
+        "OUTUBRO": 72082.5,
         "NOVEMBRO": 87628.66,
-        "DEZEMBRO": 108365.63999999996
+        "DEZEMBRO": 26358.5
       },
       "realizado": {
         "TOTAL": 853044.58,
@@ -1529,76 +1529,11 @@
       }
     },
     {
-      "titulo": "Tape Ruvicha",
-      "lider": "Caroline Amieva",
-      "area": "Business Solutions",
-      "previsto": {
-        "TOTAL": 422426.9,
-        "JANEIRO": 14729.45,
-        "FEVEREIRO": 14325.93,
-        "MARÇO": 13883.59,
-        "ABRIL": 13638.88,
-        "MAIO": 37015.2,
-        "JUNHO": 36922.08,
-        "JULHO": 37480.8,
-        "AGOSTO": 36472,
-        "SETEMBRO": 49799.5,
-        "OUTUBRO": 59419.75,
-        "NOVEMBRO": 52252.67,
-        "DEZEMBRO": 56487.05
-      },
-      "realizado": {
-        "TOTAL": 365542.14999999997,
-        "JANEIRO": 14331.75,
-        "FEVEREIRO": 14325.93,
-        "MARÇO": 13883.59,
-        "ABRIL": 13638.88,
-        "MAIO": 37015.2,
-        "JUNHO": 36922.08,
-        "JULHO": 37480.8,
-        "AGOSTO": 36472,
-        "SETEMBRO": 49799.5,
-        "OUTUBRO": 59419.75,
-        "NOVEMBRO": 52252.67,
-        "DEZEMBRO": 0
-      },
-      "aberto": {
-        "TOTAL": 52252.67,
-        "JANEIRO": 0,
-        "FEVEREIRO": 0,
-        "MARÇO": 0,
-        "ABRIL": 0,
-        "MAIO": 0,
-        "JUNHO": 0,
-        "JULHO": 0,
-        "AGOSTO": 0,
-        "SETEMBRO": 0,
-        "OUTUBRO": 0,
-        "NOVEMBRO": 52252.67,
-        "DEZEMBRO": 0
-      },
-      "atrasado": {
-        "TOTAL": 0,
-        "JANEIRO": 0,
-        "FEVEREIRO": 0,
-        "MARÇO": 0,
-        "ABRIL": 0,
-        "MAIO": 0,
-        "JUNHO": 0,
-        "JULHO": 0,
-        "AGOSTO": 0,
-        "SETEMBRO": 0,
-        "OUTUBRO": 0,
-        "NOVEMBRO": 0,
-        "DEZEMBRO": 0
-      }
-    },
-    {
       "titulo": "Backoffice CRM Case",
       "lider": "Vinicius Souza",
       "area": "Outsourcing",
       "previsto": {
-        "TOTAL": 373515.11999999994,
+        "TOTAL": 373515.12,
         "JANEIRO": 23551.79,
         "FEVEREIRO": 23560.31,
         "MARÇO": 23560.31,
@@ -1724,11 +1659,76 @@
       }
     },
     {
+      "titulo": "Tape Ruvicha",
+      "lider": "Caroline Amieva",
+      "area": "Business Solutions",
+      "previsto": {
+        "TOTAL": 365939.85,
+        "JANEIRO": 14729.45,
+        "FEVEREIRO": 14325.93,
+        "MARÇO": 13883.59,
+        "ABRIL": 13638.88,
+        "MAIO": 37015.2,
+        "JUNHO": 36922.08,
+        "JULHO": 37480.8,
+        "AGOSTO": 36472,
+        "SETEMBRO": 49799.5,
+        "OUTUBRO": 59419.75,
+        "NOVEMBRO": 52252.67,
+        "DEZEMBRO": 0
+      },
+      "realizado": {
+        "TOTAL": 365542.14999999997,
+        "JANEIRO": 14331.75,
+        "FEVEREIRO": 14325.93,
+        "MARÇO": 13883.59,
+        "ABRIL": 13638.88,
+        "MAIO": 37015.2,
+        "JUNHO": 36922.08,
+        "JULHO": 37480.8,
+        "AGOSTO": 36472,
+        "SETEMBRO": 49799.5,
+        "OUTUBRO": 59419.75,
+        "NOVEMBRO": 52252.67,
+        "DEZEMBRO": 0
+      },
+      "aberto": {
+        "TOTAL": 52252.67,
+        "JANEIRO": 0,
+        "FEVEREIRO": 0,
+        "MARÇO": 0,
+        "ABRIL": 0,
+        "MAIO": 0,
+        "JUNHO": 0,
+        "JULHO": 0,
+        "AGOSTO": 0,
+        "SETEMBRO": 0,
+        "OUTUBRO": 0,
+        "NOVEMBRO": 52252.67,
+        "DEZEMBRO": 0
+      },
+      "atrasado": {
+        "TOTAL": 0,
+        "JANEIRO": 0,
+        "FEVEREIRO": 0,
+        "MARÇO": 0,
+        "ABRIL": 0,
+        "MAIO": 0,
+        "JUNHO": 0,
+        "JULHO": 0,
+        "AGOSTO": 0,
+        "SETEMBRO": 0,
+        "OUTUBRO": 0,
+        "NOVEMBRO": 0,
+        "DEZEMBRO": 0
+      }
+    },
+    {
       "titulo": "DM - Back Office",
       "lider": "Jefferson Souza",
       "area": "Dealer Development",
       "previsto": {
-        "TOTAL": 344053.80000000005,
+        "TOTAL": 344053.8,
         "JANEIRO": 28671.6,
         "FEVEREIRO": 28671.6,
         "MARÇO": 28671.6,
@@ -1854,6 +1854,71 @@
       }
     },
     {
+      "titulo": "Serviços CNH",
+      "lider": "Beatriz Picorelli",
+      "area": "HRD",
+      "previsto": {
+        "TOTAL": 284860.52000000014,
+        "JANEIRO": 5486.88,
+        "FEVEREIRO": 19204.08,
+        "MARÇO": 31092.319999999992,
+        "ABRIL": 37493.68,
+        "MAIO": 10059.279999999999,
+        "JUNHO": 33835.759999999995,
+        "JULHO": 20575.8,
+        "AGOSTO": 58526.72,
+        "SETEMBRO": 13717.2,
+        "OUTUBRO": 34750.240000000005,
+        "NOVEMBRO": 20118.559999999998,
+        "DEZEMBRO": 0
+      },
+      "realizado": {
+        "TOTAL": 261665.66,
+        "JANEIRO": 5211,
+        "FEVEREIRO": 18238.5,
+        "MARÇO": 31093,
+        "ABRIL": 37494.5,
+        "MAIO": 10059.5,
+        "JUNHO": 32007.5,
+        "JULHO": 20576.25,
+        "AGOSTO": 58517.97,
+        "SETEMBRO": 13717.2,
+        "OUTUBRO": 34750.24,
+        "NOVEMBRO": 0,
+        "DEZEMBRO": 0
+      },
+      "aberto": {
+        "TOTAL": 0,
+        "JANEIRO": 0,
+        "FEVEREIRO": 0,
+        "MARÇO": 0,
+        "ABRIL": 0,
+        "MAIO": 0,
+        "JUNHO": 0,
+        "JULHO": 0,
+        "AGOSTO": 0,
+        "SETEMBRO": 0,
+        "OUTUBRO": 0,
+        "NOVEMBRO": 0,
+        "DEZEMBRO": 0
+      },
+      "atrasado": {
+        "TOTAL": 34750.24,
+        "JANEIRO": 0,
+        "FEVEREIRO": 0,
+        "MARÇO": 0,
+        "ABRIL": 0,
+        "MAIO": 0,
+        "JUNHO": 0,
+        "JULHO": 0,
+        "AGOSTO": 0,
+        "SETEMBRO": 0,
+        "OUTUBRO": 34750.24,
+        "NOVEMBRO": 0,
+        "DEZEMBRO": 0
+      }
+    },
+    {
       "titulo": "Dealer Standard Construcion",
       "lider": "Jefferson Souza",
       "area": "Dealer Development",
@@ -1919,76 +1984,11 @@
       }
     },
     {
-      "titulo": "Serviços CNH",
-      "lider": "Beatriz Picorelli",
-      "area": "HRD",
-      "previsto": {
-        "TOTAL": 273886.76,
-        "JANEIRO": 5486.88,
-        "FEVEREIRO": 19204.08,
-        "MARÇO": 31092.319999999992,
-        "ABRIL": 37493.68,
-        "MAIO": 10059.279999999999,
-        "JUNHO": 33835.759999999995,
-        "JULHO": 20575.8,
-        "AGOSTO": 58526.72,
-        "SETEMBRO": 13717.2,
-        "OUTUBRO": 0,
-        "NOVEMBRO": 20118.559999999998,
-        "DEZEMBRO": 23776.479999999996
-      },
-      "realizado": {
-        "TOTAL": 261665.66,
-        "JANEIRO": 5211,
-        "FEVEREIRO": 18238.5,
-        "MARÇO": 31093,
-        "ABRIL": 37494.5,
-        "MAIO": 10059.5,
-        "JUNHO": 32007.5,
-        "JULHO": 20576.25,
-        "AGOSTO": 58517.97,
-        "SETEMBRO": 13717.2,
-        "OUTUBRO": 34750.24,
-        "NOVEMBRO": 0,
-        "DEZEMBRO": 0
-      },
-      "aberto": {
-        "TOTAL": 0,
-        "JANEIRO": 0,
-        "FEVEREIRO": 0,
-        "MARÇO": 0,
-        "ABRIL": 0,
-        "MAIO": 0,
-        "JUNHO": 0,
-        "JULHO": 0,
-        "AGOSTO": 0,
-        "SETEMBRO": 0,
-        "OUTUBRO": 0,
-        "NOVEMBRO": 0,
-        "DEZEMBRO": 0
-      },
-      "atrasado": {
-        "TOTAL": 34750.24,
-        "JANEIRO": 0,
-        "FEVEREIRO": 0,
-        "MARÇO": 0,
-        "ABRIL": 0,
-        "MAIO": 0,
-        "JUNHO": 0,
-        "JULHO": 0,
-        "AGOSTO": 0,
-        "SETEMBRO": 0,
-        "OUTUBRO": 34750.24,
-        "NOVEMBRO": 0,
-        "DEZEMBRO": 0
-      }
-    },
-    {
       "titulo": "Treinamento Comercial",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
       "previsto": {
-        "TOTAL": 268340.92999999993,
+        "TOTAL": 263768.52999999997,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 13717.2,
@@ -1998,9 +1998,9 @@
         "JULHO": 42594.94,
         "AGOSTO": 25219.82,
         "SETEMBRO": 26134.300000000003,
-        "OUTUBRO": 21561.9,
+        "OUTUBRO": 29792.22,
         "NOVEMBRO": 21561.9,
-        "DEZEMBRO": 34364.62
+        "DEZEMBRO": 21561.9
       },
       "realizado": {
         "TOTAL": 240379.28999999998,
@@ -2118,7 +2118,7 @@
       "lider": "Beatriz Picorelli",
       "area": "HRD",
       "previsto": {
-        "TOTAL": 205170.25,
+        "TOTAL": 255160.25000000003,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -2128,7 +2128,7 @@
         "JULHO": 54245.54,
         "AGOSTO": 11827.76,
         "SETEMBRO": 116536.66,
-        "OUTUBRO": 0,
+        "OUTUBRO": 49990,
         "NOVEMBRO": 5570.29,
         "DEZEMBRO": 0
       },
@@ -2163,7 +2163,7 @@
         "DEZEMBRO": 0
       },
       "atrasado": {
-        "TOTAL": 53940.24,
+        "TOTAL": 23940.239999999998,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -2173,7 +2173,7 @@
         "JULHO": 0,
         "AGOSTO": 0,
         "SETEMBRO": 6990.24,
-        "OUTUBRO": 46950,
+        "OUTUBRO": 16950,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
       }
@@ -2258,9 +2258,9 @@
         "JULHO": 18289.6,
         "AGOSTO": 21947.52,
         "SETEMBRO": 21947.52,
-        "OUTUBRO": 0,
+        "OUTUBRO": 21947.52,
         "NOVEMBRO": 21947.52,
-        "DEZEMBRO": 21947.52
+        "DEZEMBRO": 0
       },
       "realizado": {
         "TOTAL": 111567.56000000001,
@@ -2304,71 +2304,6 @@
         "AGOSTO": 0,
         "SETEMBRO": 0,
         "OUTUBRO": 21947.52,
-        "NOVEMBRO": 0,
-        "DEZEMBRO": 0
-      }
-    },
-    {
-      "titulo": "Fortrac | Gestão Organizacional",
-      "lider": "Caroline Amieva",
-      "area": "Business Solutions",
-      "previsto": {
-        "TOTAL": 117600,
-        "JANEIRO": 9800,
-        "FEVEREIRO": 9800,
-        "MARÇO": 9800,
-        "ABRIL": 9800,
-        "MAIO": 9800,
-        "JUNHO": 9800,
-        "JULHO": 9800,
-        "AGOSTO": 9800,
-        "SETEMBRO": 9800,
-        "OUTUBRO": 9800,
-        "NOVEMBRO": 9800,
-        "DEZEMBRO": 9800
-      },
-      "realizado": {
-        "TOTAL": 107800,
-        "JANEIRO": 9800,
-        "FEVEREIRO": 9800,
-        "MARÇO": 9800,
-        "ABRIL": 9800,
-        "MAIO": 9800,
-        "JUNHO": 9800,
-        "JULHO": 9800,
-        "AGOSTO": 9800,
-        "SETEMBRO": 9800,
-        "OUTUBRO": 9800,
-        "NOVEMBRO": 9800,
-        "DEZEMBRO": 0
-      },
-      "aberto": {
-        "TOTAL": 0,
-        "JANEIRO": 0,
-        "FEVEREIRO": 0,
-        "MARÇO": 0,
-        "ABRIL": 0,
-        "MAIO": 0,
-        "JUNHO": 0,
-        "JULHO": 0,
-        "AGOSTO": 0,
-        "SETEMBRO": 0,
-        "OUTUBRO": 0,
-        "NOVEMBRO": 0,
-        "DEZEMBRO": 0
-      },
-      "atrasado": {
-        "TOTAL": 0,
-        "JANEIRO": 0,
-        "FEVEREIRO": 0,
-        "MARÇO": 0,
-        "ABRIL": 0,
-        "MAIO": 0,
-        "JUNHO": 0,
-        "JULHO": 0,
-        "AGOSTO": 0,
-        "SETEMBRO": 0,
-        "OUTUBRO": 0,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
       }
@@ -2439,11 +2374,76 @@
       }
     },
     {
+      "titulo": "Fortrac | Gestão Organizacional",
+      "lider": "Caroline Amieva",
+      "area": "Business Solutions",
+      "previsto": {
+        "TOTAL": 107800,
+        "JANEIRO": 9800,
+        "FEVEREIRO": 9800,
+        "MARÇO": 9800,
+        "ABRIL": 9800,
+        "MAIO": 9800,
+        "JUNHO": 9800,
+        "JULHO": 9800,
+        "AGOSTO": 9800,
+        "SETEMBRO": 9800,
+        "OUTUBRO": 9800,
+        "NOVEMBRO": 9800,
+        "DEZEMBRO": 0
+      },
+      "realizado": {
+        "TOTAL": 107800,
+        "JANEIRO": 9800,
+        "FEVEREIRO": 9800,
+        "MARÇO": 9800,
+        "ABRIL": 9800,
+        "MAIO": 9800,
+        "JUNHO": 9800,
+        "JULHO": 9800,
+        "AGOSTO": 9800,
+        "SETEMBRO": 9800,
+        "OUTUBRO": 9800,
+        "NOVEMBRO": 9800,
+        "DEZEMBRO": 0
+      },
+      "aberto": {
+        "TOTAL": 0,
+        "JANEIRO": 0,
+        "FEVEREIRO": 0,
+        "MARÇO": 0,
+        "ABRIL": 0,
+        "MAIO": 0,
+        "JUNHO": 0,
+        "JULHO": 0,
+        "AGOSTO": 0,
+        "SETEMBRO": 0,
+        "OUTUBRO": 0,
+        "NOVEMBRO": 0,
+        "DEZEMBRO": 0
+      },
+      "atrasado": {
+        "TOTAL": 0,
+        "JANEIRO": 0,
+        "FEVEREIRO": 0,
+        "MARÇO": 0,
+        "ABRIL": 0,
+        "MAIO": 0,
+        "JUNHO": 0,
+        "JULHO": 0,
+        "AGOSTO": 0,
+        "SETEMBRO": 0,
+        "OUTUBRO": 0,
+        "NOVEMBRO": 0,
+        "DEZEMBRO": 0
+      }
+    },
+    {
       "titulo": "Parecis | Gestão Organizacional",
       "lider": "Caroline Amieva",
       "area": "Business Solutions",
       "previsto": {
-        "TOTAL": 112000,
+        "TOTAL": 96000,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -2455,7 +2455,7 @@
         "SETEMBRO": 16000,
         "OUTUBRO": 16000,
         "NOVEMBRO": 16000,
-        "DEZEMBRO": 16000
+        "DEZEMBRO": 0
       },
       "realizado": {
         "TOTAL": 96000,
@@ -2508,7 +2508,7 @@
       "lider": "Caroline Amieva",
       "area": "Business Solutions",
       "previsto": {
-        "TOTAL": 96425,
+        "TOTAL": 91350,
         "JANEIRO": 10150,
         "FEVEREIRO": 10150,
         "MARÇO": 10150,
@@ -2520,7 +2520,7 @@
         "SETEMBRO": 5075,
         "OUTUBRO": 5075,
         "NOVEMBRO": 5075,
-        "DEZEMBRO": 5075
+        "DEZEMBRO": 0
       },
       "realizado": {
         "TOTAL": 91350,
@@ -2573,7 +2573,7 @@
       "lider": "Caroline Amieva",
       "area": "Business Solutions",
       "previsto": {
-        "TOTAL": 81800,
+        "TOTAL": 77737.5,
         "JANEIRO": 4660,
         "FEVEREIRO": 4660,
         "MARÇO": 29660,
@@ -2585,7 +2585,7 @@
         "SETEMBRO": 1875,
         "OUTUBRO": 12625,
         "NOVEMBRO": 3875,
-        "DEZEMBRO": 4062.5
+        "DEZEMBRO": 0
       },
       "realizado": {
         "TOTAL": 75112.5,
@@ -2638,7 +2638,7 @@
       "lider": "Caroline Amieva",
       "area": "Business Solutions",
       "previsto": {
-        "TOTAL": 80299.99,
+        "TOTAL": 68799.99,
         "JANEIRO": 8960,
         "FEVEREIRO": 2500,
         "MARÇO": 8960,
@@ -2650,7 +2650,7 @@
         "SETEMBRO": 2500,
         "OUTUBRO": 2500,
         "NOVEMBRO": 11500,
-        "DEZEMBRO": 11500
+        "DEZEMBRO": 0
       },
       "realizado": {
         "TOTAL": 68800,
@@ -3073,7 +3073,7 @@
         "DEZEMBRO": 0
       },
       "atrasado": {
-        "TOTAL": 1100,
+        "TOTAL": 850,
         "JANEIRO": 0,
         "FEVEREIRO": 0,
         "MARÇO": 0,
@@ -3083,7 +3083,7 @@
         "JULHO": 0,
         "AGOSTO": 0,
         "SETEMBRO": 0,
-        "OUTUBRO": 1100,
+        "OUTUBRO": 850,
         "NOVEMBRO": 0,
         "DEZEMBRO": 0
       }
