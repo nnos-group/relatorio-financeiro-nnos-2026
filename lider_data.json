@@ -1,19 +1,19 @@
 {
-  "updatedAt": "2026-11-27T11:00:12.384Z",
+  "updatedAt": "2026-11-28T11:00:14.260Z",
   "macro": {
     "receita": 10600035.6,
-    "custos": 7273983.7,
-    "custosPct": 68.6222572686454,
+    "custos": 7747901.29,
+    "custosPct": 73.09316291352833,
     "impostos": 1298504.3699999999,
     "impostosPct": 12.250000084905373,
-    "logistica": 1033522.51,
-    "logisticaPct": 9.75017961260432,
-    "repasse": -841964.9600000001,
-    "repassePct": -7.943038983755867,
+    "logistica": 1041329.0900000001,
+    "logisticaPct": 9.823826346394537,
+    "repasse": -842428.01,
+    "repassePct": -7.947407365311113,
     "prospeccao": 162878.45,
     "prospeccaoPct": 1.536583990340561,
-    "margem": 1835989.9799999997,
-    "margemPct": 17.32060201760077,
+    "margem": 1354728.8599999999,
+    "margemPct": 12.780418020482873,
     "totalLideres": 7,
     "totalProjetos": 44
   },
@@ -659,15 +659,15 @@
         "receitaPct": 100,
         "impostos": 111020.01,
         "impostosPct": 12.25,
-        "custos": 0,
-        "custosPct": 0,
-        "logistica": 120320.91,
-        "logisticaPct": 13.28,
+        "custos": 473917.59,
+        "custosPct": 52.29,
+        "logistica": 127664.44,
+        "logisticaPct": 14.09,
         "repasse": -8879.72,
         "repassePct": -0.98,
-        "margem": 683824.6,
-        "margemPct": 75.45,
-        "statusCor": "emerald"
+        "margem": 202563.48,
+        "margemPct": 22.35,
+        "statusCor": "sky"
       },
       "projetos": [
         {
@@ -732,15 +732,15 @@
           "receitaPct": 100,
           "impostos": 31903.9,
           "impostosPct": 12.25,
-          "custos": 0,
-          "custosPct": 0,
-          "logistica": 120320.91,
-          "logisticaPct": 46.2,
+          "custos": 161842.84,
+          "custosPct": 62.14,
+          "logistica": 127664.44,
+          "logisticaPct": 49.02,
           "repasse": -8879.72,
           "repassePct": -3.41,
-          "margem": 117094.91,
-          "margemPct": 44.96,
-          "statusCor": "emerald"
+          "margem": -52091.46,
+          "margemPct": -20,
+          "statusCor": "rose"
         }
       ]
     },
@@ -847,9 +847,9 @@
         "impostosPct": 12.25,
         "custos": 3769098.2,
         "custosPct": 72.61,
-        "logistica": 426426.61,
-        "logisticaPct": 8.21,
-        "repasse": -406232.07,
+        "logistica": 426889.66,
+        "logisticaPct": 8.22,
+        "repasse": -406695.12,
         "repassePct": -7.83,
         "margem": 765874.78,
         "margemPct": 14.75,
@@ -902,10 +902,10 @@
           "impostosPct": 12.25,
           "custos": 1700512.09,
           "custosPct": 69.64,
-          "logistica": 360222.23,
-          "logisticaPct": 14.75,
-          "repasse": -353268.75,
-          "repassePct": -14.47,
+          "logistica": 360685.28,
+          "logisticaPct": 14.77,
+          "repasse": -353731.8,
+          "repassePct": -14.49,
           "margem": 435272.63,
           "margemPct": 17.83,
           "statusCor": "amber"
@@ -1041,15 +1041,6 @@
     },
     {
       "ranking": 6,
-      "projeto": "DDN - Business Assessment",
-      "lider": "Jefferson Souza",
-      "area": "Dealer Development",
-      "receita": 260440,
-      "margem": 117094.91,
-      "margemPct": 44.96
-    },
-    {
-      "ranking": 7,
       "projeto": "Serviços CNH",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
@@ -1058,7 +1049,7 @@
       "margemPct": 32.93
     },
     {
-      "ranking": 8,
+      "ranking": 7,
       "projeto": "Instrutores Porsche",
       "lider": "Fábio Canassa",
       "area": "HRD",
@@ -1067,7 +1058,7 @@
       "margemPct": 22.66
     },
     {
-      "ranking": 9,
+      "ranking": 8,
       "projeto": "Consultoria Pós-Vendas (POE) Porsche",
       "lider": "Fábio Canassa",
       "area": "Outsourcing",
@@ -1076,7 +1067,7 @@
       "margemPct": 16.1
     },
     {
-      "ranking": 10,
+      "ranking": 9,
       "projeto": "IVECO Academy",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
@@ -1085,7 +1076,7 @@
       "margemPct": 21.5
     },
     {
-      "ranking": 11,
+      "ranking": 10,
       "projeto": "Treinamento Comercial",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
@@ -1094,7 +1085,7 @@
       "margemPct": 19.18
     },
     {
-      "ranking": 12,
+      "ranking": 11,
       "projeto": "DM - Back Office",
       "lider": "Jefferson Souza",
       "area": "Dealer Development",
@@ -1103,7 +1094,7 @@
       "margemPct": 14.95
     },
     {
-      "ranking": 13,
+      "ranking": 12,
       "projeto": "Backoffice CRM Case",
       "lider": "Vinicius Souza",
       "area": "Outsourcing",
@@ -1112,7 +1103,7 @@
       "margemPct": 12.83
     },
     {
-      "ranking": 14,
+      "ranking": 13,
       "projeto": "Projeto Especial 01",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
@@ -1121,7 +1112,7 @@
       "margemPct": 28.07
     },
     {
-      "ranking": 15,
+      "ranking": 14,
       "projeto": "Fortrac | Gestão Organizacional",
       "lider": "Caroline Amieva",
       "area": "Business Solutions",
@@ -1130,7 +1121,7 @@
       "margemPct": 31.6
     },
     {
-      "ranking": 16,
+      "ranking": 15,
       "projeto": "Parecis | Gestão Organizacional",
       "lider": "Caroline Amieva",
       "area": "Business Solutions",
@@ -1139,7 +1130,7 @@
       "margemPct": 29.73
     },
     {
-      "ranking": 17,
+      "ranking": 16,
       "projeto": "NH Comercial Construction",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
@@ -1148,7 +1139,7 @@
       "margemPct": 44.68
     },
     {
-      "ranking": 18,
+      "ranking": 17,
       "projeto": "Quality Shymphony IVECO",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
@@ -1157,7 +1148,7 @@
       "margemPct": 41.49
     },
     {
-      "ranking": 19,
+      "ranking": 18,
       "projeto": "Backoffice Porsche",
       "lider": "Fábio Canassa",
       "area": "Outsourcing",
@@ -1166,13 +1157,22 @@
       "margemPct": 15.39
     },
     {
-      "ranking": 20,
+      "ranking": 19,
       "projeto": "Ditrasa | Governança NHCE",
       "lider": "Caroline Amieva",
       "area": "Business Solutions",
       "receita": 80300,
       "margem": 23690.89,
       "margemPct": 29.5
+    },
+    {
+      "ranking": 20,
+      "projeto": "Central Irrigação",
+      "lider": "Caroline Amieva",
+      "area": "Business Solutions",
+      "receita": 112000,
+      "margem": 19063.18,
+      "margemPct": 17.02
     }
   ],
   "menosRentaveis": [
@@ -1205,6 +1205,15 @@
     },
     {
       "ranking": 4,
+      "projeto": "DDN - Business Assessment",
+      "lider": "Jefferson Souza",
+      "area": "Dealer Development",
+      "receita": 260440,
+      "margem": -52091.46,
+      "margemPct": -20
+    },
+    {
+      "ranking": 5,
       "projeto": "Nocarvel | Auditoria Caixa Dagua",
       "lider": "Caroline Amieva",
       "area": "Business Solutions",
@@ -1213,7 +1222,7 @@
       "margemPct": -130.96
     },
     {
-      "ranking": 5,
+      "ranking": 6,
       "projeto": "DM - Negócios Br",
       "lider": "Jefferson Souza",
       "area": "Dealer Development",
@@ -1222,7 +1231,7 @@
       "margemPct": -7.5
     },
     {
-      "ranking": 6,
+      "ranking": 7,
       "projeto": "Automação Essencialidade",
       "lider": "Caroline Amieva",
       "area": "Business Solutions",
@@ -1231,7 +1240,7 @@
       "margemPct": 6
     },
     {
-      "ranking": 7,
+      "ranking": 8,
       "projeto": "Excelência em ServiçOs IVECO",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
@@ -1240,7 +1249,7 @@
       "margemPct": 11.33
     },
     {
-      "ranking": 8,
+      "ranking": 9,
       "projeto": "Case Comercial Construction",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
@@ -1249,22 +1258,13 @@
       "margemPct": 20.25
     },
     {
-      "ranking": 9,
+      "ranking": 10,
       "projeto": "Workshop Curitiba",
       "lider": "Beatriz Picorelli",
       "area": "HRD",
       "receita": 10000,
       "margem": 6435,
       "margemPct": 64.35
-    },
-    {
-      "ranking": 10,
-      "projeto": "CNHI Técnico Construction",
-      "lider": "Beatriz Picorelli",
-      "area": "HRD",
-      "receita": 24489,
-      "margem": 6680.59,
-      "margemPct": 27.28
     }
   ],
   "metasAreas": [
@@ -1529,71 +1529,6 @@
       }
     },
     {
-      "titulo": "Backoffice CRM Case",
-      "lider": "Vinicius Souza",
-      "area": "Outsourcing",
-      "previsto": {
-        "TOTAL": 373515.12,
-        "JANEIRO": 23551.79,
-        "FEVEREIRO": 23560.31,
-        "MARÇO": 23560.31,
-        "ABRIL": 23560.31,
-        "MAIO": 23560.31,
-        "JUNHO": 23560.31,
-        "JULHO": 36656.73,
-        "AGOSTO": 36656.73,
-        "SETEMBRO": 36656.73,
-        "OUTUBRO": 36656.73,
-        "NOVEMBRO": 36656.73,
-        "DEZEMBRO": 48878.130000000005
-      },
-      "realizado": {
-        "TOTAL": 324636.99,
-        "JANEIRO": 23551.79,
-        "FEVEREIRO": 23560.31,
-        "MARÇO": 23560.31,
-        "ABRIL": 23560.31,
-        "MAIO": 23560.31,
-        "JUNHO": 23560.31,
-        "JULHO": 36656.73,
-        "AGOSTO": 36656.73,
-        "SETEMBRO": 36656.73,
-        "OUTUBRO": 36656.73,
-        "NOVEMBRO": 36656.73,
-        "DEZEMBRO": 0
-      },
-      "aberto": {
-        "TOTAL": 36656.73,
-        "JANEIRO": 0,
-        "FEVEREIRO": 0,
-        "MARÇO": 0,
-        "ABRIL": 0,
-        "MAIO": 0,
-        "JUNHO": 0,
-        "JULHO": 0,
-        "AGOSTO": 0,
-        "SETEMBRO": 0,
-        "OUTUBRO": 0,
-        "NOVEMBRO": 36656.73,
-        "DEZEMBRO": 0
-      },
-      "atrasado": {
-        "TOTAL": 0,
-        "JANEIRO": 0,
-        "FEVEREIRO": 0,
-        "MARÇO": 0,
-        "ABRIL": 0,
-        "MAIO": 0,
-        "JUNHO": 0,
-        "JULHO": 0,
-        "AGOSTO": 0,
-        "SETEMBRO": 0,
-        "OUTUBRO": 0,
-        "NOVEMBRO": 0,
-        "DEZEMBRO": 0
-      }
-    },
-    {
       "titulo": "Consultoria Pós-Vendas (POE) Porsche",
       "lider": "Fábio Canassa",
       "area": "Outsourcing",
@@ -1770,6 +1705,71 @@
         "SETEMBRO": 0,
         "OUTUBRO": 0,
         "NOVEMBRO": 28671.6,
+        "DEZEMBRO": 0
+      },
+      "atrasado": {
+        "TOTAL": 0,
+        "JANEIRO": 0,
+        "FEVEREIRO": 0,
+        "MARÇO": 0,
+        "ABRIL": 0,
+        "MAIO": 0,
+        "JUNHO": 0,
+        "JULHO": 0,
+        "AGOSTO": 0,
+        "SETEMBRO": 0,
+        "OUTUBRO": 0,
+        "NOVEMBRO": 0,
+        "DEZEMBRO": 0
+      }
+    },
+    {
+      "titulo": "Backoffice CRM Case",
+      "lider": "Vinicius Souza",
+      "area": "Outsourcing",
+      "previsto": {
+        "TOTAL": 324636.99,
+        "JANEIRO": 23551.79,
+        "FEVEREIRO": 23560.31,
+        "MARÇO": 23560.31,
+        "ABRIL": 23560.31,
+        "MAIO": 23560.31,
+        "JUNHO": 23560.31,
+        "JULHO": 36656.73,
+        "AGOSTO": 36656.73,
+        "SETEMBRO": 36656.73,
+        "OUTUBRO": 36656.73,
+        "NOVEMBRO": 36656.73,
+        "DEZEMBRO": 0
+      },
+      "realizado": {
+        "TOTAL": 324636.99,
+        "JANEIRO": 23551.79,
+        "FEVEREIRO": 23560.31,
+        "MARÇO": 23560.31,
+        "ABRIL": 23560.31,
+        "MAIO": 23560.31,
+        "JUNHO": 23560.31,
+        "JULHO": 36656.73,
+        "AGOSTO": 36656.73,
+        "SETEMBRO": 36656.73,
+        "OUTUBRO": 36656.73,
+        "NOVEMBRO": 36656.73,
+        "DEZEMBRO": 0
+      },
+      "aberto": {
+        "TOTAL": 36656.73,
+        "JANEIRO": 0,
+        "FEVEREIRO": 0,
+        "MARÇO": 0,
+        "ABRIL": 0,
+        "MAIO": 0,
+        "JUNHO": 0,
+        "JULHO": 0,
+        "AGOSTO": 0,
+        "SETEMBRO": 0,
+        "OUTUBRO": 0,
+        "NOVEMBRO": 36656.73,
         "DEZEMBRO": 0
       },
       "atrasado": {
